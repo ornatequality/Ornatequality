@@ -44,3 +44,4 @@ export function KnowledgeHubMenu({ variant = "desktop", onNavigate }: KnowledgeH
     </nav>
   );
 }
+

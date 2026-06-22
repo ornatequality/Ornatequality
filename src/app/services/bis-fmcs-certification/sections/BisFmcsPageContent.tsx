@@ -121,7 +121,6 @@ function CallbackForm() {
     </form>
   );
 }
-
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 

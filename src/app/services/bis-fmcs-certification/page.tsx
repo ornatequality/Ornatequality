@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "Complete BIS FMCS certification guide for foreign manufacturers. End-to-end FMCS application, AIR services, factory inspection support, and licence renewal by Ornate Quality Services.",
 };
 
+
 export default function BisFmcsCertificationPage() {
   return (
     <>

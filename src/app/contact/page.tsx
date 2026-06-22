@@ -94,14 +94,13 @@ export default function ContactPage() {
                     <div className={styles.infoValue}>
                       09:30 AM – 06:00 PM (Mon – Sat)
                       <br />
-                      Sunday – Closed
+                      Sunday - Closed
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div className={styles.card} aria-label="Send message">
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>Send Message</h2>
