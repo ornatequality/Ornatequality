@@ -5,7 +5,7 @@ import TopBar from "@/components/common/Topbar";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
 import { JsonLdScripts } from "@/components/seo/JsonLdScripts";
-import { inter, playfair } from "@/lib/fonts";
+import { inter, manrope, playfair } from "@/lib/fonts";
 import {
   HOME_DESCRIPTION,
   HOME_KEYWORDS,
@@ -144,7 +144,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
+      className={`${inter.variable} ${manrope.variable} ${playfair.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

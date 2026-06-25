@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import styles from "../../styles/about.module.css";
 
 import aboutImg1 from "../../assests/supernova.png";
@@ -12,12 +12,6 @@ import {
   IconGlobalStandards,
   IconPanIndia,
 } from "./AboutFeatureIcons";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 const FEATURES = [
   {

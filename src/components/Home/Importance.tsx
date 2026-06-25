@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
+import { playfair } from "@/lib/fonts";
 import styles from "../../styles/importance.module.css";
 import {
   IconAvoidPenalties,
@@ -32,7 +33,7 @@ const Importance = () => {
     <section className={styles.section} aria-label="Why certification is important">
       <div className={styles.container}>
         <div className={styles.headingWrap}>
-          <h2 className={styles.heading}>WHY CERTIFICATION IS IMPORTANT</h2>
+          <h2 className={`${styles.heading} ${playfair.className}`}>Why certification is important</h2>
           <div className={styles.underline} aria-hidden="true" />
         </div>
 

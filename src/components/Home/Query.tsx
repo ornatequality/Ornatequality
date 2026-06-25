@@ -1,18 +1,6 @@
 import React from "react";
-import { Inter, Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import styles from "../../styles/query.module.css";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
 
 function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -28,7 +16,7 @@ function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
 const Query = () => {
   return (
     <section
-      className={`${styles.section} ${inter.className}`}
+      className={styles.section}
       aria-label="Request a call back"
     >
       <div className={styles.container}>

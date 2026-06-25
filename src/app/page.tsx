@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <>
+    <div className="home-page">
       <JsonLdList
         schemas={[homeWebPageSchema, homeFaqSchema, homeBreadcrumbSchema]}
       />
@@ -71,6 +71,6 @@ export default function HomePage() {
       <ValuedClients />
       <Query />
       <Faq />
-    </>
+    </div>
   );
 }

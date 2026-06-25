@@ -50,6 +50,11 @@
     #eaf5ff 84%,
     #d7ffdf 100%
   );
+
+  /* Typography — H1/H2 Playfair, H3 Georgia, body Manrope */
+  --font-heading-display: var(--font-playfair), "Playfair Display", serif;
+  --font-heading-serif: Georgia, "Times New Roman", Times, serif;
+  --font-body: var(--font-manrope), system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 @theme inline {
@@ -80,6 +85,51 @@ body {
   line-height: 1.5;
   overflow-x: clip;
   min-width: 0;
+}
+
+/* Home page typography — fonts loaded once in layout, rules scoped here */
+.home-page {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.home-page h1,
+.home-page h2,
+.home-page h1[class],
+.home-page h2[class] {
+  font-family: var(--font-heading-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.home-page h3 {
+  font-family: var(--font-heading-serif);
+}
+
+.home-page h2[class] {
+  font-size: 45px;
+  line-height: 1.15;
+  text-transform: lowercase;
+}
+
+.home-page h2[class]::first-letter {
+  text-transform: uppercase;
+}
+
+.home-page h4,
+.home-page p,
+.home-page li,
+.home-page label,
+.home-page input,
+.home-page textarea,
+.home-page button {
+  font-family: var(--font-body);
+}
+
+.home-page p {
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 *,

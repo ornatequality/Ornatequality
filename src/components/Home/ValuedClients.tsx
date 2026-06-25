@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import styles from "@/styles/valuedClients.module.css";
 
 import flipkart from "@/assests/clientslogo/Flipkart.webp";
@@ -26,12 +26,6 @@ import westway from "@/assests/clientlogo/westway.png";
 import brandworks from "@/assests/clientlogo/brandworks.png";
 import datamini from "@/assests/clientlogo/datamini.png";
 import mage from "@/assests/clientlogo/image.png";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 const CLIENTS = [
   { id: "flipkart", name: "Flipkart", src: flipkart },
@@ -78,6 +72,8 @@ function LogoStrip({
               alt={ariaHidden ? "" : `${name} logo`}
               fill
               sizes="104px"
+              quality={75}
+              loading="lazy"
               className={styles.logoImg}
             />
           </div>

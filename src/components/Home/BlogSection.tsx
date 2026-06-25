@@ -3,19 +3,12 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import styles from "../../styles/blog.module.css";
 
 import blog1 from "../../assests/blog-1.webp";
 import blog2 from "../../assests/blog-2.webp";
 import blog3 from "../../assests/blog-3.webp";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
 
 export default function BlogSection() {
   const pathname = usePathname();

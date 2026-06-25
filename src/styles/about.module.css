@@ -68,7 +68,6 @@
   color: var(--hero-navy);
   text-align: left;
   justify-self: stretch;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .kicker {

@@ -1,6 +1,6 @@
 import React from "react";
 import Image, { type StaticImageData } from "next/image";
-import { Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import styles from "../../styles/trustProcess.module.css";
 import trustBannerImage from "../../assests/trust.png";
 import bisLogo from "@/assests/certi-img/BIS.webp";
@@ -18,12 +18,6 @@ import {
   IconShieldBanner,
   IconTrustedShield,
 } from "./TrustProcessFeatureIcons";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 const FEATURES = [
   {
@@ -218,9 +212,9 @@ const TrustProcess = () => {
             </div>
 
             <h2 className={`${styles.mainTitle} ${playfair.className}`}>Ornate Quality Services</h2>
-            <p className={`${styles.subTitle} ${playfair.className}`}>
+            <h3 className={styles.subTitle}>
               Your Reliable Compliance Partner
-            </p>
+            </h3>
 
             <p className={styles.intro}>
               Ornate Quality Services is a leading regulatory compliance and certification consultancy
@@ -297,7 +291,7 @@ const TrustProcess = () => {
                   <IconShieldBanner />
                 </span>
                 <div className={styles.commitCopy}>
-                  <p className={`${styles.commitQuote} ${playfair.className}`}>
+                  <p className={styles.commitQuote}>
                     <span className={styles.commitQuoteLine}>Committed to Quality.</span>
                     <span className={styles.commitQuoteLine}>Focused on Compliance.</span>
                     <span className={styles.commitQuoteLine}>Driven by Trust.</span>
@@ -309,6 +303,7 @@ const TrustProcess = () => {
                   src={trustBannerImage}
                   alt="Modern glass corporate building"
                   fill
+                  quality={80}
                   sizes="(max-width: 900px) 50vw, 320px"
                   className={styles.commitImage}
                 />

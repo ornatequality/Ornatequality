@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter, Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import styles from "../../styles/hero.module.css";
 import heroImg from "../../assests/abtt.png";
 import bisLogo from "@/assests/certi-img/BIS.webp";
@@ -14,18 +14,6 @@ import {
   serviceHref,
   type MegaMenuIcon,
 } from "@/components/common/servicesMegaMenu.data";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
 
 function IconShieldCheck(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -113,7 +101,7 @@ function HeroCertIcon({ icon }: { icon: MegaMenuIcon }) {
   if (icon.type === "image") {
     return (
       <span className={styles.certIcon}>
-        <Image src={icon.src} alt="" width={26} height={26} className={styles.certIconImg} />
+        <Image src={icon.src} alt="" width={26} height={26} quality={80} className={styles.certIconImg} />
       </span>
     );
   }
@@ -155,7 +143,7 @@ function HeroCertificationStrip({
 
 const Hero = () => {
   return (
-    <section className={`${styles.hero} ${inter.className}`} aria-label="Hero">
+    <section className={styles.hero} aria-label="Hero">
       <div className={styles.heroTop}>
         <div className={styles.container}>
           <div className={styles.left}>
@@ -211,8 +199,9 @@ Helping Businesses Achieve Product Compliance & Certification Success           
                   alt=""
                   fill
                   priority
+                  quality={82}
                   className={styles.heroImage}
-                  sizes="(max-width: 1024px) 100vw, min(720px, 52vw)"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, min(720px, 52vw)"
                 />
               </div>
             </div>

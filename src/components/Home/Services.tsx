@@ -2,17 +2,12 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
-import { Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import styles from "../../styles/services.module.css";
 import bisCrsIcon from "@/assests/certi-img/BIS.webp";
 import isiMarkIcon from "@/assests/certi-img/isi.png";
 import wpcEtaIcon from "@/assests/certi-img/wpc.webp";
 import eprRegistrationIcon from "@/assests/certi-img/msmp.jpeg";
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 type ServiceItem = {
   title: string;

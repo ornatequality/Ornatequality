@@ -1,21 +1,9 @@
 "use client";
 
 import React, { useId, useState } from "react";
-import { Inter, Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import { HOME_FAQS } from "@/lib/seo/home";
 import styles from "../../styles/faq.module.css";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  display: "swap",
-});
 
 const Faq = () => {
   const baseId = useId();
@@ -23,7 +11,7 @@ const Faq = () => {
 
   return (
     <section
-      className={`${styles.section} ${inter.className}`}
+      className={styles.section}
       aria-label="Frequently Asked Questions"
     >
       <div className={styles.container}>

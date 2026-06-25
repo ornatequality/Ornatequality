@@ -39,7 +39,7 @@
   justify-content: center;
 }
 
-.tagline {
+p.tagline {
   margin: 0 0 14px;
   font-size: 12px;
   font-weight: 700;
