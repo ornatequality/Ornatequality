@@ -271,12 +271,13 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: min(42%, 200px);
+  width: min(24%, 130px);
   z-index: 2;
   background: linear-gradient(
     to right,
     var(--hero-white) 0%,
-    rgba(255, 255, 255, 0.92) 35%,
+    rgba(255, 255, 255, 0.88) 22%,
+    rgba(255, 255, 255, 0.35) 68%,
     rgba(255, 255, 255, 0) 100%
   );
   pointer-events: none;
@@ -293,21 +294,21 @@
 
 .heroImage {
   object-fit: cover;
-  object-position: center;
+  object-position: 72% center;
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 0.15) 8%,
-    rgba(0, 0, 0, 0.55) 22%,
-    #000 40%,
+    rgba(0, 0, 0, 0.18) 6%,
+    rgba(0, 0, 0, 0.6) 16%,
+    #000 26%,
     #000 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 0.15) 8%,
-    rgba(0, 0, 0, 0.55) 22%,
-    #000 40%,
+    rgba(0, 0, 0, 0.18) 6%,
+    rgba(0, 0, 0, 0.6) 16%,
+    #000 26%,
     #000 100%
   );
 }
@@ -413,7 +414,7 @@
   }
 
   .heroImage {
-    object-position: center;
+    object-position: right center;
     -webkit-mask-image: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.2) 0%,

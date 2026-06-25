@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Inter, Playfair_Display } from "next/font/google";
 import styles from "../../styles/hero.module.css";
-import heroImg from "../../assests/abtor.png";
+import heroImg from "../../assests/abtt.png";
 import bisLogo from "@/assests/certi-img/BIS.webp";
 import beeLogo from "@/assests/certi-img/BEElogo.webp";
 import eprLogo from "@/assests/certi-img/msmp.jpeg";

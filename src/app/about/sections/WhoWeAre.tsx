@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Inter, Playfair_Display } from "next/font/google";
 import styles from "@/styles/aboutV2.module.css";
 
-import aboutTopImg from "@/assests/about3.webp";
+import aboutTopImg from "@/assests/about12.jpg";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],

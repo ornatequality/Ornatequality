@@ -196,7 +196,12 @@ const Header = () => {
         </nav>
 
         <div className={styles.actions}>
-          <Link href="#login" className={styles.loginBtn}>
+          <Link
+            href="https://crm1.ornatequality.com/login"
+            className={styles.loginBtn}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             LOGIN
           </Link>
 
@@ -319,7 +324,13 @@ const Header = () => {
             >
               Contact Us
             </Link>
-            <Link href="#login" className={styles.mobileLoginBtn} onClick={() => setOpen(false)}>
+            <Link
+              href="https://crm1.ornatequality.com/login"
+              className={styles.mobileLoginBtn}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+            >
               LOGIN
             </Link>
           </div>
