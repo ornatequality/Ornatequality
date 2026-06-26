@@ -128,28 +128,19 @@
   width: var(--logo-box);
   height: var(--logo-box);
   flex-shrink: 0;
-  background: #ffffff;
-  border: 1px solid #e8eaed;
+  background: transparent;
+  border: none;
   border-radius: 10px;
   padding: clamp(10px, 1.2vw, 14px);
   box-sizing: border-box;
-  box-shadow:
-    0 2px 8px rgba(0, 27, 61, 0.08),
-    0 1px 2px rgba(0, 27, 61, 0.04);
-  transition: border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.logoItem:hover .logoSlot {
-  border-color: #d0d5dd;
-  box-shadow:
-    0 6px 16px rgba(0, 27, 61, 0.1),
-    0 2px 4px rgba(0, 27, 61, 0.06);
+  box-shadow: none;
 }
 
 .logoImg {
   object-fit: contain;
   object-position: center;
-  opacity: 0.92;
+  opacity: 0.95;
+  mix-blend-mode: multiply;
   transition: opacity 180ms ease;
 }
 

@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import styles from "../../styles/common/footer.module.css";
-
-import logo from "../../assests/logo.png";
+import logo from "../../assests/logo-footer-white.png";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -89,30 +88,24 @@ function IconInstagram(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-// function IconWhatsApp(props: React.SVGProps<SVGSVGElement>) {
-//   return (
-//     <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" {...props}>
-//       <path
-//         fill="currentColor"
-//         d="M12.04 2A9.96 9.96 0 0 0 2 11.96a9.85 9.85 0 0 0 1.45 5.16L2 22l5-1.3a10 10 0 0 0 5.04 1.34h.01A9.96 9.96 0 0 0 22 12.04 10.01 10.01 0 0 0 12.04 2Zm5.8 14.46c-.24.67-1.2 1.23-1.95 1.4-.52.11-1.2.2-3.48-.75-2.92-1.21-4.8-4.19-4.95-4.39-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.6-.37.8-.37h.58c.19 0 .45-.07.7.54.24.6.84 2.07.92 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.17-.31.38-.44.5-.15.15-.31.31-.14.6.17.3.77 1.27 1.65 2.05 1.13 1 2.08 1.31 2.38 1.46.3.15.47.12.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.7.8 1.99.95.3.15.5.22.57.34.07.12.07.7-.17 1.37Z"
-//       />
-//     </svg>
-//   );
-// }
-
 const Footer = () => {
   return (
     <footer className={`${styles.footer} ${inter.className}`} aria-label="Footer">
       <div className={styles.container}>
         <div className={styles.topGrid}>
           <div className={styles.brandCol}>
-            <div className={styles.brandRow}>
-              <div className={styles.logoPlate}>
-                <Image src={logo} alt="Ornate" className={styles.logo} loading="lazy" />
-              </div>
-            </div>
+            <Link href="/" className={styles.brandLink} aria-label="Ornate Quality Services home">
+              <Image
+                src={logo}
+                alt="Ornate Quality Services"
+                className={styles.brandLogo}
+                width={220}
+                height={72}
+                loading="lazy"
+              />
+            </Link>
             <p className={styles.brandText}>
-              Your trusted partner for certification, khushi compliance and regulatory approvals. We
+              Your trusted partner for certification, compliance and regulatory approvals. We
               help you achieve compliance with confidence.
             </p>
 

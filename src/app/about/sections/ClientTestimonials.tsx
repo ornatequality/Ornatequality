@@ -51,7 +51,7 @@ export function ClientTestimonials() {
   return (
     <section className={styles.section} aria-label="What our clients say">
       <div className={styles.container}>
-        <h2 className={styles.sectionHeadingCenter}>WHAT OUR CLIENTS SAY</h2>
+        <h2 className={styles.sectionHeadingCenter}>What our clients say</h2>
 
         <div className={styles.testimonialsWrapV2}>
           <div className={styles.testimonialsMarqueeTrack}>

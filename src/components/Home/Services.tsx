@@ -2,12 +2,13 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
+import Link from "next/link";
 import { playfair } from "@/lib/fonts";
 import styles from "../../styles/services.module.css";
 import bisCrsIcon from "@/assests/certi-img/BIS.webp";
 import isiMarkIcon from "@/assests/certi-img/isi.png";
 import wpcEtaIcon from "@/assests/certi-img/wpc.webp";
-import eprRegistrationIcon from "@/assests/certi-img/msmp.jpeg";
+import eprRegistrationIcon from "@/assests/certi-img/epr-icon.png";
 
 type ServiceItem = {
   title: string;
@@ -174,20 +175,25 @@ const Services = () => {
                 role="listitem"
                 data-service-card="true"
               >
-                <div className={styles.iconWrap}>
-                  <Image
-                    src={s.icon}
-                    alt={s.iconAlt}
-                    width={40}
-                    height={40}
-                    className={styles.serviceIconImg}
-                  />
+                <Link href={s.href} className={styles.cardLink} aria-label={`Learn more about ${s.title}`} />
+                <div className={styles.cardInner}>
+                  <div className={styles.iconWrap}>
+                    <Image
+                      src={s.icon}
+                      alt={s.iconAlt}
+                      fill
+                      sizes="48px"
+                      className={styles.serviceIconImg}
+                    />
+                  </div>
+                  <div className={styles.cardBody}>
+                    <h3 className={styles.cardTitle}>{s.title}</h3>
+                    <p className={styles.cardText}>{s.description}</p>
+                  </div>
+                  <Link className={styles.learnMore} href={s.href}>
+                    Learn More <span className={styles.learnMoreArrow} aria-hidden="true">→</span>
+                  </Link>
                 </div>
-                <h3 className={styles.cardTitle}>{s.title}</h3>
-                <p className={styles.cardText}>{s.description}</p>
-                <a className={styles.learnMore} href={s.href}>
-                  Learn More <span aria-hidden="true">→</span>
-                </a>
               </article>
             ))}
           </div>

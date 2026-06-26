@@ -7,15 +7,14 @@
   --query-muted: rgba(255, 255, 255, 0.85);
 
   background: linear-gradient(165deg, var(--query-navy-deep) 0%, var(--query-navy) 48%, #062a6e 100%);
-  padding: clamp(22px, 2.5vw, 32px) 0;
+  padding: clamp(22px, 2.5vw, 32px) clamp(20px, 3.5vw, 40px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  
 }
 
 .container {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 clamp(24px, 4vw, 48px);
 }
 
 .grid {
@@ -41,9 +40,9 @@
 }
 
 .phoneIcon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   color: var(--query-navy-deep);
@@ -54,24 +53,24 @@
 }
 
 /* Section-sized serif title (clear hierarchy, not full hero billboard scale) */
-.title {
+.left .title {
   margin: 0;
   flex: 1;
   min-width: 0;
-  font-size: clamp(26px, 2.2vw + 14px, 40px);
+  font-size: clamp(22px, 1.6vw + 12px, 30px);
   font-weight: 700;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   color: #ffffff;
+  text-transform: none;
 }
 
-/* Body copy aligned with heading column */
-.subtitle {
+.left .subtitle {
   margin: 0;
   max-width: min(44ch, 100%);
-  font-size: clamp(14px, 0.35vw + 13px, 17px);
+  font-size: 12px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--query-muted);
   text-align: left;
 }
@@ -101,7 +100,7 @@
 }
 
 .label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -109,12 +108,12 @@
 }
 
 .control {
-  min-height: 42px;
+  min-height: 40px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.98);
   padding: 0 12px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--query-navy-deep);
   outline: none;
   width: 100%;
@@ -144,11 +143,11 @@
 .submit {
   width: calc(50% - 7px);
   max-width: 100%;
-  min-height: 42px;
+  min-height: 40px;
   border: 0;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -181,8 +180,13 @@
 }
 
 @media (max-width: 640px) {
+  .section {
+    padding-left: clamp(16px, 4vw, 24px);
+    padding-right: clamp(16px, 4vw, 24px);
+  }
+
   .container {
-    padding: 0 14px;
+    padding: 0 clamp(12px, 3vw, 20px);
   }
 
   .form {

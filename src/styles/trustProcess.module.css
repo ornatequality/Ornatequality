@@ -75,9 +75,9 @@
   color: var(--hero-navy);
 }
 
-.intro {
+.left .intro {
   margin: 0 0 14px;
-  font-size: clamp(14px, 0.35vw + 13px, 15.5px);
+  font-size: 14px;
   line-height: 1.65;
   font-weight: 500;
   color: var(--hero-gray);
@@ -126,9 +126,9 @@
   letter-spacing: -0.01em;
 }
 
-.featureDesc {
+.featureBody .featureDesc {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.55;
   font-weight: 500;
   color: var(--hero-gray);
@@ -148,13 +148,14 @@
   min-width: 0;
 }
 
-.processTitle {
+.processBlock .processTitle {
   margin: 0 0 8px;
-  font-size: clamp(22px, 1.6vw + 10px, 30px);
+  font-size: clamp(20px, 1.2vw + 12px, 26px);
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--hero-navy);
+  text-transform: none;
 }
 
 .processUnderline {
@@ -287,10 +288,10 @@
   width: 100%;
 }
 
-.stepDesc {
+.processCard .stepDesc {
   margin: 0;
   padding-top: 0;
-  font-size: clamp(11px, 0.2vw + 10px, 12px);
+  font-size: 12px;
   line-height: 1.5;
   font-weight: 500;
   color: var(--hero-gray);
@@ -300,32 +301,31 @@
   text-align: center;
 }
 
-/* Commitment banner — content left | image right (no overlap) */
+/* Commitment banner — text left | building image right (crop baked-in text from asset) */
 .commitBanner {
   display: flex;
   align-items: stretch;
   width: 100%;
   max-width: 100%;
-  height: 152px;
-  min-height: 152px;
-  max-height: 152px;
-  border-radius: 16px;
+  min-height: 118px;
+  border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(15, 95, 168, 0.12);
+  border: 1px solid rgba(15, 95, 168, 0.1);
+  box-shadow: 0 8px 24px rgba(4, 30, 91, 0.06);
   min-width: 0;
   box-sizing: border-box;
+  background: #f3f9fd;
 }
 
 .commitText {
-  flex: 1 1 52%;
+  flex: 1 1 58%;
   display: flex;
   align-items: center;
-  gap: clamp(12px, 1.6vw, 18px);
+  gap: clamp(10px, 1.4vw, 14px);
   min-width: 0;
-  padding: clamp(16px, 2vw, 24px) clamp(14px, 2vw, 22px);
+  padding: clamp(14px, 1.8vw, 18px) clamp(14px, 1.8vw, 20px);
   box-sizing: border-box;
-  background: linear-gradient(100deg, #f3f9fd 0%, #eaf4fb 55%, #e4f1fa 100%);
-  border-right: 1px solid var(--tp-divider);
+  background: linear-gradient(100deg, #f6fbfe 0%, #edf5fb 70%, #e8f2fa 100%);
 }
 
 .commitShield {
@@ -336,8 +336,13 @@
 }
 
 .commitShield svg {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
+}
+
+.commitCopy {
+  min-width: 0;
+  flex: 1;
 }
 
 .commitQuote {
@@ -346,9 +351,9 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 3px;
-  font-size: clamp(14px, 1vw + 10px, 18px);
-  line-height: 1.38;
+  gap: 2px;
+  font-size: clamp(12px, 0.35vw + 11px, 14px);
+  line-height: 1.45;
   font-weight: 700;
   color: var(--hero-navy);
   letter-spacing: -0.01em;
@@ -357,31 +362,31 @@
 .commitQuote::after {
   content: "";
   display: block;
-  width: 40px;
+  width: 32px;
   height: 2px;
-  margin-top: 11px;
+  margin-top: 8px;
   border-radius: 1px;
-  background: rgba(0, 27, 61, 0.38);
+  background: rgba(0, 27, 61, 0.32);
 }
 
 .commitQuoteLine {
   display: block;
-  white-space: nowrap;
 }
 
 .commitImageWrap {
   position: relative;
-  flex: 0 0 48%;
-  width: 48%;
-  max-width: 48%;
-  height: 100%;
+  flex: 0 0 42%;
+  width: 42%;
+  max-width: 42%;
+  min-height: 118px;
   overflow: hidden;
   flex-shrink: 0;
+  background: #c5d9e8;
 }
 
 .commitImage {
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center center;
 }
 
 /* Certification logos row */
@@ -466,6 +471,11 @@
     gap: 14px;
   }
 
+  .commitImageWrap {
+    flex: 0 0 40%;
+    width: 40%;
+    max-width: 40%;
+  }
 }
 
 @media (max-width: 700px) {
@@ -498,25 +508,31 @@
   }
 
   .commitBanner {
-    height: 140px;
-    min-height: 140px;
-    max-height: 140px;
+    flex-direction: column;
+    min-height: 0;
   }
 
   .commitText {
-    flex: 1 1 54%;
-    padding: 16px 14px;
-    gap: 12px;
+    flex: none;
+    width: 100%;
+    padding: 14px 16px;
+    gap: 10px;
+    border-bottom: none;
   }
 
-  .commitQuoteLine {
-    white-space: normal;
+  .commitQuote {
+    font-size: 13px;
   }
 
   .commitImageWrap {
-    flex: 0 0 46%;
-    width: 46%;
-    max-width: 46%;
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    min-height: 108px;
+  }
+
+  .commitImage {
+    object-position: center center;
   }
 
   .certLogos {

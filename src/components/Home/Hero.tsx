@@ -6,7 +6,7 @@ import styles from "../../styles/hero.module.css";
 import heroImg from "../../assests/abtt.png";
 import bisLogo from "@/assests/certi-img/BIS.webp";
 import beeLogo from "@/assests/certi-img/BEElogo.webp";
-import eprLogo from "@/assests/certi-img/msmp.jpeg";
+import eprLogo from "@/assests/certi-img/epr-icon.png";
 import wpcLogo from "@/assests/certi-img/wpc.webp";
 import {
   SERVICE_PAGE_ANCHORS,
@@ -150,7 +150,8 @@ const Hero = () => {
             <p className={styles.tagline}>YOUR TRUSTED COMPLIANCE PARTNER —</p>
 
             <h1 className={`${styles.title} ${playfair.className}`}>
-Helping Businesses Achieve Product Compliance & Certification Success            </h1>
+              Helping Businesses Achieve Product Compliance &amp; Certification Success
+            </h1>
 
             <p className={styles.subtitle}>
               Expert solutions for BIS, WPC, BEE, EPR, CE and more. From consultation to

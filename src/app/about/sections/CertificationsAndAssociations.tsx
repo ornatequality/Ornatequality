@@ -8,7 +8,7 @@ import wpcLogo from "@/assests/certi-img/wpc.webp";
 import beeLogo from "@/assests/certi-img/BEElogo.webp";
 import tecLogo from "@/assests/certi-img/tec.webp";
 import nablLogo from "@/assests/certi-img/nabl.webp";
-import msmeLogo from "@/assests/certi-img/msmp.jpeg";
+import msmeLogo from "@/assests/certi-img/msme.webp";
 import isoLogo from "@/assests/certi-img/iso.webp";
 
 const inter = Inter({
@@ -50,7 +50,7 @@ function LogoCell({
     >
       <div className={styles.logoImgWrap} aria-hidden="true">
         {l.src ? (
-          <Image src={l.src} alt="" fill sizes="160px" className={styles.logoImg} />
+          <Image src={l.src} alt="" fill sizes="180px" className={styles.logoImg} />
         ) : (
           <div className={styles.logoFallback}>{l.label}</div>
         )}

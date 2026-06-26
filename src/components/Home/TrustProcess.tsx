@@ -2,7 +2,7 @@ import React from "react";
 import Image, { type StaticImageData } from "next/image";
 import { playfair } from "@/lib/fonts";
 import styles from "../../styles/trustProcess.module.css";
-import trustBannerImage from "../../assests/trust.png";
+import trustBannerImage from "../../assests/trust-building.webp";
 import bisLogo from "@/assests/certi-img/BIS.webp";
 import isiLogo from "@/assests/certi-img/isi.png";
 import wpcLogo from "@/assests/certi-img/wpc.webp";
@@ -298,13 +298,13 @@ const TrustProcess = () => {
                   </p>
                 </div>
               </div>
-              <div className={styles.commitImageWrap}>
+              <div className={styles.commitImageWrap} aria-hidden="true">
                 <Image
                   src={trustBannerImage}
-                  alt="Modern glass corporate building"
+                  alt=""
                   fill
                   quality={80}
-                  sizes="(max-width: 900px) 50vw, 320px"
+                  sizes="(max-width: 700px) 100vw, 280px"
                   className={styles.commitImage}
                 />
               </div>

@@ -1,49 +1,75 @@
 .page {
   --hero-navy: #001b3d;
-  --hero-gold: #f9ac38;
+  --hero-gold: #ff9c08;
   --hero-gray: #555555;
   --hero-white: #ffffff;
 
   background: #ffffff;
 }
 
-.hero {
-  --hero-navy: #001b3d;
-  --hero-gold: #f9ac38;
-  --hero-gray: #555555;
-  --hero-white: #ffffff;
-
-  background: var(--hero-white);
-}
-
 .main {
-  --hero-navy: #001b3d;
-  --hero-gold: #f9ac38;
-  --hero-gray: #555555;
-  --hero-white: #ffffff;
-
   width: 100%;
 }
 
+.hero {
+  --hero-navy: #001b3d;
+  --hero-gold: #ff9c08;
+  --hero-gray: #555555;
+  --hero-white: #ffffff;
+
+  position: relative;
+  overflow: hidden;
+  background: #0c2840;
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroBgImg {
+  object-fit: cover;
+  object-position: 72% center;
+  filter: saturate(1.02) contrast(1.03);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(11, 47, 66, 0.92) 0%,
+    rgba(11, 47, 66, 0.78) 34%,
+    rgba(11, 47, 66, 0.42) 58%,
+    rgba(11, 47, 66, 0.12) 78%,
+    rgba(11, 47, 66, 0.04) 100%
+  );
+  pointer-events: none;
+}
+
 .heroInner {
+  position: relative;
+  z-index: 2;
   max-width: 1320px;
   margin: 0 auto;
-  padding: 44px 20px 30px;
+  padding: clamp(44px, 5vw, 56px) 20px clamp(34px, 4vw, 44px);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
-  gap: 18px;
 }
 
 .heroLeft {
-  
   max-width: 540px;
-  padding-left: 30px;
+  padding-left: clamp(0px, 2vw, 30px);
 }
 
 .heroKicker {
   display: inline-block;
   margin: 0 0 14px;
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -53,11 +79,11 @@
 
 .heroTitle {
   margin: 0 0 16px;
-  font-size: clamp(26px, 2.6vw + 10px, 42px);
+  font-size: clamp(32px, 3.2vw + 14px, 48px);
   line-height: 1.12;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--hero-navy);
+  color: #ffffff;
 }
 
 .heroTitleLine {
@@ -65,58 +91,27 @@
 }
 
 .heroText {
-  margin: 0 0 28px;
-  font-size: clamp(16px, 0.6vw + 15px, 18px);
+  margin: 0 0 22px;
+  font-family: var(--font-body);
+  font-size: clamp(15px, 0.55vw + 14px, 17px);
   font-weight: 500;
   line-height: 1.55;
-  color: var(--hero-gray);
+  color: rgba(255, 255, 255, 0.9);
   max-width: 48ch;
 }
 
-.heroTabs {
-  display: inline-flex;
-  gap: 10px;
-  padding: 6px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.32);
-  box-shadow: 0 12px 28px rgba(2, 24, 64, 0.08);
-}
-
-.tab,
-.tabActive {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--hero-navy);
+.heroScopeBadge {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-width: 140px;
-  justify-content: center;
-  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease, color 160ms ease;
-}
-
-.tabActive {
-  background: #041e5b;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
   color: #ffffff;
-  box-shadow: 0 16px 36px rgba(15, 95, 168, 0.22);
-}
-
-.tab:hover,
-.tabActive:hover {
-  transform: translateY(-1px);
-}
-
-.tab:focus-visible,
-.tabActive:focus-visible {
-  outline: 2px solid rgba(44, 126, 255, 0.45);
-  outline-offset: 3px;
+  background: #041e5b;
+  box-shadow: 0 12px 28px rgba(4, 30, 91, 0.18);
 }
 
 .flag {
@@ -128,17 +123,6 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-.heroRight {
-  display: grid;
-  justify-content: end;
-}
-
-.heroArt {
-  width: min(520px, 100%);
-  height: auto;
-  filter: drop-shadow(0 26px 44px rgba(2, 24, 64, 0.18));
-}
-
 .section {
   max-width: 1320px;
   margin: 40px auto;
@@ -148,168 +132,262 @@
 
 .sectionHead {
   margin-top: 2px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  padding-bottom: clamp(14px, 2vw, 20px);
+  border-bottom: 1px solid rgba(10, 27, 43, 0.06);
 }
 
 .sectionTitleRow {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-end;
+  gap: clamp(12px, 2vw, 18px);
 }
 
 .sectionTitleLeft {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sectionTitleBlock {
+  min-width: 0;
 }
 
 .sectionFlag {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: rgba(44, 126, 255, 0.10);
-  border: 1px solid rgba(44, 126, 255, 0.18);
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 156, 8, 0.08);
+  border: 1px solid rgba(255, 156, 8, 0.2);
   display: grid;
   place-items: center;
-  margin-top: 2px;
+  margin-top: 3px;
+  flex-shrink: 0;
 }
 
 .sectionTitle {
   margin: 0;
-  font-size: clamp(32px, 3.6vw + 14px, 56px);
+  font-size: clamp(22px, 1.6vw + 14px, 32px);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.18;
   letter-spacing: -0.02em;
   color: var(--hero-navy);
 }
 
+.sectionTitleUnderline {
+  width: 52px;
+  height: 2px;
+  border-radius: 999px;
+  margin: 8px 0 10px;
+  background: linear-gradient(90deg, rgba(255, 156, 8, 0.95), rgba(255, 156, 8, 0.25));
+}
+
 .sectionSubtitle {
-  margin-top: 4px;
-  font-size: clamp(16px, 0.6vw + 15px, 18px);
+  margin: 0;
+  max-width: 52ch;
+  font-size: clamp(12px, 0.25vw + 11.5px, 13px);
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--hero-gray);
 }
 
 .pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   justify-content: flex-end;
+  align-self: center;
 }
 
 .pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 12px;
+  gap: 7px;
+  padding: 7px 11px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  color: rgba(10, 27, 43, 0.68);
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(148, 163, 184, 0.28);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--hero-gold);
+  background: rgba(255, 156, 8, 0.06);
+  border: 1px solid rgba(255, 156, 8, 0.22);
+  white-space: nowrap;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.pill svg {
+  flex-shrink: 0;
+  color: var(--hero-gold);
 }
 
 .grid {
-  margin-top: 40px;
+  margin-top: clamp(24px, 3vw, 40px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: clamp(14px, 1.6vw, 20px);
+  align-items: stretch;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(148, 163, 184, 0.30);
-  border-radius: 12px;
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(10, 27, 43, 0.08);
+  border-radius: 16px;
   padding: 0;
   overflow: hidden;
-  box-shadow: 0 14px 34px rgba(2, 24, 64, 0.08);
-  min-height: 132px;
+  box-shadow:
+    0 2px 6px rgba(4, 30, 91, 0.04),
+    0 8px 22px rgba(4, 30, 91, 0.06);
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   scroll-margin-top: 110px;
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  text-decoration: none;
+}
+
+.cardOverlay:focus-visible {
+  outline: 2px solid rgba(255, 156, 8, 0.55);
+  outline-offset: 2px;
 }
 
 .cardBanner {
   position: relative;
   width: 100%;
-  height: clamp(140px, 22vw, 200px);
-  min-height: 140px;
+  height: clamp(132px, 18vw, 168px);
+  min-height: 132px;
   flex-shrink: 0;
-  background: rgba(44, 126, 255, 0.08);
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(4, 30, 91, 0.04) 0%, rgba(44, 126, 255, 0.06) 100%);
 }
 
 .cardBannerImg {
   object-fit: cover;
   object-position: center;
+  transition: transform 320ms ease;
+}
+
+.card:hover .cardBannerImg {
+  transform: scale(1.05);
 }
 
 .cardContent {
-  display: grid;
-  align-content: start;
-  gap: 8px;
-  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  gap: 8px;
+  padding: clamp(14px, 1.4vw, 18px) clamp(14px, 1.4vw, 18px) clamp(12px, 1.2vw, 16px);
   min-height: 0;
 }
 
 .card:hover {
-  transform: translateY(-1px);
-  border-color: rgba(44, 126, 255, 0.35);
-  box-shadow: 0 18px 44px rgba(2, 24, 64, 0.11);
+  transform: translateY(-4px);
+  border-color: rgba(255, 156, 8, 0.38);
+  box-shadow:
+    0 6px 14px rgba(4, 30, 91, 0.08),
+    0 18px 38px rgba(4, 30, 91, 0.1);
 }
 
 .cardTop {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 .cardIconWrap {
   position: relative;
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-  background: rgba(44, 126, 255, 0.10);
-  border: 1px solid rgba(44, 126, 255, 0.18);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: transparent;
   overflow: hidden;
   flex: 0 0 auto;
 }
 
 .cardIcon {
   object-fit: contain;
-  padding: 8px;
+  object-position: center;
+  padding: 2px;
+  mix-blend-mode: multiply;
 }
 
 .cardTitle {
-  font-size: 15px;
-  font-weight: 900;
-  color: rgba(10, 27, 43, 0.88);
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 0.35vw + 13px, 15px);
+  font-weight: 800;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  color: var(--hero-navy);
 }
 
 .cardDesc {
-  font-size: 14px;
-  line-height: 1.6;
-  color: rgba(10, 27, 43, 0.6);
-  min-height: 48px;
+  margin: 0;
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--hero-gray);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cardLink {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(10, 27, 43, 0.06);
   text-decoration: none;
-  font-size: 13px;
-  font-weight: 900;
-  color: rgba(11, 87, 181, 0.95);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--hero-gold);
+  transition: color 160ms ease, gap 160ms ease, border-color 160ms ease;
+}
+
+.card:hover .cardLink {
+  border-top-color: rgba(255, 156, 8, 0.22);
 }
 
 .cardLink:hover {
-  text-decoration: underline;
+  color: color-mix(in srgb, var(--hero-gold) 75%, #001b3d);
+}
+
+.cardLinkArrow {
+  display: inline-block;
+  transition: transform 160ms ease;
+}
+
+.cardLink:hover .cardLinkArrow {
+  transform: translateX(3px);
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid rgba(255, 156, 8, 0.55);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .helpBar {
@@ -641,32 +719,47 @@
   .heroLeft {
     padding-left: clamp(0px, 2vw, 30px);
   }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 980px) {
   .heroInner {
-    grid-template-columns: 1fr;
     padding: 38px 20px 24px;
-  }
-
-  .heroRight {
-    justify-content: center;
   }
 
   .heroLeft {
     padding-left: 0;
   }
 
+  .heroTitleLine {
+    white-space: normal;
+  }
+
   .sectionTitleRow {
     grid-template-columns: 1fr;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  .sectionTitle {
+    font-size: clamp(20px, 3vw + 12px, 26px);
+  }
+
+  .sectionSubtitle {
+    font-size: 12px;
   }
 
   .pills {
     justify-content: flex-start;
+    align-self: flex-start;
   }
 
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
 }
 
@@ -676,12 +769,33 @@
     gap: 8px;
   }
 
+  .pill {
+    font-size: 10.5px;
+    padding: 6px 10px;
+    white-space: normal;
+  }
+
+  .sectionFlag {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
   .section {
     padding: 16px clamp(14px, 3vw, 20px) 40px;
   }
 
+  .sectionTitleUnderline {
+    margin: 6px 0 8px;
+  }
+
   .grid {
-    gap: 14px;
+    gap: 12px;
+  }
+
+  .cardBanner {
+    height: clamp(120px, 32vw, 150px);
+    min-height: 120px;
   }
 }
 
@@ -704,6 +818,15 @@
 
   .grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .cardBanner {
+    height: clamp(148px, 42vw, 180px);
   }
 
   .tab,

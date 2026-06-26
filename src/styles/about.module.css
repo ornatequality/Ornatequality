@@ -89,18 +89,18 @@
   text-align: left;
 }
 
-.text {
+.content .text {
   margin: 0 0 14px;
-  font-size: clamp(16px, 0.6vw + 15px, 18px);
-  line-height: 1.55;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
   font-weight: 500;
-  color: var(--hero-gray);
+  color: #000000;
   text-align: left;
-  /* Use full text column width so body copy lines up with the heading */
   max-width: 100%;
 }
 
-.text:last-of-type {
+.content .text:last-of-type {
   margin-bottom: 0;
 }
 
@@ -179,12 +179,12 @@
 
 .featureDesc {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 11px;
+  line-height: 1.45;
   font-weight: 400;
   color: var(--hero-gray);
   text-align: left;
-  min-height: calc(1.5em * 2);
+  min-height: calc(1.45em * 2);
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -317,10 +317,6 @@
 
   .title {
     font-size: clamp(1.65rem, 5vw, 2rem);
-  }
-
-  .text {
-    font-size: 16px;
   }
 
   .features {

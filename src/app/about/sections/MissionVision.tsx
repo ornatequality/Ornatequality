@@ -1,39 +1,26 @@
 import React from "react";
-import { Inter, Playfair_Display } from "next/font/google";
+import { manrope, playfair } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 import { IconEye, IconTarget } from "./icons";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  display: "swap",
-});
 
 export function MissionVision() {
   return (
     <section
-      className={`${styles.mvBand} ${inter.className}`}
+      className={`${styles.mvBand} ${manrope.className}`}
       lang="en"
       aria-label="Mission and vision"
     >
-      <div className={styles.container}>
+      <div className={`${styles.container} ${styles.mvContainer}`}>
         <div className={styles.mvGrid}>
-          <article className={styles.mvCard}>
+          <article className={`${styles.mvCard} ${styles.mvCardMission}`}>
+            <div className={styles.mvKicker}>Our mission</div>
             <div className={styles.mvBlockHead}>
               <div className={`${styles.mvIcon} ${styles.mvIconMission}`} aria-hidden="true">
                 <IconTarget />
               </div>
-              <div className={styles.mvHeadText}>
-                <div className={styles.mvKicker}>Our mission</div>
-                <h2 className={`${styles.mvBlockTitle} ${playfair.className}`}>Mission</h2>
-              </div>
+              <h2 className={`${styles.mvBlockTitle} ${playfair.className}`}>Mission</h2>
             </div>
+            <div className={styles.mvDivider} aria-hidden="true" />
             <p className={styles.mvBody}>
               At <span className={styles.mvHighlight}>Ornate Quality Services</span>, our mission is to
               empower businesses with reliable, efficient, and result-driven{" "}
@@ -54,16 +41,15 @@ export function MissionVision() {
             </p>
           </article>
 
-          <article className={styles.mvCard}>
+          <article className={`${styles.mvCard} ${styles.mvCardVision}`}>
+            <div className={styles.mvKicker}>Our vision</div>
             <div className={styles.mvBlockHead}>
               <div className={`${styles.mvIcon} ${styles.mvIconVision}`} aria-hidden="true">
                 <IconEye />
               </div>
-              <div className={styles.mvHeadText}>
-                <div className={styles.mvKicker}>Our vision</div>
-                <h2 className={`${styles.mvBlockTitle} ${playfair.className}`}>Vision</h2>
-              </div>
+              <h2 className={`${styles.mvBlockTitle} ${playfair.className}`}>Vision</h2>
             </div>
+            <div className={styles.mvDivider} aria-hidden="true" />
             <p className={styles.mvBody}>
               At <span className={styles.mvHighlight}>Ornate Quality Services</span>, our vision is to
               become a globally recognized leader in regulatory compliance, product certification,

@@ -1,27 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter, Playfair_Display } from "next/font/google";
+import { manrope, playfair } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 
-import aboutHeroImg from "@/assests/about11.png";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
+import aboutHeroImg from "@/assests/about12.jpg";
 
 export function AboutHero() {
   return (
-    <section className={`${styles.aboutHero} ${inter.className}`} aria-label="About hero">
+    <section className={`${styles.aboutHero} ${manrope.className}`} aria-label="About hero">
       <div className={styles.aboutHeroMedia} aria-hidden="true">
         <Image
           src={aboutHeroImg}
@@ -35,7 +22,7 @@ export function AboutHero() {
 
       <div className={styles.container}>
         <div className={styles.aboutHeroInner}>
-          <div className={styles.aboutHeroKicker}>ABOUT US</div>
+          <div className={styles.aboutHeroKicker}>About us</div>
 
           <h1 className={`${styles.aboutHeroTitle} ${playfair.className}`}>
             The{" "}

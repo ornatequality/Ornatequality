@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 
 import bisLogo from "@/assests/certi-img/BIS.webp";
 import beeLogo from "@/assests/certi-img/BEElogo.webp";
-import eprLogo from "@/assests/certi-img/msmp.jpeg";
+import eprLogo from "@/assests/certi-img/epr-icon.png";
 import lmpcLogo from "@/assests/certi-img/lmpc.webp";
 import isoLogo from "@/assests/certi-img/iso.webp";
 import wpcLogo from "@/assests/certi-img/wpc.webp";
@@ -68,49 +68,7 @@ export function serviceHref(slug: string) {
 }
 
 export const servicesMegaMenuColumns: MegaMenuColumn[] = [
-  {
-    id: "registration",
-    title: "REGISTRATION",
-    accent: "red",
-    headerGlyph: "reg",
-    items: [
-      {
-        label: "BIS CRS REGISTRATION",
-        slug: SERVICE_ROUTES.bisCrs,
-        icon: { type: "image", src: bisLogo, alt: "BIS CRS" },
-      },
-      {
-        label: "BEE (Bureau of Energy Efficiency)",
-        slug: SERVICE_ROUTES.bee,
-        icon: { type: "image", src: beeLogo, alt: "BEE" },
-      },
-      {
-        label: "EPR (Extended Producer Responsibility)",
-        slug: SERVICE_ROUTES.epr,
-        icon: { type: "image", src: eprLogo, alt: "EPR" },
-      },
-      {
-        label: "GEM (Government e-Marketplace)",
-        slug: SERVICE_ROUTES.gem,
-        icon: { type: "glyph", glyph: "GeM", tone: "orange" },
-      },
-      {
-        label: "TRADEMARK REGISTRATION",
-        slug: SERVICE_ROUTES.trademark,
-        icon: { type: "glyph", glyph: "™", tone: "red" },
-      },
-      {
-        label: "IEC (Import Export Code)",
-        slug: SERVICE_ROUTES.iec,
-        icon: { type: "glyph", glyph: "IEC", tone: "blue" },
-      },
-      {
-        label: "LMPC (Legal Metrology Packaged Commodities)",
-        slug: SERVICE_ROUTES.lmpc,
-        icon: { type: "image", src: lmpcLogo, alt: "LMPC" },
-      },
-    ],
-  },
+ 
   {
     id: "certification",
     title: "CERTIFICATION",
@@ -123,7 +81,7 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
         icon: { type: "image", src: bisLogo, alt: "BIS ISI" },
       },
       {
-        label: "ISO (International Organization for Standardization)",
+        label: "ISO CERTIFICATION(International Organization for Standardization)",
         slug: SERVICE_ROUTES.iso,
         icon: { type: "image", src: isoLogo, alt: "ISO" },
       },
@@ -133,7 +91,7 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
         icon: { type: "glyph", glyph: "CE", tone: "blue" },
       },
       {
-        label: "FMCS (Foreign Manufacturers Certification Scheme)",
+        label: "FMCS CERTIFICATION (Foreign Manufacturers Certification Scheme)",
         slug: SERVICE_ROUTES.bisFmcs,
         icon: { type: "glyph", glyph: "FM", tone: "navy" },
       },
@@ -143,16 +101,59 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
         icon: { type: "glyph", glyph: "TOY", tone: "teal" },
       },
       {
-        label: "CCOE / PESO",
+        label: "CCOE / PESO CERTIFICATION",
         slug: SERVICE_ROUTES.pesoCcoe,
         icon: { type: "glyph", glyph: "CC", tone: "navy" },
       },
       {
-        label: "CDSCO (Central Drugs Standard Control Organization)",
+        label: "CDSCO CERTIFICATION(Central Drugs Standard Control Organization)",
         slug: SERVICE_ROUTES.cdsco,
         icon: { type: "glyph", glyph: "Rx", tone: "red" },
       },
     
+    ],
+  },
+   {
+    id: "registration",
+    title: "REGISTRATION",
+    accent: "red",
+    headerGlyph: "reg",
+    items: [
+      {
+        label: "BIS(CRS) REGISTRATION",
+        slug: SERVICE_ROUTES.bisCrs,
+        icon: { type: "image", src: bisLogo, alt: "BIS CRS" },
+      },
+      {
+        label: "BEE REGISTRATION(Bureau of Energy Efficiency)",
+        slug: SERVICE_ROUTES.bee,
+        icon: { type: "image", src: beeLogo, alt: "BEE" },
+      },
+      {
+        label: "EPR REGISTRATION(Extended Producer Responsibility)",
+        slug: SERVICE_ROUTES.epr,
+        icon: { type: "image", src: eprLogo, alt: "EPR" },
+      },
+      {
+        label: "GEM REGISTRATION (Government e-Marketplace)",
+        slug: SERVICE_ROUTES.gem,
+        icon: { type: "glyph", glyph: "GeM", tone: "orange" },
+      },
+      {
+        label: "TRADEMARK REGISTRATION",
+        slug: SERVICE_ROUTES.trademark,
+        icon: { type: "glyph", glyph: "™", tone: "red" },
+      },
+      {
+        label: "IEC REGISTRATION (Import Export Code)",
+        slug: SERVICE_ROUTES.iec,
+        icon: { type: "glyph", glyph: "IEC", tone: "blue" },
+      },
+      {
+        label: "LMPC REGISTRATION (Legal Metrology Packaged Commodities)",
+        slug: SERVICE_ROUTES.lmpc,
+        icon: { type: "image", src: lmpcLogo, alt: "LMPC" },
+      },
     ],
   },
   {

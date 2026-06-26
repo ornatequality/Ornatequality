@@ -55,88 +55,70 @@
 }
 
 .brandCol {
-  padding-right: 0;
-  text-align: center;
-}
-
-.brandRow {
+  padding-left: clamp(10px, 2vw, 18px);
+  padding-right: clamp(10px, 2vw, 18px);
+  text-align: left;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 2px;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.logoPlate {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 10px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+.brandLink {
+  display: inline-block;
+  margin-bottom: 16px;
+  text-decoration: none;
+  color: inherit;
 }
 
-.logo {
-  width: clamp(124px, 34vw, 152px);
+.brandLink:focus-visible {
+  outline: 2px solid var(--hero-gold);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.brandLogo {
+  width: clamp(150px, 34vw, 196px);
   height: auto;
   display: block;
-  filter: contrast(1.08) saturate(1.06);
-}
-
-.brandTagline {
-  margin: 0 auto 8px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--hero-gold);
-  line-height: 1.45;
-  max-width: 26rem;
 }
 
 /* Hero subtitle scale */
 .brandText {
-  margin: 0 auto 6px;
+  margin: 0 0 14px;
   font-size: clamp(12px, 0.35vw + 11px, 14px);
   font-weight: 500;
-  line-height: 1.45;
-  color: var(--footer-text-soft);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
   max-width: 36ch;
 }
 
 .socialRow {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .socialBtn {
-  --sb: rgba(255, 255, 255, 0.92);
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background:white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
+    filter 180ms ease;
   text-decoration: none;
-  color: var(--sb);
 }
 
 .socialBtn:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
 }
 
 .socialBtn:focus-visible {
@@ -145,52 +127,40 @@
 }
 
 .socialBtn svg {
-  width: 17px;
-  height: 17px;
+  width: 20px;
+  height: 20px;
 }
 
 .socialLinkedIn {
-  --sb: #0a66c2;
+  background: #0a66c2;
 }
 
 .socialFacebook {
-  --sb: #1877f2;
+  background: #1877f2;
 }
 
 .socialYouTube {
-  --sb: #ff0000;
+  background: #ff0000;
 }
 
 .socialInstagram {
-  --sb: #e4405f;
+  background: linear-gradient(135deg, #f58529 0%, #dd2a7b 52%, #8134af 100%);
 }
 
 .socialLinkedIn:hover {
-  color: #ffffff;
   background: #0a66c2;
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 8px 20px rgba(10, 102, 194, 0.45);
 }
 
 .socialFacebook:hover {
-  color: #ffffff;
   background: #1877f2;
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 8px 20px rgba(24, 119, 242, 0.45);
 }
 
 .socialYouTube:hover {
-  color: #ffffff;
   background: #ff0000;
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
 }
 
 .socialInstagram:hover {
-  color: #ffffff;
-  background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 8px 20px rgba(221, 42, 123, 0.35);
+  background: linear-gradient(135deg, #f58529 0%, #dd2a7b 52%, #8134af 100%);
 }
 
 .linksCol {
@@ -284,10 +254,6 @@
   place-items: center;
   background: rgba(255, 255, 255, 0.12);
   color: var(--hero-white);
-}
-
-.whatsappIcon {
-  color: #25d366;
 }
 
 .linkList {
@@ -548,13 +514,13 @@
   }
 
   .socialRow {
-    justify-content: center;
-    gap: 8px;
+    justify-content: flex-start;
+    gap: 10px;
   }
 
   .socialBtn {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
   }
 
   .contactItem {

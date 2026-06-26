@@ -68,7 +68,7 @@ function MenuItemIcon({ icon }: { icon: MegaMenuIcon }) {
   if (icon.type === "image") {
     return (
       <span className={styles.itemIcon}>
-        <Image src={icon.src} alt={icon.alt} width={24} height={24} className={styles.itemIconImg} />
+        <Image src={icon.src} alt={icon.alt} width={30} height={30} className={styles.itemIconImg} />
       </span>
     );
   }

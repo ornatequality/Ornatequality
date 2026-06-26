@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { SERVICE_PAGE_ANCHORS } from "@/components/common/servicesMegaMenu.data";
+import { SERVICE_PAGE_ANCHORS, SERVICE_ROUTES } from "@/components/common/servicesMegaMenu.data";
 import Image from "next/image";
-import { Inter, Playfair_Display } from "next/font/google";
+import Link from "next/link";
+import { manrope, playfair } from "@/lib/fonts";
 import styles from "@/styles/servicesPage.module.css";
-import heroArt from "@/assests/service.png";
 import faqArt from "@/assests/Faqs.png";
+import aboutHeroImg from "@/assests/about12.jpg";
 
 import bisLogo from "@/assests/certi-img/BIS.webp";
 import wpcLogo from "@/assests/certi-img/wpc.webp";
@@ -21,35 +22,21 @@ import testingBannerImg from "@/assests/certi-img/ser6.png";
 import ceBannerImg from "@/assests/certi-img/ser7.png";
 import eprBannerImg from "@/assests/certi-img/ser8.png";
 import nablLogo from "@/assests/certi-img/nabl.webp";
-import msmeLogo from "@/assests/certi-img/msmp.jpeg";
+import eprIcon from "@/assests/certi-img/epr-icon.png";
 import isoLogo from "@/assests/certi-img/iso.webp";
 import lmpcLogo from "@/assests/certi-img/lmpc.webp";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-type TabKey = "domestic" | "international";
 
 type ServiceItem = {
   slug: string;
   title: string;
   description: string;
+  href: string;
   icon: any;
   cardBanner?: any;
 };
 
-function TabIcon({ type }: { type: TabKey }) {
-  if (type === "domestic") {
-    return (
+function TabIcon() {
+  return (
       <svg
         viewBox="0 0 24 24"
         width="18"
@@ -78,39 +65,6 @@ function TabIcon({ type }: { type: TabKey }) {
           stroke="rgba(10, 27, 43, 0.14)"
         />
       </svg>
-    );
-  }
-
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="18"
-      height="18"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <defs>
-        <linearGradient id="globeG" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#2C7EFF" />
-          <stop offset="100%" stopColor="#22C55E" />
-        </linearGradient>
-      </defs>
-      <circle cx="12" cy="12" r="9" fill="url(#globeG)" opacity="0.18" />
-      <circle cx="12" cy="12" r="8" fill="none" stroke="url(#globeG)" strokeWidth="2" />
-      <path
-        d="M4 12h16"
-        stroke="url(#globeG)"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12 4c2.8 2.6 4.4 5.4 4.4 8S14.8 17.4 12 20c-2.8-2.6-4.4-5.4-4.4-8S9.2 6.6 12 4Z"
-        fill="none"
-        stroke="url(#globeG)"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 
@@ -203,7 +157,6 @@ function PillIcon({ type }: { type: "guidance" | "support" | "speed" | "complian
 }
 
 export function ServicesContent() {
-  const [tab, setTab] = useState<TabKey>("domestic");
   const [openFaq, setOpenFaq] = useState<number>(0);
 
   useEffect(() => {
@@ -232,6 +185,7 @@ export function ServicesContent() {
         title: "BIS Certification",
         description:
           "End-to-end support for BIS registration, product testing, documentation, and approvals as per Indian standards.",
+        href: SERVICE_ROUTES.bisCrs,
         icon: bisLogo,
         cardBanner: bisBannerImg,
       },
@@ -240,6 +194,7 @@ export function ServicesContent() {
         title: "WPC Approval",
         description:
           "Approvals for wireless products including Wi-Fi, Bluetooth, RF, and other telecommunication devices.",
+        href: SERVICE_ROUTES.wpc,
         icon: wpcLogo,
         cardBanner: wpcBannerImg,
       },
@@ -248,6 +203,7 @@ export function ServicesContent() {
         title: "TEC Certification",
         description:
           "Telecommunication product certification and compliance support as per TEC regulations.",
+        href: SERVICE_ROUTES.tec,
         icon: tecLogo,
         cardBanner: tecBannerImg,
       },
@@ -256,6 +212,7 @@ export function ServicesContent() {
         title: "LMPC Registration",
         description:
           "Legal Metrology registration for importers and packaged commodities under LMPC regulations.",
+        href: SERVICE_ROUTES.lmpc,
         icon: lmpcLogo,
         cardBanner: lmpcBannerImg,
       },
@@ -264,6 +221,7 @@ export function ServicesContent() {
         title: "BEE Registration",
         description:
           "Energy efficiency labeling and registration for appliances and electrical products under BEE.",
+        href: SERVICE_ROUTES.bee,
         icon: beeLogo,
         cardBanner: beeBannerImg,
       },
@@ -272,7 +230,8 @@ export function ServicesContent() {
         title: "EPR Registration",
         description:
           "EPR authorization for Plastic, E-waste, Battery, and other waste categories under CPCB guidelines.",
-        icon: msmeLogo,
+        href: SERVICE_ROUTES.epr,
+        icon: eprIcon,
         cardBanner: eprBannerImg,
       },
       {
@@ -280,6 +239,7 @@ export function ServicesContent() {
         title: "CE Certification",
         description:
           "CE marking support for products entering the European market as per EU directives.",
+        href: SERVICE_ROUTES.ce,
         icon: isoLogo,
         cardBanner: ceBannerImg,
       },
@@ -288,19 +248,14 @@ export function ServicesContent() {
         title: "Testing & Documentation",
         description:
           "Product testing, lab coordination, technical file preparation, and compliance documentation support.",
+        href: SERVICE_ROUTES.nabl,
         icon: nablLogo,
         cardBanner: testingBannerImg,
       },
     ];
 
-    if (tab === "domestic") return base;
-
-    // International tab keeps the same layout; content can be tuned later.
-    return base.map((x) => ({
-      ...x,
-      description: x.description.replace("Indian", "international"),
-    }));
-  }, [tab]);
+    return base;
+  }, []);
 
   const faqs = useMemo(
     () => [
@@ -325,57 +280,38 @@ export function ServicesContent() {
   );
 
   return (
-    <main className={`${styles.main} ${inter.className}`}>
+    <main className={`${styles.main} ${manrope.className}`}>
       <section className={styles.hero} aria-label="Services hero">
+        <div className={styles.heroMedia} aria-hidden="true">
+          <Image
+            src={aboutHeroImg}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroBgImg}
+          />
+        </div>
+
         <div className={styles.heroInner}>
           <div className={styles.heroLeft}>
-            <p className={styles.heroKicker}>OUR SERVICES</p>
+            <p className={styles.heroKicker}>Our services</p>
             <h1 className={`${styles.heroTitle} ${playfair.className}`}>
               <span className={styles.heroTitleLine}>Certification &amp; Compliance</span>
               <br />
               Solutions
             </h1>
             <p className={styles.heroText}>
-              We provide end-to-end support for mandatory certifications, approvals &amp;
-              registrations for your products in domestic and international markets.
+              We provide end-to-end support for mandatory certifications, approvals and
+              registrations for your products in the Indian market.
             </p>
 
-            <div className={styles.heroTabs} role="tablist" aria-label="Service scope">
-              <button
-                type="button"
-                className={tab === "domestic" ? styles.tabActive : styles.tab}
-                onClick={() => setTab("domestic")}
-                role="tab"
-                aria-selected={tab === "domestic"}
-              >
-                <span className={styles.flag} aria-hidden="true">
-                  <TabIcon type="domestic" />
-                </span>
-                Domestic
-              </button>
-              <button
-                type="button"
-                className={tab === "international" ? styles.tabActive : styles.tab}
-                onClick={() => setTab("international")}
-                role="tab"
-                aria-selected={tab === "international"}
-              >
-                <span className={styles.flag} aria-hidden="true">
-                  <TabIcon type="international" />
-                </span>
-                International
-              </button>
+            <div className={styles.heroScopeBadge}>
+              <span className={styles.flag} aria-hidden="true">
+                <TabIcon />
+              </span>
+              Domestic certifications
             </div>
-          </div>
-
-          <div className={styles.heroRight} aria-hidden="true">
-            <Image
-              src={heroArt}
-              alt=""
-              priority
-              className={styles.heroArt}
-              sizes="(max-width: 980px) 92vw, 520px"
-            />
           </div>
         </div>
       </section>
@@ -389,17 +325,16 @@ export function ServicesContent() {
           <div className={styles.sectionTitleRow}>
             <div className={styles.sectionTitleLeft}>
               <span className={styles.sectionFlag} aria-hidden="true">
-                  <TabIcon type={tab} />
+                <TabIcon />
               </span>
-              <div>
+              <div className={styles.sectionTitleBlock}>
                 <h2 className={`${styles.sectionTitle} ${playfair.className}`}>
-                  {tab === "domestic" ? "Domestic Certifications" : "International Certifications"}
+                  Domestic certifications
                 </h2>
-                <div className={styles.sectionSubtitle}>
-                  {tab === "domestic"
-                    ? "Mandatory certifications, registrations & approvals for Indian market."
-                    : "Approvals & certifications to sell in global markets."}
-                </div>
+                <div className={styles.sectionTitleUnderline} aria-hidden="true" />
+                <p className={styles.sectionSubtitle}>
+                  Mandatory certifications, registrations and approvals for the Indian market.
+                </p>
               </div>
             </div>
 
@@ -427,13 +362,18 @@ export function ServicesContent() {
         <div className={styles.grid} role="list">
           {items.map((s) => (
             <article className={styles.card} id={s.slug} key={s.slug} role="listitem">
+              <Link
+                href={s.href}
+                className={styles.cardOverlay}
+                aria-label={`Learn more about ${s.title}`}
+              />
               {s.cardBanner ? (
                 <div className={styles.cardBanner} aria-hidden="true">
                   <Image
                     src={s.cardBanner}
                     alt=""
                     fill
-                    sizes="(max-width: 720px) 92vw, 280px"
+                    sizes="(max-width: 520px) 92vw, (max-width: 980px) 46vw, 280px"
                     className={styles.cardBannerImg}
                   />
                 </div>
@@ -445,16 +385,16 @@ export function ServicesContent() {
                       src={s.icon}
                       alt=""
                       fill
-                      sizes="48px"
+                      sizes="40px"
                       className={styles.cardIcon}
                     />
                   </div>
-                  <div className={styles.cardTitle}>{s.title}</div>
+                  <h3 className={styles.cardTitle}>{s.title}</h3>
                 </div>
-                <div className={styles.cardDesc}>{s.description}</div>
-                <a className={styles.cardLink} href="/contact">
-                  Learn More <span aria-hidden="true">→</span>
-                </a>
+                <p className={styles.cardDesc}>{s.description}</p>
+                <Link href={s.href} className={styles.cardLink}>
+                  Learn More <span className={styles.cardLinkArrow} aria-hidden="true">→</span>
+                </Link>
               </div>
             </article>
           ))}

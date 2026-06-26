@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { playfair } from "@/lib/fonts";
 import styles from "../../styles/blog.module.css";
@@ -78,6 +79,7 @@ export default function BlogSection() {
         <div className={styles.grid} role="list" aria-label="Blog posts">
           {posts.map((p) => (
             <article key={p.title} className={styles.card} role="listitem">
+              <Link href="/blog" className={styles.cardLink} aria-label={`Read more: ${p.title}`} />
               <div className={styles.media}>
                 <Image
                   src={p.img}
@@ -94,9 +96,9 @@ export default function BlogSection() {
                 <div className={styles.tag}>{p.tag}</div>
                 <h3 className={styles.title}>{p.title}</h3>
                 <p className={styles.excerpt}>{p.excerpt}</p>
-                <a className={styles.readMore} href="#">
+                <Link className={styles.readMore} href="/blog">
                   Read More <span aria-hidden="true">→</span>
-                </a>
+                </Link>
               </div>
             </article>
           ))}

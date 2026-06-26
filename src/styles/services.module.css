@@ -18,7 +18,7 @@
   display: grid;
   justify-items: center;
   gap: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 28px;
 }
 
 p.sectionTagline {
@@ -97,14 +97,14 @@ p.sectionTagline {
   flex: 1;
   min-width: 0;
   display: flex;
-  gap: 18px;
+  gap: 20px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 6px 4px 12px;
+  padding: 8px 4px 16px;
 }
 
 .carousel::-webkit-scrollbar {
@@ -112,110 +112,148 @@ p.sectionTagline {
 }
 
 .card {
-  flex: 0 0 calc((100% - 54px) / 4);
-  min-width: calc((100% - 54px) / 4);
+  flex: 0 0 calc((100% - 60px) / 4);
+  min-width: calc((100% - 60px) / 4);
   scroll-snap-align: start;
+  position: relative;
   background: #ffffff;
   border: 1px solid rgba(10, 27, 43, 0.08);
   border-radius: 16px;
-  padding: 20px 16px 16px;
   box-shadow:
-    0 0 18px rgba(0, 0, 0, 0.1),
-    0 0 40px rgba(0, 0, 0, 0.08);
-  min-height: 292px;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  align-content: start;
-  justify-items: center;
-  text-align: center;
+    0 2px 6px rgba(4, 30, 91, 0.04),
+    0 8px 22px rgba(4, 30, 91, 0.06);
+  min-height: 296px;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+  overflow: hidden;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
-    border-color 180ms ease,
-    outline-color 180ms ease;
+    border-color 180ms ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 156, 8, 0.45);
-  outline-color: rgba(0, 27, 61, 0.2);
+  transform: translateY(-4px);
+  border-color: rgba(255, 156, 8, 0.42);
   box-shadow:
-    0 0 22px rgba(0, 0, 0, 0.12),
-    0 0 48px rgba(0, 0, 0, 0.1);
+    0 6px 14px rgba(4, 30, 91, 0.08),
+    0 18px 38px rgba(4, 30, 91, 0.1);
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  padding: 24px 20px 18px;
+  text-align: center;
 }
 
 .iconWrap {
-  width: 62px;
-  height: 62px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  /* background: rgba(255, 156, 8, 0.1); */
-  /* border: 1px solid rgba(15, 15, 14, 0.22); */
-  margin: 0 auto 12px;
-  justify-self: center;
+  position: relative;
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  margin: 0 0 14px;
+  padding: 10px;
+  background: transparent;
+  border: none;
 }
 
 .serviceIconImg {
-  width: 60px;
-  height: 60px;
   object-fit: contain;
+  object-position: center;
+  mix-blend-mode: multiply;
 }
 
-.cardTitle {
-  margin: 2px 0 8px;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1.25;
-  color: var(--hero-navy);
-  min-height: 40px;
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  text-align: center;
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   width: 100%;
+  gap: 8px;
 }
 
-.cardText {
-  margin: 0 0 12px;
-  font-size: 14px;
+.cardBody .cardTitle {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.32;
+  color: var(--hero-navy);
+  letter-spacing: -0.01em;
+}
+
+.cardBody .cardText {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.55;
   color: var(--hero-gray);
-  min-height: 62px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-align: center;
-  width: 100%;
-  justify-self: center;
 }
 
 .learnMore {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(10, 27, 43, 0.06);
   text-decoration: none;
-  font-size: 13px;
-  font-weight: 800;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--hero-gold);
-  padding-top: 6px;
-  justify-self: center;
-  text-align: center;
+  cursor: pointer;
+  transition: color 160ms ease, gap 160ms ease, border-color 160ms ease;
+}
+
+.card:hover .learnMore {
+  border-top-color: rgba(255, 156, 8, 0.22);
+}
+
+.cardLink {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid rgba(255, 156, 8, 0.55);
+  outline-offset: 2px;
+}
+
+.learnMoreArrow {
+  display: inline-block;
+  transition: transform 160ms ease;
 }
 
 .learnMore:hover {
-  text-decoration: underline;
-  color: color-mix(in srgb, var(--hero-gold) 82%, #001b3d);
+  color: color-mix(in srgb, var(--hero-gold) 75%, #001b3d);
+}
+
+.learnMore:hover .learnMoreArrow {
+  transform: translateX(3px);
 }
 
 .ctaRow {
-  margin-top: 14px;
+  margin-top: 24px;
   display: grid;
   justify-items: center;
 }
@@ -249,8 +287,8 @@ p.sectionTagline {
 
 @media (max-width: 1100px) {
   .card {
-    flex: 0 0 calc((100% - 36px) / 3);
-    min-width: calc((100% - 36px) / 3);
+    flex: 0 0 calc((100% - 40px) / 3);
+    min-width: calc((100% - 40px) / 3);
   }
 }
 
@@ -260,8 +298,8 @@ p.sectionTagline {
   }
 
   .card {
-    flex: 0 0 calc((100% - 18px) / 2);
-    min-width: calc((100% - 18px) / 2);
+    flex: 0 0 calc((100% - 20px) / 2);
+    min-width: calc((100% - 20px) / 2);
   }
 }
 

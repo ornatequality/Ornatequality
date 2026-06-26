@@ -21,15 +21,13 @@
   z-index: 1;
   max-width: 1240px;
   margin: 0 auto;
-  /* padding-top: clamp(40px, 5vw, 64px); */
-  /* padding-bottom: clamp(40px, 5vw, 56px); */
+  padding-bottom: clamp(32px, 4vw, 48px);
   padding-left: max(20px, env(safe-area-inset-left));
   padding-right: max(20px, env(safe-area-inset-right));
   display: grid;
   grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
-  align-items: stretch;
-  gap: clamp(24px, 4vw, 48px);
-
+  align-items: center;
+  gap: clamp(20px, 3.5vw, 48px);
 }
 
 .left {
@@ -50,26 +48,27 @@ p.tagline {
 
 .title {
   margin: 0 0 16px;
-  font-size: clamp(32px, 3.6vw + 14px, 56px);
+  font-size: clamp(26px, 2.2vw + 14px, 46px);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.14;
   letter-spacing: -0.02em;
   color: var(--hero-navy);
+  text-wrap: balance;
 }
 
 .subtitle {
   margin: 0 0 14px;
-  font-size: clamp(16px, 0.6vw + 15px, 18px);
+  font-size: clamp(12px, 0.2vw + 11.5px, 14px);
   font-weight: 500;
   line-height: 1.55;
   color: var(--hero-gray);
-  max-width: 48ch;
+  max-width: min(48ch, 100%);
 }
 
 /* Certification icons — same width as subtitle paragraph */
 .certMarqueeWrap {
   width: 100%;
-  max-width: 48ch;
+  max-width: min(48ch, 100%);
   margin: 0 0 22px;
   min-width: 0;
   background: transparent;
@@ -260,7 +259,7 @@ p.tagline {
 .visual {
   position: relative;
   flex: 1;
-  min-height: clamp(360px, 48vw, 520px);
+  min-height: clamp(340px, 44vw, 520px);
   background: var(--hero-white);
   width: calc(100% + max(0px, (100vw - 1240px) / 2 + 20px));
   margin-right: calc(-1 * max(0px, (100vw - 1240px) / 2 + 20px));
@@ -377,28 +376,73 @@ p.tagline {
 }
 
 .barStatLabel {
-  font-size: 13px;
+  font-size: clamp(12px, 0.35vw + 11px, 13px);
   font-weight: 500;
   line-height: 1.25;
   color: var(--hero-gray);
 }
 
+@media (min-width: 1201px) {
+  .container {
+    max-width: 1280px;
+  }
+
+  .statsBarInner {
+    max-width: 1280px;
+  }
+
+  .visual {
+    width: calc(100% + max(0px, (100vw - 1280px) / 2 + 20px));
+    margin-right: calc(-1 * max(0px, (100vw - 1280px) / 2 + 20px));
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .container {
+    gap: clamp(16px, 2.8vw, 28px);
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+    padding-top: clamp(32px, 4vw, 48px);
+    padding-bottom: clamp(28px, 3.5vw, 40px);
+  }
+
+  .title {
+    font-size: clamp(24px, 2.4vw + 10px, 38px);
+  }
+
+  .visual {
+    min-height: clamp(300px, 40vw, 440px);
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 14px 18px;
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 1024px) {
   .container {
     grid-template-columns: 1fr;
-    padding-top: clamp(32px, 6vw, 44px);
+    padding-top: clamp(28px, 5vw, 40px);
     padding-bottom: clamp(8px, 2vw, 16px);
-    gap: 20px;
+    gap: clamp(16px, 3vw, 22px);
+  }
+
+  .left {
+    max-width: 640px;
+    width: 100%;
+    margin-inline: auto;
   }
 
   .right {
     order: -1;
+    width: 100%;
   }
 
   .visual {
     width: 100%;
     margin-right: 0;
-    min-height: clamp(280px, 52vw, 380px);
+    min-height: clamp(260px, 48vw, 360px);
     border-radius: 8px;
     overflow: hidden;
   }
@@ -444,6 +488,16 @@ p.tagline {
     margin-bottom: 18px;
     border-bottom: 1px solid var(--hero-divider);
   }
+
+  .ctaRow {
+    flex-wrap: wrap;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    flex: 1 1 220px;
+    justify-content: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -465,6 +519,51 @@ p.tagline {
 
   .certMarqueeTrack > ul:first-of-type {
     flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: clamp(24px, 4.5vw, 32px);
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  p.tagline {
+    margin-bottom: 10px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .title {
+    font-size: clamp(22px, 5vw + 10px, 30px);
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    margin-bottom: 12px;
+  }
+
+  .certMarqueeWrap {
+    margin-bottom: 18px;
+  }
+
+  .certIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .certIconImg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .visual {
+    min-height: clamp(220px, 52vw, 320px);
+  }
+
+  .barStatValue {
+    font-size: clamp(20px, 4.5vw, 26px);
   }
 }
 
@@ -507,13 +606,60 @@ p.tagline {
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
+  .container {
+    padding-top: 20px;
+    padding-bottom: 6px;
+  }
+
   .title {
-    font-size: clamp(28px, 8vw, 32px);
+    font-size: clamp(20px, 6.2vw, 26px);
+    line-height: 1.18;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 13px 16px;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
   }
 
   .visual {
-    min-height: clamp(220px, 58vw, 300px);
+    min-height: clamp(200px, 56vw, 260px);
+    border-radius: 6px;
+  }
+
+  .statsBar {
+    padding-top: 12px;
+    padding-bottom: 18px;
+  }
+
+  .barStatIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .barStatValue {
+    font-size: 20px;
+  }
+
+  .barStatLabel {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .title {
+    font-size: clamp(19px, 6.8vw, 24px);
+  }
+
+  .visual {
+    min-height: clamp(190px, 58vw, 240px);
   }
 }
 
