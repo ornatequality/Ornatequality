@@ -7,7 +7,7 @@ export const SITE_LEGAL_NAME = "Ornate Quality Services Pvt. Ltd.";
 export const SITE_ALT_NAME = "Ornate Certification";
 
 export const DEFAULT_PHONE = "+91-9266877738";
-export const DEFAULT_PHONE_2 = "+91-8880013897";
+export const DEFAULT_PHONE_2 = "+91-8800013897";
 
 export const SITE_EMAIL = "chetan@ornatequality.com";
 export const SITE_EMAIL_MARKETING = "marketing@ornatequality.com";

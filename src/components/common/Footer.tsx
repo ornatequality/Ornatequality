@@ -279,7 +279,7 @@ const Footer = () => {
                     </a>
                     <br />
                     <a className={styles.link} href="tel:+918880013897">
-                      +91 8880013897
+                      +91 8800013897
                     </a>
                   </div>
                 </div>

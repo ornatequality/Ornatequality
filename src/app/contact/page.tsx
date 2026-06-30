@@ -79,7 +79,7 @@ export default function ContactPage() {
                         |
                       </span>{" "}
                       <a className={styles.link} href="tel:+918880013897">
-                        +91-8880013897
+                        +91-88000013897
                       </a>
                     </div>
                   </div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
               />
 
               <button className={styles.submit} type="submit">
-                Request For Call
+                Submit
               </button>
             </form>
           </div>
@@ -210,7 +210,7 @@ export default function ContactPage() {
                     </a>
                     <br />
                     <a className={styles.link} href="tel:+918880013897">
-                      +91-8880013897
+                      +91-8800013897
                     </a>
                     
                   </span>
