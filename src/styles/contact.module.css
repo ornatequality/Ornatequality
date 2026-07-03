@@ -216,6 +216,26 @@
   outline-offset: 3px;
 }
 
+.submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.formStatus {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.formStatusSuccess {
+  color: #0f766e;
+}
+
+.formStatusError {
+  color: #b91c1c;
+}
+
 /* ========================= */
 /* Map / Location section     */
 /* ========================= */

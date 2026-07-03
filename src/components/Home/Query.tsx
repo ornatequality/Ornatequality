@@ -1,5 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { playfair } from "@/lib/fonts";
+import { parseApiResponse } from "@/lib/parseApiResponse";
 import styles from "../../styles/query.module.css";
 
 function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -13,12 +16,54 @@ function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 const Query = () => {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("loading");
+    setErrorMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/callback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          message: formData.get("message"),
+        }),
+      });
+
+      const result = await parseApiResponse(response);
+
+      if (!response.ok || !result.success) {
+        const firstError =
+          result.errors && typeof result.errors === "object"
+            ? Object.values(result.errors)[0]
+            : result.message;
+        throw new Error(
+          typeof firstError === "string" ? firstError : "Submission failed. Please try again."
+        );
+      }
+
+      form.reset();
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+    }
+  }
+
   return (
-    <section
-      className={styles.section}
-      aria-label="Request a call back"
-    >
+    <section className={styles.section} aria-label="Request a call back">
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.left}>
@@ -26,9 +71,7 @@ const Query = () => {
               <span className={styles.phoneIcon} aria-hidden="true">
                 <PhoneIcon />
               </span>
-              <h2 className={`${styles.title} ${playfair.className}`}>
-                Request a call back
-              </h2>
+              <h2 className={`${styles.title} ${playfair.className}`}>Request a call back</h2>
             </div>
 
             <p className={styles.subtitle}>
@@ -38,7 +81,7 @@ const Query = () => {
             </p>
           </div>
 
-          <form className={styles.form} action="#" method="post">
+          <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <div className={styles.field}>
               <label className={styles.label} htmlFor="query-name">
                 Your Name
@@ -50,6 +93,7 @@ const Query = () => {
                 name="name"
                 autoComplete="name"
                 placeholder="Your Name"
+                required
               />
             </div>
 
@@ -65,6 +109,7 @@ const Query = () => {
                 inputMode="numeric"
                 autoComplete="tel"
                 placeholder="10 digit Mobile No"
+                required
               />
             </div>
 
@@ -79,6 +124,7 @@ const Query = () => {
                 name="email"
                 autoComplete="email"
                 placeholder="you@example.com"
+                required
               />
             </div>
 
@@ -92,14 +138,27 @@ const Query = () => {
                 name="message"
                 rows={3}
                 placeholder="How can we help you?"
+                required
               />
             </div>
 
             <div className={`${styles.field} ${styles.fieldSubmit}`}>
-              <button type="submit" className={styles.submit}>
-                Submit
+              <button type="submit" className={styles.submit} disabled={status === "loading"}>
+                {status === "loading" ? "Submitting..." : "Submit"}
               </button>
             </div>
+
+            {status === "success" && (
+              <p className={`${styles.formStatus} ${styles.formStatusSuccess}`} role="status">
+                Thank you! We will call you back shortly.
+              </p>
+            )}
+
+            {status === "error" && (
+              <p className={`${styles.formStatus} ${styles.formStatusError}`} role="alert">
+                {errorMessage}
+              </p>
+            )}
           </form>
         </div>
       </div>

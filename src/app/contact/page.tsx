@@ -1,4 +1,5 @@
 import React from "react";
+import ContactForm from "@/components/forms/ContactForm";
 import styles from "@/styles/contact.module.css";
 
 function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -107,36 +108,7 @@ export default function ContactPage() {
               <div className={styles.cardSubtitle}>I would like to discuss:</div>
             </div>
 
-            <form className={styles.form} action="#" method="post">
-              <div className={styles.row2}>
-                <input className={styles.input} type="text" name="name" placeholder="Your Name *" required />
-                <input className={styles.input} type="email" name="email" placeholder="Your Email *" required />
-              </div>
-
-              <div className={styles.row2}>
-                <input
-                  className={styles.input}
-                  type="tel"
-                  name="phone"
-                  inputMode="numeric"
-                  placeholder="Phone Number *"
-                  required
-                />
-                <input className={styles.input} type="text" name="city" placeholder="Your City *" required />
-              </div>
-
-              <textarea
-                className={styles.textarea}
-                name="message"
-                placeholder="Enter Your Message *"
-                rows={5}
-                required
-              />
-
-              <button className={styles.submit} type="submit">
-                Submit
-              </button>
-            </form>
+            <ContactForm />
           </div>
         </div>
 
