@@ -7,7 +7,7 @@ function getEnv(name) {
 }
 
 const NOTIFY_EMAIL =
-  getEnv("FORM_NOTIFY_EMAIL") || getEnv("NOTIFY_EMAIL") || "ritiksharmaornate@gmail.com";
+  getEnv("FORM_NOTIFY_EMAIL") || getEnv("NOTIFY_EMAIL") || "chetan@ornatequality.com";
 
 const PLACEHOLDER_PASSWORDS = new Set([
   "YOUR_GMAIL_APP_PASSWORD",
