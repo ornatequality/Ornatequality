@@ -1,5 +1,7 @@
 "use client";
 
+import { ServiceCallbackForm } from "@/components/forms/ServiceCallbackForm";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useActiveTocScroll } from "@/hooks/useActiveTocScroll";
 import Image from "next/image";
@@ -31,90 +33,20 @@ const inter = Inter({
 });
 
 function CallbackForm() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
-  if (submitted) {
-    return (
-      <div className={styles.formSuccess}>
-        <span className={styles.formSuccessIcon} aria-hidden="true">
-          ✓
-        </span>
-        <p className={styles.formSuccessTitle}>Request Submitted!</p>
-        <p className={styles.formSuccessText}>
-          Our PESO / CCOE registration expert will contact you within one business day.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="peso-callback-name">
-          Name
-        </label>
-        <input
-          id="peso-callback-name"
-          className={styles.formInput}
-          type="text"
-          name="name"
-          required
-          placeholder="Your full name"
-          autoComplete="name"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="peso-callback-email">
-          Email
-        </label>
-        <input
-          id="peso-callback-email"
-          className={styles.formInput}
-          type="email"
-          name="email"
-          required
-          placeholder="you@company.com"
-          autoComplete="email"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="peso-callback-mobile">
-          Mobile
-        </label>
-        <input
-          id="peso-callback-mobile"
-          className={styles.formInput}
-          type="tel"
-          name="mobile"
-          required
-          placeholder="+91 XXXXX XXXXX"
-          autoComplete="tel"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="peso-callback-service">
-          Service
-        </label>
-        <select
-          id="peso-callback-service"
-          className={styles.formInput}
-          name="service"
-          defaultValue="PESO / CCOE Registration"
-        >
-          <option value="PESO / CCOE Registration">PESO / CCOE Registration</option>
-        </select>
-      </div>
-      <button type="submit" className={styles.formSubmit}>
-        Submit Request
-      </button>
-    </form>
+    <ServiceCallbackForm
+      idPrefix="peso"
+      defaultService="PESO / CCOE Registration"
+      serviceOptions={[
+        "PESO / CCOE Registration",
+      ]}
+      successText="Our PESO / CCOE registration expert will contact you within one business day."
+      mobilePlaceholder="+91 XXXXX XXXXX"
+      serviceSelectClassName="formInput"
+    />
   );
 }
+
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

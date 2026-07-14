@@ -1,5 +1,7 @@
 "use client";
 
+import { ServiceCallbackForm } from "@/components/forms/ServiceCallbackForm";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useActiveTocScroll } from "@/hooks/useActiveTocScroll";
 import Image from "next/image";
@@ -32,90 +34,20 @@ const inter = Inter({
 });
 
 function CallbackForm() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
-  if (submitted) {
-    return (
-      <div className={styles.formSuccess}>
-        <span className={styles.formSuccessIcon} aria-hidden="true">
-          ✓
-        </span>
-        <p className={styles.formSuccessTitle}>Request Submitted!</p>
-        <p className={styles.formSuccessText}>
-          Our audit services expert will contact you within one business day.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="audit-callback-name">
-          Name
-        </label>
-        <input
-          id="audit-callback-name"
-          className={styles.formInput}
-          type="text"
-          name="name"
-          required
-          placeholder="Your full name"
-          autoComplete="name"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="audit-callback-email">
-          Email
-        </label>
-        <input
-          id="audit-callback-email"
-          className={styles.formInput}
-          type="email"
-          name="email"
-          required
-          placeholder="you@company.com"
-          autoComplete="email"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="audit-callback-mobile">
-          Mobile
-        </label>
-        <input
-          id="audit-callback-mobile"
-          className={styles.formInput}
-          type="tel"
-          name="mobile"
-          required
-          placeholder="+91 XXXXX XXXXX"
-          autoComplete="tel"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="audit-callback-service">
-          Service
-        </label>
-        <select
-          id="audit-callback-service"
-          className={styles.formInput}
-          name="service"
-          defaultValue="Audit Services"
-        >
-          <option value="Audit Services">Audit Services</option>
-        </select>
-      </div>
-      <button type="submit" className={styles.formSubmit}>
-        Submit Request
-      </button>
-    </form>
+    <ServiceCallbackForm
+      idPrefix="audit"
+      defaultService="Audit Services"
+      serviceOptions={[
+        "Audit Services",
+      ]}
+      successText="Our audit services expert will contact you within one business day."
+      mobilePlaceholder="+91 XXXXX XXXXX"
+      serviceSelectClassName="formInput"
+    />
   );
 }
+
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

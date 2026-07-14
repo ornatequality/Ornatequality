@@ -1,5 +1,7 @@
 "use client";
 
+import { ServiceCallbackForm } from "@/components/forms/ServiceCallbackForm";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useActiveTocScroll } from "@/hooks/useActiveTocScroll";
 import Image from "next/image";
@@ -31,95 +33,22 @@ const inter = Inter({
 });
 
 function CallbackForm() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
-  if (submitted) {
-    return (
-      <div className={styles.formSuccess}>
-        <span className={styles.formSuccessIcon} aria-hidden="true">
-          ✓
-        </span>
-        <p className={styles.formSuccessTitle}>Request Submitted!</p>
-        <p className={styles.formSuccessText}>
-          Our IEC registration expert will contact you within one business day.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="iec-callback-name">
-          Name
-        </label>
-        <input
-          id="iec-callback-name"
-          className={styles.formInput}
-          type="text"
-          name="name"
-          required
-          placeholder="Your full name"
-          autoComplete="name"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="iec-callback-email">
-          Email
-        </label>
-        <input
-          id="iec-callback-email"
-          className={styles.formInput}
-          type="email"
-          name="email"
-          required
-          placeholder="you@company.com"
-          autoComplete="email"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="iec-callback-mobile">
-          Mobile Number
-        </label>
-        <input
-          id="iec-callback-mobile"
-          className={styles.formInput}
-          type="tel"
-          name="mobile"
-          required
-          inputMode="tel"
-          placeholder="10-digit mobile number"
-          autoComplete="tel"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="iec-callback-service">
-          Service
-        </label>
-        <select
-          id="iec-callback-service"
-          className={styles.formSelect}
-          name="service"
-          defaultValue="IEC Registration"
-        >
-          <option value="IEC Registration">IEC Registration</option>
-          <option value="LMPC Registration">LMPC Registration</option>
-          <option value="BIS CRS Registration">BIS CRS Registration</option>
-          <option value="EPR Registration">EPR Registration</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <button type="submit" className={styles.formSubmit}>
-        Submit Request
-      </button>
-    </form>
+    <ServiceCallbackForm
+      idPrefix="iec"
+      defaultService="IEC Registration"
+      serviceOptions={[
+        "IEC Registration",
+        "LMPC Registration",
+        "BIS CRS Registration",
+        "EPR Registration",
+        "Other",
+      ]}
+      successText="Our IEC registration expert will contact you within one business day."
+    />
   );
 }
+
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

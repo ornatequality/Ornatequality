@@ -1,5 +1,7 @@
 "use client";
 
+import { ServiceCallbackForm } from "@/components/forms/ServiceCallbackForm";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useActiveTocScroll } from "@/hooks/useActiveTocScroll";
 import Image from "next/image";
@@ -32,98 +34,25 @@ const inter = Inter({
 });
 
 function CallbackForm() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
-  if (submitted) {
-    return (
-      <div className={styles.formSuccess}>
-        <span className={styles.formSuccessIcon} aria-hidden="true">
-          ✓
-        </span>
-        <p className={styles.formSuccessTitle}>Request Submitted!</p>
-        <p className={styles.formSuccessText}>
-          Our trademark expert will contact you within one business day.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="tm-callback-name">
-          Name
-        </label>
-        <input
-          id="tm-callback-name"
-          className={styles.formInput}
-          type="text"
-          name="name"
-          required
-          placeholder="Your full name"
-          autoComplete="name"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="tm-callback-email">
-          Email
-        </label>
-        <input
-          id="tm-callback-email"
-          className={styles.formInput}
-          type="email"
-          name="email"
-          required
-          placeholder="you@company.com"
-          autoComplete="email"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="tm-callback-mobile">
-          Mobile Number
-        </label>
-        <input
-          id="tm-callback-mobile"
-          className={styles.formInput}
-          type="tel"
-          name="mobile"
-          required
-          inputMode="tel"
-          placeholder="10-digit mobile number"
-          autoComplete="tel"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="tm-callback-service">
-          Service
-        </label>
-        <select
-          id="tm-callback-service"
-          className={styles.formSelect}
-          name="service"
-          defaultValue="Trademark Registration"
-        >
-          <option value="Trademark Registration">Trademark Registration</option>
-          <option value="BIS CRS Registration">BIS CRS Registration</option>
-          <option value="BEE Certification">BEE Certification</option>
-          <option value="EPR Registration">EPR Registration</option>
-          <option value="GeM Portal Registration">GeM Portal Registration</option>
-          <option value="LMPC Registration">LMPC Registration</option>
-          <option value="IEC Registration">IEC Registration</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <button type="submit" className={styles.formSubmit}>
-        Submit Request
-      </button>
-    </form>
+    <ServiceCallbackForm
+      idPrefix="tm"
+      defaultService="Trademark Registration"
+      serviceOptions={[
+        "Trademark Registration",
+        "BIS CRS Registration",
+        "BEE Certification",
+        "EPR Registration",
+        "GeM Portal Registration",
+        "LMPC Registration",
+        "IEC Registration",
+        "Other",
+      ]}
+      successText="Our trademark expert will contact you within one business day."
+    />
   );
 }
+
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

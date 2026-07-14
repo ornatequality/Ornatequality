@@ -1,5 +1,7 @@
 "use client";
 
+import { ServiceCallbackForm } from "@/components/forms/ServiceCallbackForm";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useActiveTocScroll } from "@/hooks/useActiveTocScroll";
 import Image from "next/image";
@@ -32,95 +34,23 @@ const inter = Inter({
 });
 
 function CallbackForm() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
-  if (submitted) {
-    return (
-      <div className={styles.formSuccess}>
-        <span className={styles.formSuccessIcon} aria-hidden="true">
-          ✓
-        </span>
-        <p className={styles.formSuccessTitle}>Request Submitted!</p>
-        <p className={styles.formSuccessText}>
-          Our FMCS certification expert will contact you within one business day.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="fmcs-callback-name">
-          Name
-        </label>
-        <input
-          id="fmcs-callback-name"
-          className={styles.formInput}
-          type="text"
-          name="name"
-          required
-          placeholder="Your full name"
-          autoComplete="name"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="fmcs-callback-email">
-          Email
-        </label>
-        <input
-          id="fmcs-callback-email"
-          className={styles.formInput}
-          type="email"
-          name="email"
-          required
-          placeholder="you@company.com"
-          autoComplete="email"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="fmcs-callback-mobile">
-          Mobile Number 
-        </label>
-        <input
-          id="fmcs-callback-mobile"
-          className={styles.formInput}
-          type="tel"
-          name="mobile"
-          required
-          inputMode="tel"
-          placeholder="10-digit mobile number"
-          autoComplete="tel"
-        />
-      </div>
-      <div className={styles.formField}>
-        <label className={styles.formLabel} htmlFor="fmcs-callback-service">
-          Service
-        </label>
-        <select
-          id="fmcs-callback-service"
-          className={styles.formSelect}
-          name="service"
-          defaultValue="BIS FMCS Certification"
-        >
-          <option value="BIS FMCS Certification">BIS FMCS Certification</option>
-          <option value="BIS ISI Mark Certification">BIS ISI Mark Certification</option>
-          <option value="BIS CRS Registration">BIS CRS Registration</option>
-          <option value="WPC-ETA Approval">WPC-ETA Approval</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <button type="submit" className={styles.formSubmit}>
-        Submit Request
-      </button>
-    </form>
+    <ServiceCallbackForm
+      idPrefix="fmcs"
+      defaultService="BIS FMCS Certification"
+      serviceOptions={[
+        "BIS FMCS Certification",
+        "BIS ISI Mark Certification",
+        "BIS CRS Registration",
+        "WPC-ETA Approval",
+        "Other",
+      ]}
+      successText="Our FMCS certification expert will contact you within one business day."
+    />
   );
 }
+
+
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 

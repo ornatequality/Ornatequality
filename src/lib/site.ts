@@ -1,6 +1,6 @@
-/** Canonical site URL — override via NEXT_PUBLIC_SITE_URL when custom domain goes live */
+/** Canonical site URL — override via NEXT_PUBLIC_SITE_URL if needed */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ornatequality.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ornatequality.com";
 
 export const SITE_NAME = "Ornate Quality Services";
 export const SITE_LEGAL_NAME = "Ornate Quality Services Pvt. Ltd.";

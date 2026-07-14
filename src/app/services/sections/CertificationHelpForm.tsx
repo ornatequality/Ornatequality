@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Playfair_Display } from "next/font/google";
+import { parseApiResponse } from "@/lib/parseApiResponse";
 import styles from "@/styles/servicesPage.module.css";
 
 const playfair = Playfair_Display({
@@ -24,19 +25,67 @@ const CERT_OPTIONS = [
 ] as const;
 
 type MarketOption = "domestic" | "unsure";
+type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function CertificationHelpForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [market, setMarket] = useState<MarketOption>("domestic");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus("loading");
+    setErrorMessage("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const product = String(formData.get("product") || "").trim();
+    const certification = String(formData.get("certification") || "").trim();
+    const notes = String(formData.get("notes") || "").trim();
+    const marketLabel = market === "domestic" ? "India (Domestic)" : "Not sure yet";
+
+    try {
+      const response = await fetch("/api/callback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          message: [
+            `Certification guidance request`,
+            `Product: ${product}`,
+            `Target market: ${marketLabel}`,
+            `Looking for: ${certification}`,
+            notes ? `Notes: ${notes}` : null,
+          ]
+            .filter(Boolean)
+            .join("\n"),
+        }),
+      });
+
+      const result = await parseApiResponse(response);
+
+      if (!response.ok || !result.success) {
+        const firstError =
+          result.errors && typeof result.errors === "object"
+            ? Object.values(result.errors)[0]
+            : result.message;
+        throw new Error(
+          typeof firstError === "string" ? firstError : "Submission failed. Please try again."
+        );
+      }
+
+      form.reset();
+      setMarket("domestic");
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+    }
   }
 
-  
-
-  if (submitted) {
+  if (status === "success") {
     return (
       <div className={styles.certGuide} role="region" aria-label="Certification guidance">
         <div className={styles.certGuideSuccess}>
@@ -84,7 +133,6 @@ export function CertificationHelpForm() {
               autoComplete="off"
             />
           </div>
-
 
           <div className={styles.certGuideField}>
             <label className={styles.certGuideLabel} htmlFor="cert-market">
@@ -154,13 +202,14 @@ export function CertificationHelpForm() {
 
           <div className={styles.certGuideField}>
             <label className={styles.certGuideLabel} htmlFor="cert-email">
-              Email
+              Email <span className={styles.certGuideReq}>*</span>
             </label>
             <input
               id="cert-email"
               className={styles.certGuideInput}
               type="email"
               name="email"
+              required
               autoComplete="email"
               placeholder="you@company.com"
             />
@@ -181,18 +230,24 @@ export function CertificationHelpForm() {
         </div>
 
         <div className={styles.certGuideActions}>
-          <button type="submit" className={styles.certGuideSubmit}>
-            Get expert recommendation
+          <button
+            type="submit"
+            className={styles.certGuideSubmit}
+            disabled={status === "loading"}
+          >
+            {status === "loading" ? "Submitting..." : "Get expert recommendation"}
             <span aria-hidden="true">→</span>
           </button>
           <p className={styles.certGuideNote}>
             Free guidance — no obligation. We typically respond within one business day.
           </p>
+          {status === "error" && (
+            <p role="alert" style={{ color: "#b91c1c", margin: 0 }}>
+              {errorMessage}
+            </p>
+          )}
         </div>
       </form>
     </div>
   );
 }
-
-
-

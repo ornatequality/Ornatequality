@@ -69,7 +69,7 @@ async function getConnectionUri() {
   const envUri = process.env.MONGODB_URI;
 
   if (!envUri) {
-    throw new Error("MONGODB_URI is missing from your .env.local file");
+    throw new Error("MONGODB_URI is missing from your environment (.env / .env.local)");
   }
 
   const directUri = process.env.MONGODB_URI_DIRECT;

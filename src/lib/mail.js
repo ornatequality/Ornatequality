@@ -56,13 +56,13 @@ export async function sendFormEmail({ subject, formType, fields }) {
   const pass = getEnv("SMTP_PASS").replace(/\s+/g, "");
 
   if (!user || !pass) {
-    console.warn("SMTP_USER or SMTP_PASS missing in .env.local — email skipped.");
+    console.warn("SMTP_USER or SMTP_PASS missing in environment — email skipped.");
     return { sent: false, reason: "smtp_not_configured" };
   }
 
   if (PLACEHOLDER_PASSWORDS.has(pass)) {
     console.warn(
-      "SMTP_PASS is still a placeholder. Set a real Gmail App Password in .env.local"
+      "SMTP_PASS is still a placeholder. Set a real Gmail App Password in your environment (.env / .env.local)"
     );
     return { sent: false, reason: "smtp_placeholder_password" };
   }
