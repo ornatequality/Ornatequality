@@ -115,12 +115,16 @@
 }
 
 @media (max-width: 640px) {
+  .section {
+    padding: 32px 0 36px;
+  }
+
   .container {
-    padding: 0 14px;
+    padding: 0 16px;
   }
 
   .heading {
-    font-size: clamp(22px, 5vw + 12px, 26px);
+    font-size: clamp(1.3rem, 6vw, 1.65rem);
   }
 
   .qRow {

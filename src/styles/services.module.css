@@ -320,9 +320,35 @@ p.sectionTagline {
   }
 }
 
+@media (max-width: 768px) {
+  .services {
+    padding: 36px 0 44px;
+  }
+
+  .heading {
+    font-size: clamp(1.4rem, 5.5vw + 0.35rem, 1.85rem);
+  }
+
+  p.sectionTagline {
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 520px) {
+  .services {
+    padding: 32px 0 40px;
+  }
+
   .container {
-    padding: 0 14px;
+    padding: 0 16px;
+  }
+
+  .headerRow {
+    margin-bottom: 20px;
+  }
+
+  .heading {
+    font-size: clamp(1.3rem, 6vw, 1.65rem);
   }
 
   .carousel {
