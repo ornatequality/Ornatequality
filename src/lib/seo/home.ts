@@ -28,31 +28,47 @@ export type HomeFaqItem = {
   a: string;
 };
 
-/** Shared by FAQ UI and FAQPage JSON-LD — edit here only */
+/** Shared by FAQ UI and FAQPage JSON-LD — edit here only (10 items: 5 left + 5 right) */
 export const HOME_FAQS: HomeFaqItem[] = [
   {
-    q: "What is BIS certification and why is it mandatory in India?",
-    a: "BIS certification is a mandatory quality mark required by the Government of India for specific product categories under the BIS Act, 2016. Products like electronics, appliances, steel, cement, and toys must carry the ISI mark or CRS registration before they can be legally sold in India. Selling without BIS certification can result in penalties or product seizure.",
+    q: "What does Ornate Quality Services do?",
+    a: "Helps businesses obtain BIS, WPC, BEE, EPR, TEC, LMPC and CE certification in India, end-to-end.",
   },
   {
-    q: "How long does it take to get BIS CRS registration in India?",
-    a: "BIS CRS registration typically takes 4–8 weeks once all documents and test reports are ready. The timeline depends on product category, testing lab availability, and document completeness. Ornate Quality Services helps clients reduce avoidable delays through accurate documentation and direct coordination with testing labs and BIS authorities.",
+    q: "What certifications does Ornate help with?",
+    a: "BIS (CRS, ISI Mark, FMCS), WPC ETA, TEC, LMPC, BEE, EPR and CE certification.",
   },
   {
-    q: "What is WPC ETA approval and which products require it?",
-    a: "WPC ETA is mandatory certification required in India for all wireless communication devices such as Wi-Fi routers, Bluetooth devices, mobile phones, drones, and IoT equipment. It ensures the device operates on approved frequency bands and does not interfere with other communications. Importers and manufacturers must obtain WPC ETA before market entry.",
+    q: "Is Ornate Quality Services a government body?",
+    a: "No. It's a private compliance consultancy; certificates are issued by the respective government authorities (BIS, WPC, BEE, CPCB).",
   },
   {
-    q: "What is EPR registration and who needs it in India?",
-    a: "EPR (Extended Producer Responsibility) registration is mandatory for producers, importers, and brand owners of electronics and plastic packaging. It requires registering with the Central Pollution Control Board (CPCB) and meeting annual collection and recycling targets. Non-compliance can result in fines and import bans.",
+    q: "How many years of experience does Ornate have?",
+    a: "13+ years, established in 2013.",
   },
   {
-    q: "Can foreign companies or importers apply for BIS certification in India?",
-    a: "Yes, foreign manufacturers can apply for BIS certification through an Authorized Indian Representative (AIR). Ornate Quality Services assists foreign manufacturers and importers in appointing an AIR, preparing foreign test reports from BIS-recognized labs, and managing the entire BIS application process for Indian market entry.",
+    q: "Which companies has Ornate worked with?",
+    a: "Enterprise clients including Flipkart, Croma, Hitachi, Hyundai, Nokia, Reliance Digital and T-Series.",
   },
   {
-    q: "Why should I use a BIS certification consultant instead of applying directly?",
-    a: "A BIS certification consultant accelerates approvals by preparing accurate documentation, coordinating with BIS-recognized testing labs, and managing follow-ups with regulatory authorities. Ornate Quality Services has a 98% first-time approval rate and has delivered 5000+ certifications over 13+ years, significantly reducing time-to-market.",
+    q: "Can foreign manufacturers use Ornate's services?",
+    a: "Yes, with Authorized Indian Representative (AIR) support.",
+  },
+  {
+    q: "What is Ornate's certification success rate?",
+    a: "98%, as stated on the site.",
+  },
+  {
+    q: "How do I start the certification process?",
+    a: "Book a free consultation; the process then moves through documentation, testing coordination, and certification.",
+  },
+  {
+    q: "How can I contact Ornate Quality Services?",
+    a: "Phone, email, WhatsApp, or the website contact form.",
+  },
+  {
+    q: "Why should I use Ornate instead of applying directly?",
+    a: "Ornate prepares accurate documentation, coordinates testing labs, and manages authority follow-ups — with a 98% success rate over 13+ years.",
   },
 ];
 
