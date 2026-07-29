@@ -17,3 +17,6 @@ export async function parseApiResponse(response: Response) {
     throw new Error("Unexpected server response. Please try again.");
   }
 }
+
+
+  
