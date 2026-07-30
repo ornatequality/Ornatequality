@@ -207,7 +207,7 @@ const Footer = () => {
             </ul>
             <div className={styles.footerCtaRow} aria-label="Footer call to actions">
               <Link href="/contact" className={styles.footerPrimaryBtn}>
-                Get Free Consultation
+                Get Expert Consultation
                 <span className={styles.btnArrow} aria-hidden="true">
                   →
                 </span>
@@ -309,7 +309,7 @@ const Footer = () => {
         <div className={styles.bottomBar}>
           <div className={styles.bottomLeft}>© 2024 Ornate Certification. All Rights Reserved.</div>
           <div className={styles.bottomRight}>
-            <a className={styles.bottomLink} href="#">
+            <a className={styles.bottomLink} href="/privacy-policy">
               Privacy Policy
             </a>
             <span className={styles.bottomSep} aria-hidden="true">

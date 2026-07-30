@@ -2,11 +2,18 @@
 
 import React, { useState } from "react";
 import { parseApiResponse } from "@/lib/parseApiResponse";
-import styles from "@/styles/contact.module.css";
+import { pushGenerateLeadEvent } from "@/lib/analytics";
+import defaultStyles from "@/styles/contact.module.css";
+import adsStyles from "@/styles/adsContactForm.module.css";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
-export default function ContactForm() {
+type ContactFormProps = {
+  variant?: "default" | "ads";
+};
+
+export default function ContactForm({ variant = "default" }: ContactFormProps) {
+  const styles = variant === "ads" ? adsStyles : defaultStyles;
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -45,6 +52,9 @@ export default function ContactForm() {
 
       form.reset();
       setStatus("success");
+      pushGenerateLeadEvent({
+        page_type: variant === "ads" ? "ads_landing" : "contact",
+      });
     } catch (error) {
       setStatus("error");
       setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");

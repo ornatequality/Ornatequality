@@ -14,6 +14,11 @@ import {
 } from "@/lib/seo/home";
 import { SITE_LEGAL_NAME, SITE_NAME, SITE_URL } from "@/lib/site";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
+import CookieConsent from "@/components/consent/CookieConsent";
+import {
+  GoogleTagManagerBody,
+  GoogleTagManagerHead,
+} from "@/components/analytics/GoogleTagManager";
 
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 const bingVerification = process.env.BING_SITE_VERIFICATION;
@@ -149,12 +154,15 @@ export default function RootLayout({
     >
       <head>
         <JsonLdScripts />
+        <GoogleTagManagerHead />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <GoogleTagManagerBody />
         <TopBar />
         <Header />
         <main className="grow bg-white">{children}</main>
         <WhatsAppButton/>
+        <CookieConsent />
         <Footer />
       </body>
     </html>

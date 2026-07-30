@@ -4,7 +4,7 @@ export const HOME_TITLE =
   "BIS Certification Consultant India | Ornate Quality Services";
 
 export const HOME_DESCRIPTION =
-  "India's trusted BIS Certification Consultant. Expert support for WPC, TEC, CRS, BEE, EPR & LMPC. 13+ years · 5000+ certifications · 98% success rate. Free consultation.";
+  "India's trusted BIS Certification Consultant. Expert support for WPC, TEC, CRS, BEE, EPR & LMPC. 13+ years · 5000+ certifications · 98% success rate. Expert consultation.";
 
 export const HOME_KEYWORDS = [
   "BIS Certification Consultant India",
@@ -60,7 +60,7 @@ export const HOME_FAQS: HomeFaqItem[] = [
   },
   {
     q: "How do I start the certification process?",
-    a: "Book a free consultation; the process then moves through documentation, testing coordination, and certification.",
+    a: "Book an expert consultation; the process then moves through documentation, testing coordination, and certification.",
   },
   {
     q: "How can I contact Ornate Quality Services?",

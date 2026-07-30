@@ -451,7 +451,7 @@ export function BisCrsPageContent() {
                   Apply Now →
                 </Link>
                 <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Free Consultation
+                  📞 Expert Consultation
                 </a>
               </div>
             </section>
