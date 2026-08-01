@@ -1,0 +1,203 @@
+﻿Diagnose log at 2026-08-01T10:53:19Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.6.1+786ab03440ddc82e807a97c0e540f5247e44cec6
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26200)
+Reading environment variables... OK
+ Variables:
+HOMEPATH=\Users\khush
+DriverData=C:\Windows\System32\Drivers\DriverData
+COMPUTERNAME=KHUSHI
+GIT_TRACE2_PARENT_SID=2d106db7-68fa-4202-a58d-8b168b726a03
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+OneDrive=C:\Users\khush\OneDrive
+ChocolateyLastPathUpdate=133996719428925680
+RegionCode=APJ
+LANG=en_US.UTF-8
+TMP=C:\Users\khush\AppData\Local\Temp
+PROCESSOR_REVISION=ba02
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+GIT_ASKPASS=c:\Users\khush\AppData\Roaming\Code\User\globalStorage\vscode.git\askpass\70789581cae28aa7\askpass.sh
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+TEMP=C:\Users\khush\AppData\Local\Temp
+LOCALAPPDATA=C:\Users\khush\AppData\Local
+MSYSTEM=MINGW64
+ANDROID_HOME=C:\Users\khush\AppData\Local\Android\Sdk
+COPILOT_DEBUG_NONCE=754daf3c1fd01801bddd37f2efc160f1
+VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
+ProgramW6432=C:\Program Files
+windir=C:\Windows
+JAVA_HOME=C:\Program Files\Microsoft\jdk-17.0.16.8-hotspot\
+USERDOMAIN=KHUSHI
+ProgramFiles(x86)=C:\Program Files (x86)
+platformcode=M7
+VSCODE_GIT_ASKPASS_NODE=C:\Users\khush\AppData\Local\Programs\Microsoft VS Code\Code.exe
+Path=C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\khush\bin;c:\Users\khush\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\khush\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Microsoft\jdk-17.0.16.8-hotspot\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Program Files\HP\OMEN-Broadcast\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\php;C:\Program Files\MongoDB\Server\8.2\bin;C:\Users\khush\AppData\Local\Programs\Python\Launcher\;C:\Users\khush\AppData\Local\Microsoft\WindowsApps;C:\Users\khush\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\khush\AppData\Roaming\npm;C:\Program Files\php;C:\Users\khush\AppData\Local\Programs\cursor\resources\app\bin
+TERM_PROGRAM=vscode
+PROCESSOR_LEVEL=6
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 186 Stepping 2, GenuineIntel
+TMPDIR=C:\Users\khush\AppData\Local\Temp
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+PROMPT=$P$G
+TERM_PROGRAM_VERSION=1.130.0
+EFC_9232_1592913036=1
+PSModulePath=C:\Users\khush\OneDrive\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC=C:\Users\Public
+NUMBER_OF_PROCESSORS=12
+FPS_BROWSER_USER_PROFILE_STRING=Default
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+VSCODE_INJECTION=1
+VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-6a4e5e6b46-sock
+CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_9248_QRMNVSHDNAJQLKJM
+VSCODE_GIT_ASKPASS_MAIN=c:\Users\khush\AppData\Roaming\Code\User\globalStorage\vscode.git\askpass\70789581cae28aa7\askpass-main.js
+PLINK_PROTOCOL=ssh
+ProgramData=C:\ProgramData
+ProgramFiles=C:\Program Files (x86)
+ChocolateyInstall=C:\ProgramData\chocolatey
+OnlineServices=Online Services
+SystemRoot=C:\Windows
+HOME=C:\Users\khush
+CommonProgramW6432=C:\Program Files\Common Files
+ZES_ENABLE_SYSMAN=1
+LOGONSERVER=\\KHUSHI
+USERPROFILE=C:\Users\khush
+COLORTERM=truecolor
+USERDOMAIN_ROAMINGPROFILE=KHUSHI
+TERM=xterm-256color
+APPDATA=C:\Users\khush\AppData\Roaming
+HOMEDRIVE=C:
+SESSIONNAME=Console
+USERNAME=khush
+PROCESSOR_ARCHITEW6432=AMD64
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+PROCESSOR_ARCHITECTURE=x86
+OS=Windows_NT
+ComSpec=C:\Windows\system32\cmd.exe
+SystemDrive=C:
+EFC_9232_4126798990=1
+OneDriveConsumer=C:\Users\khush\OneDrive
+ALLUSERSPROFILE=C:\ProgramData
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\khush\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\khush\AppData\Local\Temp\901a4a8ca17fc7fff5484fbe'... OK
+Reading from temporary file 'C:\Users\khush\AppData\Local\Temp\901a4a8ca17fc7fff5484fbe'... OK
+Deleting temporary file 'C:\Users\khush\AppData\Local\Temp\901a4a8ca17fc7fff5484fbe'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\khush
+UserDataDirectoryPath: C:\Users\khush\.gcm
+GetCurrentDirectory(): D:\ornateproject\Ornatequality
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:59485/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.49.0.windows.1'
+Locating current repository...Git repository at 'D:/ornateproject/Ornatequality/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:C:/Users/khush/.gitconfig	user.name=Khushisingh0
+file:C:/Users/khush/.gitconfig	user.email=khushi62064@gmail.com
+file:C:/Users/khush/.gitconfig	core.fscache=false
+file:C:/Users/khush/.gitconfig	core.preloadindex=false
+file:C:/Users/khush/.gitconfig	core.protectntfs=true
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	remote.origin.url=https://github.com/ornatequality/Ornatequality.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	branch.khushi.remote=origin
+file:.git/config	branch.khushi.merge=refs/heads/khushi
+file:.git/config	branch.khushi.vscode-merge-base=origin/khushi
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\khush\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\khush\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+

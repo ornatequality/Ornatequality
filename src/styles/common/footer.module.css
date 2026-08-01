@@ -452,13 +452,46 @@
 }
 
 @media (max-width: 768px) {
+  /* Brand full width; Quick Links + Our Services side-by-side */
   .topGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 14px;
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .linksCol,
+  .servicesCol {
+    text-align: left;
+  }
+
+  .colTitle {
+    text-align: left;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+  }
+
+  .linkList {
+    justify-items: start;
+    gap: 5px;
+  }
+
+  .link {
+    text-align: left;
+    font-size: 12.5px;
+  }
+
+  /* Government Links column (4th child) — full width below the pair */
+  .topGrid > .linksCol:nth-child(4) {
+    grid-column: 1 / -1;
   }
 
   .contactCol {
-    grid-column: auto;
+    grid-column: 1 / -1;
     max-width: none;
     margin-left: 0;
     margin-right: 0;
@@ -468,6 +501,10 @@
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
+    margin-top: 14px;
+    /* Span both Quick Links + Our Services columns */
+    width: calc(200% + 14px);
+    margin-left: calc(-100% - 14px);
   }
 
   .footerPrimaryBtn,
@@ -478,30 +515,61 @@
     min-height: 42px;
     white-space: normal;
     text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  /* Government Links — horizontal justified row on mobile */
+  .topGrid > .linksCol:nth-child(4) .linkList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px 10px;
+    width: 100%;
+  }
+
+  .topGrid > .linksCol:nth-child(4) .linkList li {
+    flex: 0 0 auto;
+  }
+
+  .contactValue {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .contactCol .colTitle {
+    text-align: left;
   }
 
   .bottomBar {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    gap: 8px;
   }
 
   .bottomLeft {
     text-align: center;
+    font-size: 11px;
   }
 
   .bottomRight {
     margin-left: 0;
     justify-content: center;
-    flex-wrap: wrap;
-    row-gap: 8px;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .bottomLink {
+    font-size: 11px;
   }
 }
 
 @media (max-width: 640px) {
   .footer {
-    padding-top: 16px;
-    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    padding-top: 18px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
   }
 
   .container {
@@ -510,7 +578,17 @@
   }
 
   .topGrid {
-    gap: 14px;
+    gap: 16px 12px;
+  }
+
+  .footerCtaRow {
+    width: calc(200% + 12px);
+    margin-left: calc(-100% - 12px);
+  }
+
+  .brandText {
+    font-size: 12.5px;
+    max-width: none;
   }
 
   .socialRow {
@@ -519,8 +597,17 @@
   }
 
   .socialBtn {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .colTitle {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .link {
+    font-size: 12px;
   }
 
   .contactItem {
@@ -536,10 +623,15 @@
 
 @media (max-width: 380px) {
   .colTitle {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+    font-size: 9.5px;
   }
 
   .linkList {
     gap: 4px;
+  }
+
+  .link {
+    font-size: 11.5px;
   }
 }

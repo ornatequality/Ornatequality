@@ -580,7 +580,7 @@ export function LmpcPageContent() {
                   Apply Now →
                 </Link>
                 <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Free Consultation
+                  📞 Expert Consultation
                 </a>
               </div>
             </section>

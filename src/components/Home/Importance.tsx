@@ -30,10 +30,10 @@ const Importance = () => {
   );
 
   return (
-    <section className={styles.section} aria-label="Why certification is important">
+    <section className={styles.section} aria-label="Why certification matters">
       <div className={styles.container}>
         <div className={styles.headingWrap}>
-          <h2 className={`${styles.heading} ${playfair.className}`}>Why certification is important</h2>
+          <h2 className={`${styles.heading} ${playfair.className}`}>Why certification Matters</h2>
           <div className={styles.underline} aria-hidden="true" />
         </div>
 

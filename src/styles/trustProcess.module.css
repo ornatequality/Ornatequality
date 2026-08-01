@@ -480,17 +480,48 @@
 
 @media (max-width: 700px) {
   .section {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 36px 0 40px;
   }
 
   .container {
-    padding: 0 14px;
+    padding: 0 16px;
+  }
+
+  .kicker {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .mainTitle {
+    font-size: clamp(1.35rem, 5.5vw, 1.75rem);
+  }
+
+  .subTitle {
+    font-size: clamp(1.15rem, 4.5vw, 1.4rem);
+    margin-bottom: 14px;
+  }
+
+  .left .intro {
+    font-size: 13px;
+    line-height: 1.65;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
   }
 
   .featuresGrid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .featureTitle {
+    font-size: clamp(14px, 3.8vw, 16px);
+  }
+
+  .featureBody .featureDesc {
+    font-size: 12px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .processCards {

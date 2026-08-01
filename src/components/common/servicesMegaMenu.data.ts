@@ -22,7 +22,7 @@ export type MegaMenuItem = {
 export type MegaMenuColumn = {
   id: string;
   title: string;
-  accent: "red" | "teal";
+  accent: "red" | "teal" | "green" | "orange" | "blue";
   headerGlyph: string;
   items: MegaMenuItem[];
 };
@@ -54,7 +54,7 @@ export const SERVICE_PAGE_ANCHORS = {
   bis: "bis-certification",
   bee: "bee-registration",
   epr: "epr-registration",
-  lmpc: "lmpc-registration",  
+  lmpc: "lmpc-registration",
   wpc: "wpc-approval",
   tec: "tec-certification",
   ce: "ce-certification",
@@ -67,8 +67,9 @@ export function serviceHref(slug: string) {
   return `/services#${slug}`;
 }
 
+const TPI_SERVICES = `${SERVICE_ROUTES.tpi}#services-offered`;
+
 export const servicesMegaMenuColumns: MegaMenuColumn[] = [
- 
   {
     id: "certification",
     title: "CERTIFICATION",
@@ -110,10 +111,9 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
         slug: SERVICE_ROUTES.cdsco,
         icon: { type: "glyph", glyph: "Rx", tone: "red" },
       },
-    
     ],
   },
-   {
+  {
     id: "registration",
     title: "REGISTRATION",
     accent: "red",
@@ -157,18 +157,61 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
     ],
   },
   {
+    id: "inspection",
+    title: "INSPECTION & QUALITY",
+    accent: "green",
+    headerGlyph: "insp",
+    items: [
+      {
+        label: "PRE-PRODUCTION INSPECTION (PPI)",
+        slug: TPI_SERVICES,
+        icon: { type: "glyph", glyph: "PPI", tone: "green" },
+      },
+      {
+        label: "DURING PRODUCTION INSPECTION (DPI)",
+        slug: TPI_SERVICES,
+        icon: { type: "glyph", glyph: "DPI", tone: "green" },
+      },
+      {
+        label: "FINAL RANDOM INSPECTION (FRI)",
+        slug: TPI_SERVICES,
+        icon: { type: "glyph", glyph: "FRI", tone: "teal" },
+      },
+      {
+        label: "CONTAINER LOADING INSPECTION (CLI)",
+        slug: TPI_SERVICES,
+        icon: { type: "glyph", glyph: "CLI", tone: "navy" },
+      },
+      {
+        label: "FACTORY & PROCESS INSPECTION",
+        slug: TPI_SERVICES,
+        icon: { type: "glyph", glyph: "FAC", tone: "green" },
+      },
+      {
+        label: "PRODUCT INSPECTION",
+        slug: TPI_SERVICES,
+        icon: { type: "glyph", glyph: "PRD", tone: "blue" },
+      },
+      {
+        label: "THIRD-PARTY INSPECTION (TPI)",
+        slug: SERVICE_ROUTES.tpi,
+        icon: { type: "glyph", glyph: "TPI", tone: "red" },
+      },
+    ],
+  },
+  {
     id: "other",
-    title: "Other Services",
-    accent: "red",
+    title: "OTHER SERVICES",
+    accent: "orange",
     headerGlyph: "other",
     items: [
       {
-        label: "FSSAI (Food Safety and Standards Authority of India)",
+        label: "FSSAI REGISTRATION(Food Safety and Standards Authority of India)",
         slug: SERVICE_ROUTES.fssai,
         icon: { type: "glyph", glyph: "FSS", tone: "green" },
       },
       {
-        label: "WPC-ETA Approval",
+        label: "WPC-ETA APPROVAL",
         slug: SERVICE_ROUTES.wpc,
         icon: { type: "image", src: wpcLogo, alt: "WPC ETA" },
       },
@@ -178,7 +221,7 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
         icon: { type: "image", src: tecLogo, alt: "TEC" },
       },
       {
-        label: "RoHS COMPLIANCE",
+        label: "ROHS COMPLIANCE",
         slug: SERVICE_ROUTES.rohs,
         icon: { type: "glyph", glyph: "RoHS", tone: "green" },
       },
@@ -187,21 +230,16 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
         slug: SERVICE_ROUTES.nabl,
         icon: { type: "image", src: nablLogo, alt: "NABL" },
       },
-     
-      {
-        label: "TPI (Third Party Inspection)",
-        slug: SERVICE_ROUTES.tpi,
-        icon: { type: "glyph", glyph: "TPI", tone: "red" },
-      },
       {
         label: "AUDIT SERVICES",
         slug: SERVICE_ROUTES.audit,
         icon: { type: "glyph", glyph: "AUD", tone: "navy" },
       },
+      {
+        label: "TECHNICAL DOCUMENTATION & COMPLIANCE SUPPORT",
+        slug: SERVICE_PAGE_ANCHORS.testing,
+        icon: { type: "glyph", glyph: "DOC", tone: "orange" },
+      },
     ],
   },
 ];
-
-
-
-

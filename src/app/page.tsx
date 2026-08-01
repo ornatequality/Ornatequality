@@ -8,6 +8,7 @@ import Importance from "@/components/Home/Importance";
 const TrustProcess = dynamic(() => import("@/components/Home/TrustProcess"));
 const BlogSection = dynamic(() => import("@/components/Home/BlogSection"));
 const ValuedClients = dynamic(() => import("@/components/Home/ValuedClients"));
+const ClientTestimonials = dynamic(() => import("@/components/Home/ClientTestimonials"));
 const Query = dynamic(() => import("@/components/Home/Query"));
 const Faq = dynamic(() => import("@/components/Home/Faq"));
 import { JsonLdList } from "@/components/seo/JsonLdScripts";
@@ -69,6 +70,7 @@ export default function HomePage() {
       <TrustProcess />
       <BlogSection />
       <ValuedClients />
+      <ClientTestimonials variant="home" />
       <Query />
       <Faq />
     </div>

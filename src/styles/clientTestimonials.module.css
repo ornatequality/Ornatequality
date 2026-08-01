@@ -1,0 +1,135 @@
+/* Shared client testimonials — landing (default) + home (compact) */
+.section {
+  --ct-navy: #0a1e4d;
+  --ct-white: #ffffff;
+  --ct-light-blue: #f0f7ff;
+  --ct-card-gap: 16px;
+  --ct-heading-size: clamp(24px, 2vw + 14px, 34px);
+  --ct-quote-size: 13px;
+  --ct-name-size: 13px;
+  --ct-role-size: 11px;
+  --ct-stars-size: 14px;
+  --ct-card-padding: 18px 16px;
+
+  padding: clamp(40px, 5vw, 56px) 0;
+  background: var(--ct-light-blue);
+}
+
+.sectionHome {
+  --ct-card-gap: 14px;
+  --ct-heading-size: clamp(20px, 1.6vw + 12px, 28px);
+  --ct-quote-size: 8px;
+  --ct-name-size: 11px;
+  --ct-role-size: 9px;
+  --ct-stars-size: 11px;
+  --ct-card-padding: 14px 14px 12px;
+
+  padding: clamp(36px, 4vw, 48px) 0;
+}
+
+.container {
+  max-width: min(1240px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, clamp(14px, 2.5vw, 24px));
+}
+
+.heading {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: var(--ct-heading-size);
+  font-weight: 700;
+  color: var(--ct-navy);
+  line-height: 1.15;
+}
+
+.sectionHome .heading {
+  margin-bottom: 6px;
+}
+
+.underline {
+  width: 64px;
+  height: 3px;
+  margin: 0 auto 24px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--ct-navy), #1e5a9e);
+}
+
+.sectionHome .underline {
+  width: 52px;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ct-card-gap);
+}
+
+.card {
+  box-sizing: border-box;
+  background: var(--ct-white);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 12px;
+  padding: var(--ct-card-padding);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(2, 24, 64, 0.06);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 10px;
+  color: #f9ac38;
+  font-size: var(--ct-stars-size);
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.sectionHome .stars {
+  margin-bottom: 7px;
+  letter-spacing: 0.4px;
+}
+
+.quote {
+  margin: 0 0 14px;
+  flex: 1;
+  font-size: var(--ct-quote-size);
+  line-height: 1.65;
+  color: rgba(10, 27, 43, 0.78);
+  font-style: italic;
+}
+
+.sectionHome .quote {
+  margin-bottom: 10px;
+  line-height: 1.55;
+}
+
+.author {
+  margin-top: auto;
+}
+
+.name {
+  font-size: var(--ct-name-size);
+  font-weight: 800;
+  color: var(--ct-navy);
+  line-height: 1.35;
+}
+
+.role {
+  margin-top: 2px;
+  font-size: var(--ct-role-size);
+  color: rgba(10, 27, 43, 0.58);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .sectionHome .card {
+    padding: 12px;
+  }
+}
