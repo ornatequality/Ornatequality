@@ -882,20 +882,44 @@
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
+  .page {
+    background: #f4f7fb;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .layout {
-    grid-template-columns: 1fr;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 0 calc(48px + env(safe-area-inset-bottom, 0px));
   }
 
-  .toc,
+  .toc {
+    display: none;
+  }
+
   .sidebar {
-    position: static;
+    display: none;
   }
 
-  .tocList {
-    max-height: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  .main {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .introGrid,
@@ -925,7 +949,7 @@
 
 @media (max-width: 768px) {
   .layout {
-    padding: 20px 0 36px;
+    padding: 20px 0 calc(48px + env(safe-area-inset-bottom, 0px));
     gap: 16px;
   }
 

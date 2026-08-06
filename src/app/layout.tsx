@@ -150,18 +150,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${manrope.variable} ${playfair.variable} h-full antialiased`}
+      className={`${inter.variable} ${manrope.variable} ${playfair.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
         <JsonLdScripts />
         <GoogleTagManagerHead />
       </head>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body className="site-body min-h-screen flex flex-col" suppressHydrationWarning>
         <GoogleTagManagerBody />
         <TopBar />
         <Header />
-        <main className="grow bg-white">{children}</main>
+        <main className="site-main flex-1 w-full bg-white">{children}</main>
         <WhatsAppButton/>
         <ConsultationPopupGate />
         <CookieConsent />

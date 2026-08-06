@@ -83,14 +83,22 @@ const Topbar = () => {
     <div ref={topbarRef} className={styles.topbar}>
       <div className={styles.inner}>
         <div className={styles.section} data-slot="left">
-          <a className={styles.item} href="tel:+919266877738">
+          <a
+            className={styles.item}
+            href="tel:+919266877738"
+            aria-label="Call +91 926-687-7738"
+          >
             <IconPhone className={styles.icon} />
             <span className={styles.text}>+91 926-687-7738</span>
           </a>
         </div>
 
         <div className={styles.section} data-slot="center">
-          <a className={styles.item} href="mailto:Chetan@ornatequality.com">
+          <a
+            className={styles.item}
+            href="mailto:Chetan@ornatequality.com"
+            aria-label="Email Chetan at ornatequality.com"
+          >
             <IconMail className={styles.icon} />
             <span className={styles.text}>Chetan@ornatequality.com</span>
           </a>

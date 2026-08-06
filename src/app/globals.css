@@ -75,6 +75,8 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  height: auto;
+  min-height: 100%;
 }
 
 body {
@@ -85,6 +87,28 @@ body {
   line-height: 1.5;
   overflow-x: clip;
   min-width: 0;
+  height: auto;
+  min-height: 100%;
+}
+
+.site-body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.site-main {
+  flex: 1 0 auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+@media (max-width: 1024px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* Home page typography — fonts loaded once in layout, rules scoped here */

@@ -46,7 +46,8 @@
   padding: 12px 10px 8px;
   margin-top: 8px;
   box-shadow: 0 16px 40px rgba(2, 24, 64, 0.1);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .mobilePanel::before {
@@ -495,7 +496,7 @@
 }
 
 @media (max-width: 900px) {
-  .columns {
+  .panel .columns {
     grid-template-columns: 1fr;
     gap: 10px;
   }
@@ -506,13 +507,48 @@
     border-radius: 16px;
   }
 
-  .column {
+  .panel .column {
     height: auto;
     min-height: 0;
   }
 
-  .itemArrow {
+  .panel .itemArrow {
     opacity: 0.65;
     transform: translateX(0) scale(1);
   }
+}
+
+/* Mobile nav drawer — always stack all service sections vertically */
+.mobilePanel .columns {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.mobilePanel .column {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.mobilePanel .itemList > li {
+  flex: 0 0 auto;
+}
+
+.mobilePanel .itemLink {
+  min-height: 48px;
+}
+
+.mobilePanel .itemArrow {
+  opacity: 0.65;
+  transform: translateX(0) scale(1);
+}
+
+.mobilePanel .panelFooter {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.mobilePanel .viewAllLink {
+  width: 100%;
+  justify-content: center;
 }

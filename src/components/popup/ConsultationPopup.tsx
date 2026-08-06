@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { playfair } from "@/lib/fonts";
 import { parseApiResponse } from "@/lib/parseApiResponse";
 import { pushGenerateLeadEvent } from "@/lib/analytics";
@@ -161,6 +162,7 @@ function IconLock(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function ConsultationPopup() {
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -175,9 +177,15 @@ export default function ConsultationPopup() {
 
   useEffect(() => {
     if (!mounted) return;
+    const isServiceDetailPage = /^\/services\/[^/]+/.test(pathname);
+    if (isServiceDetailPage) {
+      setOpen(false);
+      return;
+    }
+
     const timer = window.setTimeout(() => setOpen(true), 0);
     return () => window.clearTimeout(timer);
-  }, [mounted]);
+  }, [mounted, pathname]);
 
   useEffect(() => {
     if (!open) return;

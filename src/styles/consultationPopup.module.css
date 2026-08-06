@@ -668,13 +668,58 @@
 }
 
 @media (max-width: 860px) {
+  .overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    width: 100%;
+    height: 100svh;
+    min-height: 100svh;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: rgba(6, 18, 40, 0.78);
+  }
+
   .modal {
-    width: min(480px, calc(100vw - 24px));
-    max-height: calc(100vh - 24px);
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: translateY(-4vh);
+    width: min(340px, calc(100% - 4px));
+    height: auto;
+    min-height: 0;
+    max-height: calc(100svh - 32px);
+    margin: 0;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    flex-shrink: 0;
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 20;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(2, 24, 64, 0.15);
   }
 
   .modalBody {
     grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .left {
+    overflow: visible;
   }
 
   .leftMain {
@@ -682,73 +727,107 @@
   }
 
   .buildingCol {
-    position: relative;
-    width: 100%;
-    min-height: 150px;
+    display: none;
+  }
+
+  /* Mobile: logo only in top section */
+  .badge,
+  .headline,
+  .headlineDivider,
+  .lead,
+  .leftBottom,
+  .formHeader,
+  .modalFooter {
+    display: none;
   }
 
   .leftContent {
     width: 100%;
     max-width: 100%;
+    min-height: auto;
+    padding: 10px 40px 4px 14px;
     background: #fff;
-    padding: 16px 14px 12px 18px;
+    text-align: center;
   }
 
-  .leadLine {
-    max-width: 100%;
+  .logoWrap {
+    width: 112px;
+    margin: 0 auto;
+  }
+
+  .right {
+    overflow: visible;
+    min-height: auto;
+    align-items: stretch;
   }
 
   .formCard {
+    height: auto;
+    flex: none;
+    min-height: auto;
     margin: 0;
-    border-left: none;
-    border-top: 1.5px solid var(--gold);
+    padding: 4px 14px 14px;
+    border: none;
   }
 
-  .certRow {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px 8px;
+  .form {
+    gap: 7px;
   }
 
-  .featuresBar {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 0;
+  .field input,
+  .field select {
+    height: 40px;
+    font-size: 13px;
   }
 
-  .featureItem {
-    border-right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding-bottom: 8px;
+  .submitBtn {
+    height: 42px;
+    font-size: 9px;
+    margin-top: 2px;
   }
 
-  .featureItem:nth-last-child(-n + 2) {
-    border-bottom: 0;
+  .secureLine {
+    margin-top: 4px;
+    justify-content: center;
+    font-size: 8px;
   }
 
-  .modalFooter {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .partnerStrip {
-    border-right: none;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.15);
-  }
-
-  .headlineLine {
-    font-size: 22px;
+  .successBox {
+    padding: 20px 10px;
   }
 }
 
 @media (max-width: 420px) {
-  .headlineLine {
-    font-size: 20px;
+  .overlay {
+    padding: 12px;
   }
 
-  .formTitle {
-    font-size: 16px;
+  .modal {
+    width: min(320px, 100%);
+    max-height: calc(100svh - 24px);
+    transform: translateY(-3vh);
+    border-radius: 14px;
   }
 
-  .certRow {
-    gap: 4px;
+  .leftContent {
+    padding: 12px 38px 4px 12px;
+  }
+
+  .logoWrap {
+    width: 108px;
+  }
+
+  .formCard {
+    padding: 2px 12px 12px;
+  }
+
+  .field input,
+  .field select {
+    height: 38px;
+    font-size: 12px;
+  }
+
+  .submitBtn {
+    height: 40px;
   }
 }
