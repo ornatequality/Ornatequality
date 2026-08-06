@@ -5,6 +5,13 @@ function cleanText(value) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function extractMeta(body) {
+  return {
+    source: cleanText(body?.source),
+    service: cleanText(body?.service),
+  };
+}
+
 function validateEmail(email, errors, field = "email") {
   if (!email) {
     errors[field] = "Email is required.";
@@ -42,6 +49,7 @@ export function validateContactForm(body) {
   const phone = cleanText(body?.phone).replace(/\s+/g, "");
   const city = cleanText(body?.city);
   const message = cleanText(body?.message);
+  const { source, service } = extractMeta(body);
 
   validateName(name, errors);
   validateEmail(email, errors);
@@ -61,7 +69,7 @@ export function validateContactForm(body) {
   return {
     ok: Object.keys(errors).length === 0,
     errors,
-    data: { name, email, phone, city, message },
+    data: { name, email, phone, city, message, source, service },
   };
 }
 
@@ -71,6 +79,7 @@ export function validateCallbackForm(body) {
   const email = cleanText(body?.email).toLowerCase();
   const phone = cleanText(body?.phone).replace(/\s+/g, "");
   const message = cleanText(body?.message);
+  const { source, service } = extractMeta(body);
 
   validateName(name, errors);
   validateEmail(email, errors);
@@ -86,6 +95,6 @@ export function validateCallbackForm(body) {
   return {
     ok: Object.keys(errors).length === 0,
     errors,
-    data: { name, email, phone, message },
+    data: { name, email, phone, message, source, service },
   };
 }

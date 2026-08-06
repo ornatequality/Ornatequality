@@ -35,6 +35,7 @@ export default function ContactForm({ variant = "default" }: ContactFormProps) {
           phone: formData.get("phone"),
           city: formData.get("city"),
           message: formData.get("message"),
+          source: variant === "ads" ? "ads-landing" : "contact-page",
         }),
       });
 

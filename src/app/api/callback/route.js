@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
-import FormSubmission from "@/models/FormSubmission";
 import { validateCallbackForm } from "@/lib/formValidation";
-import { sendFormEmail } from "@/lib/mail";
+import { saveFormSubmission } from "@/lib/submitForm";
 
 export const runtime = "nodejs";
 
@@ -15,23 +13,12 @@ export async function POST(request) {
       return NextResponse.json({ success: false, errors: validation.errors }, { status: 400 });
     }
 
-    await connectDB();
-
-    const submission = await FormSubmission.create({
-      formType: "callback",
-      ...validation.data,
-    });
-
-    const emailResult = await sendFormEmail({
-      subject: "New Callback Request - Ornate Quality",
-      formType: "callback",
-      fields: validation.data,
-    });
+    const { submission, emailSent } = await saveFormSubmission("callback", validation.data);
 
     return NextResponse.json({
       success: true,
       id: submission._id,
-      emailSent: emailResult.sent,
+      emailSent,
     });
   } catch (error) {
     console.error("Callback form error:", error);

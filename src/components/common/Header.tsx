@@ -20,6 +20,7 @@ const HOVER_CLOSE_DELAY_MS = 140;
 
 const Header = () => {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [knowledgeHubOpen, setKnowledgeHubOpen] = useState(false);
@@ -73,12 +74,17 @@ const Header = () => {
   };
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     setServicesOpen(false);
     setKnowledgeHubOpen(false);
     setMobileServicesOpen(false);
     setMobileKnowledgeHubOpen(false);
     setOpen(false);
-  }, [pathname]);
+  }, [pathname, mounted]);
 
   useEffect(() => {
     return () => {
@@ -101,13 +107,14 @@ const Header = () => {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [servicesOpen, knowledgeHubOpen]);
 
-  const servicesActive = navItemIsActive(pathname, "/services");
+  const activePath = mounted ? pathname : "";
+  const servicesActive = navItemIsActive(activePath, "/services");
   const knowledgeHubActive =
-    pathname === "/blog" ||
-    pathname.startsWith("/blog/") ||
-    pathname === "/news" ||
-    pathname.startsWith("/news/") ||
-    pathname === KNOWLEDGE_HUB_HREF;
+    activePath === "/blog" ||
+    activePath.startsWith("/blog/") ||
+    activePath === "/news" ||
+    activePath.startsWith("/news/") ||
+    activePath === KNOWLEDGE_HUB_HREF;
 
   return (
     <header className={styles.header}>
@@ -119,15 +126,15 @@ const Header = () => {
         <nav className={styles.nav} aria-label="Primary">
           <Link
             href="/"
-            className={`${styles.navLink} ${navItemIsActive(pathname, "/") ? styles.navLinkActive : ""}`}
-            aria-current={navItemIsActive(pathname, "/") ? "page" : undefined}
+            className={`${styles.navLink} ${navItemIsActive(activePath, "/") ? styles.navLinkActive : ""}`}
+            aria-current={navItemIsActive(activePath, "/") ? "page" : undefined}
           >
             Home
           </Link>
           <Link
             href="/about"
-            className={`${styles.navLink} ${navItemIsActive(pathname, "/about") ? styles.navLinkActive : ""}`}
-            aria-current={navItemIsActive(pathname, "/about") ? "page" : undefined}
+            className={`${styles.navLink} ${navItemIsActive(activePath, "/about") ? styles.navLinkActive : ""}`}
+            aria-current={navItemIsActive(activePath, "/about") ? "page" : undefined}
           >
             About
           </Link>
@@ -188,8 +195,8 @@ const Header = () => {
 
           <Link
             href="/contact"
-            className={`${styles.navLink} ${navItemIsActive(pathname, "/contact") ? styles.navLinkActive : ""}`}
-            aria-current={navItemIsActive(pathname, "/contact") ? "page" : undefined}
+            className={`${styles.navLink} ${navItemIsActive(activePath, "/contact") ? styles.navLinkActive : ""}`}
+            aria-current={navItemIsActive(activePath, "/contact") ? "page" : undefined}
           >
             Contact Us
           </Link>
@@ -222,14 +229,14 @@ const Header = () => {
           <div className={styles.mobileNav}>
             <Link
               href="/"
-              className={`${styles.mobileLink} ${navItemIsActive(pathname, "/") ? styles.mobileLinkActive : ""}`}
+              className={`${styles.mobileLink} ${navItemIsActive(activePath, "/") ? styles.mobileLinkActive : ""}`}
               onClick={() => setOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/about"
-              className={`${styles.mobileLink} ${navItemIsActive(pathname, "/about") ? styles.mobileLinkActive : ""}`}
+              className={`${styles.mobileLink} ${navItemIsActive(activePath, "/about") ? styles.mobileLinkActive : ""}`}
               onClick={() => setOpen(false)}
             >
               About
@@ -319,7 +326,7 @@ const Header = () => {
 
             <Link
               href="/contact"
-              className={`${styles.mobileLink} ${navItemIsActive(pathname, "/contact") ? styles.mobileLinkActive : ""}`}
+              className={`${styles.mobileLink} ${navItemIsActive(activePath, "/contact") ? styles.mobileLinkActive : ""}`}
               onClick={() => setOpen(false)}
             >
               Contact Us

@@ -15,6 +15,7 @@ import {
 import { SITE_LEGAL_NAME, SITE_NAME, SITE_URL } from "@/lib/site";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
 import CookieConsent from "@/components/consent/CookieConsent";
+import ConsultationPopupGate from "@/components/popup/ConsultationPopupGate";
 import {
   GoogleTagManagerBody,
   GoogleTagManagerHead,
@@ -162,6 +163,7 @@ export default function RootLayout({
         <Header />
         <main className="grow bg-white">{children}</main>
         <WhatsAppButton/>
+        <ConsultationPopupGate />
         <CookieConsent />
         <Footer />
       </body>
