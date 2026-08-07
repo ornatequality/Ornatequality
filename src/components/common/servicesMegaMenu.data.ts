@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 
 import bisLogo from "@/assests/certi-img/BIS.webp";
 import beeLogo from "@/assests/certi-img/BEElogo.webp";
-import eprLogo from "@/assests/certi-img/epr-icon.png";
+import eprLogo from "@/assests/certi-img/epr-icon.webp";
 import lmpcLogo from "@/assests/certi-img/lmpc.webp";
 import isoLogo from "@/assests/certi-img/iso.webp";
 import wpcLogo from "@/assests/certi-img/wpc.webp";

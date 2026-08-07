@@ -12,20 +12,20 @@ import reliance from "@/assests/clientslogo/Reliance-digital.webp";
 import tseries from "@/assests/clientslogo/tseries.webp";
 import nokia from "@/assests/clientslogo/Nokia.webp";
 
-import age from "@/assests/clientlogo/age.png";
-import alfaa from "@/assests/clientlogo/alfaa.jpg";
-import cambium from "@/assests/clientlogo/cambium.png";
-import digismart from "@/assests/clientlogo/digismart.png";
-import dishtv from "@/assests/clientlogo/dishtv.png";
-import ekkaa from "@/assests/clientlogo/ekkaa.png";
-import eson from "@/assests/clientlogo/eson.png";
-import orion from "@/assests/clientlogo/orion.png";
-import veira from "@/assests/clientlogo/veira.png";
-import videotex from "@/assests/clientlogo/videotex.png";
-import westway from "@/assests/clientlogo/westway.png";
-import brandworks from "@/assests/clientlogo/brandworks.png";
-import datamini from "@/assests/clientlogo/datamini.png";
-import mage from "@/assests/clientlogo/image.png";
+import age from "@/assests/clientlogo/age.webp";
+import alfaa from "@/assests/clientlogo/alfaa.webp";
+import cambium from "@/assests/clientlogo/cambium.webp";
+import digismart from "@/assests/clientlogo/digismart.webp";
+import dishtv from "@/assests/clientlogo/dishtv.webp";
+import ekkaa from "@/assests/clientlogo/ekkaa.webp";
+import eson from "@/assests/clientlogo/eson.webp";
+import orion from "@/assests/clientlogo/orion.webp";
+import veira from "@/assests/clientlogo/veira.webp";
+import videotex from "@/assests/clientlogo/videotex.webp";
+import westway from "@/assests/clientlogo/westway.webp";
+import brandworks from "@/assests/clientlogo/brandworks.webp";
+import datamini from "@/assests/clientlogo/datamini.webp";
+import mage from "@/assests/clientlogo/image.webp";
 
 const CLIENTS = [
   { id: "flipkart", name: "Flipkart", src: flipkart },

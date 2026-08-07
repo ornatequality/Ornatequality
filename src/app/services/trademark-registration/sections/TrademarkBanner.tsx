@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import trademarkBanner from "@/assests/certi-img/trademark.png";
+import trademarkBanner from "@/assests/certi-img/trademark.webp";
 
 export function TrademarkBanner() {
   return (

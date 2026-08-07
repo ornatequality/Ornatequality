@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { playfair } from "@/lib/fonts";
 import styles from "@/styles/ads.module.css";
-import buildingImg from "@/assests/supernova.png";
+import buildingImg from "@/assests/supernova.webp";
 
 const STATS = [
   { value: "5000+", label: "Satisfied Clients" },

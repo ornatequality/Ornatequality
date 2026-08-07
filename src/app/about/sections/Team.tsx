@@ -1,23 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter, Playfair_Display } from "next/font/google";
+import { inter, playfair } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 
-import manPng from "@/assests/man.png";
+import manPng from "@/assests/man.webp";
 import { IconLinkedIn } from "./icons";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 const members = [
   { name: "Amit Sharma", role: "Founder & CEO" },

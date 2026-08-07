@@ -1,13 +1,8 @@
 import React from "react";
-import { Inter } from "next/font/google";
+import { inter } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 import { IconBadge, IconBriefcase, IconGlobe, IconUsers } from "./icons";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  display: "swap",
-});
 
 /** Full-width stats strip — same layout/colors as home Hero stats bar; copy from Who-we-are metrics */
 export function AboutStatsBar() {

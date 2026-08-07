@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import pesoBanner from "@/assests/services/pesoccoe.png";
+import pesoBanner from "@/assests/services/pesoccoe.webp";
 
 export function PesoCcoeBanner() {
   return (

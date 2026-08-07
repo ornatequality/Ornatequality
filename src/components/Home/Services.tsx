@@ -6,9 +6,9 @@ import Link from "next/link";
 import { playfair } from "@/lib/fonts";
 import styles from "../../styles/services.module.css";
 import bisCrsIcon from "@/assests/certi-img/BIS.webp";
-import isiMarkIcon from "@/assests/certi-img/isi.png";
+import isiMarkIcon from "@/assests/certi-img/isi.webp";
 import wpcEtaIcon from "@/assests/certi-img/wpc.webp";
-import eprRegistrationIcon from "@/assests/certi-img/epr-icon.png";
+import eprRegistrationIcon from "@/assests/certi-img/epr-icon.webp";
 
 type ServiceItem = {
   title: string;

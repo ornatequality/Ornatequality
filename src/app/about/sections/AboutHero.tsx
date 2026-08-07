@@ -4,7 +4,7 @@ import Link from "next/link";
 import { manrope, playfair } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 
-import aboutHeroImg from "@/assests/about12.jpg";
+import aboutHeroImg from "@/assests/about12.webp";
 
 export function AboutHero() {
   return (

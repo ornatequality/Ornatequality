@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import fssaiBanner from "@/assests/services/FSSAI.png";
+import fssaiBanner from "@/assests/services/FSSAI.webp";
 
 export function FssaiBanner() {
   return (

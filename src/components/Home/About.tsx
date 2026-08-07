@@ -4,8 +4,8 @@ import Link from "next/link";
 import { playfair } from "@/lib/fonts";
 import styles from "../../styles/about.module.css";
 
-import aboutImg1 from "../../assests/supernova.png";
-import aboutImg2 from "../../assests/abt22.png";
+import aboutImg1 from "../../assests/supernova.webp";
+import aboutImg2 from "../../assests/abt22.webp";
 import {
   IconEndToEnd,
   IconExpertTeam,
@@ -49,7 +49,8 @@ const About = () => {
                 fill
                 sizes="(max-width: 900px) 92vw, 520px"
                 className={styles.img}
-                quality={80}
+                quality={75}
+                loading="lazy"
               />
             </div>
 
@@ -60,7 +61,8 @@ const About = () => {
                 fill
                 sizes="(max-width: 900px) 78vw, 420px"
                 className={styles.img}
-                quality={80}
+                quality={75}
+                loading="lazy"
               />
             </div>
           </div>

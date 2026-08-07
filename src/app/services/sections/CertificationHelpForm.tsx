@@ -1,15 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Playfair_Display } from "next/font/google";
+import { playfair } from "@/lib/fonts";
 import { parseApiResponse } from "@/lib/parseApiResponse";
 import styles from "@/styles/servicesPage.module.css";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 const CERT_OPTIONS = [
   "Not sure — recommend the right one for me",

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Hero from "@/components/Home/Hero";
-import About from "@/components/Home/About";
-import Services from "@/components/Home/Services";
 import Importance from "@/components/Home/Importance";
+
+const About = dynamic(() => import("@/components/Home/About"));
+const Services = dynamic(() => import("@/components/Home/Services"));
 
 const TrustProcess = dynamic(() => import("@/components/Home/TrustProcess"));
 const BlogSection = dynamic(() => import("@/components/Home/BlogSection"));

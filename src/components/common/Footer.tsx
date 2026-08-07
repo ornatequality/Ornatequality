@@ -1,15 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "next/font/google";
+import { inter } from "@/lib/fonts";
 import styles from "../../styles/common/footer.module.css";
-import logo from "../../assests/logo-footer-white.png";
+import logo from "../../assests/logo-footer-white.webp";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  display: "swap",
-  
-});
 
 function IconPin(props: React.SVGProps<SVGSVGElement>) {
   return (

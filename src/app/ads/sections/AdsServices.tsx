@@ -4,11 +4,11 @@ import Link from "next/link";
 import styles from "@/styles/ads.module.css";
 import AdsSectionHeader from "./AdsSectionHeader";
 import bisIcon from "@/assests/certi-img/BIS.webp";
-import isiIcon from "@/assests/certi-img/isi.png";
+import isiIcon from "@/assests/certi-img/isi.webp";
 import wpcIcon from "@/assests/certi-img/wpc.webp";
 import tecIcon from "@/assests/certi-img/tec.webp";
 import beeIcon from "@/assests/certi-img/BEElogo.webp";
-import eprIcon from "@/assests/certi-img/epr-icon.png";
+import eprIcon from "@/assests/certi-img/epr-icon.webp";
 
 const SERVICES = [
   {

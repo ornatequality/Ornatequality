@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import isoBanner from "@/assests/certi-img/iso.png";
+import isoBanner from "@/assests/certi-img/iso.webp";
 
 export function IsoBanner() {
   return (

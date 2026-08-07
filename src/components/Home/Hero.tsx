@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { playfair } from "@/lib/fonts";
 import styles from "../../styles/hero.module.css";
-import heroImg from "../../assests/abtt.png";
+import heroImg from "../../assests/abtt.webp";
 import bisLogo from "@/assests/certi-img/BIS.webp";
 import beeLogo from "@/assests/certi-img/BEElogo.webp";
-import eprLogo from "@/assests/certi-img/epr-icon.png";
+import eprLogo from "@/assests/certi-img/epr-icon.webp";
 import wpcLogo from "@/assests/certi-img/wpc.webp";
 import {
   SERVICE_PAGE_ANCHORS,

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "@/styles/aboutV2.module.css";
 
-import handshakeImg from "@/assests/handshake.jpeg";
+import handshakeImg from "@/assests/handshake.webp";
 
 export function HandshakeCta() {
   return (

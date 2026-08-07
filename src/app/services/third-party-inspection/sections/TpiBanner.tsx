@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import tpiBanner from "@/assests/services/thirdparty.png";
+import tpiBanner from "@/assests/services/thirdparty.webp";
 
 export function TpiBanner() {
   return (

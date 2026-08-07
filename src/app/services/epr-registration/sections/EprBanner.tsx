@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import eprBanner from "@/assests/certi-img/EPR.png";
+import eprBanner from "@/assests/certi-img/EPR.webp";
 
 export function EprBanner() {
   return (

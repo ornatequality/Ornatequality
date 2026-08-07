@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import iecBanner from "@/assests/services/iec.png";
+import iecBanner from "@/assests/services/iec.webp";
 
 export function IecBanner() {
   return (

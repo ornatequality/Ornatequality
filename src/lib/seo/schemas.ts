@@ -21,7 +21,7 @@ export const organizationSchema = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/logo.png`,
+    url: `${SITE_URL}/logo.webp`,
     width: 200,
     height: 60,
   },
@@ -45,7 +45,7 @@ export const professionalServiceSchema = {
   url: `${SITE_URL}/`,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/logo.png`,
+    url: `${SITE_URL}/logo.webp`,
     width: 300,
     height: 80,
   },
@@ -155,7 +155,7 @@ export const webSiteSchema = {
     name: SITE_LEGAL_NAME,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/logo.png`,
+      url: `${SITE_URL}/logo.webp`,
     },
   },
 };

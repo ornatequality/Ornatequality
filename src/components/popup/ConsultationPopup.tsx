@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { playfair } from "@/lib/fonts";
 import { parseApiResponse } from "@/lib/parseApiResponse";
 import { pushGenerateLeadEvent } from "@/lib/analytics";
 import styles from "@/styles/consultationPopup.module.css";
-import logo from "@/assests/logo.png";
-import buildingImg from "@/assests/popup-building.png";
+import logo from "@/assests/logo.webp";
+import buildingImg from "@/assests/popup-building.webp";
 import bisIcon from "@/assests/certi-img/BIS.webp";
-import isiIcon from "@/assests/certi-img/isi.png";
+import isiIcon from "@/assests/certi-img/isi.webp";
 import wpcIcon from "@/assests/certi-img/wpc.webp";
 import tecIcon from "@/assests/certi-img/tec.webp";
 import lmpcIcon from "@/assests/certi-img/lmpc.webp";
@@ -90,6 +89,24 @@ const FEATURES = [
   },
 ] as const;
 
+const POPUP_SEEN_KEY = "consultation_popup_seen";
+
+function hasSeenPopup() {
+  try {
+    return sessionStorage.getItem(POPUP_SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function markPopupSeen() {
+  try {
+    sessionStorage.setItem(POPUP_SEEN_KEY, "1");
+  } catch {
+    // ignore storage errors (private browsing, etc.)
+  }
+}
+
 function IconUser(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" {...props}>
@@ -162,7 +179,6 @@ function IconLock(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function ConsultationPopup() {
-  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -171,21 +187,25 @@ export default function ConsultationPopup() {
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  const dismissPopup = useCallback(() => {
+    markPopupSeen();
+    setOpen(false);
+  }, []);
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
-    const isServiceDetailPage = /^\/services\/[^/]+/.test(pathname);
-    if (isServiceDetailPage) {
-      setOpen(false);
-      return;
-    }
+    if (!mounted || hasSeenPopup()) return;
 
-    const timer = window.setTimeout(() => setOpen(true), 0);
+    const timer = window.setTimeout(() => {
+      setOpen(true);
+      markPopupSeen();
+    }, 1500);
+
     return () => window.clearTimeout(timer);
-  }, [mounted, pathname]);
+  }, [mounted]);
 
   useEffect(() => {
     if (!open) return;
@@ -252,7 +272,7 @@ export default function ConsultationPopup() {
       pushGenerateLeadEvent({ page_type: "contact" });
 
       setTimeout(() => {
-        setOpen(false);
+        dismissPopup();
         setStatus("idle");
         setServiceOpen(false);
         form.reset();
@@ -266,7 +286,7 @@ export default function ConsultationPopup() {
   if (!mounted || !open) return null;
 
   return (
-    <div className={styles.overlay} role="presentation" onClick={() => setOpen(false)}>
+    <div className={styles.overlay} role="presentation" onClick={dismissPopup}>
       <div
         className={styles.modal}
         role="dialog"
@@ -278,7 +298,7 @@ export default function ConsultationPopup() {
           type="button"
           className={styles.closeBtn}
           aria-label="Close consultation popup"
-          onClick={() => setOpen(false)}
+          onClick={dismissPopup}
         >
           ×
         </button>

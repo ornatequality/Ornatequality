@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useMemo } from "react";
+import React from "react";
 import { playfair } from "@/lib/fonts";
 import styles from "../../styles/importance.module.css";
 import {
@@ -17,18 +15,15 @@ type Item = {
   Icon: (props: React.SVGProps<SVGSVGElement>) => React.JSX.Element;
 };
 
-const Importance = () => {
-  const items = useMemo<Item[]>(
-    () => [
-      { title: "Legal Compliance", desc: "Meet government regulations", Icon: IconLegalCompliance },
-      { title: "Avoid Penalties", desc: "Stay safe from fines & legal actions", Icon: IconAvoidPenalties },
-      { title: "Market Trust", desc: "Build customer confidence", Icon: IconMarketTrust },
-      { title: "Product Approval", desc: "Easy market entry & expansion", Icon: IconProductApproval },
-      { title: "Business Growth", desc: "Increase sales & brand value", Icon: IconBusinessGrowth },
-    ],
-    []
-  );
+const ITEMS: Item[] = [
+  { title: "Legal Compliance", desc: "Meet government regulations", Icon: IconLegalCompliance },
+  { title: "Avoid Penalties", desc: "Stay safe from fines & legal actions", Icon: IconAvoidPenalties },
+  { title: "Market Trust", desc: "Build customer confidence", Icon: IconMarketTrust },
+  { title: "Product Approval", desc: "Easy market entry & expansion", Icon: IconProductApproval },
+  { title: "Business Growth", desc: "Increase sales & brand value", Icon: IconBusinessGrowth },
+];
 
+const Importance = () => {
   return (
     <section className={styles.section} aria-label="Why certification matters">
       <div className={styles.container}>
@@ -39,7 +34,7 @@ const Importance = () => {
 
         <div className={styles.shell}>
           <div className={styles.row} role="list">
-            {items.map((it) => (
+            {ITEMS.map((it) => (
               <div key={it.title} className={styles.item} role="listitem" data-imp-card="true">
                 <div className={styles.icon} aria-hidden="true">
                   <it.Icon />

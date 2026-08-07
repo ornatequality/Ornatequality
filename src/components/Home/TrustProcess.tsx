@@ -4,7 +4,7 @@ import { playfair } from "@/lib/fonts";
 import styles from "../../styles/trustProcess.module.css";
 import trustBannerImage from "../../assests/trust-building.webp";
 import bisLogo from "@/assests/certi-img/BIS.webp";
-import isiLogo from "@/assests/certi-img/isi.png";
+import isiLogo from "@/assests/certi-img/isi.webp";
 import wpcLogo from "@/assests/certi-img/wpc.webp";
 import tecLogo from "@/assests/certi-img/tec.webp";
 import lmpcLogo from "@/assests/certi-img/lmpc.webp";

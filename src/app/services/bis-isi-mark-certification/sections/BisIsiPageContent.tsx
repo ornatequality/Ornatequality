@@ -6,9 +6,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useActiveTocScroll } from "@/hooks/useActiveTocScroll";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "next/font/google";
+import { inter } from "@/lib/fonts";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import buildingImage from "@/assests/services/certificate.png";
+import buildingImage from "@/assests/services/certificate.webp";
 import {
   WHY_ORNATE_ITEMS,
   LATEST_NOTIFICATIONS,
@@ -29,11 +29,6 @@ import {
   FAQ_ITEMS,
 } from "../data/bisIsiContent";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 function ImportanceIcon({ type }: { type: string }) {
   const icons: Record<string, React.ReactNode> = {

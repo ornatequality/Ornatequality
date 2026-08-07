@@ -6,7 +6,7 @@ import toIco from "to-ico";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
-const source = path.join(root, "src/assests/logo.png");
+const source = path.join(root, "src/assests/logo.webp");
 const publicDir = path.join(root, "public");
 const appDir = path.join(root, "src/app");
 

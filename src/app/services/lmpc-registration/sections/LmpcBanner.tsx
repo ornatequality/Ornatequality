@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import lmpcBanner from "@/assests/certi-img/LMPC.png";
+import lmpcBanner from "@/assests/certi-img/lmpc.webp";
 
 export function LmpcBanner() {
   return (

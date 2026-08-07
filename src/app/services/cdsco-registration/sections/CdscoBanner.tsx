@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import cdscoBanner from "@/assests/services/cdsco.png";
+import cdscoBanner from "@/assests/services/cdsco.webp";
 
 export function CdscoBanner() {
   return (

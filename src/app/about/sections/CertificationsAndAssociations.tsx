@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Inter, Playfair_Display } from "next/font/google";
+import { inter, playfair } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 
 import bisLogo from "@/assests/certi-img/BIS.webp";
@@ -11,17 +11,7 @@ import nablLogo from "@/assests/certi-img/nabl.webp";
 import msmeLogo from "@/assests/certi-img/msme.webp";
 import isoLogo from "@/assests/certi-img/iso.webp";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 const logos: Array<{ label: string; src?: any }> = [
   { label: "BIS", src: bisLogo },

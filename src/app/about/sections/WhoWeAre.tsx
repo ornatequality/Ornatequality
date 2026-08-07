@@ -3,7 +3,7 @@ import Image from "next/image";
 import { manrope, playfair } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 
-import aboutTopImg from "@/assests/about12.jpg";
+import aboutTopImg from "@/assests/about12.webp";
 
 export function WhoWeAre() {
   return (

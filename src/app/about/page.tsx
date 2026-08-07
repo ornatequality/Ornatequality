@@ -26,7 +26,7 @@ export const metadata = {
       "Ornate Quality Services — India's trusted BIS Certification Consultant since 2013. 13+ years, 5000+ certifications, 98% success rate. Expert support for WPC, TEC, BEE, EPR & LMPC.",
     images: [
       {
-        url: `${SITE_URL}/og-about.jpg`,
+        url: `${SITE_URL}/og-about.webp`,
         width: 1200,
         height: 630,
         alt: "Ornate Quality Services Team — BIS Certification Consultant India since 2013",

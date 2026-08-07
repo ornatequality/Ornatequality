@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "../../styles/common/header.module.css";
-import logo from "../../assests/logo.png";
+import logo from "../../assests/logo.webp";
 import { ServicesMegaMenu } from "./ServicesMegaMenu";
 import { KnowledgeHubMenu } from "./KnowledgeHubMenu";
 import { KNOWLEDGE_HUB_HREF } from "./knowledgeHubMenu.data";

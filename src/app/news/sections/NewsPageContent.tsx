@@ -1,25 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter, Playfair_Display } from "next/font/google";
+import { inter, playfair } from "@/lib/fonts";
 import styles from "@/styles/news.module.css";
 
 import newsFeatured from "@/assests/blog-1.webp";
 import newsImg2 from "@/assests/blog-2.webp";
 import newsImg3 from "@/assests/blog-3.webp";
-import newsImg4 from "@/assests/service.png";
+import newsImg4 from "@/assests/service.webp";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
 
 const newsItems = [
   {

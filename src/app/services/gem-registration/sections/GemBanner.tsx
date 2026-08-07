@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import gemBanner from "@/assests/certi-img/GEm.png";
+import gemBanner from "@/assests/certi-img/GEm.webp";
 
 export function GemBanner() {
   return (

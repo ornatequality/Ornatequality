@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
-import beeBanner from "@/assests/services/bee.png";
+import beeBanner from "@/assests/services/bee.webp";
 
 export function BeeBanner() {
   return (
