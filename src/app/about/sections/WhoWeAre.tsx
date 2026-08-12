@@ -40,7 +40,7 @@ export function WhoWeAre() {
             </p>
 
             <p className={styles.whoBody}>
-              With over <span className={styles.whoHighlight}>13 years of industry experience</span>, we
+              With over <span className={styles.whoHighlight}>15 years of industry experience</span>, we
               have built a strong reputation for providing expert guidance in{" "}
               <span className={styles.whoHighlight}>
                 BIS Certification, CRS Registration, ISI Certification, WPC Approval, TEC Certification,

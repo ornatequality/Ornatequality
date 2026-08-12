@@ -28,7 +28,7 @@ export default function AdsAbout() {
               />
             </div>
             <div className={styles.aboutBadge} aria-hidden="true">
-              <strong>13+</strong>
+              <strong>15+</strong>
               Years of Excellence
             </div>
           </div>
@@ -45,7 +45,7 @@ export default function AdsAbout() {
               and testing coordination to final certification.
             </p>
             <p className={styles.aboutText}>
-              With 13+ years of industry experience, our expert team delivers faster approvals,
+              With 15+ years of industry experience, our expert team delivers faster approvals,
               transparent communication and dedicated support at every step of your compliance journey.
             </p>
 

@@ -17,7 +17,7 @@ export function AboutStatsBar() {
             <IconBriefcase />
           </span>
           <div className={styles.aboutBarStatText}>
-            <span className={styles.aboutBarStatValue}>13+</span>
+            <span className={styles.aboutBarStatValue}>15+</span>
             <span className={styles.aboutBarStatLabel}>Years Experience</span>
           </div>
         </div>

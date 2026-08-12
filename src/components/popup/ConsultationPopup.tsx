@@ -40,7 +40,7 @@ const CERT_BADGES = [
 
 const FEATURES = [
   {
-    title: "13+ Years Expertise",
+    title: "15+ Years Expertise",
     description: "Deep knowledge of Indian & international standards.",
     icon: (
       <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">

@@ -51,7 +51,7 @@ export const professionalServiceSchema = {
   },
   image: `${SITE_URL}/og-image.jpg`,
   description:
-    "Ornate Quality Services is India's trusted regulatory compliance and certification consultancy, providing BIS Certification, CRS Registration, ISI Mark, WPC Approval, TEC, BEE, EPR, LMPC, and FMCS services with 13+ years of experience and 5000+ successful certifications.",
+    "Ornate Quality Services is India's trusted regulatory compliance and certification consultancy, providing BIS Certification, CRS Registration, ISI Mark, WPC Approval, TEC, BEE, EPR, LMPC, and FMCS services with 15+ years of experience and 5000+ successful certifications.",
   foundingDate: "2011",
   numberOfEmployees: {
     "@type": "QuantitativeValue",

@@ -197,7 +197,7 @@ export const WHY_ORNATE_COMPARISON_ROWS = [
   },
   {
     others: "Limited regulatory expertise",
-    ornate: "13+ years of BIS, PESO, CE, and product certification expertise",
+    ornate: "15+ years of BIS, PESO, CE, and product certification expertise",
   },
   {
     others: "Inspectors unfamiliar with regulatory requirements",

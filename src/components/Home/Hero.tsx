@@ -217,7 +217,7 @@ const Hero = () => {
               <IconUsers />
             </span>
             <div className={styles.barStatText}>
-              <span className={styles.barStatValue}>13+</span>
+              <span className={styles.barStatValue}>15+</span>
               <span className={styles.barStatLabel}>Years Experience</span>
             </div>
           </div>

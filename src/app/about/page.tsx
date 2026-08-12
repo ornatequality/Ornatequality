@@ -15,7 +15,7 @@ import { ClientTestimonials } from "./sections/ClientTestimonials";
 export const metadata = {
   title: "About Us | BIS Certification Consultants India — Ornate Quality",
   description:
-    "Ornate Quality Services — India's trusted BIS Certification Consultant since 2013. 13+ years, 5000+ certifications, 98% success rate. Expert support for WPC, TEC, BEE, EPR & LMPC.",
+    "Ornate Quality Services — India's trusted BIS Certification Consultant since 2013. 15+ years, 5000+ certifications, 98% success rate. Expert support for WPC, TEC, BEE, EPR & LMPC.",
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -23,7 +23,7 @@ export const metadata = {
     url: `${SITE_URL}/about`,
     title: "About Us | BIS Certification Consultants India — Ornate Quality",
     description:
-      "Ornate Quality Services — India's trusted BIS Certification Consultant since 2013. 13+ years, 5000+ certifications, 98% success rate. Expert support for WPC, TEC, BEE, EPR & LMPC.",
+      "Ornate Quality Services — India's trusted BIS Certification Consultant since 2013. 15+ years, 5000+ certifications, 98% success rate. Expert support for WPC, TEC, BEE, EPR & LMPC.",
     images: [
       {
         url: `${SITE_URL}/og-about.webp`,
@@ -52,7 +52,7 @@ const FAQ_SCHEMA = {
       name: "How many years of experience does Ornate Quality Services have?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Ornate Quality Services has over 13 years of experience in regulatory compliance and product certification, having been established in 2013. The company has delivered more than 5000 certifications with a 98% first-time approval success rate.",
+        text: "Ornate Quality Services has over 15 years of experience in regulatory compliance and product certification, having been established in 2013. The company has delivered more than 5000 certifications with a 98% first-time approval success rate.",
       },
     },
     {

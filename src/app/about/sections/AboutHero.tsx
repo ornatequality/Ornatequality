@@ -31,7 +31,7 @@ export function AboutHero() {
           </h1>
 
           <p className={styles.aboutHeroText}>
-            For over 13 years, Ornate has been helping manufacturers, importers, and global brands
+            For over 15 years, Ornate has been helping manufacturers, importers, and global brands
             simplify regulatory compliance, secure certifications, and achieve seamless market access
             with confidence.
            </p>

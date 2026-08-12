@@ -230,7 +230,7 @@ export const WHY_ORNATE_COMPARISON_ROWS = [
   },
   {
     others: "Limited regulatory knowledge",
-    ornate: "13+ years of deep regulatory experience across BIS, PESO, FSSAI, CDSCO, and more",
+    ornate: "15+ years of deep regulatory experience across BIS, PESO, FSSAI, CDSCO, and more",
   },
   {
     others: "Slow turnaround on deliverables",
