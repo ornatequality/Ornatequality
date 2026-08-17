@@ -17,22 +17,18 @@
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-  background: #0c2840;
+  background: #031e5e;
 }
 
 .aboutHeroMedia {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: auto;
-  width: min(82%, 1040px);
-  max-width: 100%;
+  inset: 0;
+  width: 100%;
 }
 
 .aboutHeroImg {
   object-fit: cover;
-  object-position: 72% center;
+  object-position: 68% center;
   filter: saturate(1.02) contrast(1.03);
 }
 
@@ -40,31 +36,27 @@
   content: "";
   position: absolute;
   inset: 0;
-  /* Left dark merge like screenshot */
   background: linear-gradient(
     90deg,
-    rgba(11, 47, 66, 0.92) 0%,
-    rgba(11, 47, 66, 0.82) 24%,
-    rgba(11, 47, 66, 0.55) 48%,
-    rgba(11, 47, 66, 0.22) 70%,
-    rgba(11, 47, 66, 0.06) 100%
+    rgba(3, 30, 94, 0.9) 0%,
+    rgba(3, 30, 94, 0.78) 28%,
+    rgba(3, 30, 94, 0.45) 52%,
+    rgba(3, 30, 94, 0.15) 72%,
+    rgba(3, 30, 94, 0.02) 100%
   );
   pointer-events: none;
   z-index: 1;
 }
 
-/* slight edge vignette so it feels merged */
+/* subtle edge depth — keep image visible on the left */
 .aboutHero::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background:
-    radial-gradient(900px 380px at 18% 45%, rgba(11, 47, 66, 0.65), transparent 62%),
-    radial-gradient(760px 320px at 78% 50%, rgba(0, 0, 0, 0.18), transparent 62%);
-  mix-blend-mode: multiply;
-  opacity: 0.9;
+  background: radial-gradient(720px 340px at 82% 50%, rgba(0, 0, 0, 0.14), transparent 65%);
+  opacity: 0.75;
 }
 
 .aboutHeroInner {
@@ -1436,10 +1428,17 @@
 }
 
 @media (max-width: 640px) {
-  .aboutHeroMedia {
-    left: 0;
-    right: 0;
-    width: 100%;
+  .aboutHeroImg {
+    object-position: 62% center;
+  }
+
+  .aboutHero::before {
+    background: linear-gradient(
+      180deg,
+      rgba(3, 30, 94, 0.92) 0%,
+      rgba(3, 30, 94, 0.72) 45%,
+      rgba(3, 30, 94, 0.35) 100%
+    );
   }
 }
 

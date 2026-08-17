@@ -1,9 +1,44 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { inter } from "@/lib/fonts";
+import {
+  SITE_ADDRESS,
+  SITE_EMAIL,
+  SITE_EMAIL_MARKETING,
+  SITE_SOCIAL,
+} from "@/lib/site";
 import styles from "../../styles/common/footer.module.css";
 import logo from "../../assests/logo-footer-white.webp";
 
+const QUICK_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Contact Us", href: "/contact" },
+] as const;
+
+const SERVICE_LINKS = [
+  { label: "BIS Certification", href: "/services/bis-crs-registration" },
+  { label: "WPC Approval", href: "/services/wpc-eta-approval" },
+  { label: "TEC Certification", href: "/services/tec-certification" },
+  { label: "LMPC Registration", href: "/services/lmpc-registration" },
+] as const;
+
+const GOVERNMENT_LINKS = [
+  { label: "BIS", href: "https://www.bis.gov.in/" },
+  { label: "WPC", href: "https://www.wpc.gov.in/" },
+  { label: "BEE", href: "https://beeindia.gov.in/" },
+  { label: "CPCB", href: "https://cpcb.nic.in/" },
+] as const;
+
+const SOCIAL_LINKS = [
+  { label: "LinkedIn", href: SITE_SOCIAL[1], Icon: IconLinkedIn, socialClass: styles.socialLinkedIn },
+  { label: "Facebook", href: SITE_SOCIAL[0], Icon: IconFacebook, socialClass: styles.socialFacebook },
+  { label: "Instagram", href: SITE_SOCIAL[2], Icon: IconInstagram, socialClass: styles.socialInstagram },
+  { label: "X", href: SITE_SOCIAL[4], Icon: IconX, socialClass: styles.socialX },
+] as const;
 
 function IconPin(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -38,6 +73,83 @@ function IconMail(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function IconChevron(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" {...props}>
+      <path
+        d="M9 6l6 6-6 6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconShield(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" {...props}>
+      <path
+        d="M12 2 4 5.5V11c0 5.25 3.45 10.2 8 11 4.55-.8 8-5.75 8-11V5.5L12 2Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="m9 12 2 2 4-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconBuilding(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" {...props}>
+      <path
+        d="M4 21V9l8-4 8 4v12M8 21v-4h8v4M10 13h1M13 13h1M10 9h1M13 9h1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconHeadset(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" {...props}>
+      <path
+        d="M4 14v-2a8 8 0 0 1 16 0v2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4 14a2 2 0 0 0 2 2h1v-4H5a1 1 0 0 0-1 1Zm16 0a2 2 0 0 1-2 2h-1v-4h1a1 1 0 0 1 1 1Z"
+        fill="currentColor"
+      />
+      <path
+        d="M8 21h8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 function IconFacebook(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
@@ -60,17 +172,6 @@ function IconLinkedIn(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function IconYouTube(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
-      <path
-        d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28.2 28.2 0 0 0 2 12a28.2 28.2 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28.2 28.2 0 0 0 22 12a28.2 28.2 0 0 0-.4-4.8ZM10 15.3V8.7L15.8 12 10 15.3Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
 function IconInstagram(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
@@ -82,9 +183,46 @@ function IconInstagram(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function IconX(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
+      <path
+        d="M4 4l16 16M20 4 4 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function IconArrowUp(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" {...props}>
+      <path
+        d="M12 19V5M6 11l6-6 6 6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const Footer = () => {
+  const year = new Date().getFullYear();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className={`${styles.footer} ${inter.className}`} aria-label="Footer">
+      <div className={styles.skyline} aria-hidden="true" />
+
       <div className={styles.container}>
         <div className={styles.topGrid}>
           <div className={styles.brandCol}>
@@ -93,171 +231,95 @@ const Footer = () => {
                 src={logo}
                 alt="Ornate Quality Services"
                 className={styles.brandLogo}
-                width={220}
-                height={72}
+                width={824}
+                height={206}
                 loading="lazy"
               />
             </Link>
             <p className={styles.brandText}>
-              Your trusted partner for certification, compliance and regulatory approvals. We
-              help you achieve compliance with confidence.
+              Your trusted partner for certification, compliance and regulatory approvals.
             </p>
+            <p className={styles.brandTagline}>We help you achieve compliance with confidence.</p>
 
             <div className={styles.socialRow} aria-label="Social links">
-              <a className={`${styles.socialBtn} ${styles.socialLinkedIn}`} href="#" aria-label="LinkedIn">
-                <IconLinkedIn />
-              </a>
-              <a className={`${styles.socialBtn} ${styles.socialFacebook}`} href="#" aria-label="Facebook">
-                <IconFacebook />
-              </a>
-              <a className={`${styles.socialBtn} ${styles.socialYouTube}`} href="#" aria-label="YouTube">
-                <IconYouTube />
-              </a>
-              <a className={`${styles.socialBtn} ${styles.socialInstagram}`} href="#" aria-label="Instagram">
-                <IconInstagram />
-              </a>
+              {SOCIAL_LINKS.map(({ label, href, Icon, socialClass }) => (
+                <a
+                  key={label}
+                  className={`${styles.socialBtn} ${socialClass}`}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  <Icon />
+                </a>
+              ))}
             </div>
           </div>
 
           <div className={styles.linksCol}>
-            <div className={styles.colTitle}>QUICK LINKS</div>
+            <div className={styles.colTitle}>Quick Links</div>
             <ul className={styles.linkList}>
-              <li>
-                <Link className={styles.link} href="/">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link className={styles.link} href="/about">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link className={styles.link} href="/services">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <a className={styles.link} href="#industries">
-                  Industries
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="#resources">
-                  Resources
-                </a>
-              </li>
-              <li>
-                <Link className={styles.link} href="/contact">
-                  Contact Us 
-                </Link>
-              </li>
+              {QUICK_LINKS.map(({ label, href }) => (
+                <li key={label}>
+                  <Link className={styles.link} href={href}>
+                    <span className={styles.linkIcon} aria-hidden="true">
+                      <IconChevron />
+                    </span>
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
-
-          <div className={`${styles.linksCol} ${styles.servicesCol}`}>
-            <div className={styles.colTitle}>OUR SERVICES</div>
-            <ul className={styles.linkList}>
-              <li>
-                <a className={styles.link} href="/services">
-                  BIS Certification
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="/services/wpc-eta-approval">
-                  WPC Approval
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="/services/tec-certification">
-                  TEC Certification
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="/services/lmpc-registration">
-                  LMPC Registration
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="/services/bee-certification">
-                  BEE Registration
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="/services/epr-registration">
-                  EPR Registration
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="/services/ce-certification">
-                  CE Certification
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="/services">
-                  Testing &amp; Documentation
-                </a>
-              </li>
-            </ul>
-            <div className={styles.footerCtaRow} aria-label="Footer call to actions">
-              <Link href="/contact" className={styles.footerPrimaryBtn}>
-                Get Expert Consultation
-                <span className={styles.btnArrow} aria-hidden="true">
-                  →
-                </span>
-              </Link>
-             
-            </div>
           </div>
 
           <div className={styles.linksCol}>
-            <div className={styles.colTitle}>GOVERNMENT LINKS</div>
+            <div className={styles.colTitle}>Our Services</div>
             <ul className={styles.linkList}>
-              <li>
-                <a className={styles.link} href="#" target="_blank" rel="noreferrer">
-                  BIS
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="#" target="_blank" rel="noreferrer">
-                  WPC
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="#" target="_blank" rel="noreferrer">
-                  BEE
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="#" target="_blank" rel="noreferrer">
-                  CPCB
-                </a>
-              </li>
-              <li>
-                <a className={styles.link} href="#" target="_blank" rel="noreferrer">
-                  TEC
-                </a>
-              </li>
+              {SERVICE_LINKS.map(({ label, href }) => (
+                <li key={label}>
+                  <Link className={styles.link} href={href}>
+                    <span className={styles.linkIcon} aria-hidden="true">
+                      <IconShield />
+                    </span>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.linksCol}>
+            <div className={styles.colTitle}>Government Links</div>
+            <ul className={styles.linkList}>
+              {GOVERNMENT_LINKS.map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    className={styles.link}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className={styles.linkIcon} aria-hidden="true">
+                      <IconBuilding />
+                    </span>
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className={styles.contactCol}>
-            <div className={styles.colTitle}>CONTACT US</div>
-
+            <div className={styles.colTitle}>Contact Us</div>
             <div className={styles.contactList}>
               <div className={styles.contactItem}>
                 <span className={styles.contactIcon} aria-hidden="true">
                   <IconPin />
                 </span>
-                <div className={styles.contactText}>
-                  <strong className={styles.contactLabel}>ADDRESS (CORPORATE OFFICE)</strong>
-                  <div className={styles.contactValue}>
-                    Office No. 1726, Astralis Tower,
-                    <br />
-                    Sector 94, Noida, Uttar Pradesh,
-                    <br />
-                    201301
-                  </div>
+                <div className={styles.contactValue}>
+                  {SITE_ADDRESS.streetAddress}, {SITE_ADDRESS.addressLocality},{" "}
+                  {SITE_ADDRESS.addressRegion}, {SITE_ADDRESS.postalCode}
                 </div>
               </div>
 
@@ -265,17 +327,14 @@ const Footer = () => {
                 <span className={styles.contactIcon} aria-hidden="true">
                   <IconPhone />
                 </span>
-                <div className={styles.contactText}>
-                  <strong className={styles.contactLabel}>PHONE</strong>
-                  <div className={styles.contactValue}>
-                    <a className={styles.link} href="tel:+919266877738">
-                      +91 9266877738
-                    </a>
-                    <br />
-                    <a className={styles.link} href="tel:+918880013897">
-                      +91 8800013897
-                    </a>
-                  </div>
+                <div className={styles.contactValue}>
+                  <a className={styles.contactLink} href="tel:+919266877738">
+                    +91 9266877738
+                  </a>
+                  ,{" "}
+                  <a className={styles.contactLink} href="tel:+918880013897">
+                    +91 8800013897
+                  </a>
                 </div>
               </div>
 
@@ -283,29 +342,45 @@ const Footer = () => {
                 <span className={styles.contactIcon} aria-hidden="true">
                   <IconMail />
                 </span>
-                <div className={styles.contactText}>
-                  <strong className={styles.contactLabel}>EMAIL</strong>
-                  <div className={styles.contactValue}>
-                    <a className={styles.link} href="mailto:chetan@ornatequality.com">
-                      chetan@ornatequality.com
-                    </a>
-                    <br />
-                    <a className={styles.link} href="mailto:marketing@ornatequality.com">
-                      marketing@ornatequality.com
-                    </a>
-                  </div>
+                <div className={styles.contactValue}>
+                  <a className={styles.contactLink} href={`mailto:${SITE_EMAIL}`}>
+                    {SITE_EMAIL}
+                  </a>
+                  <br />
+                  <a className={styles.contactLink} href={`mailto:${SITE_EMAIL_MARKETING}`}>
+                    {SITE_EMAIL_MARKETING}
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        <div className={styles.ctaBanner}>
+          <div className={styles.ctaCopy}>
+            <span className={styles.ctaIconWrap} aria-hidden="true">
+              <IconHeadset />
+            </span>
+            <p className={styles.ctaText}>
+              <strong>Need Expert Guidance?</strong> Our experts are ready to help you.
+            </p>
+          </div>
+          <Link href="/contact" className={styles.ctaBtn}>
+            Get Expert Consultation
+            <span className={styles.ctaBtnArrow} aria-hidden="true">
+              →
+            </span>
+          </Link>
+        </div>
+
         <div className={styles.bottomBar}>
-          <div className={styles.bottomLeft}>© 2024 Ornate Certification. All Rights Reserved.</div>
-          <div className={styles.bottomRight}>
-            <a className={styles.bottomLink} href="/privacy-policy">
+          <div className={styles.bottomLeft}>
+            © {year} Ornate Certification. All Rights Reserved.
+          </div>
+          <div className={styles.bottomCenter}>
+            <Link className={styles.bottomLink} href="/privacy-policy">
               Privacy Policy
-            </a>
+            </Link>
             <span className={styles.bottomSep} aria-hidden="true">
               |
             </span>
@@ -313,6 +388,12 @@ const Footer = () => {
               Terms &amp; Conditions
             </a>
           </div>
+          <button type="button" className={styles.backToTop} onClick={scrollToTop}>
+            Back to Top
+            <span className={styles.backToTopIcon} aria-hidden="true">
+              <IconArrowUp />
+            </span>
+          </button>
         </div>
       </div>
     </footer>
