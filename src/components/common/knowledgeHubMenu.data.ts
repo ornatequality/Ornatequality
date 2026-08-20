@@ -18,3 +18,5 @@ export const knowledgeHubMenuItems: KnowledgeHubMenuItem[] = [
 ];
 
 export const KNOWLEDGE_HUB_HREF = "/blog";
+
+
