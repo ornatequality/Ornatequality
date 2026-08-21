@@ -15,6 +15,7 @@
   display: block;
   width: 100%;
   height: auto;
+  image-rendering: auto;
 }
 
 /* ── Layout ── */
@@ -195,7 +196,190 @@
   line-height: 1.55;
 }
 
-/* Introduction split */
+/* EPR / product data tables — navy header, zebra rows */
+.tableScroll {
+  width: 100%;
+  overflow-x: auto;
+  margin: 16px 0 20px;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 2px 12px rgba(3, 30, 94, 0.06);
+}
+
+.dataTable {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: clamp(12px, 0.2vw + 11px, 13px);
+}
+
+.dataTable thead th {
+  background: #031e5e;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+
+.dataTable tbody td,
+.dataTable tbody th {
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.dataTable tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+.dataTable tbody tr:nth-child(even) {
+  background: #eef4fb;
+}
+
+.dataTable tbody th[scope="row"] {
+  font-weight: 600;
+  color: #0a1f44;
+  background: inherit;
+}
+
+.textJustify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.heroLead {
+  font-size: clamp(14px, 0.35vw + 13px, 16px);
+  line-height: 1.65;
+  color: #334155;
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.highlightsBox {
+  margin: 20px 0 24px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #f0f7ff 0%, #eef4fb 100%);
+  border: 1px solid rgba(3, 30, 94, 0.12);
+  border-radius: 10px;
+}
+
+.highlightsTitle {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #031e5e;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.noteBox {
+  margin: 16px 0;
+  padding: 14px 18px;
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #78350f;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.productTableBlock {
+  margin-bottom: 36px;
+}
+
+.productTableBlock:last-child {
+  margin-bottom: 0;
+}
+
+/* Internal link suggestions */
+.internalLinkGroup {
+  margin-bottom: 22px;
+}
+
+.internalLinkGroup:last-of-type {
+  margin-bottom: 0;
+}
+
+.internalLinkGroupTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0a1f44;
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.internalLinkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.internalLinkList li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.internalLinkList li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #0b57b5;
+  font-weight: 700;
+}
+
+.internalLinkList a {
+  color: #0b57b5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.internalLinkList a:hover {
+  text-decoration: underline;
+  color: #0a1f44;
+}
+
+.internalLinkDesc {
+  color: #475569;
+  font-weight: 400;
+}
+
+/* Introduction — text wraps beside and below floated image */
+.introFlow::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.introFlow .introImageWrap {
+  float: right;
+  width: min(300px, 38%);
+  margin: 0 0 16px 24px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 4px 20px rgba(10, 31, 68, 0.12);
+}
+
+.introFlow .noteBox {
+  clear: both;
+}
+
+/* Introduction split (two-column grid — used on other service pages) */
 .introGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
@@ -486,17 +670,44 @@
   padding: 0 4px;
 }
 
-/* Bullet list */
+/* Bullet list — visible markers (Tailwind reset removes default list-style) */
 .bulletList {
-  margin: 0;
-  padding: 0 0 0 20px;
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
 }
 
 .bulletList li {
-  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+  font-size: clamp(13px, 0.25vw + 12px, 14px);
   line-height: 1.75;
   color: #475569;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.bulletList li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #0b57b5;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.bulletList li strong {
+  color: #0a1f44;
+  font-weight: 700;
+}
+
+.highlightsBox .bulletList {
+  margin-bottom: 0;
+}
+
+.highlightsBox .bulletList li::before {
+  color: #031e5e;
 }
 
 /* FAQ */
@@ -577,8 +788,25 @@
 .ctaButtons {
   display: flex;
   gap: 12px;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.ctaButtonsCenter {
+  justify-content: center;
+}
+
+.ctaButtonsOnLight .ctaBtnSecondary {
+  color: #0b57b5;
+  border: 2px solid #0b57b5;
+  background: transparent;
+}
+
+.ctaButtonsOnLight .ctaBtnSecondary:hover {
+  background: rgba(11, 87, 181, 0.08);
+  border-color: #0a1f44;
+  color: #0a1f44;
 }
 
 .ctaBtnPrimary {
@@ -927,6 +1155,13 @@
     grid-template-columns: 1fr;
   }
 
+  .introFlow .introImageWrap {
+    float: none;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto 20px;
+  }
+
   .introImageWrap {
     max-width: 360px;
     margin: 0 auto;
@@ -969,6 +1204,14 @@
     display: table;
     width: 100%;
     min-width: 520px;
+  }
+
+  .dataTable {
+    min-width: 640px;
+  }
+
+  .tableScroll {
+    border-radius: 6px;
   }
 
   .processFlow {

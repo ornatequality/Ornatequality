@@ -16,16 +16,142 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   EPR_TOC,
-  EPR_CATEGORY_ROWS,
-  DOCUMENTS_ROWS,
-  PENALTIES_ROWS,
-  PROCESS_STEPS,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  BANNER_SERVICE_NOTE,
+  KEY_HIGHLIGHTS,
+  INTRO_PARAGRAPHS,
+  INTRO_IMPORTANT_NOTE,
+  WHAT_IS_PARAGRAPHS,
+  ESTABLISHES_TABLE,
+  PURPOSE_OBJECTIVES,
+  WHAT_IS_ALT_NAMES,
+  WHAT_IS_COMPLIANCE_NOTE,
+  WHY_MATTERS_INTRO,
+  WHY_MATTERS_ITEMS,
+  WHO_NEEDS_INTRO,
+  OBLIGATED_ROLES,
+  OBLIGATED_ROLES_NOTE,
+  BUSINESS_TYPES,
+  WHO_NEEDS_CLOSING,
+  WASTE_STREAMS_INTRO,
+  WASTE_STREAMS_ROWS,
+  WASTE_STREAM_DETAILS,
+  PRODUCTS_COVERED_INTRO,
+  PRODUCTS_EWASTE_INTRO,
+  PRODUCTS_BATTERY_INTRO,
+  PRODUCTS_BATTERY_NOTE,
+  PRODUCTS_PLASTIC_INTRO,
+  PRODUCTS_PLASTIC_NOTE,
+  PRODUCTS_TYRE_INTRO,
+  PRODUCTS_USED_OIL_INTRO,
+  PRODUCTS_USED_OIL_NOTE,
   BENEFITS_ITEMS,
+  SERVICE_INCLUDES,
+  ELIGIBILITY_INTRO,
+  ELIGIBILITY_QUESTIONS,
+  ELIGIBILITY_WHO_QUALIFIES,
+  ELIGIBILITY_WHO_NOT,
+  ELIGIBILITY_IMPORTANT_NOTES,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_CLOSING,
+  PROCESS_INTRO,
+  PROCESS_STEPS,
+  TIMELINE_INTRO,
+  TIMELINE_ROWS,
+  TIMELINE_PARAGRAPHS,
+  COST_INTRO,
+  COST_FACTORS,
+  COST_HOW_WE_QUOTE,
+  VALIDITY_PARAGRAPHS,
+  RENEWAL_INTRO,
+  RENEWAL_WHEN,
+  RENEWAL_PROCESS_STEPS,
+  RENEWAL_PRECAUTIONS,
+  RENEWAL_CLOSING,
+  CHALLENGES_ITEMS,
+  HOW_WE_HELP_INTRO,
+  HOW_WE_HELP_ITEMS,
+  HOW_WE_HELP_NOT_PROMISE,
+  WHY_CHOOSE_ITEMS,
+  INDUSTRIES_ROWS,
+  MISTAKES_ROWS,
+  EXPERT_TIPS,
+  STREAM_COMPARISON_INTRO,
+  STREAM_COMPARISON_ROWS,
+  STREAM_COMPARISON_NOTE,
   FAQ_ITEMS,
+  GET_STARTED_PARAGRAPHS,
+  GET_STARTED_TAGLINE,
+  INTERNAL_LINK_GROUPS,
+  type TableRow,
 } from "../data/eprContent";
+import {
+  EWASTE_PRODUCTS,
+  BATTERY_PRODUCTS,
+  PLASTIC_PACKAGING_PRODUCTS,
+  TYRE_PRODUCTS,
+  USED_OIL_PRODUCTS,
+} from "../data/eprProductTables";
 
 const EPR_PAGE_PATH = "/services/epr-registration";
 
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+type DataTableProps = {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+};
+
+function DataTable({ columns, rows, getRowKey }: DataTableProps) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+const PRODUCT_TABLE_COLUMNS: DataTableColumn[] = [
+  { key: "srNo", header: "Sr. No." },
+  { key: "product", header: "Product", scope: "row" },
+  { key: "category", header: "Category" },
+  { key: "eprCode", header: "EPR Code" },
+  { key: "examples", header: "Examples" },
+];
 
 function CallbackForm() {
   return (
@@ -43,7 +169,6 @@ function CallbackForm() {
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -137,35 +262,32 @@ export function EprPageContent() {
           </nav>
 
           <article className={styles.main}>
-            <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                EPR Registration in India — Complete Guide for Producers, Importers &amp; Brand Owners
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    If you manufacture, import, or sell products in categories that generate
-                    post-consumer waste — electronics, batteries, plastic packaging, tyres, or used oil
-                    — EPR Registration is a mandatory compliance requirement that has become one of
-                    India&apos;s most actively enforced environmental regulations.
-                  </p>
-                  <p className={styles.sectionText}>
-                    EPR stands for Extended Producer Responsibility — a policy framework under which
-                    producers, importers, and brand owners are held legally responsible for the
-                    end-of-life management of the products and packaging they place in the market. In
-                    India, EPR is implemented through the Central Pollution Control Board (CPCB) under
-                    various environmental rules, and registration on the CPCB EPR portal is mandatory
-                    for all entities covered under these rules.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we have been helping manufacturers, importers, and brand
-                    owners obtain EPR Registration and manage their ongoing EPR compliance since the CPCB
-                    portal was first introduced. In this guide, we explain exactly what EPR Registration
-                    is, who needs it, how the process works, what it costs, and how to stay compliant year
-                    after year.
-                  </p>
-                </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>{BANNER_SUBTITLE}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_SERVICE_NOTE}</p>
+              <div className={styles.highlightsBox}>
+                <div className={styles.highlightsTitle}>Key Highlights</div>
+                <ul className={styles.bulletList}>
+                  {KEY_HIGHLIGHTS.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+                <Link href="/contact" className={styles.ctaBtnPrimary}>
+                  Talk to an EPR expert →
+                </Link>
+                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
+                  📞 Expert Consultation
+                </a>
+              </div>
+            </div>
 
+            <section id="introduction" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Introduction</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
@@ -175,150 +297,219 @@ export function EprPageContent() {
                     className={styles.introImage}
                   />
                 </div>
-
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Already placing products in the Indian market? Contact our team for a free EPR
-                    compliance assessment and find out your registration obligations immediately.
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
+                <div className={styles.noteBox}>{INTRO_IMPORTANT_NOTE}</div>
               </div>
             </section>
 
             <section id="what-is-epr" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is EPR Registration?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    Extended Producer Responsibility (EPR) is an environmental policy that makes
-                    producers, importers, and brand owners responsible for the collection, recycling, and
-                    safe disposal of the waste generated by their products at the end of their useful life.
-                    The principle is straightforward — if you put a product or packaging into the market,
-                    you are responsible for ensuring it does not end up in a landfill or cause environmental
-                    harm.
-                  </p>
-                  <p className={styles.sectionText}>
-                    In India, EPR is implemented through a set of rules framed under the Environment
-                    (Protection) Act, 1986. The Central Pollution Control Board (CPCB) is the nodal
-                    authority for EPR implementation at the national level, and registration on the CPCB EPR
-                    portal is the first mandatory step for all covered entities.
-                  </p>
-                  <p className={styles.sectionText}>
-                    EPR Registration in India currently covers four main categories — E-Waste (electronics
-                    and electrical equipment), Batteries, Plastic Packaging, and Tyres — along with Used
-                    Oil obligations under applicable rules. The CPCB portal allows registered entities to set
-                    annual EPR targets, onboard certified recyclers and Producer Responsibility
-                    Organisations (PROs), and submit annual compliance reports.
-                  </p>
-                  <p className={styles.sectionText}>
-                    Non-registration and non-compliance with EPR obligations are treated as violations of
-                    India&apos;s environmental laws — and penalties have been significantly strengthened in
-                    recent years.
-                  </p>
-                </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>EP</span>
-                  <span className={styles.whatIsLabel}>CPCB EPR PORTAL</span>
-                </div>
-              </div>
+              <h2 className={styles.sectionTitle}>What Is EPR Registration?</h2>
+              {WHAT_IS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <DataTable
+                columns={[
+                  { key: "establishes", header: "What Registration Establishes", scope: "row" },
+                  { key: "whyItMatters", header: "Why It Matters" },
+                ]}
+                rows={ESTABLISHES_TABLE}
+                getRowKey={(row) => row.establishes}
+              />
+              <h3 className={styles.subsectionTitle}>Purpose and Objectives</h3>
+              <ul className={styles.bulletList}>
+                {PURPOSE_OBJECTIVES.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHAT_IS_ALT_NAMES}</p>
+              <div className={styles.noteBox}>{WHAT_IS_COMPLIANCE_NOTE}</div>
             </section>
 
-            <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why EPR Registration Is Essential for Your Business</h2>
-              <p className={styles.sectionText}>
-                EPR compliance has moved from a niche environmental concern to a mainstream business
-                requirement in India. Here is why EPR Registration matters — not just for the environment,
-                but for your business.
-              </p>
-              <h3 className={styles.subsectionTitle}>It Is Legally Mandatory Under Indian Environmental Law</h3>
-              <p className={styles.sectionText}>
-                EPR Registration is not voluntary. The E-Waste (Management) Rules, the Battery Waste
-                Management Rules, the Plastic Waste Management Rules, and the Hazardous and Other Wastes
-                Rules all require covered entities to register on the CPCB EPR portal and fulfil annual EPR
-                targets. Failure to register or comply is a violation of the Environment (Protection) Act —
-                with penalties that have become significantly more serious since 2022.
-              </p>
-              <h3 className={styles.subsectionTitle}>CPCB Enforcement Has Increased Significantly</h3>
-              <p className={styles.sectionText}>
-                The CPCB has substantially strengthened EPR enforcement since 2022. Entities found operating
-                without EPR Registration or failing to meet annual targets are subject to Environmental
-                Compensation — a financial penalty calculated on the basis of unmet EPR obligations. CPCB
-                has issued notices to thousands of companies and has published lists of non-compliant
-                entities.
-              </p>
-              <h3 className={styles.subsectionTitle}>E-Commerce Platforms Are Checking EPR Compliance</h3>
-              <p className={styles.sectionText}>
-                Amazon India and Flipkart have made EPR Registration a requirement for sellers in covered
-                product categories. Sellers who cannot provide valid EPR Registration certificates face
-                listing restrictions. For businesses that rely on e-commerce as a primary sales channel, EPR
-                Registration has become as important as BIS or LMPC compliance.
-              </p>
-              <h3 className={styles.subsectionTitle}>Brand and ESG Credibility</h3>
-              <p className={styles.sectionText}>
-                Indian consumers, institutional buyers, and global business partners are increasingly
-                scrutinising the environmental credentials of the companies they work with. EPR compliance
-                demonstrates a commitment to responsible business practices — and in the context of growing
-                ESG reporting requirements, EPR Registration is fast becoming a standard due diligence
-                requirement in supply chains.
-              </p>
-              <h3 className={styles.subsectionTitle}>Avoid Environmental Compensation Liability</h3>
-              <p className={styles.sectionText}>
-                The CPCB&apos;s Environmental Compensation framework means that non-compliance creates a
-                quantified financial liability based on the volume of products placed in the market and the
-                shortfall against EPR targets. For businesses with significant sales volumes, this liability
-                can be substantial. Proactive EPR Registration and compliance management is always more
-                cost-effective than dealing with Environmental Compensation notices.
-              </p>
+            <section id="why-matters" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why This Compliance Matters for Your Business</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHY_MATTERS_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {WHY_MATTERS_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}.</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Needs EPR Registration?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "role", header: "Role", scope: "row" },
+                  { key: "whoCovers", header: "Who It Covers" },
+                  { key: "obligation", header: "Obligation" },
+                ]}
+                rows={OBLIGATED_ROLES}
+                getRowKey={(row) => row.role}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{OBLIGATED_ROLES_NOTE}</p>
+              <h3 className={styles.subsectionTitle}>Business Types Commonly Obligated</h3>
+              <ul className={styles.bulletList}>
+                {BUSINESS_TYPES.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_CLOSING}</p>
+            </section>
+
+            <section id="waste-streams" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Waste Streams Covered Under EPR Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WASTE_STREAMS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "wasteStream", header: "Waste Stream", scope: "row" },
+                  { key: "governingRules", header: "Governing Rules" },
+                  { key: "whoMustRegister", header: "Who Must Register" },
+                  { key: "ourService", header: "Our Service" },
+                ]}
+                rows={WASTE_STREAMS_ROWS}
+                getRowKey={(row) => row.wasteStream}
+              />
+              <ul className={styles.bulletList}>
+                {WASTE_STREAM_DETAILS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}.</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
             </section>
 
             <section id="products-covered" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Who Needs EPR Registration in India?</h2>
-              <p className={styles.sectionText}>
-                EPR Registration in India is required for producers, importers, and brand owners across four
-                main waste categories — plus Used Oil obligations where applicable. Here is a breakdown of
-                who needs to register under each category.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">EPR Category</th>
-                    <th scope="col">Who Must Register</th>
-                    <th scope="col">Common Products Covered</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {EPR_CATEGORY_ROWS.map((row) => (
-                    <tr key={row.category}>
-                      <th scope="row">{row.category}</th>
-                      <td>{row.whoMustRegister}</td>
-                      <td>{row.products}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                A single business may be required to register under multiple EPR categories. For example, a
-                consumer electronics importer who uses plastic packaging for their products needs EPR
-                Registration for both E-Waste and Plastic Packaging. Our team assesses your complete product
-                portfolio and identifies all applicable EPR obligations in one comprehensive review.
-              </p>
-              <p className={styles.sectionText}>
-                Not sure which EPR categories apply to your business? Our team provides a free EPR
-                obligation assessment. Contact us before your next product launch or import shipment.
-              </p>
+              <h2 className={styles.sectionTitle}>Products Covered Under EPR Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_COVERED_INTRO}</p>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>E-Waste Products</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_EWASTE_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={EWASTE_PRODUCTS}
+                  getRowKey={(row) => `${row.srNo}-${row.product}`}
+                />
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Battery Waste Products</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_BATTERY_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={BATTERY_PRODUCTS}
+                  getRowKey={(row) => `${row.srNo}-${row.product}`}
+                />
+                <div className={styles.noteBox}>{PRODUCTS_BATTERY_NOTE}</div>
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Plastic Packaging Products</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_PLASTIC_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={PLASTIC_PACKAGING_PRODUCTS}
+                  getRowKey={(row) => `${row.srNo}-${row.product}`}
+                />
+                <div className={styles.noteBox}>{PRODUCTS_PLASTIC_NOTE}</div>
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Waste Tyre Products</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_TYRE_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={TYRE_PRODUCTS}
+                  getRowKey={(row) => `${row.srNo}-${row.product}`}
+                />
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Used Oil Products</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_USED_OIL_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={USED_OIL_PRODUCTS}
+                  getRowKey={(row) => `${row.srNo}-${row.product}`}
+                />
+                <div className={styles.noteBox}>{PRODUCTS_USED_OIL_NOTE}</div>
+              </div>
+            </section>
+
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits for Your Business</h2>
+              <ul className={styles.bulletList}>
+                {BENEFITS_ITEMS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="service-includes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>What Our Service Includes</h2>
+              <ul className={styles.bulletList}>
+                {SERVICE_INCLUDES.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Eligibility for EPR Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_QUESTIONS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>Who Typically Qualifies</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_WHO_QUALIFIES.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>Who Typically Does Not Need to Register</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_WHO_NOT.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>Important Notes</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_IMPORTANT_NOTES.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Documents Required for EPR Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document", scope: "row" },
+                  { key: "purpose", header: "Purpose" },
+                  { key: "mandatory", header: "Mandatory" },
+                  { key: "notes", header: "Notes" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_CLOSING}</p>
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>EPR Registration Process — Step by Step</h2>
-              <p className={styles.sectionText}>
-                The EPR Registration process is managed through the CPCB EPR portal. The process involves
-                registration, target setting, recycler or PRO onboarding, and annual compliance reporting.
-                Here is a complete breakdown of every step and how Ornate Quality Services manages the
-                process for you.
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step EPR Registration Process</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_INTRO}</p>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
@@ -332,250 +523,203 @@ export function EprPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
                 </div>
               ))}
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>EPR Registration Requirements in India</h2>
-              <p className={styles.sectionText}>
-                Before applying for EPR Registration, businesses must meet the following requirements under
-                the applicable EPR rules.
-              </p>
-              <h3 className={styles.subsectionTitle}>For All EPR Categories</h3>
-              <ul className={styles.bulletList}>
-                <li>
-                  Valid business registration in India — GST registration and company incorporation
-                  certificate
-                </li>
-                <li>Import Export Code (IEC) for importers — registered with DGFT</li>
-                <li>
-                  Accurate records of products placed in the Indian market — unit volumes and packaging
-                  weights by category
-                </li>
-                <li>
-                  Willingness to set annual EPR targets and fulfil them through CPCB-registered PROs or
-                  recyclers
-                </li>
-                <li>
-                  Commitment to file annual compliance reports on the CPCB portal within prescribed
-                  deadlines
-                </li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>Category-Specific Requirements</h3>
-              <p className={styles.sectionText}>
-                Each EPR category has specific product classification requirements under its applicable
-                rules. For E-Waste, products must be classified under the correct equipment category as
-                defined in Schedule I of the E-Waste Rules. For Battery Waste, battery chemistry and type must
-                be declared. For Plastic Packaging, the type and weight of all plastic packaging used must be
-                declared by category.
-              </p>
-              <p className={styles.sectionText}>
-                Incorrect product classification is one of the most common issues in EPR applications — and it
-                can create compliance problems that are difficult to correct after registration. Our team
-                reviews your product portfolio in detail and ensures all classifications are correct before
-                filing.
-              </p>
-              <p className={styles.sectionText}>
-                Multiple products across multiple EPR categories? Our team handles everything in a single,
-                coordinated compliance project. Contact us to get started.
-              </p>
-            </section>
-
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for EPR Registration</h2>
-              <p className={styles.sectionText}>
-                The following documents are required for EPR Registration on the CPCB portal. Requirements may
-                vary slightly by EPR category.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_ROWS.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Our team provides a category-specific document checklist after reviewing your business and
-                product details. For multi-category EPR registrations, we manage all documentation
-                systematically to ensure consistency across all portal submissions.
-              </p>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>EPR Registration Timeline</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "stage", header: "Stage", scope: "row" },
+                  { key: "duration", header: "What Drives Duration" },
+                ]}
+                rows={TIMELINE_ROWS}
+                getRowKey={(row) => row.stage}
+              />
+              {TIMELINE_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
             <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>EPR Registration Cost in India</h2>
-              <p className={styles.sectionText}>
-                EPR Registration itself does not involve a government registration fee — the CPCB portal
-                registration is free. However, EPR compliance involves ongoing costs that must be factored
-                into your business planning.
-              </p>
-              <h3 className={styles.subsectionTitle}>PRO or Recycler Service Fees</h3>
-              <p className={styles.sectionText}>
-                The most significant ongoing cost of EPR compliance is the fee paid to a Producer
-                Responsibility Organisation (PRO) or registered recycler for fulfilling your annual EPR
-                targets. PRO fees are typically calculated on a per-kilogram basis and vary based on material
-                type, target volume, and the PRO&apos;s collection network. For modest sales volumes, annual
-                PRO fees can range from INR 10,000 to INR 1,00,000 depending on category and target volume.
-              </p>
-              <h3 className={styles.subsectionTitle}>Environmental Compensation (Non-Compliance Cost)</h3>
-              <p className={styles.sectionText}>
-                Entities that fail to meet their annual EPR targets are subject to Environmental Compensation
-                — a penalty levied by CPCB on the basis of the target shortfall. Environmental Compensation
-                rates vary by category and make non-compliance significantly more expensive than compliance.
-              </p>
-              <h3 className={styles.subsectionTitle}>Professional Service Fees</h3>
-              <p className={styles.sectionText}>
-                Ornate Quality Services charges a professional fee for EPR Registration, target setting, PRO
-                onboarding, and annual compliance reporting. Our fees are structured as an annual compliance
-                retainer — giving you complete EPR compliance management for a fixed, transparent cost.
-              </p>
-              <p className={styles.sectionText}>
-                For a precise cost estimate based on your product categories and sales volumes — contact our
-                team. We provide a complete EPR compliance cost projection at no obligation.
-              </p>
+              <h2 className={styles.sectionTitle}>EPR Registration Cost</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>Factors That Affect Cost</h3>
+              <ul className={styles.bulletList}>
+                {COST_FACTORS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_HOW_WE_QUOTE}</p>
             </section>
 
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>EPR Registration Validity and Annual Compliance Cycle</h2>
-              <p className={styles.sectionText}>
-                EPR Registration certificates do not have a fixed expiry date in the way that many product
-                certifications do. Once registered, the entity remains registered on the CPCB portal as long
-                as it continues to fulfil its annual EPR obligations and files compliance reports on time.
-              </p>
-              <h3 className={styles.subsectionTitle}>Annual EPR Target Setting</h3>
-              <p className={styles.sectionText}>
-                At the start of each financial year, registered entities must set their annual EPR targets on
-                the CPCB portal. Targets are based on the volume of products placed in the market in the
-                previous year and must meet minimum prescribed targets under the applicable rules. Failure to
-                set targets before the prescribed deadline is treated as non-compliance.
-              </p>
-              <h3 className={styles.subsectionTitle}>Annual Compliance Report Filing</h3>
-              <p className={styles.sectionText}>
-                By the end of each financial year, registered entities must file a compliance report on the
-                CPCB portal confirming the waste collected and recycled against their declared targets. The
-                report must be supported by recycling certificates from CPCB-registered PROs or recyclers.
-              </p>
-              <h3 className={styles.subsectionTitle}>Consequences of Non-Filing</h3>
-              <p className={styles.sectionText}>
-                Entities that fail to file annual compliance reports face Environmental Compensation notices
-                from CPCB. Repeated non-filing can result in enhanced penalties, listing on CPCB&apos;s
-                non-compliant entities register, and potential legal action under the Environment Protection
-                Act. Our annual compliance retainer service ensures no deadline is missed.
-              </p>
+              <h2 className={styles.sectionTitle}>EPR Registration Validity</h2>
+              {VALIDITY_PARAGRAPHS.slice(0, 2).map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>Two points worth understanding</h3>
+              <ul className={styles.bulletList}>
+                {VALIDITY_PARAGRAPHS.slice(2).map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </section>
 
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Key Benefits of EPR Registration for Your Business</h2>
+            <section id="renewal" className={styles.section}>
+              <h2 className={styles.sectionTitle}>EPR Registration Renewal</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>When to Renew</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_WHEN}</p>
+              <h3 className={styles.subsectionTitle}>Renewal Process</h3>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
+                {RENEWAL_PROCESS_STEPS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>Renewal Precautions</h3>
+              <ul className={styles.bulletList}>
+                {RENEWAL_PRECAUTIONS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_CLOSING}</p>
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges Businesses Face</h2>
+              <ul className={styles.bulletList}>
+                {CHALLENGES_ITEMS.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
             </section>
 
-            <section id="penalties" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Penalties for Non-Compliance with EPR Registration</h2>
-              <p className={styles.sectionText}>
-                Since 2022, CPCB has significantly strengthened EPR enforcement. Environmental Compensation
-                has replaced the older penalty structure, creating quantified financial liability for
-                non-compliance that scales directly with the volume of products placed in the market.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Violation</th>
-                    <th scope="col">Consequence</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PENALTIES_ROWS.map((row) => (
-                    <tr key={row.violation}>
-                      <th scope="row">{row.violation}</th>
-                      <td>{row.consequence}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                CPCB publishes lists of non-compliant entities on its website — which is visible to
-                e-commerce platforms, retail chains, government procurement bodies, and the general public.
-                For businesses where brand reputation matters, appearing on this list has consequences well
-                beyond the financial penalty itself.
-              </p>
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How We Help</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HOW_WE_HELP_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {HOW_WE_HELP_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}.</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{HOW_WE_HELP_NOT_PROMISE}</div>
             </section>
 
-            <section id="case-study" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a Consumer Electronics Brand Get EPR Registered Across Three
-                Categories
-              </h2>
-              <p className={styles.sectionText}>
-                A Mumbai-based consumer electronics brand that imported mobile phones, tablets, and Bluetooth
-                audio products approached Ornate Quality Services after receiving an Environmental
-                Compensation notice from CPCB. The brand had been operating for three years without EPR
-                Registration — unaware that their product range triggered obligations under both the E-Waste
-                Rules and the Battery Waste Management Rules. Their plastic packaging also created obligations
-                under the Plastic Waste Management Rules.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                The CPCB notice was for the E-Waste category only — but our initial assessment revealed that
-                the brand was also non-compliant under Battery Waste and Plastic Packaging EPR Rules. Three
-                years of unregistered operations meant significant accumulated EPR targets. At the same
-                time, their Amazon India account had been flagged for missing EPR compliance documentation.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                Our team conducted a full EPR obligation assessment covering all three categories — E-Waste,
-                Battery Waste, and Plastic Packaging. We calculated historical EPR targets based on the
-                brand&apos;s sales data for the previous three financial years, prepared all registration
-                documents for simultaneous filing across all three categories, and managed the CPCB portal
-                registration process in parallel. We also onboarded a CPCB-registered PRO with national coverage
-                for all three waste categories.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                All three EPR Registrations were obtained within 25 working days. The CPCB Environmental
-                Compensation notice was addressed through a formal response demonstrating active registration
-                and compliance activity. Amazon India reinstated the brand&apos;s compliance status, and the
-                brand is now fully current on annual target setting and compliance reporting across all three
-                EPR categories.
-              </p>
+            <section id="why-ornate" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Ornate Quality Services</h2>
+              <ul className={styles.bulletList}>
+                {WHY_CHOOSE_ITEMS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries We Serve</h2>
+              <DataTable
+                columns={[
+                  { key: "industry", header: "Industry", scope: "row" },
+                  { key: "obligation", header: "Typical EPR Obligation" },
+                ]}
+                rows={INDUSTRIES_ROWS}
+                getRowKey={(row) => row.industry}
+              />
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes and How to Avoid Them</h2>
+              <DataTable
+                columns={[
+                  { key: "mistake", header: "Mistake", scope: "row" },
+                  { key: "why", header: "Why It Happens" },
+                  { key: "avoid", header: "How to Avoid" },
+                ]}
+                rows={MISTAKES_ROWS}
+                getRowKey={(row) => row.mistake}
+              />
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips for a Smooth Application</h2>
+              <ul className={styles.bulletList}>
+                {EXPERT_TIPS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="stream-comparison" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Comparing the EPR Waste Streams</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{STREAM_COMPARISON_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "aspect", header: "Aspect", scope: "row" },
+                  { key: "eWaste", header: "E-Waste" },
+                  { key: "plastic", header: "Plastic Packaging" },
+                  { key: "battery", header: "Battery Waste" },
+                ]}
+                rows={STREAM_COMPARISON_ROWS}
+                getRowKey={(row) => row.aspect}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{STREAM_COMPARISON_NOTE}</p>
             </section>
 
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions — EPR Registration</h2>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Expert Assistance for EPR Registration</h2>
-              <p className={styles.ctaText}>
-                Need help with EPR Registration, CPCB portal filing, PRO onboarding, or annual compliance
-                reporting? Connect with Ornate Quality Services for complete support and professional guidance
-                for your environmental compliance in India.
-              </p>
-              <div className={styles.ctaButtons}>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Start Your EPR Registration</h2>
+              {GET_STARTED_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{GET_STARTED_TAGLINE}</p>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
                 <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
+                  Talk to an EPR expert →
                 </Link>
                 <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
                   📞 Expert Consultation
                 </a>
               </div>
             </section>
+
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Internal Link Suggestions</h2>
+              {INTERNAL_LINK_GROUPS.map((group) => (
+                <div key={group.title} className={styles.internalLinkGroup}>
+                  <h3 className={styles.internalLinkGroupTitle}>{group.title}</h3>
+                  <ul className={styles.internalLinkList}>
+                    {group.items.map((item) => (
+                      <li key={item.label}>
+                        <Link href={item.href}>{item.label}</Link>
+                        {item.description ? (
+                          <>
+                            {" "}
+                            <span className={styles.internalLinkDesc}>— {item.description}</span>
+                          </>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </article>
 
           <aside className={styles.sidebar} aria-label="Sidebar">

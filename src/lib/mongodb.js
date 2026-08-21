@@ -43,6 +43,15 @@ async function connectDB() {
 
     if (error instanceof Error) {
       if (
+        error.message.includes("Could not connect to any servers") ||
+        error.message.includes("Server selection timed out")
+      ) {
+        throw new Error(
+          "Database connection failed. If you are on local development, add your IP to MongoDB Atlas → Network Access. Live server IP is usually already allowed."
+        );
+      }
+
+      if (
         error.message.includes("ECONNREFUSED") ||
         error.message.includes("querySrv") ||
         error.message.includes("ENOTFOUND")

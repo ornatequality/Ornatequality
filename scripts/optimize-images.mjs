@@ -17,6 +17,7 @@ const IMAGE_EXT = /\.(png|jpe?g)$/i;
 function getMaxWidth(filePath) {
   const rel = filePath.replace(/\\/g, "/").toLowerCase();
   if (rel.includes("/clientlogo/") || rel.includes("/clientslogo/")) return 280;
+  // Full-width service banners live in /services/ (1600px). certi-img icons stay small.
   if (rel.includes("/certi-img/")) return 480;
   if (rel.endsWith("logo.png")) return 512;
   if (rel.includes("/services/")) return 1600;

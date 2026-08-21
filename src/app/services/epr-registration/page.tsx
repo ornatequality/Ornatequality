@@ -3,9 +3,9 @@ import { EprBanner } from "./sections/EprBanner";
 import { EprPageContent } from "./sections/EprPageContent";
 
 export const metadata: Metadata = {
-  title: "EPR Registration | Ornate Quality Services",
+  title: "EPR Registration in India | Ornate Quality Services",
   description:
-    "Complete EPR Registration support for producers, importers and brand owners in India. CPCB portal filing, PRO onboarding, target setting, and annual compliance reporting by Ornate Quality Services.",
+    "Waste-stream-wise EPR registration support for producers, importers and brand owners in India. End-to-end CPCB portal filing, documentation, query handling and post-approval compliance across e-waste, plastic, battery, tyre and used oil.",
 };
 
 export default function EprRegistrationPage() {
