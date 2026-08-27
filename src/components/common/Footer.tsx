@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { inter } from "@/lib/fonts";
 import {
+  DEFAULT_PHONE,
+  DEFAULT_PHONE_2,
   SITE_ADDRESS,
   SITE_EMAIL,
   SITE_EMAIL_MARKETING,
@@ -33,12 +35,19 @@ const GOVERNMENT_LINKS = [
   { label: "CPCB", href: "https://cpcb.nic.in/" },
 ] as const;
 
+const WHATSAPP_HREF = "https://wa.me/919266877738";
+
 const SOCIAL_LINKS = [
   { label: "LinkedIn", href: SITE_SOCIAL[1], Icon: IconLinkedIn, socialClass: styles.socialLinkedIn },
   { label: "Facebook", href: SITE_SOCIAL[0], Icon: IconFacebook, socialClass: styles.socialFacebook },
   { label: "Instagram", href: SITE_SOCIAL[2], Icon: IconInstagram, socialClass: styles.socialInstagram },
-  { label: "X", href: SITE_SOCIAL[4], Icon: IconX, socialClass: styles.socialX },
+  { label: "WhatsApp", href: WHATSAPP_HREF, Icon: IconWhatsApp, socialClass: styles.socialWhatsApp },
 ] as const;
+
+const PHONE_PRIMARY = DEFAULT_PHONE.replace("-", " ");
+const PHONE_SECONDARY = DEFAULT_PHONE_2.replace("-", " ");
+const TEL_PRIMARY = `tel:${DEFAULT_PHONE.replace(/-/g, "")}`;
+const TEL_SECONDARY = `tel:${DEFAULT_PHONE_2.replace(/-/g, "")}`;
 
 function IconPin(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -88,18 +97,12 @@ function IconChevron(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function IconShield(props: React.SVGProps<SVGSVGElement>) {
+function IconCheckCircle(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" {...props}>
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8" />
       <path
-        d="M12 2 4 5.5V11c0 5.25 3.45 10.2 8 11 4.55-.8 8-5.75 8-11V5.5L12 2Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="m9 12 2 2 4-4"
+        d="m8 12.2 2.5 2.5 5.4-5.4"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
@@ -129,21 +132,20 @@ function IconHeadset(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" {...props}>
       <path
-        d="M4 14v-2a8 8 0 0 1 16 0v2"
+        d="M4.5 13V11.5a7.5 7.5 0 0 1 15 0V13"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="1.7"
         strokeLinecap="round"
       />
+      <rect x="3.1" y="12.2" width="3.6" height="5.4" rx="1.4" fill="currentColor" />
+      <rect x="17.3" y="12.2" width="3.6" height="5.4" rx="1.4" fill="currentColor" />
+      <circle cx="12" cy="13.4" r="2.15" fill="currentColor" />
       <path
-        d="M4 14a2 2 0 0 0 2 2h1v-4H5a1 1 0 0 0-1 1Zm16 0a2 2 0 0 1-2 2h-1v-4h1a1 1 0 0 1 1 1Z"
-        fill="currentColor"
-      />
-      <path
-        d="M8 21h8"
+        d="M7.6 20.6c.7-2.3 2.4-3.5 4.4-3.5s3.7 1.2 4.4 3.5"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="1.7"
         strokeLinecap="round"
       />
     </svg>
@@ -174,24 +176,19 @@ function IconLinkedIn(props: React.SVGProps<SVGSVGElement>) {
 
 function IconInstagram(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" {...props}>
+      <defs>
+        <radialGradient id="footerIgGrad" cx="30%" cy="107%" r="150%">
+          <stop offset="0%" stopColor="#fdf497" />
+          <stop offset="5%" stopColor="#fdf497" />
+          <stop offset="45%" stopColor="#fd5949" />
+          <stop offset="60%" stopColor="#d6249f" />
+          <stop offset="90%" stopColor="#285aeb" />
+        </radialGradient>
+      </defs>
       <path
         d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2Zm0 2A1.8 1.8 0 1 0 13.8 12 1.8 1.8 0 0 0 12 10.2ZM17.8 6.6a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function IconX(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
-      <path
-        d="M4 4l16 16M20 4 4 20"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
+        fill="url(#footerIgGrad)"
       />
     </svg>
   );
@@ -212,6 +209,17 @@ function IconArrowUp(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function IconWhatsApp(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
+      <path
+        fill="currentColor"
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+      />
+    </svg>
+  );
+}
+
 const Footer = () => {
   const year = new Date().getFullYear();
 
@@ -221,8 +229,6 @@ const Footer = () => {
 
   return (
     <footer className={`${styles.footer} ${inter.className}`} aria-label="Footer">
-      <div className={styles.skyline} aria-hidden="true" />
-
       <div className={styles.container}>
         <div className={styles.topGrid}>
           <div className={styles.brandCol}>
@@ -239,7 +245,9 @@ const Footer = () => {
             <p className={styles.brandText}>
               Your trusted partner for certification, compliance and regulatory approvals.
             </p>
-            <p className={styles.brandTagline}>We help you achieve compliance with confidence.</p>
+            <p className={styles.brandTagline}>
+              <span>We help you achieve</span> compliance with confidence.
+            </p>
 
             <div className={styles.socialRow} aria-label="Social links">
               {SOCIAL_LINKS.map(({ label, href, Icon, socialClass }) => (
@@ -257,7 +265,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className={styles.linksCol}>
+          <nav className={styles.linksCol} aria-label="Quick links">
             <div className={styles.colTitle}>Quick Links</div>
             <ul className={styles.linkList}>
               {QUICK_LINKS.map(({ label, href }) => (
@@ -271,25 +279,25 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div className={styles.linksCol}>
+          <nav className={styles.linksCol} aria-label="Our services">
             <div className={styles.colTitle}>Our Services</div>
             <ul className={styles.linkList}>
               {SERVICE_LINKS.map(({ label, href }) => (
                 <li key={label}>
                   <Link className={styles.link} href={href}>
                     <span className={styles.linkIcon} aria-hidden="true">
-                      <IconShield />
+                      <IconCheckCircle />
                     </span>
                     {label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div className={styles.linksCol}>
+          <nav className={styles.linksCol} aria-label="Government links">
             <div className={styles.colTitle}>Government Links</div>
             <ul className={styles.linkList}>
               {GOVERNMENT_LINKS.map(({ label, href }) => (
@@ -308,7 +316,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           <div className={styles.contactCol}>
             <div className={styles.colTitle}>Contact Us</div>
@@ -328,12 +336,12 @@ const Footer = () => {
                   <IconPhone />
                 </span>
                 <div className={styles.contactValue}>
-                  <a className={styles.contactLink} href="tel:+919266877738">
-                    +91 9266877738
+                  <a className={styles.contactLink} href={TEL_PRIMARY}>
+                    {PHONE_PRIMARY}
                   </a>
-                  ,{" "}
-                  <a className={styles.contactLink} href="tel:+918880013897">
-                    +91 8800013897
+                  <span className={styles.contactSep}>, </span>
+                  <a className={styles.contactLink} href={TEL_SECONDARY}>
+                    {PHONE_SECONDARY}
                   </a>
                 </div>
               </div>
@@ -342,11 +350,10 @@ const Footer = () => {
                 <span className={styles.contactIcon} aria-hidden="true">
                   <IconMail />
                 </span>
-                <div className={styles.contactValue}>
+                <div className={`${styles.contactValue} ${styles.contactEmails}`}>
                   <a className={styles.contactLink} href={`mailto:${SITE_EMAIL}`}>
                     {SITE_EMAIL}
                   </a>
-                  <br />
                   <a className={styles.contactLink} href={`mailto:${SITE_EMAIL_MARKETING}`}>
                     {SITE_EMAIL_MARKETING}
                   </a>

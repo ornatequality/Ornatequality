@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 import TopBar from "@/components/common/Topbar";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
+import RouteScrollReset from "@/components/common/RouteScrollReset";
 import { JsonLdScripts } from "@/components/seo/JsonLdScripts";
 import { inter, manrope, playfair } from "@/lib/fonts";
 import {
@@ -158,7 +160,11 @@ export default function RootLayout({
         <GoogleTagManagerHead />
       </head>
       <body className="site-body min-h-screen flex flex-col" suppressHydrationWarning>
+        <Script id="scroll-restoration" strategy="beforeInteractive">
+          {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";if(!location.hash){window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0;}}catch(e){}})();`}
+        </Script>
         <GoogleTagManagerBody />
+        <RouteScrollReset />
         <TopBar />
         <Header />
         <main className="site-main flex-1 w-full bg-white">{children}</main>

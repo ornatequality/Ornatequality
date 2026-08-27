@@ -8,6 +8,7 @@ import { pushGenerateLeadEvent } from "@/lib/analytics";
 import styles from "@/styles/consultationPopup.module.css";
 import logo from "@/assests/logo.webp";
 import buildingImg from "@/assests/popup-building.webp";
+import trustSealImg from "@/assests/popup-trust-seal.webp";
 import bisIcon from "@/assests/certi-img/BIS.webp";
 import isiIcon from "@/assests/certi-img/isi.webp";
 import wpcIcon from "@/assests/certi-img/wpc.webp";
@@ -40,49 +41,89 @@ const CERT_BADGES = [
 
 const FEATURES = [
   {
-    title: "15+ Years Expertise",
-    description: "Deep knowledge of Indian & international standards.",
+    title: "Expert Guidance",
+    description: "Get advice from industry experts",
     icon: (
-      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
+        <circle cx="10.2" cy="7.6" r="3.1" stroke="currentColor" strokeWidth="1.7" />
+        <path
+          d="M4.2 19.8c.9-3.6 3.3-5.5 6-5.5 1.2 0 2.3.4 3.3 1.1"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+        />
         <path
           fill="currentColor"
-          d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-6Zm0 4.2L10.5 9H8.3l1.8 1.3-.7 2.2L12 11.2l2.6 1.3-.7-2.2L16.7 9h-2.2L12 6.2Z"
+          d="M17.9 3.2 18.7 5l1.9.28-1.38 1.34.33 1.9-1.65-.88-1.65.88.33-1.9L15.2 5.28 17.1 5z"
         />
       </svg>
     ),
   },
   {
     title: "End-to-End Support",
-    description: "From documents to approvals, we handle everything.",
+    description: "From documentation to final approval",
     icon: (
-      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
         <path
-          fill="currentColor"
-          d="M7 3h10a2 2 0 0 1 2 2v14l-7-3-7 3V5a2 2 0 0 1 2-2Zm1 6h8v2H8V9Zm0 4h5v2H8v-2Z"
+          d="M6.5 3.4h8.2L19 7.8v12.8H6.5z"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="round"
+        />
+        <path d="M14.7 3.4v4.4H19" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+        <path d="M9.4 11.4h5.4M9.4 14.4h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+        <circle cx="17.2" cy="17.6" r="3.3" fill="#fff9f2" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="17.2" cy="16.6" r="1.05" fill="currentColor" />
+        <path
+          d="M15.15 20.2c.35-1.05 1.05-1.55 2.05-1.55s1.7.5 2.05 1.55"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
         />
       </svg>
     ),
   },
   {
     title: "Faster Approvals",
-    description: "Streamlined process for quick and hassle-free certifications.",
+    description: "Quick & hassle-free certification process",
     icon: (
-      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="7.5" stroke="currentColor" strokeWidth="1.7" />
         <path
-          fill="currentColor"
-          d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 5v5.2l4.2 2.5-.9 1.5L11 13V7h2Z"
+          d="M11 7.2v4.1l2.8 1.6"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle cx="17.1" cy="17.1" r="3.7" fill="#fff9f2" stroke="currentColor" strokeWidth="1.5" />
+        <path
+          d="M15.5 17.2 16.7 18.4 19 15.9"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     ),
   },
   {
-    title: "Trusted by Businesses",
-    description: "Committed to quality, driven by trust and transparency.",
+    title: "Trusted Partner",
+    description: "5000+ businesses trust Ornate",
     icon: (
-      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
         <path
-          fill="currentColor"
-          d="M12 2 4 5.5V11c0 5.25 3.45 10.2 8 11 4.55-.8 8-5.75 8-11V5.5L12 2Zm-1 13.1-3.2-3.2 1.4-1.4L11 12.3l4.8-4.8 1.4 1.4L11 15.1Z"
+          d="M12 3.2 5.2 6.1v6.1c0 4.5 3.1 8.4 6.8 9.3 3.7-.9 6.8-4.8 6.8-9.3V6.1L12 3.2Z"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M8.6 12.2 11 14.6l4.6-4.8"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     ),
@@ -311,11 +352,17 @@ export default function ConsultationPopup() {
                   <Image src={logo} alt="Ornate Quality Services" priority className={styles.logo} />
                 </div>
 
-                <span className={styles.badge}>
-                  <span className={styles.badgeIcon} aria-hidden="true">
-                    🎁
+                <span className={styles.consultLabel}>
+                  — EXPERT
+                  <span className={styles.consultShield} aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="14" height="14">
+                      <path
+                        fill="currentColor"
+                        d="M12 2 4 5.5V11c0 5.25 3.45 10.2 8 11 4.55-.8 8-5.75 8-11V5.5L12 2Z"
+                      />
+                    </svg>
                   </span>
-                  EXPERT CONSULTATION
+                  CONSULTATION —
                 </span>
 
                 <h2 className={`${styles.headline} ${playfair.className}`}>
@@ -344,19 +391,51 @@ export default function ConsultationPopup() {
                   className={styles.buildingImg}
                   priority
                 />
+                <div className={styles.trustSeal} aria-hidden="true">
+                  <Image
+                    src={trustSealImg}
+                    alt=""
+                    width={96}
+                    height={96}
+                    className={styles.trustSealImg}
+                  />
+                </div>
               </div>
             </div>
 
-            <div className={styles.leftBottom}>
-              <div className={styles.curveDivider} aria-hidden="true" />
-              <div className={styles.featuresBar}>
-                {FEATURES.map(({ title, description, icon }) => (
-                  <div key={title} className={styles.featureItem}>
-                    <span className={styles.featureIcon}>{icon}</span>
-                    <span className={styles.featureTitle}>{title}</span>
-                    <span className={styles.featureDesc}>{description}</span>
-                  </div>
-                ))}
+            <div className={styles.featuresRow}>
+              {FEATURES.map(({ title, description, icon }) => (
+                <div key={title} className={styles.featureItem}>
+                  <span className={styles.featureIcon}>{icon}</span>
+                  <span className={styles.featureTitle}>{title}</span>
+                  <span className={styles.featureDesc}>{description}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.partnerBand}>
+              <span className={styles.partnerEmblem} aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22">
+                  <path
+                    fill="currentColor"
+                    d="M12 2 4 5.5V11c0 5.25 3.45 10.2 8 11 4.55-.8 8-5.75 8-11V5.5L12 2Zm-1 13.1-3.2-3.2 1.4-1.4L11 12.3l4.8-4.8 1.4 1.4L11 15.1Z"
+                  />
+                </svg>
+              </span>
+              <div className={styles.partnerBandCopy}>
+                <span className={`${styles.partnerBandTitle} ${playfair.className}`}>
+                  Your Reliable Compliance Partner
+                </span>
+                <span className={styles.partnerBandLines}>
+                  Committed to Quality. Focused on Compliance. Driven by Trust.
+                </span>
+              </div>
+              <span className={styles.partnerBandSep} aria-hidden="true" />
+              <div className={styles.partnerBandStat}>
+                <span className={`${styles.partnerBandTitle} ${playfair.className}`}>
+                  Trusted by 5000+
+                </span>
+                <span className={styles.partnerBandLines}>Businesses Across India</span>
               </div>
             </div>
           </div>
@@ -365,18 +444,15 @@ export default function ConsultationPopup() {
             <div className={styles.formCard}>
               <div className={styles.formHeader}>
                 <span className={styles.formHeaderIcon} aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="20" height="20">
+                  <svg viewBox="0 0 24 24" width="22" height="22">
                     <path
                       fill="currentColor"
-                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm0 2.5L18.5 9H14V4.5ZM8 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm8 6H8v-.5a3.5 3.5 0 0 1 7 0V19Z"
+                      d="M8 11a3.5 3.5 0 1 0-3.5-3.5A3.5 3.5 0 0 0 8 11Zm8 0a3.5 3.5 0 1 0-3.5-3.5A3.5 3.5 0 0 0 16 11ZM8 13c-3.2 0-6 1.5-6 3.4V18h8.2A6.4 6.4 0 0 1 9 13.2 8.7 8.7 0 0 1 8 13Zm8 0a8.7 8.7 0 0 1-1 .2 6.4 6.4 0 0 1-1.2 4.8H22v-1.6C22 14.5 19.2 13 16 13Z"
                     />
                   </svg>
                 </span>
                 <h3 id="consultation-popup-title" className={`${styles.formTitle} ${playfair.className}`}>
-                  <span className={styles.formTitleLine}>Book an</span>
-                  <span className={`${styles.formTitleLine} ${styles.formTitleGold}`}>
-                    Expert Consultation
-                  </span>
+                  Book an Expert Consultation
                 </h3>
                 <span className={styles.titleDivider} aria-hidden="true" />
                 <p className={styles.formSubtitle}>
@@ -497,38 +573,11 @@ export default function ConsultationPopup() {
         </div>
 
         <div className={styles.modalFooter}>
-          <div className={styles.partnerStrip}>
-            <span className={styles.partnerShieldTop} aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="14" height="14">
-                <path
-                  fill="currentColor"
-                  d="M12 2 4 5.5V11c0 5.25 3.45 10.2 8 11 4.55-.8 8-5.75 8-11V5.5L12 2Zm-1 13.1-3.2-3.2 1.4-1.4L11 12.3l4.8-4.8 1.4 1.4L11 15.1Z"
-                />
-              </svg>
-            </span>
-            <div className={styles.partnerRow}>
-              <span className={styles.laurel} aria-hidden="true">
-                ☙
-              </span>
-              <div className={styles.partnerCopy}>
-                <span className={`${styles.partnerText} ${playfair.className}`}>
-                  Your Reliable Compliance Partner
-                </span>
-                <span className={styles.partnerTagline}>
-                  Committed to Quality. Focused on Compliance. Driven by Trust.
-                </span>
-              </div>
-              <span className={`${styles.laurel} ${styles.laurelRight}`} aria-hidden="true">
-                ☙
-              </span>
-            </div>
-          </div>
-
           <div className={styles.certRow} aria-label="Certifications we support">
             {CERT_BADGES.map(({ label, src }) => (
               <div key={label} className={styles.certBadge}>
                 <div className={styles.certIcon}>
-                  <Image src={src} alt="" fill sizes="28px" />
+                  <Image src={src} alt="" fill sizes="32px" />
                 </div>
                 <span>{label}</span>
               </div>

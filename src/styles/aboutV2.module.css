@@ -17,7 +17,7 @@
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-  background: #031e5e;
+  background: #0b2532;
 }
 
 .aboutHeroMedia {
@@ -29,7 +29,6 @@
 .aboutHeroImg {
   object-fit: cover;
   object-position: 68% center;
-  filter: saturate(1.02) contrast(1.03);
 }
 
 .aboutHero::before {
@@ -38,25 +37,18 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(3, 30, 94, 0.9) 0%,
-    rgba(3, 30, 94, 0.78) 28%,
-    rgba(3, 30, 94, 0.45) 52%,
-    rgba(3, 30, 94, 0.15) 72%,
-    rgba(3, 30, 94, 0.02) 100%
+    rgba(11, 37, 50, 0.88) 0%,
+    rgba(11, 37, 50, 0.72) 32%,
+    rgba(11, 37, 50, 0.28) 55%,
+    rgba(11, 37, 50, 0.08) 78%,
+    transparent 100%
   );
   pointer-events: none;
   z-index: 1;
 }
 
-/* subtle edge depth — keep image visible on the left */
 .aboutHero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background: radial-gradient(720px 340px at 82% 50%, rgba(0, 0, 0, 0.14), transparent 65%);
-  opacity: 0.75;
+  content: none;
 }
 
 .aboutHeroInner {
@@ -1435,9 +1427,9 @@
   .aboutHero::before {
     background: linear-gradient(
       180deg,
-      rgba(3, 30, 94, 0.92) 0%,
-      rgba(3, 30, 94, 0.72) 45%,
-      rgba(3, 30, 94, 0.35) 100%
+      rgba(11, 37, 50, 0.88) 0%,
+      rgba(11, 37, 50, 0.62) 42%,
+      rgba(11, 37, 50, 0.22) 100%
     );
   }
 }
