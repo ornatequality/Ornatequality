@@ -38,10 +38,10 @@ const GOVERNMENT_LINKS = [
 const WHATSAPP_HREF = "https://wa.me/919266877738";
 
 const SOCIAL_LINKS = [
-  { label: "LinkedIn", href: SITE_SOCIAL[1], Icon: IconLinkedIn, socialClass: styles.socialLinkedIn },
   { label: "Facebook", href: SITE_SOCIAL[0], Icon: IconFacebook, socialClass: styles.socialFacebook },
   { label: "Instagram", href: SITE_SOCIAL[2], Icon: IconInstagram, socialClass: styles.socialInstagram },
   { label: "WhatsApp", href: WHATSAPP_HREF, Icon: IconWhatsApp, socialClass: styles.socialWhatsApp },
+  { label: "LinkedIn", href: SITE_SOCIAL[1], Icon: IconLinkedIn, socialClass: styles.socialLinkedIn },
 ] as const;
 
 const PHONE_PRIMARY = DEFAULT_PHONE.replace("-", " ");
@@ -156,8 +156,8 @@ function IconFacebook(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
       <path
-        d="M13.5 22v-8h2.7l.4-3H13.5V9.1c0-.9.2-1.5 1.6-1.5h1.6V5c-.3 0-1.5-.1-2.8-.1-2.8 0-4.7 1.7-4.7 4.8V11H7v3h2.6v8h3.9Z"
         fill="currentColor"
+        d="M14.6 22v-8.1h2.72l.41-3.17H14.6V8.72c0-.87.24-1.46 1.49-1.46h1.58V4.42A21.2 21.2 0 0 0 15.1 4.2c-2.62 0-4.41 1.6-4.41 4.54v1.99H8.1v3.17h2.59V22h3.91Z"
       />
     </svg>
   );
@@ -167,8 +167,8 @@ function IconLinkedIn(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
       <path
-        d="M6.5 6.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4ZM4.6 21.5h3.8V9H4.6v12.5ZM9.9 9h3.6v1.7h.1c.5-1 1.9-2 4-2 4.3 0 5.1 2.8 5.1 6.5v6.3h-3.8v-5.6c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9v5.7H9.9V9Z"
         fill="currentColor"
+        d="M8.2 9.15H5.15V21H8.2V9.15ZM6.67 4.2a1.78 1.78 0 1 0 0 3.56 1.78 1.78 0 0 0 0-3.56ZM18.85 21h-3.04v-6.9c0-1.64-.59-2.76-2.06-2.76-1.12 0-1.79.76-2.08 1.49-.11.26-.14.62-.14.98V21H8.5s.04-10.6 0-11.7h3.04v1.65c.4-.63 1.13-1.53 2.75-1.53 2.01 0 3.52 1.31 3.52 4.13V21Z"
       />
     </svg>
   );
@@ -176,20 +176,10 @@ function IconLinkedIn(props: React.SVGProps<SVGSVGElement>) {
 
 function IconInstagram(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" {...props}>
-      <defs>
-        <radialGradient id="footerIgGrad" cx="30%" cy="107%" r="150%">
-          <stop offset="0%" stopColor="#fdf497" />
-          <stop offset="5%" stopColor="#fdf497" />
-          <stop offset="45%" stopColor="#fd5949" />
-          <stop offset="60%" stopColor="#d6249f" />
-          <stop offset="90%" stopColor="#285aeb" />
-        </radialGradient>
-      </defs>
-      <path
-        d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2Zm0 2A1.8 1.8 0 1 0 13.8 12 1.8 1.8 0 0 0 12 10.2ZM17.8 6.6a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"
-        fill="url(#footerIgGrad)"
-      />
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true" {...props}>
+      <rect x="3.4" y="3.4" width="17.2" height="17.2" rx="5" stroke="currentColor" strokeWidth="1.9" />
+      <circle cx="12" cy="12" r="4.15" stroke="currentColor" strokeWidth="1.9" />
+      <circle cx="17.15" cy="6.85" r="1.15" fill="currentColor" />
     </svg>
   );
 }
@@ -211,10 +201,16 @@ function IconArrowUp(props: React.SVGProps<SVGSVGElement>) {
 
 function IconWhatsApp(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12.02 3.55a8.35 8.35 0 0 0-7.15 12.58l-.82 3.02 3.1-.81A8.35 8.35 0 1 0 12.02 3.55Z"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinejoin="round"
+      />
       <path
         fill="currentColor"
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+        d="M16.62 14.42c-.24-.12-1.4-.69-1.62-.77-.22-.08-.37-.12-.53.12-.16.24-.61.77-.75.93-.14.16-.27.18-.51.06-.24-.12-1-.37-1.9-1.18-.7-.63-1.18-1.4-1.32-1.64-.14-.24-.02-.37.1-.49.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.53-1.28-.73-1.75-.19-.47-.37-.4-.53-.41h-.45c-.16 0-.41.06-.63.3-.22.24-.83.8-.83 1.96s.85 2.28.97 2.44c.12.16 1.67 2.55 4.04 3.58.57.25 1.01.39 1.36.5.57.18 1.09.15 1.5.09.46-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"
       />
     </svg>
   );

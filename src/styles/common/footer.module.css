@@ -131,17 +131,16 @@
   display: grid;
   place-items: center;
   border: none;
-  border-radius: 4px;
-  background: transparent;
+  border-radius: 50%;
   color: #fff;
   text-decoration: none;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   transition: transform 180ms ease, filter 180ms ease;
 }
 
 .socialBtn:hover {
   transform: translateY(-2px);
-  filter: brightness(1.12);
+  filter: brightness(1.08);
 }
 
 .socialBtn:focus-visible {
@@ -150,24 +149,24 @@
 }
 
 .socialBtn svg {
-  width: 28px;
-  height: 28px;
-}
-
-.socialLinkedIn {
-  color: #0a66c2;
+  width: 18px;
+  height: 18px;
 }
 
 .socialFacebook {
-  color: #1877f2;
+  background: #1877f2;
 }
 
 .socialInstagram {
-  color: #e4405f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
 }
 
 .socialWhatsApp {
-  color: #25d366;
+  background: #25d366;
+}
+
+.socialLinkedIn {
+  background: #0a66c2;
 }
 
 .linkList {
@@ -514,8 +513,8 @@
   }
 
   .socialBtn svg {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
   }
 
   .link {

@@ -14,7 +14,7 @@ function Stars() {
       ★★★★★
     </div>
   );
-}
+} 
 
 export default function ClientTestimonials({
   headingId,

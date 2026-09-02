@@ -1,156 +1,121 @@
-/* FAQ — aligned with home Hero (navy, gold, gray) */
+/* Home FAQ — accordion cards matching service-page FAQ UI */
 .section {
-  --hero-navy: #001b3d;
-  --hero-gold: #ff9c08;
-  --hero-gray: #555555;
+  --faq-navy: #0a1f44;
+  --faq-red: #e83b47;
+  --faq-gray: #64748b;
+  --faq-border: #e2e8f0;
+  --faq-open-bg: #eef2f6;
 
   background-color: #f7f8fa;
   padding: clamp(40px, 5vw, 56px) 0 clamp(44px, 5vw, 60px);
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 .headingWrap {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
   margin-bottom: 22px;
 }
 
 .heading {
   margin: 0;
-  font-size: clamp(26px, 2vw + 18px, 32px);
+  display: inline-block;
+  font-size: clamp(22px, 1.6vw + 16px, 28px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: var(--hero-navy);
-  text-align: center;
+  line-height: 1.25;
+  color: var(--faq-navy);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--faq-red);
 }
 
-.accent {
-  color: var(--hero-gold);
-}
-
-.underline {
-  width: 86px;
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255, 156, 8, 0.95), rgba(255, 156, 8, 0.15));
-}
-
-.card {
-  background: transparent;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  overflow: visible;
-  min-height: 0;
-}
-
-.columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: stretch;
-}
-
-.column {
-  min-width: 0;
+.list {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border-radius: 14px;
-  border: 1px solid rgba(0, 27, 61, 0.08);
-  box-shadow: 0 14px 40px rgba(2, 24, 64, 0.07);
-  overflow: hidden;
+  gap: 12px;
 }
 
 .item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.item + .item {
-  border-top: 1px solid rgba(0, 27, 61, 0.08);
+  background: #fff;
+  border: 1px solid var(--faq-border);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .qRow {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 42px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  padding: 16px 18px;
-  min-height: 58px;
-  background: #ffffff;
+  padding: 14px 18px;
+  background: #fff;
   border: 0;
   cursor: pointer;
   text-align: left;
+  font-family: inherit;
 }
 
 .qRow:hover {
-  background: rgba(255, 156, 8, 0.05);
+  background: #f8fafc;
+}
+
+.qRowOpen {
+  background: var(--faq-open-bg);
+}
+
+.qRowOpen:hover {
+  background: var(--faq-open-bg);
 }
 
 .qRow:focus-visible {
-  outline: 2px solid rgba(255, 156, 8, 0.45);
+  outline: 2px solid rgba(232, 59, 71, 0.35);
   outline-offset: -2px;
 }
 
 .qText {
   font-size: 15px;
   font-weight: 700;
-  color: var(--hero-navy);
+  color: var(--faq-navy);
   line-height: 1.4;
 }
 
 .icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--hero-navy);
-  background: rgba(255, 156, 8, 0.1);
-  border: 1px solid rgba(255, 156, 8, 0.28);
+  flex-shrink: 0;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid var(--faq-navy);
+  transition: transform 200ms ease;
+}
+
+.iconOpen {
+  transform: rotate(180deg);
 }
 
 .panel {
   max-height: 0;
   overflow: hidden;
+  background: #fff;
   transition: max-height 240ms ease;
 }
 
 .panelOpen {
-  max-height: 240px;
+  max-height: 280px;
+  border-top: 1px solid var(--faq-border);
 }
 
-.panel .answer {
+.answer {
   margin: 0;
-  padding: 0 18px 16px;
+  padding: 14px 18px 16px;
   font-size: 14px;
-  line-height: 1.65;
-  font-weight: 500;
-  color: var(--hero-gray);
-}
-
-@media (max-width: 900px) {
-  .columns {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .card {
-    min-height: 0;
-  }
+  line-height: 1.7;
+  font-weight: 400;
+  color: var(--faq-gray);
 }
 
 @media (max-width: 640px) {
@@ -163,21 +128,19 @@
   }
 
   .heading {
-    font-size: clamp(1.3rem, 6vw, 1.65rem);
+    font-size: clamp(1.25rem, 5.5vw, 1.5rem);
   }
 
   .qRow {
-    padding: 14px 14px;
-    min-height: 52px;
-    grid-template-columns: 1fr 38px;
+    padding: 13px 14px;
   }
 
   .qText {
     font-size: 14px;
   }
 
-  .panel .answer {
-    padding: 0 14px 14px;
+  .answer {
+    padding: 12px 14px 14px;
     font-size: 13.5px;
   }
 }

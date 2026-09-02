@@ -698,28 +698,6 @@ export function EprPageContent() {
                 </a>
               </div>
             </section>
-
-            <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Internal Link Suggestions</h2>
-              {INTERNAL_LINK_GROUPS.map((group) => (
-                <div key={group.title} className={styles.internalLinkGroup}>
-                  <h3 className={styles.internalLinkGroupTitle}>{group.title}</h3>
-                  <ul className={styles.internalLinkList}>
-                    {group.items.map((item) => (
-                      <li key={item.label}>
-                        <Link href={item.href}>{item.label}</Link>
-                        {item.description ? (
-                          <>
-                            {" "}
-                            <span className={styles.internalLinkDesc}>— {item.description}</span>
-                          </>
-                        ) : null}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
           </article>
 
           <aside className={styles.sidebar} aria-label="Sidebar">

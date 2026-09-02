@@ -28,7 +28,7 @@ export type HomeFaqItem = {
   a: string;
 };
 
-/** Shared by FAQ UI and FAQPage JSON-LD — edit here only (10 items: 5 left + 5 right) */
+/** Shared by FAQ UI and FAQPage JSON-LD — edit here only */
 export const HOME_FAQS: HomeFaqItem[] = [
   {
     q: "What does Ornate Quality Services do?",
