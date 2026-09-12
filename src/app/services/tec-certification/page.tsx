@@ -3,9 +3,9 @@ import { TecBanner } from "./sections/TecBanner";
 import { TecPageContent } from "./sections/TecPageContent";
 
 export const metadata: Metadata = {
-  title: "TEC Certification | Ornate Quality Services",
+  title: "TEC Approval Services in India | Ornate Quality Service Pvt Ltd",
   description:
-    "Complete TEC Certification support in India for telecom equipment. MTCTE portal filing, empanelled lab testing, and Interface Approval by Ornate Quality Services.",
+    "Ornate Quality Service Pvt Ltd helps manufacturers, importers, brand owners, and system integrators secure TEC approval and MTCTE certification for telecom equipment sold, imported, or deployed in India.",
 };
 
 export default function TecCertificationPage() {

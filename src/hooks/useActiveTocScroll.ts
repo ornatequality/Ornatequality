@@ -11,7 +11,7 @@ export function useActiveTocScroll(activeId: string) {
     const activeLink = list.querySelector<HTMLButtonElement>(`[data-toc-id="${activeId}"]`);
     if (!activeLink) return;
 
-    activeLink.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    activeLink.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
   }, [activeId]);
 
   return tocListRef;

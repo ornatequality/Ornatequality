@@ -46,6 +46,7 @@ export const SERVICE_ROUTES = {
   pesoCcoe: "/services/peso-ccoe-registration",
   nabl: "/services/nabl-accreditation",
   tpi: "/services/third-party-inspection",
+  cli: "/services/container-loading-inspection",
   rohs: "/services/rohs-certification",
   audit: "/services/audit-services",
 } as const;
@@ -179,7 +180,7 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
       },
       {
         label: "CONTAINER LOADING INSPECTION (CLI)",
-        slug: TPI_SERVICES,
+        slug: SERVICE_ROUTES.cli,
         icon: { type: "glyph", glyph: "CLI", tone: "navy" },
       },
       {

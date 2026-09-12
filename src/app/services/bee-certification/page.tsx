@@ -3,9 +3,9 @@ import { BeeBanner } from "./sections/BeeBanner";
 import { BeePageContent } from "./sections/BeePageContent";
 
 export const metadata: Metadata = {
-  title: "BEE Certification | Ornate Quality Services",
+  title: "BEE Star Rating Registration Consultant in India | Ornate Quality Services",
   description:
-    "Complete BEE Certification and star label registration support in India. Product testing, documentation, BEE portal filing, and renewal assistance by Ornate Quality Services.",
+    "BEE star rating registration for electrical and electronic appliances in India. Documentation, lab coordination, and portal filing for manufacturers, importers, exporters, and brand owners by Ornate Quality Service Pvt Ltd.",
 };
 
 export default function BeeCertificationPage() {

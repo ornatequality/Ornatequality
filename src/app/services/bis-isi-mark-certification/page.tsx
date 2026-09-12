@@ -3,9 +3,9 @@ import { BisIsiBanner } from "./sections/BisIsiBanner";
 import { BisIsiPageContent } from "./sections/BisIsiPageContent";
 
 export const metadata: Metadata = {
-  title: "BIS ISI Mark Certification | Ornate Quality Services",
+  title: "BIS-ISI Mark Certification for Domestic Manufacturers | Ornate Quality Services",
   description:
-    "Complete guide to ISI Certification in India — process, requirements, documents, and benefits. End-to-end ISI Mark certification support by Ornate Quality Services.",
+    "Government-approved ISI Mark Certification (Scheme-I) for domestic manufacturers. End-to-end documentation, factory audit preparation, and CM/L licence support by Ornate Quality Service Pvt. Ltd.",
 };
 
 export default function BisIsiMarkCertificationPage() {

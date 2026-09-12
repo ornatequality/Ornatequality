@@ -3,9 +3,9 @@ import { BisFmcsBanner } from "./sections/BisFmcsBanner";
 import { BisFmcsPageContent } from "./sections/BisFmcsPageContent";
 
 export const metadata: Metadata = {
-  title: "BIS FMCS Certification | Ornate Quality Services",
+  title: "FMCS Certification for Foreign Manufacturers | Ornate Quality Services",
   description:
-    "Complete BIS FMCS certification guide for foreign manufacturers. End-to-end FMCS application, AIR services, factory inspection support, and licence renewal by Ornate Quality Services.",
+    "BIS FMCS certification for foreign manufacturers exporting to India. End-to-end support for AIR appointment, factory audit, documentation, CM/L licence and renewal by Ornate Quality Services.",
 };
 
 

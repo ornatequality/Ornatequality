@@ -16,17 +16,132 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   BIS_FMCS_TOC,
-  WHY_FMCS_MATTERS,
-  PRODUCT_CATEGORIES,
-  PROCESS_STEPS,
-  FACILITY_REQUIREMENTS,
-  BUSINESS_REQUIREMENTS,
-  DOCUMENTS_REQUIRED,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  INTRO_PARAGRAPHS,
+  WHAT_IS_PARAGRAPHS,
+  WHAT_IS_DIFFERENCES,
+  WHAT_IS_CLOSING,
+  WHY_MATTERS_PARAGRAPHS,
+  WHO_NEEDS_INTRO,
+  WHO_NEEDS_ITEMS,
+  WHO_NEEDS_CLOSING,
   BENEFITS_ITEMS,
-  PENALTY_ROWS,
+  SERVICE_INCLUDES,
+  ELIGIBILITY_INTRO,
+  ELIGIBILITY_CRITERIA,
+  ELIGIBILITY_CLOSING,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_CLOSING,
+  PROCESS_INTRO,
+  PROCESS_STEPS,
+  PROCESS_CLOSING,
+  TIMELINE_PARAGRAPH,
+  COST_INTRO,
+  COST_FACTORS,
+  COST_CLOSING_PARAGRAPHS,
+  VALIDITY_PARAGRAPH,
+  RENEWAL_PARAGRAPH,
+  CHALLENGES_ITEMS,
+  HOW_WE_HELP_INTRO,
+  HOW_WE_HELP_ITEMS,
+  HOW_WE_HELP_CLOSING,
+  WHY_CHOOSE_INTRO,
+  WHY_CHOOSE_ITEMS,
+  INDUSTRIES_INTRO,
+  INDUSTRIES_TABLE_NOTE,
+  INDUSTRIES_CONSTRUCTION_INTRO,
+  INDUSTRIES_ELECTRICAL_INTRO,
+  INDUSTRIES_AUTOMOTIVE_INTRO,
+  INDUSTRIES_METALS_INTRO,
+  INDUSTRIES_CHEMICALS_INTRO,
+  INDUSTRIES_CHEMICALS_NOTE,
+  INDUSTRIES_TOYS_INTRO,
+  INDUSTRIES_FURNITURE_INTRO,
+  INDUSTRIES_FURNITURE_NOTE,
+  INDUSTRIES_FOOTWEAR_INTRO,
+  INDUSTRIES_FOOTWEAR_NOTE,
+  INDUSTRIES_MEDICAL_NOTE,
+  INDUSTRIES_CLOSING,
+  MISTAKES_ITEMS,
+  EXPERT_TIPS,
+  SCHEME_COMPARISON_INTRO,
+  SCHEME_COMPARISON_ROWS,
+  SCHEME_COMPARISON_NOTE,
   FAQ_ITEMS,
+  GET_STARTED_INTRO,
+  GET_STARTED_CTA_LINE,
+  GET_STARTED_CLOSING,
+  type TableRow,
 } from "../data/bisFmcsContent";
+import {
+  CONSTRUCTION_PRODUCTS,
+  ELECTRICAL_PRODUCTS,
+  AUTOMOTIVE_PRODUCTS,
+  METALS_STEEL_PRODUCTS,
+  CHEMICAL_PRODUCTS,
+  TOY_PRODUCTS,
+  FURNITURE_PRODUCTS,
+  FOOTWEAR_PRODUCTS,
+} from "../data/bisFmcsProductTables";
 
+const FMCS_PAGE_PATH = "/services/bis-fmcs-certification";
+
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+type DataTableProps = {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+};
+
+function DataTable({ columns, rows, getRowKey }: DataTableProps) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+const PRODUCT_TABLE_COLUMNS: DataTableColumn[] = [
+  { key: "product", header: "Product Name", scope: "row" },
+  { key: "isNumber", header: "Applicable IS Number" },
+  { key: "mandatory", header: "Mandatory (Y/N)" },
+  { key: "dedicatedPage", header: "Dedicated Product Page" },
+];
 
 function CallbackForm() {
   return (
@@ -44,7 +159,6 @@ function CallbackForm() {
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -138,157 +252,134 @@ export function BisFmcsPageContent() {
           </nav>
 
           <article className={styles.main}>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>{BANNER_SUBTITLE}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+                <Link href="/contact" className={styles.ctaBtnPrimary}>
+                  Talk to our FMCS Certification team →
+                </Link>
+                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
+                  📞 Expert Consultation
+                </a>
+              </div>
+            </div>
+
             <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                BIS FMCS Certification for Foreign Manufacturers — Complete Guide to Selling
-                Your Products in India
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    If you are a manufacturer based outside India and you want to sell your
-                    products in the Indian market, BIS FMCS Certification is the route you need.
-                    India is one of the fastest-growing consumer markets in the world — but it
-                    also has some of the most structured product compliance requirements. Without
-                    the right BIS licence, your products simply cannot enter legally.
-                  </p>
-                  <p className={styles.sectionText}>
-                    The Bureau of Indian Standards Foreign Manufacturers Certification Scheme —
-                    commonly known as BIS FMCS — was designed specifically for international
-                    manufacturers who want to certify their products against Indian Standards and
-                    gain access to Indian buyers, distributors, and e-commerce platforms.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we have been helping foreign manufacturers navigate
-                    the BIS FMCS process since 2013. We understand exactly what BIS expects, what
-                    the common delays are, and how to get your licence approved without unnecessary
-                    back-and-forth.
-                  </p>
-                </div>
+              <h2 className={styles.sectionTitle}>FMCS Certification: An Introduction</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="BIS FMCS certification for foreign manufacturers"
+                    alt="FMCS certification for foreign manufacturers exporting to India"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Already know what you need? Contact our team for a free consultation and get a
-                    clear roadmap for your BIS FMCS Certification.
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
               </div>
             </section>
 
             <section id="what-is-fmcs" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is BIS FMCS Certification?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    BIS FMCS — or the Foreign Manufacturers Certification Scheme — is a product
-                    certification programme run by the Bureau of Indian Standards (BIS) that
-                    allows manufacturers outside India to obtain a BIS licence for their products.
-                  </p>
-                  <p className={styles.sectionText}>
-                    Under this scheme, foreign manufacturers can apply for certification against
-                    the relevant Indian Standard (IS) for their product category. Once the
-                    application is approved and the BIS licence is granted, the manufacturer can
-                    affix the BIS Standard Mark on their products and legally import and sell
-                    them in India.
-                  </p>
-                  <p className={styles.sectionText}>
-                    The scheme operates under the BIS Act, 2016 and follows a structured process
-                    that includes document review, product testing at BIS-recognised laboratories,
-                    factory inspection at the manufacturing facility, and ongoing surveillance after
-                    the licence is granted. FMCS is currently the only official route through which
-                    foreign manufacturers can obtain a BIS product certification licence directly —
-                    without going through an Indian importer or third-party licence holder.
-                  </p>
-                </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>FM</span>
-                  <span className={styles.whatIsLabel}>BIS FMCS</span>
-                </div>
-              </div>
-            </section>
-
-            <section id="why-matters" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Why BIS FMCS Certification Matters for Your Business
-              </h2>
-              <p className={styles.sectionText}>
-                India&apos;s product compliance landscape has changed significantly over the last
-                decade. What was once a market where imported goods could enter with minimal checks
-                is now one of the most actively regulated consumer markets in the world. Here is
-                why BIS FMCS Certification is no longer optional for serious international
-                manufacturers.
-              </p>
-              {WHY_FMCS_MATTERS.map((item) => (
-                <div key={item.title}>
-                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
-                  <p className={styles.sectionText}>{item.text}</p>
-                </div>
+              <h2 className={styles.sectionTitle}>What Is FMCS Certification?</h2>
+              {WHAT_IS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <ul className={styles.bulletList}>
+                {WHAT_IS_DIFFERENCES.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {WHAT_IS_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
               ))}
             </section>
 
-            <section id="products" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Which Products Require BIS FMCS Certification for Foreign Manufacturers?
-              </h2>
-              <p className={styles.sectionText}>
-                BIS FMCS Certification applies to all product categories that are notified under
-                mandatory BIS certification in India. The following are some of the most common
-                product categories for which foreign manufacturers seek FMCS certification.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Product Category</th>
-                    <th scope="col">Common Products</th>
-                    <th scope="col">Applicable IS Standard</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PRODUCT_CATEGORIES.map((row) => (
-                    <tr key={row.category}>
-                      <th scope="row">{row.category}</th>
-                      <td>{row.products}</td>
-                      <td>{row.standard}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                This list is indicative and not exhaustive. New product categories are regularly
-                brought under mandatory BIS certification. Our team will confirm the exact IS
-                standard and FMCS applicability for your specific product during your free
-                consultation.
-              </p>
+            <section id="why-matters" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why FMCS Certification Matters</h2>
+              {WHY_MATTERS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+            </section>
+
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Needs FMCS Certification?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {WHO_NEEDS_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong>
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_CLOSING}</p>
+            </section>
+
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits of FMCS Certification</h2>
+              <ul className={styles.bulletList}>
+                {BENEFITS_ITEMS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="service-includes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Features of Our FMCS Certification Service</h2>
+              <ul className={styles.bulletList}>
+                {SERVICE_INCLUDES.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Eligibility for FMCS Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_CRITERIA.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_CLOSING}</p>
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Documents Required for FMCS Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document / Requirement", scope: "row" },
+                  { key: "purpose", header: "Why It's Needed" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_CLOSING}</p>
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                BIS FMCS Certification Process — Step by Step
-              </h2>
-              <p className={styles.sectionText}>
-                The BIS FMCS process is more involved than domestic BIS certification because it
-                includes international coordination, factory inspection at the overseas
-                manufacturing facility, and additional documentation requirements. Here is a clear
-                breakdown of every step — and how Ornate Quality Services manages each one for you.
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step FMCS Certification Process</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_INTRO}</p>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
-                    <div
-                      className={styles.processCircle}
-                      style={{ background: step.color }}
-                    >
+                    <div className={styles.processCircle} style={{ background: step.color }}>
                       {step.step}
                     </div>
                     <span className={styles.processLabel}>{step.label}</span>
@@ -298,229 +389,217 @@ export function BisFmcsPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
                 </div>
               ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_CLOSING}</p>
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                BIS FMCS Certification Registration Requirements
-              </h2>
-              <p className={styles.sectionText}>
-                Foreign manufacturers applying under the BIS FMCS scheme must meet the following
-                eligibility requirements before applying.
-              </p>
-              <h3 className={styles.subsectionTitle}>Manufacturing Facility Requirements</h3>
-              <ul className={styles.bulletList}>
-                {FACILITY_REQUIREMENTS.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <h3 className={styles.subsectionTitle}>Business &amp; Legal Requirements</h3>
-              <ul className={styles.bulletList}>
-                {BUSINESS_REQUIREMENTS.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className={styles.sectionText}>
-                Not sure whether your facility meets BIS FMCS requirements? We offer a
-                pre-application assessment to identify gaps and help you prepare before filing.
-                Contact us for details.
-              </p>
-            </section>
-
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for BIS FMCS Certification</h2>
-              <p className={styles.sectionText}>
-                The following documents are required for a BIS FMCS application. All documents
-                must be in English or accompanied by a certified English translation.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_REQUIRED.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Document requirements can vary based on the product category and applicable Indian
-                Standard. Our team provides a precise, product-specific document checklist after an
-                initial review of your application.
-              </p>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>FMCS Certification Timeline</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_PARAGRAPH}</p>
             </section>
 
             <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>BIS FMCS Certification Cost — What to Expect</h2>
-              <p className={styles.sectionText}>
-                BIS FMCS Certification involves several cost components. Understanding these
-                upfront helps you plan your certification budget without surprises.
-              </p>
-              <h3 className={styles.subsectionTitle}>BIS Application &amp; Licence Fees</h3>
-              <p className={styles.sectionText}>
-                BIS charges a non-refundable application fee at the time of filing, along with an
-                annual licence fee upon grant of the certificate. These fees are set by BIS and
-                vary by product category. Application fees for FMCS typically range from INR 10,000
-                to INR 50,000 depending on the scheme and product.
-              </p>
-              <h3 className={styles.subsectionTitle}>Factory Inspection Travel Costs</h3>
-              <p className={styles.sectionText}>
-                For overseas factory inspections, the foreign manufacturer is required to bear the
-                travel, accommodation, and daily allowance costs of the BIS inspection team. This
-                is a significant cost component that varies depending on the country of manufacture
-                and the duration of the inspection. We help you plan and manage these costs
-                efficiently, including coordination with BIS for inspection scheduling to minimise
-                travel expenses.
-              </p>
-              <h3 className={styles.subsectionTitle}>Product Testing Charges</h3>
-              <p className={styles.sectionText}>
-                Testing charges are paid to the laboratory and vary by product category and the
-                number of parameters to be tested. For internationally accredited labs, charges
-                can range from USD 500 to USD 5,000+ per sample set.
-              </p>
-              <h3 className={styles.subsectionTitle}>Professional Service Fees</h3>
-              <p className={styles.sectionText}>
-                Ornate Quality Services charges a fixed professional fee covering end-to-end FMCS
-                application management, document preparation, AIR services, inspection support,
-                and post-licence compliance. All fees are quoted transparently upfront. For a
-                complete cost estimate specific to your product, country, and manufacturing setup
-                — contact our team. We will provide a full breakdown at no obligation.
-              </p>
+              <h2 className={styles.sectionTitle}>Factors That Affect FMCS Certification Cost</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {COST_FACTORS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {COST_CLOSING_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>BIS FMCS Licence Validity and Renewal</h2>
-              <p className={styles.sectionText}>
-                A BIS FMCS licence is typically granted for a period of one to two years, subject
-                to satisfactory surveillance inspections and continued conformity to the applicable
-                Indian Standard. The exact validity period is determined by BIS based on the
-                product category and the outcome of the initial factory inspection.
-              </p>
-              <h3 className={styles.subsectionTitle}>Renewal Process</h3>
-              <p className={styles.sectionText}>
-                FMCS licence renewal must be initiated before the current licence expires. The
-                renewal process involves submission of updated documents, payment of the renewal
-                fee, and confirmation of continued conformity. BIS may also conduct a factory
-                inspection as part of the renewal process for certain product categories.
-              </p>
-              <h3 className={styles.subsectionTitle}>Surveillance During Licence Period</h3>
-              <p className={styles.sectionText}>
-                BIS conducts market surveillance by purchasing products from retail channels and
-                testing them against the applicable Indian Standard. If a product fails surveillance
-                testing, the manufacturer is required to explain and rectify the non-conformance.
-                Our team monitors your compliance status and ensures you are always prepared for
-                surveillance activity.
-              </p>
+              <h2 className={styles.sectionTitle}>FMCS Certificate Validity</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_PARAGRAPH}</p>
             </section>
 
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Key Benefits of BIS FMCS Certification for Foreign Manufacturers
-              </h2>
+            <section id="renewal" className={styles.section}>
+              <h2 className={styles.sectionTitle}>FMCS Certification Renewal</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_PARAGRAPH}</p>
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges in FMCS Certification</h2>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
+                {CHALLENGES_ITEMS.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
             </section>
 
-            <section id="penalties" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Penalties for Importing Products Without BIS FMCS Certification
-              </h2>
-              <p className={styles.sectionText}>
-                Importing or selling notified products in India without a valid BIS licence is a
-                serious violation under the BIS Act, 2016. Enforcement has increased significantly
-                in recent years, with customs authorities, BIS field officers, and market
-                surveillance teams actively checking compliance.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Violation</th>
-                    <th scope="col">Consequence</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PENALTY_ROWS.map((row) => (
-                    <tr key={row.violation}>
-                      <th scope="row">{row.violation}</th>
-                      <td>{row.consequence}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                The cost of getting BIS FMCS certified is always lower than the cost of dealing
-                with customs holds, product destruction, and legal proceedings. Acting proactively
-                is the only sensible approach for any serious international manufacturer targeting
-                the Indian market.
-              </p>
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How ornate quality service pvt ltd Helps You</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HOW_WE_HELP_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {HOW_WE_HELP_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HOW_WE_HELP_CLOSING}</p>
             </section>
 
-            <section id="case-study" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a Chinese Electronics Manufacturer Get BIS FMCS
-                Certified
-              </h2>
-              <p className={styles.sectionText}>
-                A consumer electronics manufacturer based in Shenzhen, China approached Ornate
-                Quality Services after their products were held at a Mumbai customs port for the
-                second time in six months. They were importing LED smart bulbs and Wi-Fi routers —
-                both of which fall under mandatory BIS certification — without a valid BIS
-                licence.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                The manufacturer had previously engaged a local Indian importer who had assured
-                them that certification was not required. When BIS enforcement caught up with two
-                shipments, the financial and reputational cost was significant. They needed to get
-                FMCS certified quickly — and correctly — before their next shipment.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                Our team conducted an emergency assessment of their product range and identified
-                the applicable IS standards for both product categories. We managed the complete
-                FMCS application process — from document preparation and testing coordination to
-                coordinating the BIS factory inspection in Shenzhen and acting as their Authorised
-                Indian Representative throughout.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                Both BIS FMCS licences were granted within five months of engaging Ornate. The
-                manufacturer now imports without disruption, is listed on two major Indian
-                e-commerce platforms, and has since expanded their India-certified product range to
-                include power banks and smart home devices.
-              </p>
+            <section id="why-ornate" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Us for FMCS Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHY_CHOOSE_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {WHY_CHOOSE_ITEMS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries We Serve Under FMCS Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_TABLE_NOTE}</p>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Construction Materials</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_CONSTRUCTION_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={CONSTRUCTION_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Electrical Appliances</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_ELECTRICAL_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={ELECTRICAL_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Automotive Components</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_AUTOMOTIVE_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={AUTOMOTIVE_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Metals and Steel</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_METALS_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={METALS_STEEL_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Chemicals</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_CHEMICALS_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={CHEMICAL_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_CHEMICALS_NOTE}</p>
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Toys</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_TOYS_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={TOY_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Furniture</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_FURNITURE_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={FURNITURE_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_FURNITURE_NOTE}</p>
+              </div>
+
+              <div className={styles.productTableBlock}>
+                <h3 className={styles.subsectionTitle}>Footwear</h3>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_FOOTWEAR_INTRO}</p>
+                <DataTable
+                  columns={PRODUCT_TABLE_COLUMNS}
+                  rows={FOOTWEAR_PRODUCTS}
+                  getRowKey={(row) => row.product}
+                />
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_FOOTWEAR_NOTE}</p>
+              </div>
+
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_MEDICAL_NOTE}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_CLOSING}</p>
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes to Avoid in FMCS Certification</h2>
+              <ul className={styles.bulletList}>
+                {MISTAKES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong>
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips for a Smooth FMCS Certification Journey</h2>
+              <ul className={styles.bulletList}>
+                {EXPERT_TIPS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="scheme-comparison" className={styles.section}>
+              <h2 className={styles.sectionTitle}>FMCS Certification vs Other BIS Certification Schemes</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{SCHEME_COMPARISON_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "scheme", header: "Scheme", scope: "row" },
+                  { key: "who", header: "Who It's For" },
+                  { key: "feature", header: "Key Distinguishing Feature" },
+                ]}
+                rows={SCHEME_COMPARISON_ROWS}
+                getRowKey={(row) => row.scheme}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{SCHEME_COMPARISON_NOTE}</p>
             </section>
 
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Frequently Asked Questions — BIS FMCS Certification
-              </h2>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Your BIS FMCS Certification Now</h2>
-              <p className={styles.ctaText}>
-                Ready to enter the Indian market with full BIS compliance? Contact Ornate Quality
-                Services for a free consultation and a clear roadmap for your FMCS certification.
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Start Your FMCS Certification Journey Today</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{GET_STARTED_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                <strong>{GET_STARTED_CTA_LINE}</strong>
               </p>
-              <div className={styles.ctaButtons}>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{GET_STARTED_CLOSING}</p>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
                 <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
+                  Apply for FMCS certification →
                 </Link>
                 <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
                   📞 Expert Consultation
@@ -576,9 +655,7 @@ export function BisFmcsPageContent() {
                       <Link
                         href={link.href}
                         className={`${styles.servicesLink} ${
-                          link.href === "/services/bis-fmcs-certification"
-                            ? styles.servicesLinkActive
-                            : ""
+                          link.href === FMCS_PAGE_PATH ? styles.servicesLinkActive : ""
                         }`}
                       >
                         {link.label}
