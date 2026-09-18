@@ -6,8 +6,8 @@ export function GemBanner() {
   return (
     <ServicePageBanner
       src={gemBanner}
-      alt="GeM Portal Registration in India — Government e-Marketplace seller onboarding"
-      label="GeM Portal Registration banner"
+      alt="GeM Registration Services in India — Complete GeM portal support for sellers, manufacturers and service providers"
+      label="GeM Registration banner"
     />
   );
 }

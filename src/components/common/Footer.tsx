@@ -22,7 +22,7 @@ const QUICK_LINKS = [
 ] as const;
 
 const SERVICE_LINKS = [
-  { label: "BIS Certification", href: "/services/bis-crs-registration" },
+  { label: "BIS Certification", href: "/services/bis-certification" },
   { label: "WPC Approval", href: "/services/wpc-eta-approval" },
   { label: "TEC Certification", href: "/services/tec-certification" },
   { label: "LMPC Registration", href: "/services/lmpc-registration" },

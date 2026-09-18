@@ -3,9 +3,9 @@ import { IecBanner } from "./sections/IecBanner";
 import { IecPageContent } from "./sections/IecPageContent";
 
 export const metadata: Metadata = {
-  title: "IEC Registration | Ornate Quality Services",
+  title: "IEC Registration Consultant in India | Import Export Code | Ornate Quality Service Pvt Ltd",
   description:
-    "Import Export Code (IEC) registration support in India. DGFT portal filing, document preparation, certificate delivery, and annual IEC updates by Ornate Quality Services.",
+    "Get your Import Export Code registered with the DGFT, correctly the first time. IEC registration, annual update, reactivation, modification and surrender support across India.",
 };
 
 export default function IecRegistrationPage() {

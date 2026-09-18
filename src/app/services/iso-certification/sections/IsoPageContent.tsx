@@ -16,16 +16,144 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   ISO_TOC,
-  ISO_STANDARDS_ROWS,
-  PROCESS_STEPS,
-  DOCUMENTS_ROWS,
-  COMPARISON_ROWS,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  WHY_WORK_HEADING,
+  WHY_WORK_ITEMS,
+  HERO_CTA_NOTE,
+  HERO_CLOSING,
+  PAGE_COVERS,
+  INTRO_PARAGRAPHS,
+  WHAT_IS_INTRO,
+  WHAT_IS_PARTS,
+  WHAT_IS_CLOSING,
+  WHO_ISSUES_PARAGRAPHS,
+  WHO_ISSUES_QUESTIONS,
+  WHO_ISSUES_CLOSING,
+  WHY_IMPORTANT_ITEMS,
+  WHY_IMPORTANT_NOTE,
+  WHO_NEEDS_INTRO,
+  WHO_NEEDS_ITEMS,
   BENEFITS_ITEMS,
+  FEATURES_ITEMS,
+  FEATURES_NOTE,
+  ELIGIBILITY_INTRO,
+  ELIGIBILITY_WHO_HEADING,
+  ELIGIBILITY_WHO,
+  ELIGIBILITY_BASIC_HEADING,
+  ELIGIBILITY_BASIC,
+  ELIGIBILITY_NOTES_HEADING,
+  ELIGIBILITY_NOTES,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_CLOSING,
+  PROCESS_INTRO,
+  PROCESS_STEPS,
+  PROCESS_EXTRA,
+  PROCESS_CLOSING,
+  TIMELINE_INTRO,
+  TIMELINE_DRIVES_HEADING,
+  TIMELINE_DRIVES,
+  TIMELINE_SPEED_HEADING,
+  TIMELINE_SPEED,
+  TIMELINE_NOTE,
+  COST_INTRO,
+  COST_TOTAL_HEADING,
+  COST_TOTAL,
+  COST_MOVE_HEADING,
+  COST_MOVE,
+  COST_QUOTE_HEADING,
+  COST_QUOTE,
+  COST_QUESTIONS_HEADING,
+  COST_QUESTIONS,
+  VALIDITY_INTRO,
+  VALIDITY_KEEP_HEADING,
+  VALIDITY_KEEP,
+  VALIDITY_END_HEADING,
+  VALIDITY_END,
+  VALIDITY_NOTE,
+  RENEWAL_INTRO,
+  RENEWAL_DURING,
+  RENEWAL_PRECAUTIONS_HEADING,
+  RENEWAL_PRECAUTIONS,
+  RENEWAL_TRANSFER,
+  RENEWAL_CLOSING,
+  CHALLENGES_ITEMS,
+  HOW_WE_HELP_ITEMS,
+  HOW_WE_HELP_NOTE,
+  EVALUATE_INTRO,
+  EVALUATE_ITEMS,
+  EVALUATE_CLOSING,
+  WHY_CHOOSE_ITEMS,
+  STANDARDS_INTRO,
+  STANDARDS_ROWS,
+  STANDARDS_DETAIL_INTRO,
+  STANDARDS_DETAILS,
+  STANDARDS_RELATED,
+  INDUSTRIES_ROWS,
+  INDUSTRIES_CLOSING,
+  MISTAKES_ITEMS,
+  EXPERT_TIPS,
+  COMPARISON_ROWS,
   FAQ_ITEMS,
+  CTA_HEADING,
+  CTA_PARAGRAPHS,
+  CTA_REACH_HEADING,
+  CTA_REACH,
+  CTA_CLOSING,
+  CTA_TAGLINE,
+  type TableRow,
 } from "../data/isoContent";
 
 const ISO_PAGE_PATH = "/services/iso-certification";
 
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+type DataTableProps = {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+};
+
+function DataTable({ columns, rows, getRowKey }: DataTableProps) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function CallbackForm() {
   return (
@@ -43,7 +171,6 @@ function CallbackForm() {
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -122,9 +249,7 @@ export function IsoPageContent() {
                   <button
                     type="button"
                     data-toc-id={item.id}
-                    className={`${styles.tocLink} ${
-                      activeId === item.id ? styles.tocLinkActive : ""
-                    }`}
+                    className={`${styles.tocLink} ${activeId === item.id ? styles.tocLinkActive : ""}`}
                     onClick={() => scrollToSection(item.id)}
                   >
                     <span className={styles.tocNum}>{i + 1}.</span>
@@ -139,140 +264,198 @@ export function IsoPageContent() {
           </nav>
 
           <article className={styles.main}>
-            <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                ISO Certification in India — Complete Guide for Businesses Seeking Quality, Environmental &amp; Safety Certification
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    Whether you are a manufacturer trying to win a government contract, an exporter building credibility with
-                    international buyers, or a service business looking to demonstrate operational excellence — ISO Certification is
-                    one of the most recognised and respected quality credentials your business can hold.
-                  </p>
-                  <p className={styles.sectionText}>
-                    ISO — the International Organization for Standardization — publishes internationally agreed standards covering
-                    quality management, environmental management, occupational health and safety, information security, food safety,
-                    and dozens of other management disciplines. When a business achieves ISO Certification, it means an independent,
-                    accredited certification body has verified that its management system meets the requirements of the relevant ISO
-                    standard.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we help businesses across India achieve ISO Certification — from ISO 9001 for quality
-                    management to ISO 14001 for environmental management and ISO 45001 for occupational health and safety. In this guide,
-                    we cover everything you need to know — what ISO Certification is, which standard is right for your business, how the
-                    process works, and what it costs.
-                  </p>
-                </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>
+                <strong>{BANNER_SUBTITLE}</strong>
+              </p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <h3 className={styles.subsectionTitle}>{WHY_WORK_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {WHY_WORK_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HERO_CTA_NOTE}</p>
+              {HERO_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+                <Link href="/contact" className={styles.ctaBtnPrimary}>
+                  Request a scope-based proposal
+                </Link>
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Talk to iso certification expert
+                </Link>
+              </div>
+            </div>
 
+            <section id="what-this-page-covers" className={styles.section}>
+              <h2 className={styles.sectionTitle}>What This Page Covers</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PAGE_COVERS}</p>
+            </section>
+
+            <section id="introduction" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Introduction</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="ISO certification consulting and implementation support"
+                    alt="ISO certification support for manufacturers, exporters and service companies"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Ready to get ISO certified? Contact our team for a free consultation and we will identify the right ISO standard
-                    for your business and build a clear implementation roadmap.
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
               </div>
             </section>
 
             <section id="what-is-iso" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is ISO Certification?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    ISO Certification — also known as ISO Registration — is the formal confirmation by an independent, accredited
-                    third-party certification body that an organisation&apos;s management system, processes, or products conform to the
-                    requirements of a specific ISO standard.
-                  </p>
-                  <p className={styles.sectionText}>
-                    ISO itself does not certify organisations. Certification is carried out by accredited certification bodies that are
-                    authorised to audit and certify organisations against ISO standards.
-                  </p>
-                  <p className={styles.sectionText}>
-                    For businesses in India, ISO Certification is typically issued by NABCB-accredited or internationally recognised
-                    certification bodies. ISO Certification is not a one-time achievement — it requires internal audits, management review,
-                    and periodic surveillance audits to maintain the certificate.
-                  </p>
+              <h2 className={styles.sectionTitle}>What Is ISO Certification?</h2>
+              {WHAT_IS_INTRO.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              {WHAT_IS_PARTS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
                 </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>ISO</span>
-                  <span className={styles.whatIsLabel}>MANAGEMENT SYSTEM CERTIFICATION</span>
-                </div>
-              </div>
+              ))}
+              {WHAT_IS_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
-            <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why ISO Certification Matters for Your Business</h2>
-              <h3 className={styles.subsectionTitle}>Mandatory for Many Tenders and Contracts</h3>
-              <p className={styles.sectionText}>
-                Government tenders, PSU procurement, and large corporate supply chain requirements often list ISO 9001 as mandatory. Without it,
-                businesses can be disqualified even with strong pricing and capability.
-              </p>
-              <h3 className={styles.subsectionTitle}>Builds Buyer Confidence in Export Markets</h3>
-              <p className={styles.sectionText}>
-                International procurement teams frequently treat ISO certification as a baseline quality credential. ISO removes a key barrier for
-                exporters and positions you as a credible supplier.
-              </p>
-              <h3 className={styles.subsectionTitle}>Improves Internal Operations and Reduces Costs</h3>
-              <p className={styles.sectionText}>
-                ISO implementation strengthens process discipline, documentation, controls, and continuous improvement — commonly reducing errors,
-                rework, complaints, and operational costs.
-              </p>
-              <h3 className={styles.subsectionTitle}>Demonstrates Environmental and Safety Commitment</h3>
-              <p className={styles.sectionText}>
-                ISO 14001 and ISO 45001 demonstrate commitment to environmental responsibility and worker safety. These are increasingly required by
-                multinational clients and relevant for ESG requirements.
-              </p>
-              <h3 className={styles.subsectionTitle}>Strengthens Business Valuation and Investor Confidence</h3>
-              <p className={styles.sectionText}>
-                ISO certification signals management maturity and lower operational risk — improving financing and credibility in due diligence.
-              </p>
+            <section id="who-issues" className={styles.section}>
+              <h2 className={styles.sectionTitle}>
+                Who Issues the Certificate, and Why Accreditation Decides Its Value
+              </h2>
+              {WHO_ISSUES_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <ul className={styles.bulletList}>
+                {WHO_ISSUES_QUESTIONS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_ISSUES_CLOSING}</p>
             </section>
 
-            <section id="iso-we-offer" className={styles.section}>
-              <h2 className={styles.sectionTitle}>ISO Certifications Available Through Ornate Quality Services</h2>
-              <p className={styles.sectionText}>
-                Ornate Quality Services provides consulting and implementation support for a wide range of ISO management system certifications.
-                The following table covers the most commonly sought ISO certifications in India.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">ISO Standard</th>
-                    <th scope="col">Focus Area</th>
-                    <th scope="col">Who Needs It</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ISO_STANDARDS_ROWS.map((row) => (
-                    <tr key={row.standard}>
-                      <th scope="row">{row.standard}</th>
-                      <td>{row.focus}</td>
-                      <td>{row.who}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <section id="why-important" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Is ISO Certification Important?</h2>
+              <ul className={styles.bulletList}>
+                {WHY_IMPORTANT_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{WHY_IMPORTANT_NOTE}</div>
+            </section>
+
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Needs ISO Certification?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+              {WHO_NEEDS_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits</h2>
+              <ul className={styles.bulletList}>
+                {BENEFITS_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="key-features" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Features of Our ISO Certification Service</h2>
+              <ul className={styles.bulletList}>
+                {FEATURES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{FEATURES_NOTE}</div>
+            </section>
+
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Eligibility for ISO Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_WHO_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_WHO.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_BASIC_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_BASIC.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_NOTES_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_NOTES.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Documents Required for ISO Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document", scope: "row" },
+                  { key: "purpose", header: "Purpose" },
+                  { key: "mandatory", header: "Mandatory / Optional" },
+                  { key: "notes", header: "Additional Notes" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              {DOCUMENTS_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>ISO Certification Process — Step by Step</h2>
-              <p className={styles.sectionText}>
-                Many businesses benefit from implementing multiple standards together as an Integrated Management System (IMS). Implementing
-                ISO 9001, ISO 14001, and ISO 45001 together is often more efficient than separate projects.
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step ISO Certification Process</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_INTRO}</p>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
@@ -286,162 +469,283 @@ export function IsoPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
                 </div>
               ))}
+              {PROCESS_EXTRA.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_CLOSING}</p>
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>ISO Certification Requirements for Businesses in India</h2>
-              <p className={styles.sectionText}>
-                Any organisation can pursue ISO certification. Across most ISO management system standards, you will need leadership commitment,
-                a defined scope, documented processes and records, trained internal auditors, and management review.
-              </p>
-              <h3 className={styles.subsectionTitle}>Accredited Certification Body</h3>
-              <p className={styles.sectionText}>
-                ISO certificates should be issued by NABCB-accredited or internationally recognised accreditation bodies (IAF member). Certificates
-                from non-accredited bodies are often not accepted by tenders and procurement teams.
-              </p>
-              <p className={styles.sectionText}>
-                Not sure which ISO standard fits your business or whether you are ready for certification? Contact us for a free readiness assessment.
-              </p>
-            </section>
-
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for ISO Certification</h2>
-              <p className={styles.sectionText}>
-                Documentation requirements vary by standard, but the following represents the core framework required across most ISO management systems.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_ROWS.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>ISO Certification Timeline</h2>
+              {TIMELINE_INTRO.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{TIMELINE_DRIVES_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {TIMELINE_DRIVES.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{TIMELINE_SPEED_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_SPEED}</p>
+              <div className={styles.noteBox}>{TIMELINE_NOTE}</div>
             </section>
 
             <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>ISO Certification Cost in India</h2>
-              <h3 className={styles.subsectionTitle}>Certification Body Audit Fees</h3>
-              <p className={styles.sectionText}>
-                Audit fees depend on audit days required (based on headcount, scope, sites, and complexity). For many SMEs, initial certification audits
-                typically range from INR 30,000 to INR 1,50,000, with annual surveillance fees commonly INR 20,000 to INR 80,000.
-              </p>
-              <h3 className={styles.subsectionTitle}>Implementation and Consulting Fees</h3>
-              <p className={styles.sectionText}>
-                Implementation includes gap analysis, documentation, training, internal audit support, management review facilitation, and certification support.
-                Ornate provides fixed professional fees based on standard and organisational scope.
-              </p>
-              <h3 className={styles.subsectionTitle}>Integrated Management Systems — Cost Savings</h3>
-              <p className={styles.sectionText}>
-                If you implement ISO 9001 + ISO 14001 + ISO 45001 together, shared documentation and audits can reduce overall cost and effort versus three separate projects.
-              </p>
+              <h2 className={styles.sectionTitle}>ISO Certification Cost Factors</h2>
+              {COST_INTRO.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{COST_TOTAL_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {COST_TOTAL.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{COST_MOVE_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {COST_MOVE.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{COST_QUOTE_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_QUOTE}</p>
+              <h3 className={styles.subsectionTitle}>{COST_QUESTIONS_HEADING}</h3>
+              {COST_QUESTIONS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>ISO Certificate Validity and Surveillance Cycle</h2>
-              <p className={styles.sectionText}>
-                ISO certificates typically follow a 3-year cycle: initial certification audit, annual surveillance audits in years 1 and 2, and recertification in year 3.
-              </p>
-              <h3 className={styles.subsectionTitle}>Standard Revisions</h3>
-              <p className={styles.sectionText}>
-                ISO standards are periodically revised with transition periods. We track revisions and help you transition proactively so your certificate remains valid.
-              </p>
+              <h2 className={styles.sectionTitle}>Validity of ISO Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>{VALIDITY_KEEP_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {VALIDITY_KEEP.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{VALIDITY_END_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {VALIDITY_END.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{VALIDITY_NOTE}</div>
             </section>
 
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Key Benefits of ISO Certification for Indian Businesses</h2>
+            <section id="renewal" className={styles.section}>
+              <h2 className={styles.sectionTitle}>ISO Certification Renewal and Recertification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_INTRO}</p>
+              {RENEWAL_DURING.map((item) => (
+                <p key={item.title} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  <strong>{item.title}</strong> {item.text}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{RENEWAL_PRECAUTIONS_HEADING}</h3>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
+                {RENEWAL_PRECAUTIONS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              {RENEWAL_TRANSFER.map((item) => (
+                <p key={item.title} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  <strong>{item.title}</strong> {item.text}
+                </p>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_CLOSING}</p>
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges</h2>
+              <ul className={styles.bulletList}>
+                {CHALLENGES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How We Help</h2>
+              <ul className={styles.bulletList}>
+                {HOW_WE_HELP_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{HOW_WE_HELP_NOTE}</div>
+            </section>
+
+            <section id="evaluate-provider" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How to Evaluate an ISO Certification Provider</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{EVALUATE_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {EVALUATE_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              {EVALUATE_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+            </section>
+
+            <section id="why-choose" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Ornate Quality Service Pvt Ltd</h2>
+              <ul className={styles.bulletList}>
+                {WHY_CHOOSE_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="standards" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Standards Covered Under ISO Certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{STANDARDS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "standard", header: "Standard", scope: "row" },
+                  { key: "covers", header: "What It Covers" },
+                  { key: "required", header: "Typically Required By" },
+                  { key: "page", header: "Dedicated Page" },
+                ]}
+                rows={STANDARDS_ROWS}
+                getRowKey={(row) => row.standard}
+              />
+              <h3 className={styles.subsectionTitle}>What Each Standard Is Actually For</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{STANDARDS_DETAIL_INTRO}</p>
+              {STANDARDS_DETAILS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{STANDARDS_RELATED}</p>
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries We Serve</h2>
+              <DataTable
+                columns={[
+                  { key: "sector", header: "Sector", scope: "row" },
+                  { key: "standards", header: "Typical Standards" },
+                  { key: "why", header: "Why It Comes Up" },
+                ]}
+                rows={INDUSTRIES_ROWS}
+                getRowKey={(row) => row.sector}
+              />
+              {INDUSTRIES_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes to Avoid</h2>
+              <ul className={styles.bulletList}>
+                {MISTAKES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips</h2>
+              <ul className={styles.bulletList}>
+                {EXPERT_TIPS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </section>
 
             <section id="comparison" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Choosing the Right ISO Standard for Your Business</h2>
-              <p className={styles.sectionText}>
-                ISO 9001, ISO 14001, and ISO 45001 are the most common certifications. The table below compares them at a practical level.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Factor</th>
-                    <th scope="col">ISO 9001</th>
-                    <th scope="col">ISO 14001</th>
-                    <th scope="col">ISO 45001</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPARISON_ROWS.map((row) => (
-                    <tr key={row.factor}>
-                      <th scope="row">{row.factor}</th>
-                      <td>{row.iso9001}</td>
-                      <td>{row.iso14001}</td>
-                      <td>{row.iso45001}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                For most manufacturers, ISO 9001 is the best starting point. If your operations have environmental footprint or safety-critical risk,
-                adding ISO 14001 and ISO 45001 as an IMS is often the most efficient approach.
-              </p>
-            </section>
-
-            <section id="case-study" className={styles.section}>
               <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a Pune Manufacturer Get ISO 9001 Certified and Win a Government Contract
+                Comparison: Choosing the Right Standard and the Right Certificate
               </h2>
-              <p className={styles.sectionText}>
-                A Pune-based manufacturer of industrial fasteners approached Ornate Quality Services after losing a government tender where ISO 9001
-                was mandatory. They had a target of 6 months to achieve certification before the next tender cycle.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                They had limited formal documentation and processes. While operations ran effectively, informal practices created significant gaps for ISO audit expectations.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                We performed a gap analysis, created QMS documentation, trained internal auditors, conducted internal audit, facilitated management review, and coordinated
-                Stage 1 and Stage 2 audits with an accredited certification body. We supported the team throughout audit closure.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                ISO 9001:2015 certification was achieved within 5 months and 3 weeks. The business qualified for the next tender cycle and won a supply contract worth
-                INR 1.8 crore. They have maintained certification through surveillance audits and are implementing ISO 14001 next.
-              </p>
+              <DataTable
+                columns={[
+                  { key: "comparison", header: "Comparison", scope: "row" },
+                  { key: "different", header: "What Is Actually Different" },
+                  { key: "takeaway", header: "Practical Takeaway" },
+                ]}
+                rows={COMPARISON_ROWS}
+                getRowKey={(row) => row.comparison}
+              />
             </section>
 
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions — ISO Certification</h2>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Expert Assistance for ISO Certification</h2>
-              <p className={styles.ctaText}>
-                Need help selecting the right ISO standard, gap analysis, documentation, implementation, and audit readiness? Connect with Ornate Quality Services for complete support.
-              </p>
-              <div className={styles.ctaButtons}>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{CTA_HEADING}</h2>
+              {CTA_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{CTA_REACH_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {CTA_REACH.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+              {CTA_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CTA_TAGLINE}</p>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
                 <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
+                  Request iso certification proposal
                 </Link>
-                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Expert Consultation
-                </a>
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Iso certification enquiry
+                </Link>
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Iso certification consultation booking
+                </Link>
               </div>
             </section>
           </article>
@@ -509,4 +813,3 @@ export function IsoPageContent() {
     </div>
   );
 }
-

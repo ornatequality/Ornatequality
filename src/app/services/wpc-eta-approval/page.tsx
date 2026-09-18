@@ -3,9 +3,9 @@ import { WpcBanner } from "./sections/WpcBanner";
 import { WpcPageContent } from "./sections/WpcPageContent";
 
 export const metadata: Metadata = {
-  title: "WPC ETA Approval | Ornate Quality Services",
+  title: "WPC-ETA Approval Consultant in India | Ornate Quality Services",
   description:
-    "Complete WPC ETA Approval support in India for wireless and telecom products. Frequency assessment, lab testing, SACFA portal filing, and certificate delivery by Ornate Quality Services.",
+    "Get your wireless product WPC-ETA approved. Equipment Type Approval for Wi-Fi, Bluetooth, RFID and RF devices — documentation, NABL RF testing, and Saral Sanchar filing by Ornate Quality Service Pvt Ltd.",
 };
 
 export default function WpcEtaApprovalPage() {

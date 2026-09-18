@@ -14,66 +14,101 @@ import {
   WHY_ORNATE_ITEMS,
   LATEST_NOTIFICATIONS,
   OUR_SERVICES_LINKS,
-  IMPORTANCE_ITEMS,
-  CERT_TYPES,
-  PRODUCTS_COVERED,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  HERO_ITEMS,
+  INTRO_PARAGRAPHS,
+  WHAT_IS_PARAGRAPHS,
+  WHAT_IS_ITEMS,
+  WHY_IMPORTANT_INTRO,
+  WHY_IMPORTANT_ITEMS,
+  GUIDELINES_NOTE,
+  WHO_NEEDS_INTRO,
+  WHO_NEEDS_ITEMS,
+  BENEFITS_ITEMS,
+  FEATURES_ITEMS,
+  PRODUCTS_INTRO,
+  PRODUCTS_NOTE,
+  PRODUCTS_ROWS,
+  ELIGIBILITY_INTRO,
+  ELIGIBILITY_ITEMS,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_NOTE,
   PROCESS_STEPS,
+  PROCESS_CLOSING,
+  TIMELINE_PARAGRAPH,
+  TIMELINE_NOTE,
+  COST_INTRO,
+  COST_FACTORS,
+  COST_CLOSING,
+  COST_NOTE,
+  VALIDITY_PARAGRAPH,
+  RENEWAL_PARAGRAPH,
+  CHALLENGES_ITEMS,
+  HOW_WE_HELP_INTRO,
+  HOW_WE_HELP_ITEMS,
+  WHY_CHOOSE_ITEMS,
+  WHY_CHOOSE_NOTE,
+  INDUSTRIES_ITEMS,
+  MISTAKES_ITEMS,
+  EXPERT_TIPS,
+  COMPARISON_INTRO,
+  COMPARISON_ROWS,
   FAQ_ITEMS,
+  CTA_HEADING,
+  CTA_PARAGRAPH,
+  type TableRow,
 } from "../data/bisCrsContent";
 
+const BIS_CRS_PAGE_PATH = "/services/bis-crs-registration";
 
-function ImportanceIcon({ type }: { type: string }) {
-  const icons: Record<string, React.ReactNode> = {
-    shield: (
-      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M12 2 4 5.5V11c0 5.25 3.45 10.2 8 11 4.55-.8 8-5.75 8-11V5.5L12 2Z"
-        />
-      </svg>
-    ),
-    legal: (
-      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M12 2a3 3 0 0 1 3 3v1h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2V5a3 3 0 0 1 3-3Zm0 2a1 1 0 0 0-1 1v1h2V5a1 1 0 0 0-1-1Z"
-        />
-      </svg>
-    ),
-    trust: (
-      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27Z"
-        />
-      </svg>
-    ),
-    market: (
-      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M3 3h18v2H3V3Zm0 4h18v14H3V7Zm4 2v2h2V9H7Zm0 4v2h2v-2H7Zm4-4v2h6V9h-6Zm0 4v2h6v-2h-6Z"
-        />
-      </svg>
-    ),
-    customs: (
-      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4ZM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5Zm13.5-9 1.96 2.5H17V9.5h2.5Zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5Z"
-        />
-      </svg>
-    ),
-    consumer: (
-      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 2c-3 0-6 1.5-6 4v3h12v-3c0-2.5-3-4-6-4ZM8 13c-2.65 0-5 1.2-5 3.2V20h6v-2.6c0-1.35.65-2.5 1.7-3.35A8.7 8.7 0 0 0 8 13Z"
-        />
-      </svg>
-    ),
-  };
-  return <>{icons[type] ?? icons.shield}</>;
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+type DataTableProps = {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+};
+
+function DataTable({ columns, rows, getRowKey }: DataTableProps) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 function CallbackForm() {
@@ -92,7 +127,6 @@ function CallbackForm() {
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -163,7 +197,6 @@ export function BisCrsPageContent() {
     <div className={`${styles.page} ${inter.className}`}>
       <div className={styles.container}>
         <div className={styles.layout}>
-          {/* Left — Table of Contents */}
           <nav className={styles.toc} aria-label="Table of contents">
             <div className={styles.tocHead}>Table of Contents</div>
             <ol ref={tocListRef} className={styles.tocList}>
@@ -186,273 +219,316 @@ export function BisCrsPageContent() {
             </ol>
           </nav>
 
-          {/* Center — Main Content */}
           <article className={styles.main}>
-            {/* Introduction */}
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>
+                <strong>{BANNER_SUBTITLE}</strong>
+              </p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <ul className={styles.bulletList}>
+                {HERO_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+                <Link href="/contact" className={styles.ctaBtnPrimary}>
+                  Start Your BIS CRS Registration
+                </Link>
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Talk to a BIS CRS Registration Expert
+                </Link>
+              </div>
+            </div>
+
             <section id="introduction" className={styles.section}>
               <h2 className={styles.sectionTitle}>Introduction</h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    BIS (Bureau of Indian Standards) certification is a mandatory compliance
-                    requirement for manufacturers and importers looking to sell regulated products in
-                    the Indian market. It ensures that products meet the safety, quality, and
-                    performance standards set by the Government of India.
-                  </p>
-                  <p className={styles.sectionText}>
-                    Ornate Quality Services Pvt. Ltd. provides complete end-to-end support for BIS
-                    CRS, ISI Mark, and FMCS certification — from product identification and lab
-                    testing to documentation, factory inspection, and certificate issuance.
-                  </p>
-                </div>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="BIS certification office building"
+                    alt="BIS CRS registration support for electronics, IT and solar products"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Our objective is to simplify BIS compliance for manufacturers and importers,
-                    enabling faster market access with complete regulatory confidence and
-                    transparent guidance at every step.
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
               </div>
             </section>
 
-            {/* What is BIS */}
             <section id="what-is-bis" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is BIS Certification?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    BIS Certification is issued by the Bureau of Indian Standards — India&apos;s
-                    national standards body operating under the Ministry of Consumer Affairs, Food
-                    &amp; Public Distribution. It confirms that a product conforms to relevant Indian
-                    Standards (IS) and Quality Control Orders.
-                  </p>
-                  <p className={styles.sectionText}>
-                    For electronic and IT products, the Compulsory Registration Scheme (CRS)
-                    requires manufacturers and importers to register their products with BIS before
-                    placing them in the Indian market. The ISI Mark applies to a broader range of
-                    industrial and consumer goods.
-                  </p>
-                </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>🔍</span>
-                  <span className={styles.whatIsLabel}>BIS CERTIFICATION</span>
-                </div>
-              </div>
+              <h2 className={styles.sectionTitle}>What Is BIS CRS Registration</h2>
+              {WHAT_IS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <ul className={styles.bulletList}>
+                {WHAT_IS_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
             </section>
 
-            {/* Importance */}
             <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Importance of BIS Certification</h2>
-              <p className={styles.sectionText}>
-                Obtaining BIS certification is not just a legal formality — it is a strategic
-                business requirement that protects your brand and opens doors to the Indian market.
-              </p>
-              <div className={styles.importanceGrid}>
-                {IMPORTANCE_ITEMS.map((item) => (
-                  <div key={item.label} className={styles.importanceItem}>
-                    <div className={styles.importanceCircle}>
-                      <ImportanceIcon type={item.icon} />
-                    </div>
-                    <span className={styles.importanceLabel}>{item.label}</span>
-                  </div>
+              <h2 className={styles.sectionTitle}>Why BIS CRS Registration Is Important</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHY_IMPORTANT_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {WHY_IMPORTANT_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
                 ))}
-              </div>
+              </ul>
+              <div className={styles.noteBox}>{GUIDELINES_NOTE}</div>
             </section>
 
-            {/* Types */}
-            <section id="types" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Types of BIS Certification</h2>
-              <div className={styles.typesGrid}>
-                {CERT_TYPES.map((type) => (
-                  <div key={type.title} className={styles.typeCard}>
-                    <div
-                      className={`${styles.typeCardIcon} ${
-                        type.tone === "isi"
-                          ? styles.typeCardIconIsi
-                          : type.tone === "crs"
-                            ? styles.typeCardIconCrs
-                            : styles.typeCardIconFmcs
-                      }`}
-                    >
-                      {type.tone === "isi" ? "ISI" : type.tone === "crs" ? "CRS" : "FMCS"}
-                    </div>
-                    <h3 className={styles.typeCardTitle}>{type.title}</h3>
-                    <p className={styles.typeCardSubtitle}>{type.subtitle}</p>
-                    <p className={styles.typeCardText}>{type.description}</p>
-                  </div>
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Needs BIS CRS Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {WHO_NEEDS_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
                 ))}
-              </div>
+              </ul>
+              <div className={styles.noteBox}>{GUIDELINES_NOTE}</div>
             </section>
 
-            {/* Products Covered */}
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits of Working With Us</h2>
+              <ul className={styles.bulletList}>
+                {BENEFITS_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="key-features" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Features of Our BIS CRS Registration Service</h2>
+              <ul className={styles.bulletList}>
+                {FEATURES_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
             <section id="products-covered" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Products Covered Under BIS</h2>
-              <p className={styles.sectionText}>
-                BIS CRS covers a wide range of electronic and IT products. Below are some of the
-                most commonly registered product categories:
-              </p>
-              <div className={styles.productsGrid}>
-                {PRODUCTS_COVERED.map((product) => (
-                  <div key={product.label} className={styles.productCard}>
-                    <span className={styles.productEmoji} aria-hidden="true">
-                      {product.emoji}
-                    </span>
-                    <span className={styles.productLabel}>{product.label}</span>
-                  </div>
-                ))}
-              </div>
+              <h2 className={styles.sectionTitle}>Products Covered Under BIS CRS Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_INTRO}</p>
+              <div className={styles.noteBox}>{PRODUCTS_NOTE}</div>
+              <DataTable
+                columns={[
+                  { key: "num", header: "#" },
+                  { key: "product", header: "Product Name", scope: "row" },
+                  { key: "isCode", header: "Applicable IS Number" },
+                  { key: "mandatory", header: "Mandatory (CRS)" },
+                  { key: "audience", header: "Target Audience" },
+                  { key: "page", header: "Dedicated Product Page" },
+                ]}
+                rows={PRODUCTS_ROWS}
+                getRowKey={(row) => row.product}
+              />
             </section>
 
-            {/* Process */}
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Eligibility Criteria</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{GUIDELINES_NOTE}</div>
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Documents Required</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "category", header: "Document Category", scope: "row" },
+                  { key: "covers", header: "What It Covers" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.category}
+              />
+              <div className={styles.noteBox}>{DOCUMENTS_NOTE}</div>
+            </section>
+
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>BIS Certification Process</h2>
-              <p className={styles.sectionText}>
-                Our streamlined 7-step process ensures your BIS certification is handled efficiently
-                from start to finish:
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step BIS CRS Registration Process</h2>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
-                    <div
-                      className={styles.processCircle}
-                      style={{ background: step.color }}
-                    >
+                    <div className={styles.processCircle} style={{ background: step.color }}>
                       {step.step}
                     </div>
                     <span className={styles.processLabel}>{step.label}</span>
                   </div>
                 ))}
               </div>
+              {PROCESS_STEPS.map((step) => (
+                <div key={step.title}>
+                  <h3 className={styles.subsectionTitle}>{step.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
+                </div>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_CLOSING}</p>
             </section>
 
-            {/* Documents */}
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for BIS</h2>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>BIS CRS Registration Timeline</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_PARAGRAPH}</p>
+              <div className={styles.noteBox}>{TIMELINE_NOTE}</div>
+            </section>
+
+            <section id="cost" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Cost Factors</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_INTRO}</p>
               <ul className={styles.bulletList}>
-                <li>Manufacturing unit registration documents (Factory License, GST, PAN)</li>
-                <li>Product technical specifications and user manual</li>
-                <li>Test report from BIS-recognized NABL accredited laboratory</li>
-                <li>Authorization letter (for brand owners and importers)</li>
-                <li>Undertaking and affidavit as per BIS format</li>
-                <li>Trademark registration certificate (if applicable)</li>
-                <li>Factory layout plan and manufacturing process flow</li>
+                {COST_FACTORS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
               </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_CLOSING}</p>
+              <div className={styles.noteBox}>{COST_NOTE}</div>
             </section>
 
-            {/* Fees */}
-            <section id="fees" className={styles.section}>
-              <h2 className={styles.sectionTitle}>BIS Certification Fees</h2>
-              <p className={styles.sectionText}>
-                BIS certification fees vary based on product category, number of models, testing
-                requirements, and whether factory inspection is required. Government fees include
-                application fee, processing fee, and annual mark fee.
-              </p>
-              <p className={styles.sectionText}>
-                Ornate provides transparent, all-inclusive pricing with no hidden costs. Contact us
-                for a detailed quote tailored to your product and certification type.
-              </p>
-            </section>
-
-            {/* Validity */}
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Validity and Renewal</h2>
-              <p className={styles.sectionText}>
-                BIS CRS certificates are typically valid for two years from the date of grant.
-                Renewal must be initiated before expiry to avoid disruption in legal market access.
-              </p>
-              <p className={styles.sectionText}>
-                Ornate provides proactive renewal reminders and handles the complete renewal process
-                including updated testing, documentation, and BIS portal submissions.
-              </p>
+              <h2 className={styles.sectionTitle}>Validity of BIS CRS Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_PARAGRAPH}</p>
+              <div className={styles.noteBox}>{GUIDELINES_NOTE}</div>
             </section>
 
-            {/* Difference */}
-            <section id="difference" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Difference Between ISI, CRS &amp; FMCS</h2>
-              <p className={styles.sectionText}>
-                <strong>ISI Mark</strong> applies to industrial and consumer products under Quality
-                Control Orders and requires factory inspection for domestic manufacturers.
-              </p>
-              <p className={styles.sectionText}>
-                <strong>CRS Registration</strong> is specific to electronic and IT products and
-                focuses on product testing without mandatory factory inspection for most categories.
-              </p>
-              <p className={styles.sectionText}>
-                <strong>FMCS</strong> enables foreign manufacturers to obtain BIS certification
-                through an authorized Indian representative, with BIS conducting factory audits
-                overseas.
-              </p>
+            <section id="renewal" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Renewal of BIS CRS Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_PARAGRAPH}</p>
+              <div className={styles.noteBox}>{GUIDELINES_NOTE}</div>
             </section>
 
-            {/* Who Needs */}
-            <section id="who-needs" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Who Needs BIS Certification?</h2>
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges in BIS CRS Registration</h2>
               <ul className={styles.bulletList}>
-                <li>Domestic manufacturers of regulated electronic and IT products</li>
-                <li>Importers bringing covered products into India</li>
-                <li>Brand owners selling under their trademark in India</li>
-                <li>E-commerce sellers listing BIS-regulated products online</li>
-                <li>Foreign manufacturers exporting to India via FMCS scheme</li>
-              </ul>
-            </section>
-
-            {/* Penalties */}
-            <section id="penalties" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Penalties for Non-Compliance</h2>
-              <p className={styles.sectionText}>
-                Selling products without valid BIS certification can result in product seizure,
-                penalties under the BIS Act 2016, cancellation of import licenses, and legal action.
-                Non-compliant products may be barred from e-commerce platforms and retail channels.
-              </p>
-            </section>
-
-            {/* Why Ornate (main) */}
-            <section id="why-ornate" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why Choose Ornate Quality Services?</h2>
-              <ul className={styles.bulletList}>
-                {WHY_ORNATE_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
+                {CHALLENGES_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </section>
 
-            {/* FAQ */}
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How We Help You</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HOW_WE_HELP_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {HOW_WE_HELP_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="why-choose" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Ornate Quality Services</h2>
+              <ul className={styles.bulletList}>
+                {WHY_CHOOSE_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{WHY_CHOOSE_NOTE}</div>
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries We Serve</h2>
+              <ul className={styles.bulletList}>
+                {INDUSTRIES_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes to Avoid</h2>
+              <ul className={styles.bulletList}>
+                {MISTAKES_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips for a Smooth BIS CRS Registration</h2>
+              <ul className={styles.bulletList}>
+                {EXPERT_TIPS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="comparison" className={styles.section}>
+              <h2 className={styles.sectionTitle}>BIS CRS vs Other Certifications</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COMPARISON_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "comparison", header: "Comparison", scope: "row" },
+                  { key: "differs", header: "How They Generally Differ" },
+                ]}
+                rows={COMPARISON_ROWS}
+                getRowKey={(row) => row.comparison}
+              />
+              <div className={styles.noteBox}>{GUIDELINES_NOTE}</div>
+            </section>
+
             <section id="faq" className={styles.section}>
               <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
               <FaqAccordion />
             </section>
 
-            {/* Get Started */}
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Started Today</h2>
-              <p className={styles.ctaText}>
-                Ready to obtain your BIS CRS certification? Our experts are here to guide you
-                through every step — from product testing to certificate issuance.
-              </p>
-              <div className={styles.ctaButtons}>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{CTA_HEADING}</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CTA_PARAGRAPH}</p>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
                 <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
+                  Start Your BIS CRS Registration
                 </Link>
-                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Expert Consultation
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Request a BIS CRS Registration Callback
+                </Link>
+                <a href="#documents" className={styles.ctaBtnSecondary}>
+                  Download the BIS CRS Registration Checklist
                 </a>
               </div>
             </section>
           </article>
 
-          {/* Right — Sidebar */}
           <aside className={styles.sidebar} aria-label="Sidebar">
             <div className={styles.widget}>
               <div className={styles.widgetHead}>Why Ornate?</div>
@@ -500,9 +576,7 @@ export function BisCrsPageContent() {
                       <Link
                         href={link.href}
                         className={`${styles.servicesLink} ${
-                          link.href === "/services/bis-crs-registration"
-                            ? styles.servicesLinkActive
-                            : ""
+                          link.href === BIS_CRS_PAGE_PATH ? styles.servicesLinkActive : ""
                         }`}
                       >
                         {link.label}

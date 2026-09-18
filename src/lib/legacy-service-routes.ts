@@ -15,7 +15,7 @@ const LEGACY_SERVICE_SLUG_MAP: Record<string, string> = {
   "biscrs-registration": SERVICE_ROUTES.bisCrs,
   "bis-crs-registration": SERVICE_ROUTES.bisCrs,
   "bis-crs": SERVICE_ROUTES.bisCrs,
-  "bis-certification": SERVICE_ROUTES.bisCrs,
+  "bis-certification": SERVICE_ROUTES.bisCertification,
   "bis-isi-mark": SERVICE_ROUTES.bisIsi,
   "isi-mark-certification": SERVICE_ROUTES.bisIsi,
   "bis-fmcs": SERVICE_ROUTES.bisFmcs,

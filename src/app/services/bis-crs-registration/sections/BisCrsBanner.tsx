@@ -6,8 +6,8 @@ export function BisCrsBanner() {
   return (
     <ServicePageBanner
       src={bisBanner}
-      alt="BIS Certification Services in India — Complete BIS CRS, ISI and FMCS Registration Support"
-      label="BIS Certification Services banner"
+      alt="BIS CRS Registration in India — Trusted consultant for electronics, IT and solar products"
+      label="BIS CRS Registration banner"
     />
   );
 }

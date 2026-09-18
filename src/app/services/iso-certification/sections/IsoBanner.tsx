@@ -6,7 +6,7 @@ export function IsoBanner() {
   return (
     <ServicePageBanner
       src={isoBanner}
-      alt="ISO Certification in India — Quality, environmental and safety management systems"
+      alt="ISO Certification in India — Structured, audit-ready management system certification support"
       label="ISO Certification banner"
     />
   );

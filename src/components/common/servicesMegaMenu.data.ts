@@ -29,6 +29,7 @@ export type MegaMenuColumn = {
 
 export const SERVICE_ROUTES = {
   bisCrs: "/services/bis-crs-registration",
+  bisCertification: "/services/bis-certification",
   bisIsi: "/services/bis-isi-mark-certification",
   bisFmcs: "/services/bis-fmcs-certification",
   bee: "/services/bee-certification",
@@ -98,9 +99,9 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
         icon: { type: "glyph", glyph: "FM", tone: "navy" },
       },
       {
-        label: "BIS CERTIFICATION FOR TOYS",
-        slug: SERVICE_PAGE_ANCHORS.bis,
-        icon: { type: "glyph", glyph: "TOY", tone: "teal" },
+        label: "BIS CERTIFICATION",
+        slug: SERVICE_ROUTES.bisCertification,
+        icon: { type: "image", src: bisLogo, alt: "BIS Certification" },
       },
       {
         label: "CCOE / PESO CERTIFICATION",

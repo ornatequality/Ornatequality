@@ -6,7 +6,7 @@ export function IecBanner() {
   return (
     <ServicePageBanner
       src={iecBanner}
-      alt="IEC Registration in India — Import Export Code from DGFT for importers and exporters"
+      alt="IEC Registration Consultant in India — Import Export Code registration, annual update and reactivation"
       label="IEC Registration banner"
     />
   );

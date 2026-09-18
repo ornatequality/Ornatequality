@@ -3,9 +3,9 @@ import { BisCrsBanner } from "./sections/BisCrsBanner";
 import { BisCrsPageContent } from "./sections/BisCrsPageContent";
 
 export const metadata: Metadata = {
-  title: "BIS CRS Registration | Ornate Quality Services",
+  title: "BIS CRS Registration in India | Ornate Quality Services",
   description:
-    "Complete BIS CRS, ISI & FMCS registration support for manufacturers and importers in India. End-to-end documentation, testing, and certification by Ornate Quality Services.",
+    "Get BIS CRS registration handled end to end — documentation, test report coordination, application filing, and R-Number tracking for electronics, IT, and solar products in India.",
 };
 
 export default function BisCrsRegistrationPage() {

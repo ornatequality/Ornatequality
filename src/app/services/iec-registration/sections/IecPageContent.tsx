@@ -16,16 +16,134 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   IEC_TOC,
-  WHO_NEEDS_ROWS,
-  DOCUMENTS_ROWS,
-  PENALTIES_ROWS,
-  PROCESS_STEPS,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  KEY_HIGHLIGHTS_HEADING,
+  KEY_HIGHLIGHTS,
+  HERO_CTAS,
+  INTRO_LEAD,
+  INTRO_PARAGRAPHS,
+  INTRO_PARTS,
+  WHAT_IS_INTRO,
+  WHAT_IS_PARTS,
+  WHAT_IS_EXPERT_NOTE,
+  WHAT_IS_DIGITAL,
+  WHAT_IS_INDUSTRY,
+  WHY_IMPORTANT_ITEMS,
+  WHO_NEEDS_INTRO,
+  WHO_NEEDS_ITEMS,
+  WHO_NEEDS_SERVICE_NOTE,
+  WHO_NEEDS_GOVERNMENT,
+  ENTITY_TABLE_HEADING,
+  ENTITY_ROWS,
+  ENTITY_TABLE_NOTE,
   BENEFITS_ITEMS,
+  FEATURES_ITEMS,
+  ELIGIBILITY_INTRO,
+  ELIGIBILITY_WHO_HEADING,
+  ELIGIBILITY_WHO,
+  ELIGIBILITY_BASIC_HEADING,
+  ELIGIBILITY_BASIC,
+  ELIGIBILITY_EXEMPT_HEADING,
+  ELIGIBILITY_EXEMPT,
+  ELIGIBILITY_NOTE,
+  ACTIVITY_TABLE_HEADING,
+  ACTIVITY_ROWS,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_CHECKLIST_HEADING,
+  DOCUMENTS_CHECKLIST,
+  DOCUMENTS_CLOSING,
+  PROCESS_INTRO,
+  PROCESS_LEAD,
+  PROCESS_STEPS,
+  TIMELINE_INTRO,
+  TIMELINE_FACTORS_HEADING,
+  TIMELINE_FACTORS,
+  DELAYS_HEADING,
+  DELAYS_ROWS,
+  TIMELINE_NOTE,
+  COST_INTRO,
+  COST_ITEMS,
+  COST_NOTE,
+  VALIDITY_INTRO,
+  VALIDITY_STATES,
+  VALIDITY_CLOSING,
+  RENEWAL_INTRO,
+  RENEWAL_PARTS,
+  RENEWAL_NOTE,
+  CHALLENGES_ITEMS,
+  HOW_WE_HELP_INTRO,
+  HOW_WE_HELP_ITEMS,
+  HOW_WE_HELP_NOTE,
+  WHY_CHOOSE_ITEMS,
+  WHY_CHOOSE_CTAS,
+  INDUSTRIES_ITEMS,
+  WHERE_WE_WORK_HEADING,
+  WHERE_WE_WORK,
+  LOCATION_ROWS,
+  LOCATION_CLOSING,
+  MISTAKES_ROWS,
+  EXPERT_TIPS,
+  COMPARISON_ROWS,
+  COMPARISON_NOTE,
+  TERMS_ROWS,
   FAQ_ITEMS,
+  CTA_HEADING,
+  CTA_PARAGRAPHS,
+  CTA_BUTTONS,
+  type TableRow,
 } from "../data/iecContent";
 
 const IEC_PAGE_PATH = "/services/iec-registration";
 
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+type DataTableProps = {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+};
+
+function DataTable({ columns, rows, getRowKey }: DataTableProps) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function CallbackForm() {
   return (
@@ -44,7 +162,6 @@ function CallbackForm() {
   );
 }
 
-
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -60,18 +177,35 @@ function FaqAccordion() {
               aria-expanded={isOpen}
               onClick={() => setOpenIndex(isOpen ? null : i)}
             >
-              {item.q}
-              <span
-                className={`${styles.faqChevron} ${isOpen ? styles.faqChevronOpen : ""}`}
-                aria-hidden="true"
-              >
-                ▾
+              <span>{item.q}</span>
+              <span className={styles.faqIcon} aria-hidden="true">
+                {isOpen ? "−" : "+"}
               </span>
             </button>
-            {isOpen && <p className={styles.faqAnswer}>{item.a}</p>}
+            {isOpen ? <div className={styles.faqAnswer}>{item.a}</div> : null}
           </div>
         );
       })}
+    </div>
+  );
+}
+
+function CtaRow({
+  items,
+}: {
+  items: { label: string; href: string }[];
+}) {
+  return (
+    <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+      {items.map((item, index) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          className={index === 0 ? styles.ctaBtnPrimary : styles.ctaBtnSecondary}
+        >
+          {item.label}
+        </Link>
+      ))}
     </div>
   );
 }
@@ -137,168 +271,193 @@ export function IecPageContent() {
           </nav>
 
           <article className={styles.main}>
-            <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                IEC Registration in India — Complete Guide to Getting Your Import Export Code
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    If you want to import or export goods from India — whether you are a manufacturer
-                    looking to sell overseas, a trader sourcing products internationally, or a startup
-                    entering the global market — the Import Export Code, commonly known as IEC, is the
-                    first compliance step you need to take.
-                  </p>
-                  <p className={styles.sectionText}>
-                    IEC is a 10-digit unique identification code issued by the Directorate General of
-                    Foreign Trade (DGFT) under the Ministry of Commerce and Industry. It is mandatory for
-                    any individual or business entity engaged in the import or export of goods and services
-                    from India. Without a valid IEC, customs will not clear your shipment — either incoming
-                    or outgoing.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we have been helping importers, exporters, manufacturers,
-                    and traders obtain their IEC registration quickly and correctly since 2013. In this
-                    guide, we cover everything you need to know — what IEC is, who needs it, how to get it,
-                    what it costs, and how to keep it updated.
-                  </p>
-                </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>
+                <strong>{BANNER_SUBTITLE}</strong>
+              </p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <h3 className={styles.subsectionTitle}>{KEY_HIGHLIGHTS_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {KEY_HIGHLIGHTS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <CtaRow items={HERO_CTAS} />
+            </div>
 
+            <section id="introduction" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Introduction</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="IEC registration and DGFT import export code support"
+                    alt="IEC registration support for importers and exporters in India"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Ready to start importing or exporting? Contact our team for a free IEC consultation and
-                    get your code within days.
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INTRO_LEAD}</p>
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
               </div>
+              {INTRO_PARTS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
             </section>
 
             <section id="what-is-iec" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is Import Export Code (IEC) Registration?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    Import Export Code (IEC) is a mandatory 10-digit business identification number issued by
-                    DGFT — the Directorate General of Foreign Trade — to any individual or business entity that
-                    wants to import goods into India or export goods from India. The code is linked to your PAN
-                    and serves as your identity in all international trade transactions.
-                  </p>
-                  <p className={styles.sectionText}>
-                    IEC is issued under the Foreign Trade (Development and Regulation) Act, 1992, and is
-                    governed by the Foreign Trade Policy of India. Every importer and exporter must quote
-                    their IEC in all customs documentation, bank remittances for international payments, and
-                    DGFT filings related to foreign trade.
-                  </p>
-                  <p className={styles.sectionText}>
-                    The IEC is a lifetime registration — once issued, it does not expire as long as it is kept
-                    updated annually on the DGFT portal. It is required for customs clearance, opening a foreign
-                    currency account, receiving foreign remittances for export proceeds, and accessing various
-                    government export incentive schemes.
-                  </p>
-                  <p className={styles.sectionText}>
-                    Importantly, IEC is required for the import of goods even if the importer does not intend to
-                    sell those goods commercially — including products imported for personal use in commercial
-                    quantities or for product certification purposes such as BIS testing.
-                  </p>
+              <h2 className={styles.sectionTitle}>What Is IEC Registration?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHAT_IS_INTRO}</p>
+              {WHAT_IS_PARTS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                  {item.bullets ? (
+                    <ul className={styles.bulletList}>
+                      {item.bullets.map((bullet) => (
+                        <li key={bullet.slice(0, 48)} className={styles.textJustify}>
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>IE</span>
-                  <span className={styles.whatIsLabel}>DGFT IMPORT EXPORT CODE</span>
-                </div>
-              </div>
+              ))}
+              <div className={styles.noteBox}>{WHAT_IS_EXPERT_NOTE}</div>
+              <h3 className={styles.subsectionTitle}>{WHAT_IS_DIGITAL.title}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHAT_IS_DIGITAL.text}</p>
+              <h3 className={styles.subsectionTitle}>{WHAT_IS_INDUSTRY.title}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHAT_IS_INDUSTRY.text}</p>
             </section>
 
-            <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why IEC Registration Is Essential for Your Business</h2>
-              <p className={styles.sectionText}>
-                IEC is not just a compliance formality — it is the foundational legal identity for any business
-                engaged in international trade in India. Here is why getting your IEC right matters.
-              </p>
-              <h3 className={styles.subsectionTitle}>Mandatory for All Import and Export Activity</h3>
-              <p className={styles.sectionText}>
-                The Foreign Trade Policy of India makes IEC mandatory for every entity engaged in the import or
-                export of goods. Customs authorities require a valid IEC for clearance of all commercial
-                shipments. Without IEC, your goods will be held at customs and cannot be cleared for entry into
-                or exit from India.
-              </p>
-              <h3 className={styles.subsectionTitle}>Required for All Downstream Compliance</h3>
-              <p className={styles.sectionText}>
-                IEC is a prerequisite for virtually every other import-related compliance registration in India.
-                LMPC Registration requires IEC. EPR Registration for importers requires IEC. GeM seller
-                registration for importers requires IEC. WPC ETA applications for importers require IEC. Getting
-                your IEC sorted first saves time and avoids delays down the line.
-              </p>
-              <h3 className={styles.subsectionTitle}>Access to Export Incentive Schemes</h3>
-              <p className={styles.sectionText}>
-                The Government of India offers export incentive schemes — including RoDTEP, MEIS successor
-                schemes, and duty drawback benefits. All of these require a valid IEC as the foundational
-                registration. Exporters without IEC cannot access any government export incentives.
-              </p>
-              <h3 className={styles.subsectionTitle}>Foreign Currency Transactions and Bank Remittances</h3>
-              <p className={styles.sectionText}>
-                Banks in India require a valid IEC for processing foreign currency transactions related to
-                international trade — including advance payments for imports, export proceeds, and trade finance
-                facilities. Without IEC, your bank cannot process international trade remittances.
-              </p>
-              <h3 className={styles.subsectionTitle}>Business Credibility with International Partners</h3>
-              <p className={styles.sectionText}>
-                For international buyers, suppliers, and business partners, IEC registration is a basic signal
-                that your business is legally authorised to engage in international trade in India. Providing your
-                IEC number in trade correspondence and contracts demonstrates regulatory compliance and builds
-                confidence with foreign counterparts.
-              </p>
+            <section id="why-important" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Is IEC Registration Important?</h2>
+              {WHY_IMPORTANT_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
             </section>
 
             <section id="who-needs" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Who Needs IEC Registration in India?</h2>
-              <p className={styles.sectionText}>
-                IEC is required for a wide range of business activities involving cross-border trade. The
-                following table provides a clear breakdown of who needs IEC registration and for what purpose.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Business Type</th>
-                    <th scope="col">Activity</th>
-                    <th scope="col">IEC Required?</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {WHO_NEEDS_ROWS.map((row) => (
-                    <tr key={row.businessType}>
-                      <th scope="row">{row.businessType}</th>
-                      <td>{row.activity}</td>
-                      <td>{row.required}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                There are limited exemptions from IEC — including imports and exports by the Central Government,
-                certain categories of personal baggage, and imports for personal use not exceeding prescribed
-                limits. For any commercial import or export activity, IEC is mandatory without exception.
-              </p>
+              <h2 className={styles.sectionTitle}>Who Needs IEC Registration?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+              {WHO_NEEDS_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <div className={styles.noteBox}>{WHO_NEEDS_SERVICE_NOTE}</div>
+              <h3 className={styles.subsectionTitle}>{WHO_NEEDS_GOVERNMENT.title}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_GOVERNMENT.text}</p>
+              <h3 className={styles.subsectionTitle}>{ENTITY_TABLE_HEADING}</h3>
+              <DataTable
+                columns={[
+                  { key: "entity", header: "Entity Type", scope: "row" },
+                  { key: "applies", header: "Applies Using" },
+                  { key: "signing", header: "Typical Signing Route" },
+                ]}
+                rows={ENTITY_ROWS}
+                getRowKey={(row) => row.entity}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ENTITY_TABLE_NOTE}</p>
+            </section>
+
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits of IEC Registration</h2>
+              <ul className={styles.bulletList}>
+                {BENEFITS_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="key-features" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Features of IEC Registration</h2>
+              <ul className={styles.bulletList}>
+                {FEATURES_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Eligibility for IEC Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_WHO_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_WHO.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_BASIC_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_BASIC.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_EXEMPT_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_EXEMPT}</p>
+              <div className={styles.noteBox}>{ELIGIBILITY_NOTE}</div>
+              <h3 className={styles.subsectionTitle}>{ACTIVITY_TABLE_HEADING}</h3>
+              <DataTable
+                columns={[
+                  { key: "activity", header: "Activity", scope: "row" },
+                  { key: "position", header: "IEC Position" },
+                ]}
+                rows={ACTIVITY_ROWS}
+                getRowKey={(row) => row.activity}
+              />
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Documents Required for IEC Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document", scope: "row" },
+                  { key: "purpose", header: "Purpose" },
+                  { key: "mandatory", header: "Mandatory / Optional" },
+                  { key: "notes", header: "Additional Notes" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              <h3 className={styles.subsectionTitle}>{DOCUMENTS_CHECKLIST_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {DOCUMENTS_CHECKLIST.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_CLOSING}</p>
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>IEC Registration Process — Step by Step</h2>
-              <p className={styles.sectionText}>
-                IEC registration is processed entirely online through the DGFT portal. Here is a complete
-                breakdown of every step and how Ornate Quality Services manages the process for you.
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step IEC Registration Process</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_LEAD}</p>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
@@ -312,227 +471,220 @@ export function IecPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
+                  {step.note ? <div className={styles.noteBox}>{step.note}</div> : null}
+                  {step.deliverable ? (
+                    <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                      <strong>{step.deliverable}</strong>
+                    </p>
+                  ) : null}
                 </div>
               ))}
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>IEC Registration Eligibility and Requirements</h2>
-              <p className={styles.sectionText}>
-                IEC can be obtained by any Indian individual or business entity engaged in import or export
-                activity. The following eligibility requirements apply.
-              </p>
-              <h3 className={styles.subsectionTitle}>For Sole Proprietors and Individuals</h3>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Timeline for IEC Registration</h2>
+              {TIMELINE_INTRO.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{TIMELINE_FACTORS_HEADING}</h3>
               <ul className={styles.bulletList}>
-                <li>Valid individual PAN card</li>
-                <li>Aadhaar card linked to the applicant&apos;s mobile number — for OTP-based authentication</li>
-                <li>Active bank account in the applicant&apos;s name — savings or current account</li>
-                <li>Address proof — Aadhaar, passport, voter ID, or utility bill</li>
-                <li>Passport-size photograph of the applicant</li>
+                {TIMELINE_FACTORS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
               </ul>
-              <h3 className={styles.subsectionTitle}>For Private Limited Companies, LLPs, and Partnerships</h3>
-              <ul className={styles.bulletList}>
-                <li>Company PAN card</li>
-                <li>Certificate of Incorporation or LLP Agreement or Partnership Deed</li>
-                <li>Registered office address proof — rental agreement or utility bill</li>
-                <li>Active current account in the company name</li>
-                <li>Digital Signature Certificate (DSC) of the authorised signatory</li>
-                <li>Board Resolution or authorisation letter for the applicant signatory</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>For Trusts, Societies, and Other Entities</h3>
-              <p className={styles.sectionText}>
-                Trusts, registered societies, government undertakings, and other entities can also obtain IEC
-                with appropriate registration documents and governing body resolutions. Our team advises on the
-                specific requirements for non-standard entity types.
-              </p>
-              <p className={styles.sectionText}>
-                Not sure which documents apply to your business type? Our team provides a precise document
-                checklist after a quick initial review. Contact us before you begin gathering documents.
-              </p>
-            </section>
-
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for IEC Registration</h2>
-              <p className={styles.sectionText}>
-                The following documents are required for IEC registration on the DGFT portal. Requirements vary
-                by entity type.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Proprietor / Individual</th>
-                    <th scope="col">Company / LLP</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_ROWS.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.proprietor}</td>
-                      <td>{row.company}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                All documents must be in the same name and address as the PAN and bank account. Discrepancies
-                between documents are the most common cause of IEC application rejection. Our team verifies all
-                documents for consistency before filing.
-              </p>
+              <h3 className={styles.subsectionTitle}>{DELAYS_HEADING}</h3>
+              <DataTable
+                columns={[
+                  { key: "delay", header: "Delay", scope: "row" },
+                  { key: "cause", header: "Cause" },
+                  { key: "prevent", header: "How we prevent it" },
+                ]}
+                rows={DELAYS_ROWS}
+                getRowKey={(row) => row.delay}
+              />
+              <div className={styles.noteBox}>{TIMELINE_NOTE}</div>
             </section>
 
             <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>IEC Registration Cost in India</h2>
-              <p className={styles.sectionText}>
-                IEC registration is one of the most affordable regulatory registrations in India. Here is a
-                complete breakdown of the costs involved.
-              </p>
-              <h3 className={styles.subsectionTitle}>DGFT Government Fee</h3>
-              <p className={styles.sectionText}>
-                The government fee for IEC registration is INR 500 — paid online at the time of application
-                filing on the DGFT portal. This is a one-time fee. There is no annual renewal fee for IEC — only
-                the free annual update on the DGFT portal is required each year.
-              </p>
-              <h3 className={styles.subsectionTitle}>Digital Signature Certificate (DSC) — If Required</h3>
-              <p className={styles.sectionText}>
-                Companies and LLPs applying for IEC need a valid Digital Signature Certificate for the
-                authorised signatory. DSC costs typically range from INR 1,000 to INR 2,500 depending on the class
-                and validity period required.
-              </p>
-              <h3 className={styles.subsectionTitle}>Professional Service Fees</h3>
-              <p className={styles.sectionText}>
-                Ornate Quality Services charges a professional fee for end-to-end IEC registration management —
-                from document review and DGFT portal filing to certificate delivery and annual update management.
-                Our fees are transparent, fixed, and significantly lower than the cost of dealing with portal
-                rejections.
-              </p>
-              <p className={styles.sectionText}>
-                IEC registration is one of the most affordable compliance steps your business will ever take —
-                and one of the most impactful. Contact us for a free consultation and we will get it done for you
-                quickly.
-              </p>
+              <h2 className={styles.sectionTitle}>Cost Factors for IEC Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_INTRO}</p>
+              {COST_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <div className={styles.noteBox}>{COST_NOTE}</div>
             </section>
 
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>IEC Validity and Annual Update Requirements</h2>
-              <p className={styles.sectionText}>
-                IEC is a lifetime registration — it does not expire as long as it is updated annually on the DGFT
-                portal. This makes IEC fundamentally different from most other business registrations, which
-                require periodic renewal with fees.
-              </p>
-              <h3 className={styles.subsectionTitle}>Annual Update — April to June Every Year</h3>
-              <p className={styles.sectionText}>
-                DGFT requires all IEC holders to log in to the DGFT portal and confirm or update their IEC profile
-                details every financial year between April 1 and June 30. IECs that are not updated within this
-                window are marked as inactive by DGFT. An inactive IEC cannot be used for customs clearance, bank
-                remittances, or any other trade purpose until it is reactivated.
-              </p>
-              <h3 className={styles.subsectionTitle}>Updating IEC Details After Changes</h3>
-              <p className={styles.sectionText}>
-                Any change to the IEC holder&apos;s business details — including address, bank account, mobile
-                number, or entity name — must be updated on the DGFT portal. Changes must be made promptly to
-                avoid discrepancies with customs documentation and bank records.
-              </p>
+              <h2 className={styles.sectionTitle}>Validity of the Import Export Code</h2>
+              {VALIDITY_INTRO.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <ul className={styles.bulletList}>
+                {VALIDITY_STATES.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+              {VALIDITY_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Key Benefits of IEC Registration</h2>
+            <section id="renewal" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Renewal, Annual Update, Modification and Surrender</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_INTRO}</p>
+              {RENEWAL_PARTS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                  {item.bullets ? (
+                    <ul className={styles.bulletList}>
+                      {item.bullets.map((bullet) => (
+                        <li key={bullet} className={styles.textJustify}>
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ))}
+              <div className={styles.noteBox}>{RENEWAL_NOTE}</div>
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges in IEC Registration</h2>
+              {CHALLENGES_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How We Help With IEC Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HOW_WE_HELP_INTRO}</p>
+              {HOW_WE_HELP_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <div className={styles.noteBox}>{HOW_WE_HELP_NOTE}</div>
+            </section>
+
+            <section id="why-choose" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Ornate Quality Service Pvt Ltd</h2>
+              {WHY_CHOOSE_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <CtaRow items={WHY_CHOOSE_CTAS} />
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries We Serve</h2>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
+                {INDUSTRIES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{WHERE_WE_WORK_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHERE_WE_WORK}</p>
+              <DataTable
+                columns={[
+                  { key: "location", header: "Location", scope: "row" },
+                  { key: "coverage", header: "Coverage" },
+                ]}
+                rows={LOCATION_ROWS}
+                getRowKey={(row) => row.location}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{LOCATION_CLOSING}</p>
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes in IEC Registration</h2>
+              <DataTable
+                columns={[
+                  { key: "mistake", header: "Mistake", scope: "row" },
+                  { key: "impact", header: "Impact" },
+                  { key: "avoid", header: "How to avoid it" },
+                ]}
+                rows={MISTAKES_ROWS}
+                getRowKey={(row) => row.mistake}
+              />
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips</h2>
+              <ul className={styles.bulletList}>
+                {EXPERT_TIPS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
                 ))}
               </ul>
             </section>
 
-            <section id="penalties" className={styles.section}>
+            <section id="comparison" className={styles.section}>
               <h2 className={styles.sectionTitle}>
-                Consequences of Importing or Exporting Without IEC
+                Doing It Yourself, an Individual Consultant, or a Professional Firm
               </h2>
-              <p className={styles.sectionText}>
-                Attempting to import or export goods without a valid IEC is a violation of the Foreign Trade
-                (Development and Regulation) Act. The consequences are immediate and operational — not just
-                financial.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Violation</th>
-                    <th scope="col">Consequence</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PENALTIES_ROWS.map((row) => (
-                    <tr key={row.violation}>
-                      <th scope="row">{row.violation}</th>
-                      <td>{row.consequence}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                The most common consequence of IEC non-compliance is operational — a shipment held at customs at
-                the worst possible time. The cost of customs storage, demurrage, and delayed delivery almost
-                always exceeds the cost of getting IEC registered in advance. Our team ensures your IEC is in
-                place before your first shipment, and stays active and updated throughout your business lifecycle.
-              </p>
+              <DataTable
+                columns={[
+                  { key: "factor", header: "Factor", scope: "row" },
+                  { key: "diy", header: "Doing it yourself" },
+                  { key: "consultant", header: "Individual consultant" },
+                  { key: "firm", header: "Professional firm" },
+                ]}
+                rows={COMPARISON_ROWS}
+                getRowKey={(row) => row.factor}
+              />
+              <div className={styles.noteBox}>{COMPARISON_NOTE}</div>
             </section>
 
-            <section id="case-study" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a First-Time Importer Get IEC and Start Operations in 3 Days
-              </h2>
-              <p className={styles.sectionText}>
-                A young entrepreneur from Bengaluru was setting up an import business for consumer electronics
-                accessories — primarily wireless earbuds and phone cases sourced from suppliers in China and
-                Vietnam. She had placed her first order and confirmed a shipment date with her supplier before
-                realising that she did not have an IEC and that her shipment could not be cleared at customs
-                without one.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                With the shipment already in transit and an estimated arrival date at the Nhava Sheva port in 12
-                days, she needed her IEC urgently. She had attempted self-registration on the DGFT portal but the
-                application was rejected because the address on her PAN did not match the address on her GST
-                certificate.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                Our team immediately identified the PAN-GST address discrepancy and guided her through the GST
-                address correction process — processed within 2 working days. Once the addresses were consistent,
-                we prepared her complete IEC application documentation, filed it on the DGFT portal, and managed
-                Aadhaar OTP authentication.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                The IEC was issued within 48 hours of application filing — 9 days before her shipment arrived at the
-                port. She was also advised to begin LMPC Registration for her product range in parallel, which
-                Ornate completed before her second shipment arrived. She now runs a fully compliant import operation.
-              </p>
+            <section id="key-terms" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Terms You Will Encounter</h2>
+              <DataTable
+                columns={[
+                  { key: "term", header: "Term", scope: "row" },
+                  { key: "meaning", header: "What It Means" },
+                ]}
+                rows={TERMS_ROWS}
+                getRowKey={(row) => row.term}
+              />
             </section>
 
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions — IEC Registration</h2>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Expert Assistance for IEC Registration</h2>
-              <p className={styles.ctaText}>
-                Need help with IEC registration, DGFT portal filing, or annual IEC updates? Connect with Ornate
-                Quality Services for complete support and professional guidance for your import-export business.
-              </p>
-              <div className={styles.ctaButtons}>
-                <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
-                </Link>
-                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Expert Consultation
-                </a>
-              </div>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{CTA_HEADING}</h2>
+              {CTA_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <CtaRow items={CTA_BUTTONS} />
             </section>
           </article>
 

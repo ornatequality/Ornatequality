@@ -16,16 +16,151 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   GEM_TOC,
-  GEM_CATEGORY_ROWS,
-  DOCUMENTS_ROWS,
-  CHALLENGES_ROWS,
-  PROCESS_STEPS,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  WHY_COME_HEADING,
+  WHY_COME_ITEMS,
+  INTRO_PARAGRAPHS,
+  INTRO_NOTE,
+  WHAT_IS_PARAGRAPHS,
+  WHAT_REGISTRATION_DOES_ROWS,
+  WHO_RUNS_PARAGRAPHS,
+  WHAT_IT_IS_NOT,
+  WHY_REGISTER_ITEMS,
+  WHO_NEEDS_INTRO,
+  WHO_NEEDS_ROWS,
+  WHO_NEEDS_CLOSING,
+  TERMS_INTRO,
+  TERMS_ROWS,
   BENEFITS_ITEMS,
+  SERVICES_INCLUDE_ITEMS,
+  SERVICES_INCLUDE_CLOSING,
+  ELIGIBILITY_WHO_HEADING,
+  ELIGIBILITY_WHO,
+  ELIGIBILITY_BASIC_HEADING,
+  ELIGIBILITY_BASIC,
+  ELIGIBILITY_CARE_HEADING,
+  ELIGIBILITY_CARE,
+  ELIGIBILITY_NOTE,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_CLOSING,
+  PROCESS_INTRO,
+  PROCESS_STEPS,
+  PROCESS_NOTE,
+  TIMELINE_INTRO,
+  TIMELINE_ROWS,
+  TIMELINE_CLOSING,
+  COST_INTRO,
+  COST_DRIVES_HEADING,
+  COST_FACTORS,
+  COST_CLOSING,
+  VALIDITY_PARAGRAPHS,
+  VALIDITY_ITEMS,
+  VALIDITY_CLOSING,
+  RENEWAL_ATTENTION_HEADING,
+  RENEWAL_ITEMS,
+  RENEWAL_PARAGRAPH,
+  RENEWAL_PRECAUTIONS_HEADING,
+  RENEWAL_PRECAUTIONS,
+  COMPLIANCE_INTRO,
+  COMPLIANCE_INSTRUMENTS_HEADING,
+  COMPLIANCE_INSTRUMENTS,
+  COMPLIANCE_LOCAL_HEADING,
+  COMPLIANCE_LOCAL,
+  COMPLIANCE_BENEFITS_HEADING,
+  COMPLIANCE_BENEFITS,
+  COMPLIANCE_CONDUCT_HEADING,
+  COMPLIANCE_CONDUCT,
+  OEM_INTRO,
+  OEM_STATUS_HEADING,
+  OEM_STATUS,
+  OEM_BRAND_HEADING,
+  OEM_BRAND,
+  OEM_RESELLER_HEADING,
+  OEM_RESELLER,
+  OEM_SEGMENTS_HEADING,
+  OEM_SEGMENTS,
+  VA_WHAT_HEADING,
+  VA_WHAT,
+  VA_WHO_HEADING,
+  VA_WHO,
+  VA_DO_HEADING,
+  VA_DO,
+  VA_PRACTICAL_HEADING,
+  VA_PRACTICAL,
+  CHALLENGES_ITEMS,
+  HOW_WE_HELP_ITEMS,
+  WHY_CHOOSE_ITEMS,
+  INDUSTRIES_ROWS,
+  INDUSTRIES_CLOSING,
+  PERSONAS_INTRO,
+  PERSONAS_ROWS,
+  PERSONAS_CLOSING,
+  LOCATIONS_ROWS,
+  LOCATIONS_CLOSING,
+  MISTAKES_ITEMS,
+  EXPERT_TIPS,
+  EXPERT_TIPS_CLOSING,
+  TENDERING_ROWS,
+  SELLER_VS_OEM_ROWS,
+  COMPARISON_NOTE,
   FAQ_ITEMS,
+  CTA_HEADING,
+  CTA_PARAGRAPHS,
+  CTA_TAGLINE,
+  type TableRow,
 } from "../data/gemContent";
 
 const GEM_PAGE_PATH = "/services/gem-registration";
 
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+type DataTableProps = {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+};
+
+function DataTable({ columns, rows, getRowKey }: DataTableProps) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function CallbackForm() {
   return (
@@ -43,7 +178,6 @@ function CallbackForm() {
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -137,176 +271,190 @@ export function GemPageContent() {
           </nav>
 
           <article className={styles.main}>
-            <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                GeM Portal Registration in India — Complete Guide for Manufacturers, Suppliers &amp;
-                Service Providers
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    India&apos;s central government, state governments, and public sector undertakings
-                    collectively spend lakhs of crores every year on procurement — and since 2016, a
-                    growing share of that spending happens through a single platform: the Government
-                    e-Marketplace, or GeM.
-                  </p>
-                  <p className={styles.sectionText}>
-                    GeM is India&apos;s official online procurement portal for government buyers. Any
-                    business that wants to supply products or services to government departments, ministries,
-                    defence establishments, railways, PSUs, or autonomous bodies must be registered as a seller
-                    on the GeM portal. Without GeM registration, you simply cannot participate in government
-                    procurement — regardless of how good your product or how competitive your pricing.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we help manufacturers, traders, and service providers complete
-                    their GeM registration correctly and efficiently — and we help them understand the
-                    compliance requirements, including BIS certification, ISI Mark, and other product
-                    certifications that are often mandatory for GeM listings.
-                  </p>
-                </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>
+                <strong>{BANNER_SUBTITLE}</strong>
+              </p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <h3 className={styles.subsectionTitle}>{WHY_COME_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {WHY_COME_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+                <Link href="/contact" className={styles.ctaBtnPrimary}>
+                  Talk to a GeM registration expert
+                </Link>
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Send documents for GeM registration review
+                </Link>
+              </div>
+            </div>
 
+            <section id="introduction" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Introduction</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="GeM portal registration and government procurement compliance support"
+                    alt="GeM portal registration support for sellers, manufacturers and service providers"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Ready to sell to the Indian government? Contact our team for a free GeM registration
-                    consultation and we will walk you through the entire process.
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
               </div>
+              <div className={styles.noteBox}>{INTRO_NOTE}</div>
             </section>
 
             <section id="what-is-gem" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is GeM Portal Registration?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    GeM — Government e-Marketplace — is a digital procurement platform launched by the
-                    Government of India in 2016 under the Ministry of Commerce and Industry. It serves as a
-                    one-stop platform for government buyers to procure goods and services directly from
-                    registered sellers — replacing the traditional, paper-heavy tendering process with a
-                    transparent, efficient digital marketplace.
-                  </p>
-                  <p className={styles.sectionText}>
-                    GeM Registration is the process by which a business registers as a seller on the GeM
-                    portal. Once registered, the seller can list their products or services, participate in
-                    government bids and reverse auctions, receive orders from government buyers, and get paid
-                    directly through the platform.
-                  </p>
-                  <p className={styles.sectionText}>
-                    GeM registration is open to manufacturers, traders, startups, MSMEs, self-help groups, and
-                    service providers. The platform gives businesses of all sizes direct access to one of the
-                    world&apos;s largest government procurement markets — without the need for agents,
-                    intermediaries, or complex tendering processes.
-                  </p>
-                  <p className={styles.sectionText}>
-                    As of 2024, GeM has over 60 lakh registered sellers and has facilitated procurement worth
-                    over INR 4 lakh crore. For any business that manufactures or supplies products that
-                    government departments buy, GeM registration is not just an option — it is a significant
-                    business opportunity that most cannot afford to ignore.
-                  </p>
-                </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>Ge</span>
-                  <span className={styles.whatIsLabel}>GOVERNMENT e-MARKETPLACE</span>
-                </div>
-              </div>
+              <h2 className={styles.sectionTitle}>What Is GeM Registration?</h2>
+              {WHAT_IS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>What registration actually does</h3>
+              <DataTable
+                columns={[
+                  { key: "purpose", header: "Purpose", scope: "row" },
+                  { key: "means", header: "What it means for your business" },
+                ]}
+                rows={WHAT_REGISTRATION_DOES_ROWS}
+                getRowKey={(row) => row.purpose}
+              />
+              <h3 className={styles.subsectionTitle}>Who runs the platform</h3>
+              {WHO_RUNS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>What it is not</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHAT_IT_IS_NOT}</p>
             </section>
 
-            <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why GeM Registration Is a Smart Business Decision</h2>
-              <p className={styles.sectionText}>
-                GeM is not just another sales channel — for many manufacturers and suppliers, it represents
-                the single largest addressable market opportunity in India. Here is why GeM registration
-                matters.
-              </p>
-              <h3 className={styles.subsectionTitle}>Direct Access to Government Buyers Across India</h3>
-              <p className={styles.sectionText}>
-                GeM gives registered sellers direct access to over 50,000 government buyer organisations —
-                including central government ministries, state government departments, defence establishments,
-                railways, PSUs, educational institutions, and hospitals. A single GeM listing can generate
-                orders from buyers across the entire country.
-              </p>
-              <h3 className={styles.subsectionTitle}>No Middlemen — Direct Orders and Payments</h3>
-              <p className={styles.sectionText}>
-                Orders come directly from government buyers to registered sellers, and payments are processed
-                through the platform — typically within a defined period after delivery. For businesses
-                accustomed to the delays of traditional government procurement, GeM&apos;s structured payment
-                process is a significant improvement.
-              </p>
-              <h3 className={styles.subsectionTitle}>Mandatory for Government Supply</h3>
-              <p className={styles.sectionText}>
-                The Government of India has made it mandatory for central government departments to procure goods
-                and services through GeM above specified thresholds. For product categories listed on GeM,
-                government departments cannot place orders outside the platform. GeM registration is the only
-                official channel.
-              </p>
-              <h3 className={styles.subsectionTitle}>Level Playing Field for MSMEs and Startups</h3>
-              <p className={styles.sectionText}>
-                GeM has specific provisions that benefit MSMEs and startups — including purchase preferences,
-                exemptions from earnest money deposits, and dedicated MSME buyer categories. For small and
-                medium manufacturers who previously found government procurement inaccessible, GeM has
-                democratised the opportunity.
-              </p>
-              <h3 className={styles.subsectionTitle}>Product Certification Requirements Create an Advantage</h3>
-              <p className={styles.sectionText}>
-                Many product categories listed on GeM require BIS certification, ISI Mark, or other regulatory
-                certifications as mandatory qualifications. Manufacturers who already have the relevant
-                certifications have a direct competitive advantage — because competitors without certification
-                cannot list in those categories. Ornate Quality Services helps clients get both their product
-                certifications and their GeM registration done together.
-              </p>
+            <section id="why-register" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Register on GeM Portal?</h2>
+              {WHY_REGISTER_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
 
-              <h3 className={styles.subsectionTitle}>What Can You Sell on GeM Portal?</h3>
-              <p className={styles.sectionText}>
-                GeM lists a wide range of product and service categories across virtually every sector of
-                government procurement. The following table covers the major categories available on the GeM
-                portal.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Category</th>
-                    <th scope="col">Common Products / Services</th>
-                    <th scope="col">Key Certification Required</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {GEM_CATEGORY_ROWS.map((row) => (
-                    <tr key={row.category}>
-                      <th scope="row">{row.category}</th>
-                      <td>{row.products}</td>
-                      <td>{row.certification}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                The GeM catalogue is continuously expanding as new product and service categories are added. If
-                your product is not currently listed on GeM, it may be possible to add it as a new category.
-                Our team will assess whether your product can be listed and what certifications are required
-                for your specific category.
-              </p>
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Needs GeM Registration?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "who", header: "Who you are", scope: "row" },
+                  { key: "why", header: "Why you register" },
+                  { key: "extra", header: "What needs extra attention" },
+                ]}
+                rows={WHO_NEEDS_ROWS}
+                getRowKey={(row) => row.who}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_CLOSING}</p>
+            </section>
+
+            <section id="key-terms" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key GeM Terms You Should Know</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TERMS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "term", header: "Term", scope: "row" },
+                  { key: "meaning", header: "What it means" },
+                ]}
+                rows={TERMS_ROWS}
+                getRowKey={(row) => row.term}
+              />
+            </section>
+
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits of Registering Through Us</h2>
+              <ul className={styles.bulletList}>
+                {BENEFITS_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="services-include" className={styles.section}>
+              <h2 className={styles.sectionTitle}>What Our GeM Registration Services Include</h2>
+              <ul className={styles.bulletList}>
+                {SERVICES_INCLUDE_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{SERVICES_INCLUDE_CLOSING}</p>
+            </section>
+
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>GeM Registration Eligibility</h2>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_WHO_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_WHO.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_BASIC_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_BASIC.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{ELIGIBILITY_CARE_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_CARE.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{ELIGIBILITY_NOTE}</div>
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Documents Required for GeM Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document", scope: "row" },
+                  { key: "purpose", header: "Purpose" },
+                  { key: "mandatory", header: "Mandatory / Optional" },
+                  { key: "notes", header: "Notes" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              {DOCUMENTS_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>GeM Portal Registration Process — Step by Step</h2>
-              <p className={styles.sectionText}>
-                The GeM seller registration process is entirely online through the GeM portal. Here is a
-                complete breakdown of every step and how Ornate Quality Services supports you through the
-                process.
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step GeM Registration Process</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_INTRO}</p>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
@@ -320,239 +468,275 @@ export function GemPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
                 </div>
               ))}
+              <div className={styles.noteBox}>{PROCESS_NOTE}</div>
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>GeM Seller Registration Requirements</h2>
-              <p className={styles.sectionText}>
-                To register as a seller on the GeM portal, businesses must meet the following basic eligibility
-                requirements.
-              </p>
-              <h3 className={styles.subsectionTitle}>Business Registration Requirements</h3>
-              <ul className={styles.bulletList}>
-                <li>
-                  Valid business registration in India — proprietorship, partnership, LLP, private limited
-                  company, or public limited company
-                </li>
-                <li>GST registration — mandatory for all GeM sellers</li>
-                <li>PAN card — individual PAN for proprietors, company PAN for registered companies</li>
-                <li>Active bank account in the name of the registered business — for receiving GeM payments</li>
-                <li>Aadhaar-linked mobile number for the primary contact / authorised signatory</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>MSME / Udyam Registration (Recommended)</h3>
-              <p className={styles.sectionText}>
-                While not mandatory for all sellers, MSME/Udyam registration is strongly recommended. GeM has
-                specific purchase preference provisions for MSMEs — meaning government buyers are required to
-                give preference to MSME sellers for orders up to certain values. Sellers with Udyam registration
-                also get exemption from earnest money deposits in many bid categories.
-              </p>
-              <h3 className={styles.subsectionTitle}>Product Certification Requirements</h3>
-              <p className={styles.sectionText}>
-                For many product categories on GeM, sellers must hold valid product certifications before their
-                listings are approved. Common requirements include BIS CRS Registration for electronics, BIS ISI
-                Mark for electrical products and construction materials, FSSAI for food products, and BIS
-                certification for various other mandatory categories.
-              </p>
-              <p className={styles.sectionText}>
-                Ornate Quality Services handles both GeM registration and the underlying product certifications —
-                making us a single point of contact for everything your business needs to sell on GeM.
-              </p>
-              <p className={styles.sectionText}>
-                Not sure what certifications your products need for GeM listing? Our team assesses your complete
-                product portfolio and tells you exactly what is required. Contact us for a free assessment.
-              </p>
-            </section>
-
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for GeM Portal Registration</h2>
-              <p className={styles.sectionText}>
-                The following documents are required for GeM seller registration. Exact requirements may vary
-                based on the business type and product categories.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_ROWS.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Our team prepares a precise document checklist based on your business type and product
-                categories. We review all documents for accuracy and consistency before submission to avoid
-                profile rejection or delays.
-              </p>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>GeM Registration Timeline</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "stage", header: "Stage", scope: "row" },
+                  { key: "pace", header: "What determines the pace" },
+                ]}
+                rows={TIMELINE_ROWS}
+                getRowKey={(row) => row.stage}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_CLOSING}</p>
             </section>
 
             <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>GeM Portal Registration Cost</h2>
-              <p className={styles.sectionText}>
-                GeM seller registration itself is free — there is no government registration fee for becoming a
-                seller on the GeM portal. However, there are other costs associated with GeM participation that
-                businesses should plan for.
-              </p>
-              <h3 className={styles.subsectionTitle}>GeM Registration — No Government Fee</h3>
-              <p className={styles.sectionText}>
-                The GeM portal does not charge a registration fee for sellers. Any service provider claiming to
-                charge a government fee for GeM registration is not legitimate. The registration process is
-                entirely free on the official GeM portal at gem.gov.in.
-              </p>
-              <h3 className={styles.subsectionTitle}>Product Certification Costs</h3>
-              <p className={styles.sectionText}>
-                For product categories that require mandatory certifications — BIS CRS, ISI Mark, WPC approval,
-                and others — the cost of obtaining those certifications must be factored into your GeM
-                preparation budget. Ornate Quality Services provides transparent cost estimates for all required
-                certifications as part of your GeM readiness assessment.
-              </p>
-              <h3 className={styles.subsectionTitle}>GeM Convenience Fee</h3>
-              <p className={styles.sectionText}>
-                GeM charges a convenience fee on transactions processed through the platform. This is a small
-                percentage of the order value deducted from seller payments. The fee varies by product category
-                and order value and applies to all GeM transactions.
-              </p>
-              <h3 className={styles.subsectionTitle}>Professional Service Fees</h3>
-              <p className={styles.sectionText}>
-                Ornate Quality Services charges a professional fee for end-to-end GeM registration management —
-                from document preparation and profile creation to product listing, OEM registration, and ongoing
-                profile maintenance. All fees are quoted transparently before we begin.
-              </p>
-              <p className={styles.sectionText}>
-                For a complete GeM readiness cost estimate including any required product certifications —
-                contact our team for a free consultation.
-              </p>
+              <h2 className={styles.sectionTitle}>GeM Registration Fees and Cost Factors</h2>
+              {COST_INTRO.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{COST_DRIVES_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {COST_FACTORS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+              {COST_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>GeM Registration Validity and Ongoing Profile Management</h2>
-              <p className={styles.sectionText}>
-                GeM seller registration does not have a fixed expiry date. Once registered, your seller profile
-                remains active as long as it is maintained correctly and your supporting documents — particularly
-                GST registration, product certifications, and turnover declarations — remain valid and up to date.
-              </p>
-              <h3 className={styles.subsectionTitle}>Annual Renewal Activities</h3>
-              <p className={styles.sectionText}>
-                While the GeM registration itself does not expire, several elements of the seller profile require
-                annual updates — including turnover declarations, financial year performance data, and renewal of
-                product certifications with fixed validity periods. Failure to update these details can result in
-                profile suspension or listing deactivation.
-              </p>
-              <h3 className={styles.subsectionTitle}>Product Certification Renewals</h3>
-              <p className={styles.sectionText}>
-                Product certifications listed on GeM — such as BIS CRS Registration or ISI Mark Certification —
-                have their own validity periods. When a certification expires, the associated product listings on
-                GeM are automatically flagged as non-compliant. Our team manages certification renewal calendars
-                and ensures your GeM listings are never affected by a lapsed certification.
-              </p>
-              <h3 className={styles.subsectionTitle}>Catalogue Updates</h3>
-              <p className={styles.sectionText}>
-                Government buyers frequently update their procurement requirements, and new product models replace
-                older ones. Keeping your GeM catalogue current — with updated specifications, new models, and
-                competitive pricing — is important for maintaining buyer interest and order flow.
-              </p>
+              <h2 className={styles.sectionTitle}>GeM Registration Validity</h2>
+              {VALIDITY_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <ul className={styles.bulletList}>
+                {VALIDITY_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_CLOSING}</p>
             </section>
 
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Key Benefits of GeM Portal Registration</h2>
+            <section id="renewal" className={styles.section}>
+              <h2 className={styles.sectionTitle}>GeM Registration Renewal</h2>
+              <h3 className={styles.subsectionTitle}>{RENEWAL_ATTENTION_HEADING}</h3>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
+                {RENEWAL_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL_PARAGRAPH}</p>
+              <h3 className={styles.subsectionTitle}>{RENEWAL_PRECAUTIONS_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {RENEWAL_PRECAUTIONS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </section>
 
-            <section id="challenges" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Common GeM Registration Challenges — And How Ornate Solves Them
-              </h2>
-              <p className={styles.sectionText}>
-                GeM registration appears straightforward, but first-time applicants regularly encounter challenges
-                that delay their onboarding. Here are the most common issues and how our team addresses them.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Common Challenge</th>
-                    <th scope="col">How Ornate Solves It</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {CHALLENGES_ROWS.map((row) => (
-                    <tr key={row.challenge}>
-                      <th scope="row">{row.challenge}</th>
-                      <td>{row.solution}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <section id="compliance" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Compliance, Rules and Policy Every GeM Seller Should Know</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COMPLIANCE_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>{COMPLIANCE_INSTRUMENTS_HEADING}</h3>
+              <ul className={styles.bulletList}>
+                {COMPLIANCE_INSTRUMENTS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{COMPLIANCE_LOCAL_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COMPLIANCE_LOCAL}</p>
+              <h3 className={styles.subsectionTitle}>{COMPLIANCE_BENEFITS_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COMPLIANCE_BENEFITS}</p>
+              <h3 className={styles.subsectionTitle}>{COMPLIANCE_CONDUCT_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COMPLIANCE_CONDUCT}</p>
             </section>
 
-            <section id="case-study" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a Noida Electronics Manufacturer Start Selling on GeM
-              </h2>
-              <p className={styles.sectionText}>
-                A Noida-based manufacturer of LED lighting products approached Ornate Quality Services after
-                struggling with GeM registration for over three months. They had attempted self-registration twice
-                — both attempts resulted in profile rejection — and had missed several government procurement
-                opportunities during the delay.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                The manufacturer&apos;s GST registration and company incorporation certificate had a slight address
-                discrepancy that triggered automatic profile rejection on the GeM portal. Additionally, their LED
-                products required BIS ISI Mark Certification for GeM listing in the electrical equipment category
-                — a requirement they were unaware of when they first attempted registration.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                Our team conducted a complete GeM readiness assessment for their product range. We identified the
-                address discrepancy, guided the manufacturer through the GST address correction process, and
-                initiated the BIS ISI Mark Certification application for their LED luminaire range in parallel. Once
-                the GST correction was processed and the BIS certification was obtained, we managed the complete GeM
-                registration — including seller profile creation, OEM registration for their brand, and product
-                listing creation with full technical specifications and certification documents.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                GeM registration was completed successfully within 35 days of engaging Ornate. The manufacturer&apos;s
-                first government order — for LED street lights from a municipal corporation in Uttar Pradesh — came
-                through within 10 days of their products going live on the platform. They have since received orders
-                from multiple government departments and have listed four additional product models on the GeM
-                catalogue.
-              </p>
+            <section id="oem" className={styles.section}>
+              <h2 className={styles.sectionTitle}>GeM OEM Registration and Brand Approval</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{OEM_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>{OEM_STATUS_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{OEM_STATUS}</p>
+              <h3 className={styles.subsectionTitle}>{OEM_BRAND_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{OEM_BRAND}</p>
+              <h3 className={styles.subsectionTitle}>{OEM_RESELLER_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{OEM_RESELLER}</p>
+              <h3 className={styles.subsectionTitle}>{OEM_SEGMENTS_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{OEM_SEGMENTS}</p>
+            </section>
+
+            <section id="vendor-assessment" className={styles.section}>
+              <h2 className={styles.sectionTitle}>GeM Vendor Assessment</h2>
+              <h3 className={styles.subsectionTitle}>{VA_WHAT_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VA_WHAT}</p>
+              <h3 className={styles.subsectionTitle}>{VA_WHO_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VA_WHO}</p>
+              <h3 className={styles.subsectionTitle}>{VA_DO_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VA_DO}</p>
+              <h3 className={styles.subsectionTitle}>{VA_PRACTICAL_HEADING}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VA_PRACTICAL}</p>
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges in GeM Registration</h2>
+              <ul className={styles.bulletList}>
+                {CHALLENGES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How We Help</h2>
+              {HOW_WE_HELP_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="why-choose" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Us</h2>
+              <ul className={styles.bulletList}>
+                {WHY_CHOOSE_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries and Business Types We Serve</h2>
+              <DataTable
+                columns={[
+                  { key: "segment", header: "Segment", scope: "row" },
+                  { key: "supply", header: "Typical GeM supply" },
+                  { key: "compliance", header: "Compliance usually involved" },
+                ]}
+                rows={INDUSTRIES_ROWS}
+                getRowKey={(row) => row.segment}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_CLOSING}</p>
+            </section>
+
+            <section id="personas" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Personas and Locations We Cover</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PERSONAS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "persona", header: "Persona", scope: "row" },
+                  { key: "difference", header: "What is different about their registration" },
+                  { key: "page", header: "Dedicated Page" },
+                ]}
+                rows={PERSONAS_ROWS}
+                getRowKey={(row) => row.persona}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PERSONAS_CLOSING}</p>
+              <DataTable
+                columns={[
+                  { key: "location", header: "Location", scope: "row" },
+                  { key: "coverage", header: "Coverage" },
+                  { key: "page", header: "Dedicated Page" },
+                ]}
+                rows={LOCATIONS_ROWS}
+                getRowKey={(row) => row.location}
+              />
+              {LOCATIONS_CLOSING.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes and How to Avoid Them</h2>
+              <ul className={styles.bulletList}>
+                {MISTAKES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> — {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips for New GeM Sellers</h2>
+              <ul className={styles.bulletList}>
+                {EXPERT_TIPS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{EXPERT_TIPS_CLOSING}</p>
+            </section>
+
+            <section id="comparison" className={styles.section}>
+              <h2 className={styles.sectionTitle}>GeM Registration vs Traditional Government Tendering</h2>
+              <DataTable
+                columns={[
+                  { key: "parameter", header: "Parameter", scope: "row" },
+                  { key: "gem", header: "GeM registration route" },
+                  { key: "traditional", header: "Traditional tendering route" },
+                ]}
+                rows={TENDERING_ROWS}
+                getRowKey={(row) => row.parameter}
+              />
+              <h3 className={styles.subsectionTitle}>GeM Seller vs GeM OEM Registration</h3>
+              <DataTable
+                columns={[
+                  { key: "parameter", header: "Parameter", scope: "row" },
+                  { key: "seller", header: "Seller / reseller" },
+                  { key: "oem", header: "OEM" },
+                ]}
+                rows={SELLER_VS_OEM_ROWS}
+                getRowKey={(row) => `oem-${row.parameter}`}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COMPARISON_NOTE}</p>
             </section>
 
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions — GeM Portal Registration</h2>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Expert Assistance for GeM Portal Registration</h2>
-              <p className={styles.ctaText}>
-                Need help with GeM seller registration, product listing, OEM verification, or BIS certification for
-                GeM categories? Connect with Ornate Quality Services for complete support and professional guidance.
-              </p>
-              <div className={styles.ctaButtons}>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{CTA_HEADING}</h2>
+              {CTA_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CTA_TAGLINE}</p>
+              <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
                 <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
+                  Talk to a GeM registration expert
                 </Link>
-                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Expert Consultation
-                </a>
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Send documents for GeM registration review
+                </Link>
+                <Link href="/contact" className={styles.ctaBtnSecondary}>
+                  Request GeM registration quote
+                </Link>
               </div>
             </section>
           </article>
@@ -619,8 +803,4 @@ export function GemPageContent() {
       </div>
     </div>
   );
-} 
-
-
-
-
+}

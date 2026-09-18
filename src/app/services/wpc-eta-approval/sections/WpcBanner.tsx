@@ -6,7 +6,7 @@ export function WpcBanner() {
   return (
     <ServicePageBanner
       src={wpcBanner}
-      alt="WPC ETA Approval in India — Wireless and telecom product compliance"
+      alt="WPC-ETA Approval Consultant in India — Equipment Type Approval for Wireless Products"
       label="WPC ETA Approval banner"
     />
   );

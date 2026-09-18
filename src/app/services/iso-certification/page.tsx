@@ -3,9 +3,9 @@ import { IsoBanner } from "./sections/IsoBanner";
 import { IsoPageContent } from "./sections/IsoPageContent";
 
 export const metadata: Metadata = {
-  title: "ISO Certification | Ornate Quality Services",
+  title: "ISO Certification in India | Ornate Quality Services",
   description:
-    "Complete ISO Certification support in India. Gap analysis, documentation, implementation, internal audit, certification body coordination, and surveillance readiness by Ornate Quality Services.",
+    "End to end ISO certification handling for manufacturers, exporters, MSMEs and startups — gap analysis, documentation, audit preparation and accredited certification body coordination by Ornate Quality Service Pvt Ltd.",
 };
 
 export default function IsoCertificationPage() {
