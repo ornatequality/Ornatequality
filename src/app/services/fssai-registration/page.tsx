@@ -3,9 +3,9 @@ import { FssaiBanner } from "./sections/FssaiBanner";
 import { FssaiPageContent } from "./sections/FssaiPageContent";
 
 export const metadata: Metadata = {
-  title: "FSSAI Registration | Ornate Quality Services",
+  title: "FSSAI Registration & Food License Consultant in India | Ornate Quality Service Pvt Ltd",
   description:
-    "Complete FSSAI Registration and licence support in India. Basic, State and Central licence filing on FoSCoS, inspection support, label compliance, and renewals by Ornate Quality Services.",
+    "Get FSSAI registration online for your food business with expert support from application to certificate. Basic, state and central license filing on FoSCoS by Ornate Quality Service Pvt Ltd.",
 };
 
 export default function FssaiRegistrationPage() {

@@ -1,12 +1,12 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import cdscoBanner from "@/assests/services/cdsco.webp";
+import cdscoBanner from "@/assests/services/CDSCO Certification.png";
 
 export function CdscoBanner() {
   return (
     <ServicePageBanner
       src={cdscoBanner}
-      alt="CDSCO Registration in India — Medical device and drug regulatory compliance"
+      alt="CDSCO Certification — Drugs, Medical Devices, Cosmetics, Regulatory Approval"
       label="CDSCO Registration banner"
     />
   );

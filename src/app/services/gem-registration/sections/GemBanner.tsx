@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import gemBanner from "@/assests/services/gem-banner.png";
+import gemBanner from "@/assests/services/GEM regestration.png";
 
 export function GemBanner() {
   return (

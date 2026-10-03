@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import tecBanner from "@/assests/services/etc.webp";
+import tecBanner from "@/assests/services/TEC Certification.png";
 
 export function TecBanner() {
   return (

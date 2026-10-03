@@ -16,7 +16,6 @@ export type ProcessStep = {
 };
 
 export const ISO_TOC: TocItem[] = [
-  { id: "what-this-page-covers", label: "What This Page Covers" },
   { id: "introduction", label: "Introduction" },
   { id: "what-is-iso", label: "What Is ISO Certification?" },
   { id: "who-issues", label: "Who Issues the Certificate, and Why Accreditation Decides Its Value" },
@@ -87,9 +86,6 @@ export const HERO_CTA_NOTE =
 export const HERO_CLOSING = [
   "Whether you are searching for an iso certification company, an iso certification agency or an iso certification service provider in india, the question to ask is the same: who prepares you, who certifies you, and who stands behind the certificate. We do the first, coordinate the second, and explain the third before you commit. If all you need is an iso certificate for company records, tenders or a buyer file, tell us that — the scope work is the same, but the timeline planning is different.",
 ];
-
-export const PAGE_COVERS =
-  "This page explains iso certification in india in plain language: what it is, who needs it, how the process runs, what affects the cost, how long the certificate stays valid, and what we do for you at each step. If you are comparing providers, the sections on eligibility, process and cost factors will tell you more than a brochure will.";
 
 export const INTRO_PARAGRAPHS = [
   "Most Indian businesses meet ISO certification for the first time because somebody else asks for it. A tender document lists it. An overseas buyer sends a vendor form. A large customer updates its supplier policy. Suddenly a certificate that nobody thought about becomes the thing standing between you and an order.",

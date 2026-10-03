@@ -62,7 +62,7 @@ import {
   type TableRow,
 } from "../data/bisCrsContent";
 
-const BIS_CRS_PAGE_PATH = "/services/bis-crs-registration";
+const BIS_CRS_PAGE_PATH = "/services/bis-tcs-registration";
 
 type DataTableColumn = {
   key: string;

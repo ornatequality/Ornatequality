@@ -23,7 +23,6 @@ import {
   WHY_WORK_ITEMS,
   HERO_CTA_NOTE,
   HERO_CLOSING,
-  PAGE_COVERS,
   INTRO_PARAGRAPHS,
   WHAT_IS_INTRO,
   WHAT_IS_PARTS,
@@ -293,11 +292,6 @@ export function IsoPageContent() {
                 </Link>
               </div>
             </div>
-
-            <section id="what-this-page-covers" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What This Page Covers</h2>
-              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PAGE_COVERS}</p>
-            </section>
 
             <section id="introduction" className={styles.section}>
               <h2 className={styles.sectionTitle}>Introduction</h2>

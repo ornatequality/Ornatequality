@@ -16,16 +16,95 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   FSSAI_TOC,
-  LICENCE_TYPES_ROWS,
-  PROCESS_STEPS,
-  DOCUMENTS_ROWS,
-  PENALTIES_ROWS,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  INTRO,
+  WHAT_IS,
+  WHY_IMPORTANT,
+  WHO_NEEDS_INTRO,
+  WHO_NEEDS_ITEMS,
+  WHO_NEEDS_CLOSING,
   BENEFITS_ITEMS,
+  FEATURES_ITEMS,
+  ELIGIBILITY,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_NOTE,
+  PROCESS_INTRO,
+  PROCESS_STEPS,
+  PROCESS_CLOSING,
+  TIMELINE,
+  COST_INTRO,
+  COST_ITEMS,
+  COST_NOTE,
+  VALIDITY,
+  RENEWAL,
+  CHALLENGES_INTRO,
+  CHALLENGES_ITEMS,
+  CHALLENGES_CLOSING,
+  HOW_WE_HELP_INTRO,
+  HOW_WE_HELP_ITEMS,
+  HOW_WE_HELP_CLOSING,
+  WHY_CHOOSE_INTRO,
+  WHY_CHOOSE_ITEMS,
+  WHY_CHOOSE_NOTE,
+  INDUSTRIES_PARAGRAPHS,
+  MISTAKES_ITEMS,
+  MISTAKES_CLOSING,
+  EXPERT_TIPS,
   FAQ_ITEMS,
+  CTA_TEXT,
+  type TableRow,
 } from "../data/fssaiContent";
 
 const FSSAI_PAGE_PATH = "/services/fssai-registration";
 
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+type DataTableProps = {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+};
+
+function DataTable({ columns, rows, getRowKey }: DataTableProps) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function CallbackForm() {
   return (
@@ -43,7 +122,6 @@ function CallbackForm() {
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -75,6 +153,31 @@ function FaqAccordion() {
     </div>
   );
 }
+
+function CtaRow({
+  items,
+}: {
+  items: { label: string; href: string }[];
+}) {
+  return (
+    <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+      {items.map((item, index) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          className={index === 0 ? styles.ctaBtnPrimary : styles.ctaBtnSecondary}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+const PAGE_CTAS = [
+  { label: "Apply for FSSAI Registration", href: "/contact" },
+  { label: "Talk to Our FSSAI Registration Consultant", href: "/contact" },
+];
 
 export function FssaiPageContent() {
   const [activeId, setActiveId] = useState(FSSAI_TOC[0].id);
@@ -122,9 +225,7 @@ export function FssaiPageContent() {
                   <button
                     type="button"
                     data-toc-id={item.id}
-                    className={`${styles.tocLink} ${
-                      activeId === item.id ? styles.tocLinkActive : ""
-                    }`}
+                    className={`${styles.tocLink} ${activeId === item.id ? styles.tocLinkActive : ""}`}
                     onClick={() => scrollToSection(item.id)}
                   >
                     <span className={styles.tocNum}>{i + 1}.</span>
@@ -139,164 +240,99 @@ export function FssaiPageContent() {
           </nav>
 
           <article className={styles.main}>
-            <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                FSSAI Registration in India — Complete Guide for Food Businesses, Manufacturers &amp; Importers
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    If your business involves food — manufacturing it, processing it, storing it, distributing it,
-                    importing it, or selling it — FSSAI Registration is not optional. It is the foundational compliance
-                    requirement for every food business in India, and operating without it exposes you to serious legal
-                    and financial consequences.
-                  </p>
-                  <p className={styles.sectionText}>
-                    FSSAI stands for Food Safety and Standards Authority of India — the regulatory body established
-                    under the Food Safety and Standards Act, 2006, to set standards for food products and regulate their
-                    manufacture, storage, distribution, sale, and import. Every food business operator (FBO) in India must
-                    obtain a valid FSSAI licence or registration before commencing operations.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we help food manufacturers, importers, exporters, traders, and food service
-                    businesses obtain their FSSAI Registration or Licence quickly and correctly. In this guide, we cover
-                    everything you need to know — what FSSAI registration is, which type applies to you, how the process
-                    works, what it costs, and what happens if you operate without it.
-                  </p>
-                </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>
+                <strong>{BANNER_SUBTITLE}</strong>
+              </p>
+              <CtaRow items={PAGE_CTAS} />
+            </div>
 
+            <section id="introduction" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Introduction</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="FSSAI registration and food business compliance support"
+                    alt="FSSAI registration and food license support for food businesses in India"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Running a food business or planning to start one? Contact our team for a free FSSAI consultation
-                    and we will identify the right licence type for your business.
-                  </p>
-                </blockquote>
+                <p className={`${styles.sectionText} ${styles.textJustify}`}>{INTRO}</p>
               </div>
             </section>
 
-            <section id="what-is-fssai" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is FSSAI Registration?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    FSSAI Registration — or FSSAI Licence — is the mandatory authorisation issued by the Food Safety and
-                    Standards Authority of India to food business operators. It confirms that the FBO has been registered
-                    with or licensed by FSSAI and is authorised to carry out food-related business activities in India.
-                  </p>
-                  <p className={styles.sectionText}>
-                    The FSSAI licence number — a 14-digit unique identification number — must be printed on all food product
-                    labels, packaging, menus, and other business documents. The first two digits identify the licence type:
-                    1 for Basic Registration, 2 for State Licence, and 3 for Central Licence.
-                  </p>
-                  <p className={styles.sectionText}>
-                    FSSAI operates three levels — Basic Registration for small businesses, State Licence for medium-sized
-                    businesses, and Central Licence for large manufacturers, importers, and businesses operating across
-                    multiple states. The appropriate level depends on annual turnover, food activity type, and scale of operations.
-                  </p>
-                  <p className={styles.sectionText}>
-                    FSSAI Registration is issued under the Food Safety and Standards (Licensing and Registration of Food
-                    Businesses) Regulations, 2011, and is renewable annually or every 1 to 5 years depending on licence type
-                    and state jurisdiction.
-                  </p>
-                </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>FS</span>
-                  <span className={styles.whatIsLabel}>FOOD SAFETY LICENCE</span>
-                </div>
-              </div>
+            <section id="what-is" className={styles.section}>
+              <h2 className={styles.sectionTitle}>What Is FSSAI Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHAT_IS}</p>
             </section>
 
-            <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why FSSAI Registration Is Essential for Your Food Business</h2>
-              <p className={styles.sectionText}>
-                FSSAI Registration is not just a compliance formality — it is the legal foundation of every food business in India.
-              </p>
-              <h3 className={styles.subsectionTitle}>It Is Legally Mandatory for All Food Business Operators</h3>
-              <p className={styles.sectionText}>
-                The Food Safety and Standards Act, 2006 makes FSSAI registration or licensing compulsory for every food business
-                operator in India — regardless of scale, food type, or business structure. Operating without FSSAI registration is
-                a criminal offence under the FSS Act.
-              </p>
-              <h3 className={styles.subsectionTitle}>E-Commerce Food Sales Require It</h3>
-              <p className={styles.sectionText}>
-                Swiggy, Zomato, Amazon Fresh, BigBasket, and every other food delivery and e-commerce platform require a valid
-                FSSAI licence number before a food business can list products or services. Without FSSAI registration, your
-                business cannot operate through organised online food channels in India.
-              </p>
-              <h3 className={styles.subsectionTitle}>Retail and Distribution Require It</h3>
-              <p className={styles.sectionText}>
-                Organised retail chains, supermarkets, wholesalers, and institutional buyers require FSSAI registration
-                documents before onboarding food suppliers. Your FSSAI number must appear on product labels — and buyers check it.
-              </p>
-              <h3 className={styles.subsectionTitle}>Protects Consumers and Builds Brand Trust</h3>
-              <p className={styles.sectionText}>
-                The FSSAI logo on food packaging tells consumers that the product has been produced by a registered food business
-                subject to FSSAI quality and safety standards — building confidence in packaged food markets.
-              </p>
-              <h3 className={styles.subsectionTitle}>Required for Food Export</h3>
-              <p className={styles.sectionText}>
-                Indian food exporters must hold a valid FSSAI Central Licence. Export consignments are checked by customs and the
-                Export Inspection Council (EIC) for FSSAI compliance. Without a valid Central Licence, food export shipments cannot be cleared.
-              </p>
+            <section id="why-important" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why FSSAI Registration Is Important</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHY_IMPORTANT}</p>
             </section>
 
-            <section id="licence-types" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Types of FSSAI Registration — Which One Do You Need?</h2>
-              <p className={styles.sectionText}>
-                FSSAI operates three levels of registration and licensing. Identifying the correct type for your business is the
-                most important first step in the FSSAI registration process.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Factor</th>
-                    <th scope="col">Basic Registration</th>
-                    <th scope="col">State Licence</th>
-                    <th scope="col">Central Licence</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {LICENCE_TYPES_ROWS.map((row) => (
-                    <tr key={row.factor}>
-                      <th scope="row">{row.factor}</th>
-                      <td>{row.basic}</td>
-                      <td>{row.state}</td>
-                      <td>{row.central}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Importers of food products into India always require a Central Licence — regardless of turnover. This is one of
-                the most common misunderstandings among food importers who apply for a State Licence and then find import shipments
-                blocked at customs. Our team confirms the correct licence type during your free consultation.
-              </p>
-              <p className={styles.sectionText}>
-                Not sure which FSSAI licence type applies to you? Our team assesses your business and confirms the correct
-                registration category before we file anything.
-              </p>
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Needs FSSAI Registration</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {WHO_NEEDS_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_CLOSING}</p>
+            </section>
+
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits</h2>
+              <ul className={styles.bulletList}>
+                {BENEFITS_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="features" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Features of Our FSSAI Registration Service</h2>
+              <ul className={styles.bulletList}>
+                {FEATURES_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Eligibility</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY}</p>
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Documents Required</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document", scope: "row" },
+                  { key: "purpose", header: "Purpose" },
+                  { key: "mandatory", header: "Mandatory / Optional" },
+                  { key: "notes", header: "Notes" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              <div className={styles.noteBox}>{DOCUMENTS_NOTE}</div>
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>FSSAI Registration Process — Step by Step</h2>
-              <p className={styles.sectionText}>
-                The FSSAI registration and licensing process is managed through FSSAI&apos;s online portal — FoSCoS (Food Safety
-                Compliance System). The process varies slightly depending on whether you are applying for Basic Registration,
-                State Licence, or Central Licence.
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step Process</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_INTRO}</p>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
@@ -310,219 +346,120 @@ export function FssaiPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
                 </div>
               ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_CLOSING}</p>
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>FSSAI Registration Requirements for Food Businesses</h2>
-              <p className={styles.sectionText}>
-                The eligibility and infrastructure requirements for FSSAI registration vary by licence type.
-              </p>
-              <h3 className={styles.subsectionTitle}>For Basic Registration</h3>
-              <ul className={styles.bulletList}>
-                <li>Valid identity and address proof of the food business operator</li>
-                <li>Address proof of the food business premises</li>
-                <li>Annual turnover below INR 12 lakh</li>
-                <li>Business registration — GST, Shop Act, or equivalent</li>
-                <li>List of food products to be manufactured, stored, or sold</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>For State Licence</h3>
-              <ul className={styles.bulletList}>
-                <li>All Basic Registration requirements plus annual turnover between INR 12 lakh and INR 20 crore</li>
-                <li>Layout plan of the food processing or storage premises</li>
-                <li>List of equipment and machinery used in food processing</li>
-                <li>Food safety management system documentation</li>
-                <li>Source of water supply confirmation for food processing units</li>
-                <li>NOC from municipality or local body (for new premises)</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>For Central Licence</h3>
-              <ul className={styles.bulletList}>
-                <li>All State Licence requirements plus annual turnover above INR 20 crore, or importer / exporter status</li>
-                <li>Import Export Code (IEC) for importers and exporters</li>
-                <li>Detailed product list with applicable FSSAI food safety standards</li>
-                <li>Certificate of incorporation for companies</li>
-                <li>Food safety management plan covering HACCP or equivalent</li>
-              </ul>
-              <p className={styles.sectionText}>
-                For food importers specifically, a Central Licence is mandatory regardless of turnover. The Central Licence
-                for importers must be linked to the IEC and covers all food products imported through Indian ports.
-              </p>
-            </section>
-
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for FSSAI Registration</h2>
-              <p className={styles.sectionText}>
-                The following documents are required for FSSAI registration and licensing. Requirements vary by licence type —
-                documents marked in details as State &amp; Central Licence are required for those licence types only.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_ROWS.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Our team provides a precise, licence-type-specific document checklist after reviewing your business details.
-                For food manufacturers and importers with complex product portfolios, we manage all documentation systematically.
-              </p>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Timeline</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE}</p>
             </section>
 
             <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>FSSAI Registration Cost in India</h2>
-              <p className={styles.sectionText}>
-                FSSAI registration fees are set by FSSAI and vary by licence type, validity period, and state.
-              </p>
-              <h3 className={styles.subsectionTitle}>Government Fee — Basic Registration</h3>
-              <p className={styles.sectionText}>
-                The government fee for FSSAI Basic Registration is INR 100 per year. For a 5-year registration, the fee is INR 500.
-                Basic Registration is the most affordable food business compliance step in India.
-              </p>
-              <h3 className={styles.subsectionTitle}>Government Fee — State Licence</h3>
-              <p className={styles.sectionText}>
-                State Licence fees vary by state and by the type and scale of food business activity. Fees typically range from
-                INR 2,000 to INR 5,000 per year depending on the state and category. A 5-year licence reduces the per-year cost significantly.
-              </p>
-              <h3 className={styles.subsectionTitle}>Government Fee — Central Licence</h3>
-              <p className={styles.sectionText}>
-                Central Licence fees are INR 7,500 per year for most food business categories, including food importers. Fees for
-                food manufacturers with high production capacity may be higher based on FSSAI&apos;s fee schedule.
-              </p>
-              <h3 className={styles.subsectionTitle}>Professional Service Fees</h3>
-              <p className={styles.sectionText}>
-                Ornate Quality Services charges a professional fee for end-to-end FSSAI registration management — from licence type
-                determination and document preparation to portal filing, inspection support, label compliance review, and annual
-                return management. All fees are quoted transparently before we begin.
-              </p>
-              <p className={styles.sectionText}>
-                For a precise cost estimate including government fees and professional service fees for your specific food business —
-                contact our team for a free consultation.
-              </p>
+              <h2 className={styles.sectionTitle}>Cost Factors</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {COST_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{COST_NOTE}</div>
             </section>
 
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>FSSAI Registration Validity and Renewal</h2>
-              <p className={styles.sectionText}>
-                FSSAI licences and registrations are issued for a period of 1 to 5 years, at the applicant&apos;s choice. A 5-year
-                licence or registration is generally more cost-effective and reduces the administrative burden of frequent renewals.
-              </p>
-              <h3 className={styles.subsectionTitle}>Renewal Process</h3>
-              <p className={styles.sectionText}>
-                FSSAI licence renewal must be applied for at least 30 days before the expiry date on the FoSCoS portal. Renewal
-                applications filed late are subject to a penalty. Licences that lapse without renewal require a fresh application.
-                Our team sends renewal reminders 60 days before expiry and manages the complete renewal process.
-              </p>
-              <h3 className={styles.subsectionTitle}>Annual Return Filing</h3>
-              <p className={styles.sectionText}>
-                All FSSAI-licensed businesses (State and Central Licence holders) must file an Annual Return on the FoSCoS portal
-                before 31st May each year. Failure to file the annual return attracts penalties under the FSS Act.
-              </p>
-              <h3 className={styles.subsectionTitle}>Change of Details</h3>
-              <p className={styles.sectionText}>
-                Any change in the food business — including change of address, addition of new food products, change of business name,
-                or addition of new premises — must be intimated to FSSAI through a modification application on the FoSCoS portal.
-              </p>
+              <h2 className={styles.sectionTitle}>Validity</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY}</p>
             </section>
 
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Key Benefits of FSSAI Registration for Your Food Business</h2>
+            <section id="renewal" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Renewal</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RENEWAL}</p>
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CHALLENGES_INTRO}</p>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
+                {CHALLENGES_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CHALLENGES_CLOSING}</p>
+            </section>
+
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How We Help</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HOW_WE_HELP_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {HOW_WE_HELP_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HOW_WE_HELP_CLOSING}</p>
+            </section>
+
+            <section id="why-choose" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Us</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHY_CHOOSE_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {WHY_CHOOSE_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{WHY_CHOOSE_NOTE}</div>
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries Served</h2>
+              {INDUSTRIES_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes to Avoid</h2>
+              <ul className={styles.bulletList}>
+                {MISTAKES_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{MISTAKES_CLOSING}</p>
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips</h2>
+              <ul className={styles.bulletList}>
+                {EXPERT_TIPS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </section>
 
-            <section id="penalties" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Penalties for Operating Without FSSAI Registration</h2>
-              <p className={styles.sectionText}>
-                The Food Safety and Standards Act, 2006 prescribes stringent penalties for food businesses operating without FSSAI
-                registration or licence. Enforcement is conducted by Food Safety Officers at both state and central level.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Violation</th>
-                    <th scope="col">Penalty</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PENALTIES_ROWS.map((row) => (
-                    <tr key={row.violation}>
-                      <th scope="row">{row.violation}</th>
-                      <td>{row.penalty}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                FSSAI enforcement has strengthened significantly in recent years. Food Safety Officers conduct surprise inspections,
-                and e-commerce platforms are increasingly required to verify FSSAI compliance of their food seller partners.
-              </p>
-            </section>
-
-            <section id="case-study" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a Mumbai Food Importer Get FSSAI Central Licence in 3 Weeks
-              </h2>
-              <p className={styles.sectionText}>
-                A Mumbai-based company that imported packaged food products — including health supplements, snack foods, and packaged
-                beverages from the USA and Europe — approached Ornate Quality Services after their shipment of imported health supplements
-                was held at Mumbai port by customs for missing FSSAI compliance documentation.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                The company had been operating with a State Licence obtained when they were a smaller operation and had expanded into
-                importing without realising that food importers require a Central Licence regardless of turnover. Their State Licence was
-                not accepted at customs, the shipment was held, and storage charges were accumulating daily.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                Our team immediately confirmed that a FSSAI Central Licence was required. We prepared the complete Central Licence
-                application — including IEC, full product list with applicable FSSAI standards, food safety management plan, and all required
-                business documents — and filed it on an expedited basis on the FoSCoS portal. We also prepared a letter of explanation for
-                customs demonstrating that a Central Licence application was actively in progress.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                The FSSAI Central Licence was granted in 3 weeks. The customs hold was resolved, and the shipment was cleared. The company
-                now operates with a valid Central Licence covering all import categories and verifies every new product category before
-                the first shipment departs from the origin country.
-              </p>
-            </section>
-
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions — FSSAI Registration</h2>
+              <h2 className={styles.sectionTitle}>FAQ</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Expert Assistance for FSSAI Registration</h2>
-              <p className={styles.ctaText}>
-                Need help with FSSAI licence type selection, FoSCoS filing, inspection preparation, label compliance, or annual returns?
-                Connect with Ornate Quality Services for complete support.
-              </p>
-              <div className={styles.ctaButtons}>
-                <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
-                </Link>
-                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Expert Consultation
-                </a>
-              </div>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Final CTA</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CTA_TEXT}</p>
+              <CtaRow items={PAGE_CTAS} />
             </section>
           </article>
 

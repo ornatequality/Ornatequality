@@ -46,7 +46,6 @@ export const BIS_ISI_TOC: TocItem[] = [
   { id: "qco-reference", label: "QCO / Gazette Notification Reference" },
   { id: "faq", label: "Frequently Asked Questions" },
   { id: "get-started", label: "Talk to a BIS-ISI Mark Certification Expert" },
-  { id: "research-sources", label: "Research Sources for QCO / Gazette References" },
 ];
 
 export const BANNER_TITLE = "BIS-ISI Mark Certification for Domestic Manufacturers";
@@ -707,20 +706,3 @@ export const FAQ_ITEMS: FaqItem[] = [
 
 export const GET_STARTED_PARAGRAPH =
   "Getting BIS-ISI Mark Certification right the first time saves you time, avoids avoidable rejections, and gets your product to market faster. Whether you're a first-time applicant, an MSME preparing your first factory audit, or an enterprise managing certification across multiple product lines, Ornate Quality Service Pvt. Ltd. provides the documentation support, government liaison, and end-to-end guidance to get you there.";
-
-export const RESEARCH_INTRO =
-  "The QCO and Gazette Notification details in the tables above were gathered from a web research pass on official and secondary sources, not from the original Stage 1-3 keyword research (which did not include regulatory citations). Primary sources checked: bis.gov.in, dpiit.gov.in, and egazette.gov.in where reachable; where a primary source wasn't directly accessible, secondary compliance-consultancy summaries were used and are flagged accordingly above. Key sources referenced:";
-
-export const RESEARCH_SOURCES: string[] = [
-  "Steel and Steel Products (Quality Control) Order, 2024 — S.O. 574(E): worldtradescanner.com summary",
-  "Cement (Quality Control) Order, 2003 — S.O. 191(E): dpiit.gov.in",
-  "Household Electrical Appliances QCO — S.O. 4098(E): worldtradescanner.com",
-  "Toys (Quality Control) Order — S.O. 853(E) and amendment S.O. 4277(E): standphillindia.in, worldtradescanner.com",
-  "Footwear made from Leather and other Materials (Quality Control) Order, 2024 — S.O. 1421(E): taxguru.in",
-  "Furniture (Quality Control) Order, 2025 — S.O. 801(E): standphillindia.in",
-  "Multipurpose Dry Batteries IS 8144 (correcting the earlier IS 15844 entry): corpseed.com, law.resource.org",
-  "Domestic Pressure Cooker QCO (IS 2347:2017, implementation date): tuv.com",
-];
-
-export const RESEARCH_CLOSING =
-  "Secondary/compliance-consultancy sources are third-party summaries, not the Gazette text itself — please have your compliance team pull the actual Gazette of India notification for any reference you plan to publish or rely on.";

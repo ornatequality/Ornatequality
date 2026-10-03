@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import beeBanner from "@/assests/services/bee.webp";
+import beeBanner from "@/assests/services/BEE regestration.png";
 
 export function BeeBanner() {
   return (

@@ -3,9 +3,9 @@ import { TrademarkBanner } from "./sections/TrademarkBanner";
 import { TrademarkPageContent } from "./sections/TrademarkPageContent";
 
 export const metadata: Metadata = {
-  title: "Trademark Registration | Ornate Quality Services",
+  title: "Trademark Registration in India | Brand Name & Logo Filing | Ornate Quality Service Pvt Ltd",
   description:
-    "Complete Trademark Registration support in India. Trademark search, class identification, IP India filing, examination response, opposition handling, and renewal management by Ornate Quality Services.",
+    "Protect your brand name, logo and tagline with a filing prepared properly the first time. Trademark search, class selection, IP India filing, objection handling and renewal support by Ornate Quality Service Pvt Ltd.",
 };
 
 export default function TrademarkRegistrationPage() {

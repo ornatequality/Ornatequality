@@ -3,9 +3,9 @@ import { TpiBanner } from "./sections/TpiBanner";
 import { TpiPageContent } from "./sections/TpiPageContent";
 
 export const metadata: Metadata = {
-  title: "Third Party Inspection Services | Ornate Quality Services",
+  title: "Third Party Inspection (TPI) Services in India | Ornate Quality Service",
   description:
-    "Professional third party inspection services in India — pre-shipment inspection, factory audits, BIS inspection support, PESO coordination, and supplier qualification by Ornate Quality Services.",
+    "Independent, on-site quality verification at your supplier's factory — before your goods are paid for, dispatched or shipped. Photo-documented inspection reports from Ornate Quality Service Pvt. Ltd.",
 };
 
 export default function ThirdPartyInspectionPage() {

@@ -78,9 +78,6 @@ import {
   QCO_INTRO,
   FAQ_ITEMS,
   GET_STARTED_PARAGRAPH,
-  RESEARCH_INTRO,
-  RESEARCH_SOURCES,
-  RESEARCH_CLOSING,
   type TableRow,
 } from "../data/bisIsiContent";
 import { PRODUCTS_COVERED, QCO_ROWS } from "../data/bisIsiProductTables";
@@ -261,7 +258,7 @@ export function BisIsiPageContent() {
                   Get Quote for ISI Mark Certification →
                 </Link>
               </div>
-            </div>
+                </div>
 
             <section id="what-is-isi" className={styles.section}>
               <h2 className={styles.sectionTitle}>What Is BIS-ISI Mark Certification?</h2>
@@ -322,7 +319,7 @@ export function BisIsiPageContent() {
                 {BENEFITS_ITEMS.map((item) => (
                   <li key={item.title} className={styles.textJustify}>
                     <strong>{item.title}.</strong> {item.text}
-                  </li>
+                </li>
                 ))}
               </ul>
             </section>
@@ -489,11 +486,11 @@ export function BisIsiPageContent() {
             <section id="industries" className={styles.section}>
               <h2 className={styles.sectionTitle}>Industries We Serve</h2>
               <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_INTRO}</p>
-              <ul className={styles.bulletList}>
+                  <ul className={styles.bulletList}>
                 {INDUSTRIES_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
               <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_CLOSING}</p>
             </section>
 
@@ -580,17 +577,6 @@ export function BisIsiPageContent() {
                   Request a Cost Estimate →
                 </Link>
               </div>
-            </section>
-
-            <section id="research-sources" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Research Sources for QCO / Gazette References</h2>
-              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RESEARCH_INTRO}</p>
-              <ul className={styles.bulletList}>
-                {RESEARCH_SOURCES.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RESEARCH_CLOSING}</p>
             </section>
           </article>
 

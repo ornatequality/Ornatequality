@@ -47,6 +47,11 @@ export const SERVICE_ROUTES = {
   pesoCcoe: "/services/peso-ccoe-registration",
   nabl: "/services/nabl-accreditation",
   tpi: "/services/third-party-inspection",
+  prd: "/services/product-inspection",
+  ppi: "/services/pre-production-inspection",
+  dpi: "/services/during-production-inspection",
+  fac: "/services/factory-process-inspection",
+  fri: "/services/final-random-inspection",
   cli: "/services/container-loading-inspection",
   rohs: "/services/rohs-certification",
   audit: "/services/audit-services",
@@ -68,8 +73,6 @@ export function serviceHref(slug: string) {
   if (slug.startsWith("/")) return slug;
   return `/services#${slug}`;
 }
-
-const TPI_SERVICES = `${SERVICE_ROUTES.tpi}#services-offered`;
 
 export const servicesMegaMenuColumns: MegaMenuColumn[] = [
   {
@@ -166,17 +169,17 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
     items: [
       {
         label: "PRE-PRODUCTION INSPECTION (PPI)",
-        slug: TPI_SERVICES,
+        slug: SERVICE_ROUTES.ppi,
         icon: { type: "glyph", glyph: "PPI", tone: "green" },
       },
       {
         label: "DURING PRODUCTION INSPECTION (DPI)",
-        slug: TPI_SERVICES,
+        slug: SERVICE_ROUTES.dpi,
         icon: { type: "glyph", glyph: "DPI", tone: "green" },
       },
       {
         label: "FINAL RANDOM INSPECTION (FRI)",
-        slug: TPI_SERVICES,
+        slug: SERVICE_ROUTES.fri,
         icon: { type: "glyph", glyph: "FRI", tone: "teal" },
       },
       {
@@ -186,12 +189,12 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
       },
       {
         label: "FACTORY & PROCESS INSPECTION",
-        slug: TPI_SERVICES,
+        slug: SERVICE_ROUTES.fac,
         icon: { type: "glyph", glyph: "FAC", tone: "green" },
       },
       {
         label: "PRODUCT INSPECTION",
-        slug: TPI_SERVICES,
+        slug: SERVICE_ROUTES.prd,
         icon: { type: "glyph", glyph: "PRD", tone: "blue" },
       },
       {

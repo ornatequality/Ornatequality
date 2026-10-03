@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import rohsBanner from "@/assests/services/rohs.webp";
+import rohsBanner from "@/assests/services/ROHS regestration.png";
 
 export function RohsBanner() {
   return (

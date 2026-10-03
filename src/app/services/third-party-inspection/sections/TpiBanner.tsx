@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import tpiBanner from "@/assests/services/thirdparty.webp";
+import tpiBanner from "@/assests/services/third party.png";
 
 export function TpiBanner() {
   return (

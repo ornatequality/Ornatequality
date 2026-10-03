@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import auditBanner from "@/assests/services/audit.webp";
+import auditBanner from "@/assests/services/Audit services.png";
 
 export function AuditBanner() {
   return (

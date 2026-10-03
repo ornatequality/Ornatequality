@@ -3,9 +3,10 @@ import { LmpcBanner } from "./sections/LmpcBanner";
 import { LmpcPageContent } from "./sections/LmpcPageContent";
 
 export const metadata: Metadata = {
-  title: "LMPC Registration | Ornate Quality Services",
+  title:
+    "LMPC Registration in India | Legal Metrology Packaged Commodities Certificate | Ornate Quality Service Pvt. Ltd.",
   description:
-    "Complete LMPC Registration support for importers of pre-packaged products in India. Packaging compliance review, documentation, NSWS filing, and certificate delivery by Ornate Quality Services.",
+    "LMPC registration for importers, manufacturers and packers of pre-packaged goods in India. Document preparation, label review, filing and post-approval compliance by Ornate Quality Service Pvt. Ltd.",
 };
 
 export default function LmpcRegistrationPage() {

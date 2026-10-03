@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import nablBanner from "@/assests/services/nabl.webp";
+import nablBanner from "@/assests/services/NABL Testing.png";
 
 export function NablBanner() {
   return (

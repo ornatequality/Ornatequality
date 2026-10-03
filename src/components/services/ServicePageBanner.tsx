@@ -1,5 +1,5 @@
 import React from "react";
-import Image, { type StaticImageData } from "next/image";
+import type { StaticImageData } from "next/image";
 import styles from "@/styles/bisCrsRegistration.module.css";
 
 type ServicePageBannerProps = {
@@ -11,14 +11,14 @@ type ServicePageBannerProps = {
 export function ServicePageBanner({ src, alt, label }: ServicePageBannerProps) {
   return (
     <section className={styles.banner} aria-label={label}>
-      <Image
-        src={src}
+      <img
+        src={src.src}
         alt={alt}
-        priority
-        unoptimized
-        quality={95}
+        width={src.width}
+        height={src.height}
         className={styles.bannerImg}
-        sizes="100vw"
+        decoding="async"
+        fetchPriority="high"
       />
     </section>
   );

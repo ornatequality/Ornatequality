@@ -3,9 +3,9 @@ import { CeBanner } from "./sections/CeBanner";
 import { CePageContent } from "./sections/CePageContent";
 
 export const metadata: Metadata = {
-  title: "CE Certification | Ornate Quality Services",
+  title: "CE Certification & CE Marking Services in India | Ornate Quality Services",
   description:
-    "Complete CE Certification support for Indian manufacturers exporting to Europe. Directive identification, testing, Technical File preparation, and CE Marking assistance by Ornate Quality Services.",
+    "End-to-end CE certification for Indian manufacturers and exporters. Ornate Quality Service Pvt Ltd identifies EU directives, prepares the technical file, coordinates testing and the EU Declaration of Conformity.",
 };
 
 export default function CeCertificationPage() {

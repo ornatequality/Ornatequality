@@ -20,7 +20,7 @@ function getMaxWidth(filePath) {
   // Full-width service banners live in /services/ (1600px). certi-img icons stay small.
   if (rel.includes("/certi-img/")) return 480;
   if (rel.endsWith("logo.png")) return 512;
-  if (rel.includes("/services/")) return 1600;
+  if (rel.includes("/services/")) return 2560;
   return 1920;
 }
 
@@ -45,10 +45,15 @@ async function optimizeImage(filePath) {
   if (webpPath === filePath) return null;
 
   const maxWidth = getMaxWidth(filePath);
+  const isServiceBanner = filePath.replace(/\\/g, "/").toLowerCase().includes("/services/");
   const webpBuffer = await sharp(filePath)
     .rotate()
     .resize({ width: maxWidth, withoutEnlargement: true })
-    .webp({ quality: 82, effort: 4 })
+    .webp({
+      quality: isServiceBanner ? 92 : 82,
+      effort: 4,
+      smartSubsample: !isServiceBanner,
+    })
     .toBuffer();
 
   await writeFile(webpPath, webpBuffer);

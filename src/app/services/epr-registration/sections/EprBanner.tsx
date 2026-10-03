@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import eprBanner from "@/assests/services/epr-banner.webp";
+import eprBanner from "@/assests/services/EPR regestration.png";
 
 export function EprBanner() {
   return (

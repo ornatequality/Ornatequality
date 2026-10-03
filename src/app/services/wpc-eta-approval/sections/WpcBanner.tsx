@@ -1,6 +1,6 @@
 import React from "react";
 import { ServicePageBanner } from "@/components/services/ServicePageBanner";
-import wpcBanner from "@/assests/services/wpc-banner.png";
+import wpcBanner from "@/assests/services/WPC Approval.png";
 
 export function WpcBanner() {
   return (
