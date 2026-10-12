@@ -16,6 +16,8 @@ type ServiceItem = {
   href: string;
   icon: StaticImageData;
   iconAlt: string;
+  iconBg: string;
+  includes: string[];
 };
 
 function IconChevronLeft(props: React.SVGProps<SVGSVGElement>) {
@@ -48,11 +50,42 @@ function IconChevronRight(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function IconBack(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" {...props}>
+      <path
+        d="M15 6 9 12l6 6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconCheck(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" {...props}>
+      <path
+        d="M3.2 8.2 6.1 11l6.7-7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const Services = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
 
   const services = useMemo<ServiceItem[]>(
     () => [
@@ -62,6 +95,8 @@ const Services = () => {
         href: "/services/bis-crs-registration",
         icon: bisCrsIcon,
         iconAlt: "BIS CRS Registration",
+        iconBg: "#ece9fb",
+        includes: ["Electronics & IT products", "Solar photovoltaic products", "CRS portal filing"],
       },
       {
         title: "ISI Mark Certification",
@@ -69,6 +104,8 @@ const Services = () => {
         href: "/services/bis-isi-mark-certification",
         icon: isiMarkIcon,
         iconAlt: "ISI Mark Certification",
+        iconBg: "#fde8d8",
+        includes: ["Product testing support", "Factory inspection readiness", "ISI licence application"],
       },
       {
         title: "WPC ETA Approval",
@@ -76,6 +113,8 @@ const Services = () => {
         href: "/services/wpc-eta-approval",
         icon: wpcEtaIcon,
         iconAlt: "WPC ETA Approval",
+        iconBg: "#f3edd4",
+        includes: ["Equipment Type Approval", "Wireless device filing", "Import clearance support"],
       },
       {
         title: "EPR Registration",
@@ -83,9 +122,11 @@ const Services = () => {
         href: "/services/epr-registration",
         icon: eprRegistrationIcon,
         iconAlt: "EPR Registration",
+        iconBg: "#e4f3ea",
+        includes: ["Plastic packaging", "E-waste", "Battery waste"],
       },
     ],
-    []
+    [],
   );
 
   const updateNavState = useCallback(() => {
@@ -145,9 +186,7 @@ const Services = () => {
       <div className={styles.container}>
         <div className={styles.headerRow}>
           <p className={styles.sectionTagline}>Your compliance partner —</p>
-          <h2 className={`${styles.heading} ${playfair.className}`}>
-            Our Core Certification Services
-          </h2>
+          <h2 className={`${styles.heading} ${playfair.className}`}>Our Core Certification Services</h2>
           <div className={styles.headingUnderline} aria-hidden="true" />
         </div>
 
@@ -168,34 +207,84 @@ const Services = () => {
             role="list"
             aria-label="Certification service cards"
           >
-            {services.map((s) => (
-              <article
-                key={s.title}
-                className={styles.card}
-                role="listitem"
-                data-service-card="true"
-              >
-                <Link href={s.href} className={styles.cardLink} aria-label={`Learn more about ${s.title}`} />
-                <div className={styles.cardInner}>
-                  <div className={styles.iconWrap}>
-                    <Image
-                      src={s.icon}
-                      alt={s.iconAlt}
-                      fill
-                      sizes="48px"
-                      className={styles.serviceIconImg}
-                    />
+            {services.map((s, index) => {
+              const isFlipped = flippedIndex === index;
+              return (
+                <article
+                  key={s.title}
+                  className={`${styles.card} ${isFlipped ? styles.cardFlipped : ""}`}
+                  role="listitem"
+                  data-service-card="true"
+                  onMouseEnter={() => setFlippedIndex(index)}
+                  onMouseLeave={() => setFlippedIndex(null)}
+                  onClick={(event) => {
+                    const target = event.target as HTMLElement;
+                    if (target.closest("a")) return;
+                    setFlippedIndex((current) => (current === index ? null : index));
+                  }}
+                >
+                  <div className={styles.flipper}>
+                    <div className={`${styles.face} ${styles.faceFront}`}>
+                      <div className={styles.frontMain}>
+                        <div className={styles.iconWrap} style={{ background: s.iconBg }}>
+                          <Image
+                            src={s.icon}
+                            alt={s.iconAlt}
+                            fill
+                            sizes="56px"
+                            className={styles.serviceIconImg}
+                          />
+                        </div>
+                        <h3 className={styles.cardTitle}>{s.title}</h3>
+                      </div>
+                      <Link
+                        className={styles.exploreLink}
+                        href={s.href}
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        Explore Services <span aria-hidden="true">→</span>
+                      </Link>
+                    </div>
+
+                    <div className={`${styles.face} ${styles.faceBack}`}>
+                      <div className={styles.backTop}>
+                        <button
+                          type="button"
+                          className={styles.backArrow}
+                          aria-label={`Close ${s.title} details`}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setFlippedIndex(null);
+                          }}
+                        >
+                          <IconBack />
+                        </button>
+                        <div className={styles.backIcon}>
+                          <Image src={s.icon} alt="" fill sizes="28px" className={styles.backIconImg} />
+                        </div>
+                        <p className={styles.backDesc}>{s.description}</p>
+                      </div>
+                      <div className={styles.backBody}>
+                        <p className={styles.includesLabel}>Services include:</p>
+                        <ul className={styles.includesList}>
+                          {s.includes.map((item) => (
+                            <li key={item} className={styles.includesItem}>
+                              <span className={styles.check} aria-hidden="true">
+                                <IconCheck />
+                              </span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                        <Link className={styles.learnMore} href={s.href} onClick={(event) => event.stopPropagation()}>
+                          Learn More <span className={styles.learnMoreArrow} aria-hidden="true">→</span>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.cardBody}>
-                    <h3 className={styles.cardTitle}>{s.title}</h3>
-                    <p className={styles.cardText}>{s.description}</p>
-                  </div>
-                  <Link className={styles.learnMore} href={s.href}>
-                    Learn More <span className={styles.learnMoreArrow} aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
 
           <button

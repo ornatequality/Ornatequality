@@ -3,9 +3,9 @@ import { NablBanner } from "./sections/NablBanner";
 import { NablPageContent } from "./sections/NablPageContent";
 
 export const metadata: Metadata = {
-  title: "NABL Accreditation | Ornate Quality Services",
+  title: "NABL Accredited Lab Testing Services in India | Ornate Quality Service",
   description:
-    "Complete NABL Accreditation support for testing and calibration laboratories in India. ISO 17025 implementation, gap analysis, application filing, and assessment preparation by Ornate Quality Services.",
+    "End-to-end NABL accredited lab testing coordination in India — lab selection, test parameter mapping, sample dispatch and accredited test reports for BIS, BEE, WPC, TEC, FSSAI, CDSCO and EPR.",
 };
 
 export default function NablAccreditationPage() {

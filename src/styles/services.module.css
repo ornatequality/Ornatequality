@@ -1,10 +1,11 @@
-/* Services — white surface; header matches home Hero tagline/title; 4-card row */
+/* Services — category-style flip cards with hover animation */
 .services {
   --hero-navy: #001b3d;
   --hero-gold: #ff9c08;
   --hero-gray: #555555;
+  --card-blue: #0d3b82;
 
-  background: #ffffff;
+  background: #f4f6fb;
   padding: 48px 0 52px;
 }
 
@@ -77,7 +78,7 @@ p.sectionTagline {
 }
 
 .navBtn:hover:not(:disabled) {
-  border-color: rgba(255, 156, 8, 0.45);
+  border-color: rgba(13, 59, 130, 0.35);
   box-shadow: 0 8px 22px rgba(4, 30, 91, 0.14);
   transform: translateY(-1px);
 }
@@ -89,7 +90,7 @@ p.sectionTagline {
 }
 
 .navBtn:focus-visible {
-  outline: 2px solid rgba(255, 156, 8, 0.55);
+  outline: 2px solid rgba(13, 59, 130, 0.45);
   outline-offset: 2px;
 }
 
@@ -99,12 +100,12 @@ p.sectionTagline {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 8px 4px 16px;
+  padding: 12px 4px 20px;
 }
 
 .carousel::-webkit-scrollbar {
@@ -116,91 +117,123 @@ p.sectionTagline {
   min-width: calc((100% - 60px) / 4);
   scroll-snap-align: start;
   position: relative;
-  background: #ffffff;
-  border: 1px solid rgba(10, 27, 43, 0.08);
-  border-radius: 16px;
-  box-shadow:
-    0 2px 6px rgba(4, 30, 91, 0.04),
-    0 8px 22px rgba(4, 30, 91, 0.06);
-  min-height: 296px;
-  display: flex;
-  flex-direction: column;
+  height: 292px;
+  perspective: 1200px;
   cursor: pointer;
-  overflow: hidden;
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
+  background: transparent;
+  border: none;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 156, 8, 0.42);
+.flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 560ms cubic-bezier(0.22, 0.8, 0.32, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .flipper,
+  .card:focus-within .flipper {
+    transform: rotateY(180deg);
+  }
+}
+
+.cardFlipped .flipper {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: #ffffff;
   box-shadow:
-    0 6px 14px rgba(4, 30, 91, 0.08),
-    0 18px 38px rgba(4, 30, 91, 0.1);
+    0 2px 8px rgba(4, 30, 91, 0.05),
+    0 12px 28px rgba(4, 30, 91, 0.07);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
 }
 
-.cardInner {
+.faceFront {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 28px 18px 18px;
+  text-align: center;
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.faceBack {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .faceFront,
+  .card:focus-within .faceFront {
+    pointer-events: none;
+  }
+
+  .card:hover .faceBack,
+  .card:focus-within .faceBack {
+    pointer-events: auto;
+    z-index: 3;
+  }
+}
+
+.cardFlipped .faceFront {
+  pointer-events: none;
+}
+
+.cardFlipped .faceBack {
+  pointer-events: auto;
+  z-index: 3;
+}
+
+.frontMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
   flex: 1;
   width: 100%;
-  padding: 24px 20px 18px;
-  text-align: center;
 }
 
 .iconWrap {
   position: relative;
-  width: 68px;
-  height: 68px;
+  width: 84px;
+  height: 84px;
   flex-shrink: 0;
-  border-radius: 12px;
-  margin: 0 0 14px;
-  padding: 10px;
-  background: transparent;
-  border: none;
+  border-radius: 999px;
+  padding: 16px;
 }
 
 .serviceIconImg {
   object-fit: contain;
   object-position: center;
+  padding: 16px;
   mix-blend-mode: multiply;
 }
 
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-  gap: 8px;
-}
-
-.cardBody .cardTitle {
+.cardTitle {
   margin: 0;
+  max-width: 11.5em;
   font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 800;
-  line-height: 1.32;
-  color: var(--hero-navy);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #1c2b4a;
   letter-spacing: -0.01em;
 }
 
-.cardBody .cardText {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.55;
-  color: var(--hero-gray);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.learnMore {
+.exploreLink {
   position: relative;
   z-index: 2;
   display: inline-flex;
@@ -210,33 +243,142 @@ p.sectionTagline {
   width: 100%;
   margin-top: auto;
   padding-top: 14px;
-  border-top: 1px solid rgba(10, 27, 43, 0.06);
+  border-top: 1px solid rgba(10, 27, 43, 0.08);
   text-decoration: none;
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--hero-gold);
-  cursor: pointer;
-  transition: color 160ms ease, gap 160ms ease, border-color 160ms ease;
+  color: var(--card-blue);
+  transition: gap 160ms ease;
 }
 
-.card:hover .learnMore {
-  border-top-color: rgba(255, 156, 8, 0.22);
+.exploreLink:hover,
+.exploreLink:focus-visible {
+  gap: 9px;
 }
 
-.cardLink {
+.backTop {
+  position: relative;
+  background: var(--card-blue);
+  color: #ffffff;
+  padding: 16px 16px 18px;
+  min-height: 118px;
+}
+
+.backArrow {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: inherit;
-  text-decoration: none;
+  top: 12px;
+  left: 12px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
   cursor: pointer;
+  border-radius: 999px;
 }
 
-.cardLink:focus-visible {
-  outline: 2px solid rgba(255, 156, 8, 0.55);
-  outline-offset: 2px;
+.backArrow:hover,
+.backArrow:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.backIcon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+}
+
+.backIconImg {
+  object-fit: contain;
+  object-position: center;
+  padding: 5px;
+  filter: brightness(0) invert(1);
+}
+
+.backDesc {
+  margin: 36px 8px 0 4px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #ffffff;
+}
+
+.backBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 14px 16px 12px;
+  background: #ffffff;
+}
+
+.includesLabel {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--card-blue);
+}
+
+.includesList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 7px;
+}
+
+.includesItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #24324d;
+}
+
+.check {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border-radius: 999px;
+  background: var(--card-blue);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+}
+
+.learnMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--card-blue);
+  cursor: pointer;
+  transition: gap 160ms ease;
+}
+
+.learnMore:hover,
+.learnMore:focus-visible {
+  gap: 9px;
 }
 
 .learnMoreArrow {
@@ -244,11 +386,8 @@ p.sectionTagline {
   transition: transform 160ms ease;
 }
 
-.learnMore:hover {
-  color: color-mix(in srgb, var(--hero-gold) 75%, #001b3d);
-}
-
-.learnMore:hover .learnMoreArrow {
+.learnMore:hover .learnMoreArrow,
+.learnMore:focus-visible .learnMoreArrow {
   transform: translateX(3px);
 }
 
@@ -268,7 +407,6 @@ p.sectionTagline {
   font-weight: 900;
   color: #ffffff;
   text-decoration: none;
-  /* Match header LOGIN button */
   background: #041e5b;
   box-shadow: 0 16px 36px rgba(4, 30, 91, 0.28);
   transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
@@ -281,8 +419,14 @@ p.sectionTagline {
 }
 
 .ctaBtn:focus-visible {
-  outline: 2px solid rgba(255, 156, 8, 0.55);
+  outline: 2px solid rgba(13, 59, 130, 0.45);
   outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flipper {
+    transition: none;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -355,5 +499,3 @@ p.sectionTagline {
     padding: 10px 2px 14px;
   }
 }
-
-

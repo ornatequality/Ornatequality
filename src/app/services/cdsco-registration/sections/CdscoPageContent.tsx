@@ -16,32 +16,138 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   CDSCO_TOC,
-  PRODUCTS_COVERED_ROWS,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  BANNER_LEAD,
+  HIGHLIGHTS_TITLE,
+  KEY_HIGHLIGHTS,
+  INTRO_TITLE,
+  INTRO_PARAGRAPHS,
+  INTRO_ITEMS,
+  WHAT_IS_QUICK_ANSWER,
+  WHAT_IS_PARAGRAPHS,
+  RISK_CLASSES_TITLE,
+  RISK_CLASSES_INTRO,
+  RISK_CLASS_ROWS,
+  RISK_CLASS_NOTE,
+  LICENCE_ROUTES_TITLE,
+  LICENCE_ROUTE_ITEMS,
+  RULES_NOTE,
+  AGENT_TITLE,
+  AGENT_PARAGRAPHS,
+  NOT_WHOLE_ANSWER_TITLE,
+  NOT_WHOLE_ANSWER,
+  WHY_ITEMS,
+  WHO_NEEDS_ITEMS,
+  SERVICE_INCLUDE_ITEMS,
+  CONSULTANT_BENEFITS,
+  PROCESS_QUICK_ANSWER,
   PROCESS_STEPS,
+  DOCUMENTS_INTRO,
   DOCUMENTS_ROWS,
-  PENALTIES_ROWS,
-  BENEFITS_ITEMS,
+  DOCUMENTS_CHECKLIST_INTRO,
+  DOCUMENTS_CHECKLIST,
+  ELIGIBILITY_ITEMS,
+  ELIGIBILITY_NOTE,
+  TIMELINE_QUICK_ANSWER,
+  TIMELINE_INTRO,
+  TIMELINE_FACTORS_INTRO,
+  TIMELINE_FACTORS,
+  TIMELINE_DELAYS_INTRO,
+  TIMELINE_DELAYS,
+  COST_INTRO,
+  COST_FACTORS_INTRO,
+  COST_FACTORS,
+  COST_WARNING,
+  VALIDITY_INTRO,
+  VALIDITY_LEAD,
+  VALIDITY_ITEMS,
+  VALIDITY_CLOSING,
+  CHALLENGES_ITEMS,
+  WHY_CHOOSE_ITEMS,
+  CLAIMS_NOTE,
+  INDUSTRY_ITEMS,
+  PRODUCTS_INTRO,
+  PRODUCT_ROWS,
+  UPDATES_INTRO,
+  UPDATES_NOTE,
+  UPDATE_LINKS,
+  UPDATES_CLOSING,
+  MISTAKES_ROWS,
+  TIPS_ITEMS,
+  COMPARISON_ROWS,
+  COMPARISON_CLOSING,
   FAQ_ITEMS,
+  CTA_TITLE,
+  CTA_PARAGRAPHS,
+  CTA_PRIMARY_NOTE,
+  type TableRow,
 } from "../data/cdscoContent";
 
 const CDSCO_PAGE_PATH = "/services/cdsco-registration";
 
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+function DataTable({
+  columns,
+  rows,
+  getRowKey,
+}: {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+}) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function CallbackForm() {
   return (
     <ServiceCallbackForm
       idPrefix="cdsco"
       defaultService="CDSCO Registration"
-      serviceOptions={[
-        "CDSCO Registration",
-      ]}
+      serviceOptions={["CDSCO Registration"]}
       successText="Our CDSCO registration expert will contact you within one business day."
       mobilePlaceholder="+91 XXXXX XXXXX"
       serviceSelectClassName="formInput"
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -73,6 +179,49 @@ function FaqAccordion() {
     </div>
   );
 }
+
+function CtaRow({ items }: { items: { label: string; href: string }[] }) {
+  return (
+    <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+      {items.map((item, index) => {
+        const className = index === 0 ? styles.ctaBtnPrimary : styles.ctaBtnSecondary;
+        const isInternal = item.href.startsWith("/");
+        if (isInternal) {
+          return (
+            <Link key={item.label} href={item.href} className={className}>
+              {item.label}
+            </Link>
+          );
+        }
+        return (
+          <a key={item.label} href={item.href} className={className}>
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+function OfficialLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {label}
+    </a>
+  );
+}
+
+const PAGE_CTAS = [
+  { label: "Request a Scope & Quote", href: "/contact" },
+  { label: "Speak to our CDSCO team", href: "/contact" },
+  { label: "Call +91 926-687-7738", href: "tel:+919266877738" },
+];
+
+const FINAL_CTAS = [
+  { label: "Request a Scope & Quote", href: "/contact" },
+  { label: "Speak to our CDSCO team", href: "/contact" },
+  { label: "Call +91 926-687-7738", href: "tel:+919266877738" },
+];
 
 export function CdscoPageContent() {
   const [activeId, setActiveId] = useState(CDSCO_TOC[0].id);
@@ -120,9 +269,7 @@ export function CdscoPageContent() {
                   <button
                     type="button"
                     data-toc-id={item.id}
-                    className={`${styles.tocLink} ${
-                      activeId === item.id ? styles.tocLinkActive : ""
-                    }`}
+                    className={`${styles.tocLink} ${activeId === item.id ? styles.tocLinkActive : ""}`}
                     onClick={() => scrollToSection(item.id)}
                   >
                     <span className={styles.tocNum}>{i + 1}.</span>
@@ -137,171 +284,146 @@ export function CdscoPageContent() {
           </nav>
 
           <article className={styles.main}>
-            <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                CDSCO Registration in India — Complete Guide for Medical Device &amp; Drug Manufacturers and
-                Importers
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    If you manufacture, import, or distribute medical devices, drugs, cosmetics, or diagnostics in
-                    India, CDSCO Registration is the central regulatory requirement that governs your entire market
-                    access. It is one of the most complex and consequential compliance processes in the Indian
-                    regulatory landscape — and one where the cost of getting it wrong goes well beyond financial
-                    penalties.
-                  </p>
-                  <p className={styles.sectionText}>
-                    CDSCO — the Central Drugs Standard Control Organization — is India&apos;s national regulatory
-                    authority for pharmaceuticals, medical devices, cosmetics, and diagnostics. Operating under the
-                    Ministry of Health and Family Welfare, CDSCO is responsible for approving new drugs and medical
-                    devices, issuing import licences, regulating clinical trials, and enforcing standards for product
-                    safety and efficacy across India.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we help medical device manufacturers, drug importers, cosmetic
-                    companies, and diagnostic device businesses navigate the CDSCO registration process — from initial
-                    product classification and regulatory pathway identification to complete application management and
-                    post-registration compliance. In this guide, we cover everything you need to know about CDSCO
-                    Registration in India.
-                  </p>
-                </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>{BANNER_SUBTITLE}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_LEAD}</p>
+              <div className={styles.highlightsBox}>
+                <div className={styles.highlightsTitle}>{HIGHLIGHTS_TITLE}</div>
+                <ul className={styles.bulletList}>
+                  {KEY_HIGHLIGHTS.map((item) => (
+                    <li key={item.slice(0, 48)} className={styles.textJustify}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <CtaRow items={PAGE_CTAS} />
+            </div>
 
+            <section id="introduction" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{INTRO_TITLE}</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="CDSCO registration and medical device regulatory compliance support"
+                    alt="CDSCO certification and medical device regulatory compliance support"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Planning to import or manufacture medical devices or drugs in India? Contact our team for a free
-                    CDSCO consultation and get a clear regulatory roadmap for your product.
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
               </div>
-            </section>
-
-            <section id="what-is-cdsco" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is CDSCO Registration?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    CDSCO — the Central Drugs Standard Control Organization — is the apex regulatory body for drugs,
-                    medical devices, cosmetics, and diagnostics in India. It functions under the Drugs and Cosmetics
-                    Act, 1940, and the Medical Devices Rules, 2017. CDSCO Registration is the formal approval or licence
-                    issued by CDSCO that permits a manufacturer or importer to legally sell or import regulated products
-                    in India.
-                  </p>
-                  <p className={styles.sectionText}>
-                    The regulatory framework under CDSCO covers three main product categories — Drugs (including
-                    pharmaceuticals and biologicals), Medical Devices (from simple bandages to complex implantable
-                    devices), and Cosmetics. Each category has its own registration pathway, documentation requirements,
-                    and regulatory timeline.
-                  </p>
-                  <p className={styles.sectionText}>
-                    For medical devices, India implemented a comprehensive regulatory framework under the Medical
-                    Devices Rules, 2017 — which classifies devices into four risk classes (Class A, B, C, D) and mandates
-                    registration for all devices. All medical devices sold in India must have a valid CDSCO registration
-                    by the dates specified in CDSCO&apos;s phased implementation schedule.
-                  </p>
-                  <p className={styles.sectionText}>
-                    For drugs and pharmaceuticals, CDSCO issues import licences under Form 10 and manufacturing licences
-                    through the licensing system coordinated between CDSCO and State Drug Authorities. For cosmetics,
-                    import registration under CDSCO&apos;s Sugam portal is mandatory for all imported cosmetic products.
+              {INTRO_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {item.text}
+                    {item.linkHref && item.linkLabel ? (
+                      <>
+                        {" "}
+                        <OfficialLink href={item.linkHref} label={item.linkLabel} />
+                      </>
+                    ) : null}
                   </p>
                 </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>Rx</span>
-                  <span className={styles.whatIsLabel}>DRUGS &amp; DEVICES</span>
-                </div>
+              ))}
+            </section>
+
+            <section id="what-is" className={styles.section}>
+              <h2 className={styles.sectionTitle}>What is CDSCO certification?</h2>
+              <div className={styles.noteBox}>{WHAT_IS_QUICK_ANSWER}</div>
+              {WHAT_IS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{RISK_CLASSES_TITLE}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RISK_CLASSES_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "class", header: "Class", scope: "row" },
+                  { key: "risk", header: "Risk level" },
+                  { key: "who", header: "Who licenses it" },
+                  { key: "meaning", header: "What this usually means for you" },
+                ]}
+                rows={RISK_CLASS_ROWS}
+                getRowKey={(row) => row.class}
+              />
+              <div className={styles.noteBox}>
+                {RISK_CLASS_NOTE}{" "}
+                <OfficialLink href="https://cdsco.gov.in" label="cdsco.gov.in" />
               </div>
+              <h3 className={styles.subsectionTitle}>{LICENCE_ROUTES_TITLE}</h3>
+              {LICENCE_ROUTE_ITEMS.map((item) => (
+                <div key={`${item.title}-${item.text.slice(0, 32)}`}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <div className={styles.noteBox}>
+                {RULES_NOTE}{" "}
+                <OfficialLink href="https://cdsco.gov.in" label="cdsco.gov.in" />
+              </div>
+              <h3 className={styles.subsectionTitle}>{AGENT_TITLE}</h3>
+              {AGENT_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <h3 className={styles.subsectionTitle}>{NOT_WHOLE_ANSWER_TITLE}</h3>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{NOT_WHOLE_ANSWER}</p>
             </section>
 
-            <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why CDSCO Registration Is Essential for Your Business</h2>
-              <p className={styles.sectionText}>
-                CDSCO Registration is not a procedural formality — it is the gateway to one of India&apos;s most
-                regulated and fastest-growing markets.
-              </p>
-              <h3 className={styles.subsectionTitle}>Mandatory for All Regulated Products</h3>
-              <p className={styles.sectionText}>
-                The Drugs and Cosmetics Act and the Medical Devices Rules make CDSCO registration mandatory for all
-                covered product categories. Importing or selling drugs, medical devices, or cosmetics in India without
-                valid CDSCO approval is a criminal offence — punishable with imprisonment and substantial fines.
-              </p>
-              <h3 className={styles.subsectionTitle}>India&apos;s Medical Device Market Is Growing Rapidly</h3>
-              <p className={styles.sectionText}>
-                India is one of the world&apos;s top 20 medical device markets and is growing at over 15% annually. CDSCO
-                Registration is the gateway to this market — and businesses that get registered early build distribution
-                relationships and brand recognition that are difficult for later entrants to displace.
-              </p>
-              <h3 className={styles.subsectionTitle}>Customs Clearance Requires It</h3>
-              <p className={styles.sectionText}>
-                Indian customs authorities check CDSCO registration for all regulated product categories at ports of entry.
-                Medical devices, drugs, and cosmetics imported without valid CDSCO approval are refused clearance, held in
-                bonded warehouses, or destroyed — often with catastrophic cost for temperature-sensitive products.
-              </p>
-              <h3 className={styles.subsectionTitle}>Hospital and Institutional Procurement Requires It</h3>
-              <p className={styles.sectionText}>
-                Hospitals, healthcare institutions, government medical procurement agencies, and pharmacy chains require
-                valid CDSCO registration documentation before onboarding suppliers. GMSD and state medical supply
-                corporations require CDSCO registration as a basic procurement eligibility criterion.
-              </p>
-              <h3 className={styles.subsectionTitle}>Patient Safety and Legal Liability</h3>
-              <p className={styles.sectionText}>
-                CDSCO registration requires manufacturers and importers to demonstrate that products are safe, effective,
-                and manufactured to appropriate quality standards. Selling unregistered medical products in India carries
-                significant legal liability in the event of adverse events or product failures.
-              </p>
+            <section id="why-important" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why CDSCO certification is important</h2>
+              {WHY_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
             </section>
 
-            <section id="products-covered" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Which Products Require CDSCO Registration in India?</h2>
-              <p className={styles.sectionText}>
-                CDSCO Registration covers three main product categories — Medical Devices, Drugs &amp; Pharmaceuticals, and
-                Cosmetics. Here is a breakdown of what falls under each category.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Product Category</th>
-                    <th scope="col">Common Products</th>
-                    <th scope="col">Regulatory Route</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PRODUCTS_COVERED_ROWS.map((row) => (
-                    <tr key={row.category}>
-                      <th scope="row">{row.category}</th>
-                      <td>{row.products}</td>
-                      <td>{row.route}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Product classification under CDSCO is a critical first step — and incorrect classification is one of
-                the most common reasons for application delays and rejections. Our team conducts a thorough product
-                classification assessment before any application is filed, ensuring your product is correctly classified
-                and the right regulatory pathway is selected.
-              </p>
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who needs CDSCO certification?</h2>
+              {WHO_NEEDS_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="service-includes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>What our CDSCO certification service includes</h2>
+              {SERVICE_INCLUDE_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="consultant-benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Benefits of working with a specialist consultant</h2>
+              {CONSULTANT_BENEFITS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>CDSCO Registration Process — Step by Step</h2>
-              <p className={styles.sectionText}>
-                The CDSCO registration process varies significantly by product category and risk class. The following
-                covers the core steps applicable to most medical device registrations — the most common CDSCO application
-                type handled by Ornate Quality Services.
-              </p>
+              <h2 className={styles.sectionTitle}>The complete CDSCO certification process, step by step</h2>
+              <div className={styles.noteBox}>{PROCESS_QUICK_ANSWER}</div>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
@@ -315,235 +437,240 @@ export function CdscoPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  {step.objective ? (
+                    <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                      <strong>Objective:</strong> {step.objective}
+                    </p>
+                  ) : null}
+                  {step.activities ? (
+                    <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                      <strong>Activities:</strong> {step.activities}
+                    </p>
+                  ) : null}
+                  {step.timeline ? (
+                    <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                      <strong>Timeline:</strong> {step.timeline}
+                    </p>
+                  ) : null}
+                  {step.deliverables ? (
+                    <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                      <strong>Deliverables:</strong> {step.deliverables}
+                    </p>
+                  ) : null}
+                  {step.note ? <div className={styles.noteBox}>{step.note}</div> : null}
                 </div>
               ))}
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>CDSCO Registration Requirements for Manufacturers and Importers</h2>
-              <p className={styles.sectionText}>
-                The requirements for CDSCO registration vary by product category and risk class. The following covers the
-                key requirements for medical device registration — the most common CDSCO application type.
-              </p>
-              <h3 className={styles.subsectionTitle}>For Foreign Manufacturers — Medical Devices</h3>
-              <ul className={styles.bulletList}>
-                <li>Valid manufacturing authorisation from the regulatory authority of the country of manufacture</li>
-                <li>ISO 13485 Quality Management System certification — mandatory for Class B, C, D devices</li>
-                <li>CE Marking, FDA approval, or equivalent recognised international certification for Class B and above</li>
-                <li>Appointment of an Authorised Indian Representative with a valid address in India</li>
-                <li>Complete technical documentation as per CDSCO&apos;s requirements for the applicable device class</li>
-                <li>Post-market surveillance system capable of reporting adverse events to CDSCO</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>For Indian Manufacturers — Medical Devices</h3>
-              <ul className={styles.bulletList}>
-                <li>Valid manufacturing licence from the State Drug Authority for the manufacturing premises</li>
-                <li>ISO 13485 certification (mandatory for Class B, C, D devices)</li>
-                <li>Technical documentation demonstrating device safety and performance</li>
-                <li>Ability to conduct post-market surveillance and adverse event reporting</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>For Drug Importers</h3>
-              <ul className={styles.bulletList}>
-                <li>Valid import licence under Form 10 from CDSCO — required before first shipment</li>
-                <li>Certificate of Pharmaceutical Product (CoPP) from the regulatory authority of the country of manufacture</li>
-                <li>Good Manufacturing Practice (GMP) compliance certificate from the manufacturer</li>
-                <li>Approved product dossier including drug master file data where applicable</li>
-              </ul>
-              <p className={styles.sectionText}>
-                Not sure which CDSCO pathway applies to your product? Our team provides a free regulatory assessment.
-                Contact us before you begin documentation preparation.
-              </p>
-            </section>
-
             <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for CDSCO Registration</h2>
-              <p className={styles.sectionText}>
-                The following documents form the core of a CDSCO medical device registration application. Requirements
-                vary by device class — documents marked in details as Class B, C, D are required for those device classes.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_ROWS.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Our team provides a precise, device-specific document checklist after reviewing your product
-                classification and existing regulatory certifications. We identify documentation gaps early and advise on
-                the most efficient way to address them.
-              </p>
-            </section>
-
-            <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>CDSCO Registration Cost in India</h2>
-              <p className={styles.sectionText}>
-                CDSCO registration costs vary significantly by product category, device class, and the complexity of the
-                technical documentation required.
-              </p>
-              <h3 className={styles.subsectionTitle}>CDSCO Government Fee</h3>
-              <p className={styles.sectionText}>
-                CDSCO charges a government fee at the time of application filing. For Class A devices, fees are typically
-                INR 5,000 to INR 10,000. For Class B, C, and D devices, fees range from INR 10,000 to INR 50,000 depending
-                on the device category and number of models covered.
-              </p>
-              <h3 className={styles.subsectionTitle}>ISO 13485 Certification Cost</h3>
-              <p className={styles.sectionText}>
-                For Class B, C, and D devices, ISO 13485 certification from an accredited certification body is a
-                prerequisite. If the manufacturer does not hold ISO 13485, this must be obtained before the CDSCO
-                application can be filed.
-              </p>
-              <h3 className={styles.subsectionTitle}>Technical Documentation Preparation</h3>
-              <p className={styles.sectionText}>
-                Preparing a CDSCO-compliant technical dossier — particularly for Class C and D devices — requires
-                regulatory expertise. Ornate Quality Services charges a professional fee for complete technical
-                documentation preparation, regulatory strategy, application filing, and query resolution — quoted based on
-                device class and complexity.
-              </p>
-              <h3 className={styles.subsectionTitle}>Authorised Indian Representative Service</h3>
-              <p className={styles.sectionText}>
-                Ornate Quality Services charges an annual fee for acting as the Authorised Indian Representative for
-                foreign medical device manufacturers. As your AIR, we manage all CDSCO correspondence, adverse event
-                reporting, and regulatory compliance obligations in India on your behalf.
-              </p>
-              <p className={styles.sectionText}>
-                For a precise CDSCO registration cost estimate for your specific device and regulatory situation —
-                contact our team for a free consultation.
-              </p>
-            </section>
-
-            <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>CDSCO Registration Validity and Renewal</h2>
-              <p className={styles.sectionText}>
-                CDSCO medical device registrations are typically granted for a period of 5 years. Import licences for
-                drugs are issued for varying periods depending on the product category. The exact validity is specified on
-                the registration certificate at the time of issue.
-              </p>
-              <h3 className={styles.subsectionTitle}>Renewal Process</h3>
-              <p className={styles.sectionText}>
-                CDSCO registration renewal must be applied for before the current registration expires. The renewal process
-                involves filing a renewal application on the Sugam portal with updated documents and confirmation that the
-                device continues to meet all applicable requirements. For devices where specifications or manufacturing
-                have changed, updated documentation must be submitted.
-              </p>
-              <h3 className={styles.subsectionTitle}>Post-Market Surveillance Requirements</h3>
-              <p className={styles.sectionText}>
-                Throughout the validity period, registered manufacturers and importers must maintain an active post-market
-                surveillance system — monitoring device performance, collecting adverse event reports, and filing periodic
-                safety update reports with CDSCO where required.
-              </p>
-              <h3 className={styles.subsectionTitle}>Change Notifications</h3>
-              <p className={styles.sectionText}>
-                Any significant change to the device — including design modifications, manufacturing changes, or labelling
-                updates — must be notified to CDSCO. Depending on the nature of the change, CDSCO may require a supplementary
-                application or amendment to the existing registration. Our team advises on when changes trigger a
-                notification requirement and manages the process.
-              </p>
-            </section>
-
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Key Benefits of CDSCO Registration for Medical Device Businesses</h2>
+              <h2 className={styles.sectionTitle}>Documents required for CDSCO certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document", scope: "row" },
+                  { key: "purpose", header: "Purpose" },
+                  { key: "mandatory", header: "Mandatory / Optional" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              <h3 className={styles.subsectionTitle}>{DOCUMENTS_CHECKLIST_INTRO}</h3>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
+                {DOCUMENTS_CHECKLIST.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </section>
 
-            <section id="penalties" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Penalties for Selling Medical Devices Without CDSCO Registration</h2>
-              <p className={styles.sectionText}>
-                The Drugs and Cosmetics Act and the Medical Devices Rules prescribe serious penalties for manufacturing,
-                importing, or selling regulated products without valid CDSCO registration. Enforcement has strengthened
-                significantly since the full implementation of the Medical Devices Rules in 2022.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Violation</th>
-                    <th scope="col">Consequence</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PENALTIES_ROWS.map((row) => (
-                    <tr key={row.violation}>
-                      <th scope="row">{row.violation}</th>
-                      <td>{row.consequence}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                CDSCO and State Drug Authorities conduct joint enforcement operations — including surprise inspections of
-                hospitals, pharmacies, and medical device distributors. Products found without valid registration documents
-                are seized immediately.
-              </p>
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Eligibility: who can apply and under what conditions</h2>
+              {ELIGIBILITY_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <div className={styles.noteBox}>{ELIGIBILITY_NOTE}</div>
             </section>
 
-            <section id="case-study" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a South Korean Medical Device Manufacturer Get CDSCO Registered
-              </h2>
-              <p className={styles.sectionText}>
-                A South Korean manufacturer of Class B in-vitro diagnostic devices — specifically point-of-care blood
-                glucose monitoring systems — approached Ornate Quality Services after their Indian distributor informed them
-                that their devices were being flagged during hospital audits for missing CDSCO registration. Their products
-                had been sold in India for two years through informal channels without registration.
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Timeline: how long CDSCO certification takes</h2>
+              <div className={styles.noteBox}>{TIMELINE_QUICK_ANSWER}</div>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>{TIMELINE_FACTORS_INTRO}</h3>
+              <ul className={styles.bulletList}>
+                {TIMELINE_FACTORS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}.</strong> {item.text}
+                  </li>
+                ))}
+              </ul>
+              <h3 className={styles.subsectionTitle}>{TIMELINE_DELAYS_INTRO}</h3>
+              <ul className={styles.bulletList}>
+                {TIMELINE_DELAYS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="cost" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Cost factors for CDSCO certification</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_INTRO}</p>
+              <h3 className={styles.subsectionTitle}>{COST_FACTORS_INTRO}</h3>
+              <ul className={styles.bulletList}>
+                {COST_FACTORS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}.</strong> {item.text}
+                    {item.linkHref && item.linkLabel ? (
+                      <>
+                        {" "}
+                        <OfficialLink href={item.linkHref} label={item.linkLabel} />
+                      </>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{COST_WARNING}</div>
+            </section>
+
+            <section id="validity" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Validity and renewal</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                {VALIDITY_INTRO}{" "}
+                <OfficialLink href="https://cdsco.gov.in" label="cdsco.gov.in" />
               </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                The manufacturer held CE Marking for their devices under the EU IVDR, but their Indian distributor had been
-                selling the products without a valid CDSCO registration — under the mistaken belief that CE Marking alone
-                was sufficient for the Indian market. When CDSCO&apos;s phased implementation schedule extended mandatory
-                registration to their device category, the distributor began receiving compliance notices.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                Our team conducted a full regulatory assessment of the manufacturer&apos;s device portfolio — covering three
-                blood glucose monitor models and a range of test strips. We confirmed the correct device classification,
-                verified that the EU IVDR certificate was accepted by CDSCO, and appointed Ornate as the Authorised Indian
-                Representative. We prepared the complete technical dossier, filed CDSCO Sugam applications in parallel, and
-                responded to CDSCO&apos;s technical queries within the required timeframe.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                CDSCO registrations were obtained for all three device models within 4 months. The distributor resolved the
-                hospital compliance notices, and the manufacturer&apos;s products are now legally registered and available
-                through organised hospital procurement channels across India. The manufacturer maintains an ongoing
-                compliance programme through our AIR service.
-              </p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_LEAD}</p>
+              <ul className={styles.bulletList}>
+                {VALIDITY_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_CLOSING}</p>
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common challenges — and how we handle them</h2>
+              {CHALLENGES_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                    <strong>Why it happens:</strong> {item.why}
+                  </p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>
+                    <strong>Solution:</strong> {item.solution}
+                  </p>
+                </div>
+              ))}
+            </section>
+
+            <section id="why-choose" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why choose Ornate Quality Services Pvt Ltd</h2>
+              {WHY_CHOOSE_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+              <div className={styles.noteBox}>{CLAIMS_NOTE}</div>
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries we serve</h2>
+              {INDUSTRY_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="products-covered" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Products covered</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PRODUCTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "product", header: "Product name", scope: "row" },
+                  { key: "keyword", header: "Target keyword" },
+                  { key: "page", header: "Internal link" },
+                ]}
+                rows={PRODUCT_ROWS}
+                getRowKey={(row) => row.product}
+              />
+            </section>
+
+            <section id="updates" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Latest updates and regulatory changes</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{UPDATES_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{UPDATES_NOTE}</p>
+              <ul className={styles.bulletList}>
+                {UPDATE_LINKS.map((item) => (
+                  <li key={item.label} className={styles.textJustify}>
+                    {item.label} — <OfficialLink href={item.href} label={item.href.replace("https://", "")} />
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{UPDATES_CLOSING}</p>
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common mistakes in CDSCO certification</h2>
+              <DataTable
+                columns={[
+                  { key: "mistake", header: "Mistake", scope: "row" },
+                  { key: "impact", header: "Impact" },
+                  { key: "avoid", header: "How to avoid" },
+                ]}
+                rows={MISTAKES_ROWS}
+                getRowKey={(row) => row.mistake}
+              />
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert tips from our regulatory team</h2>
+              <ul className={styles.bulletList}>
+                {TIPS_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="comparison" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Doing it yourself vs a consultant vs a full-service agency</h2>
+              <DataTable
+                columns={[
+                  { key: "factor", header: "Factor", scope: "row" },
+                  { key: "inhouse", header: "In-house, on your own" },
+                  { key: "consultant", header: "Individual consultant" },
+                  { key: "agency", header: "Full-service agency" },
+                ]}
+                rows={COMPARISON_ROWS}
+                getRowKey={(row) => row.factor}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COMPARISON_CLOSING}</p>
             </section>
 
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions — CDSCO Registration</h2>
+              <h2 className={styles.sectionTitle}>Frequently asked questions</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Expert Assistance for CDSCO Registration</h2>
-              <p className={styles.ctaText}>
-                Need help with product classification, AIR appointment, technical dossier preparation, Sugam portal
-                filing, or post-market surveillance? Connect with Ornate Quality Services for complete support.
-              </p>
-              <div className={styles.ctaButtons}>
-                <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
-                </Link>
-                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Expert Consultation
-                </a>
-              </div>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{CTA_TITLE}</h2>
+              {CTA_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CTA_PRIMARY_NOTE}</p>
+              <CtaRow items={FINAL_CTAS} />
             </section>
           </article>
 

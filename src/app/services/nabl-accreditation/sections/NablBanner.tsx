@@ -6,8 +6,8 @@ export function NablBanner() {
   return (
     <ServicePageBanner
       src={nablBanner}
-      alt="NABL Accreditation in India — Testing and calibration laboratory accreditation"
-      label="NABL Accreditation banner"
+      alt="NABL Accredited Lab Testing Services in India — Test reports from accredited laboratories"
+      label="NABL Lab Testing banner"
     />
   );
 }

@@ -16,32 +16,137 @@ import {
 } from "../../bis-crs-registration/data/bisCrsContent";
 import {
   NABL_TOC,
-  ACCREDITATION_TYPES_ROWS,
-  PROCESS_STEPS,
-  DOCUMENTS_ROWS,
-  CONSEQUENCES_ROWS,
+  BANNER_TITLE,
+  BANNER_SUBTITLE,
+  BANNER_DESCRIPTION,
+  WHAT_YOU_GET_INTRO,
+  WHAT_YOU_GET,
+  INTRO_TITLE,
+  INTRO_PARAGRAPHS,
+  WHAT_IS_PARAGRAPHS,
+  WHY_INTRO,
+  WHY_ITEMS,
+  APPLICATIONS_INTRO,
+  APPLICATION_ROWS,
+  WHO_NEEDS_INTRO,
   BENEFITS_ITEMS,
+  FEATURES_ITEMS,
+  ELIGIBILITY_INTRO,
+  ELIGIBILITY_YOU_MAY,
+  ELIGIBILITY_ITEMS,
+  ELIGIBILITY_PARAGRAPHS,
+  DOCUMENTS_INTRO,
+  DOCUMENTS_ROWS,
+  DOCUMENTS_NOTE,
+  PROCESS_INTRO,
+  PROCESS_LEAD,
+  PROCESS_STEPS,
+  DOMAINS_INTRO,
+  DOMAIN_ROWS,
+  DOMAINS_NOTE,
+  TIMELINE_INTRO,
+  TIMELINE_FACTORS_INTRO,
+  TIMELINE_FACTORS,
+  TIMELINE_CLOSING,
+  COST_INTRO,
+  COST_ITEMS,
+  COST_CLOSING,
+  VALIDITY_INTRO,
+  VALIDITY_LEAD,
+  VALIDITY_ITEMS,
+  VALIDITY_NOTE,
+  VALIDITY_CLOSING,
+  RETESTING_INTRO,
+  RETESTING_ITEMS,
+  STANDARDS_ITEMS,
+  CHALLENGES_ITEMS,
+  HELP_PARAGRAPHS,
+  HELP_DO_INTRO,
+  HELP_DO_ITEMS,
+  WHY_CHOOSE_ROWS,
+  WHY_CHOOSE_CLOSING,
+  DIRECTORY_INTRO,
+  DIRECTORY_ROWS,
+  INDUSTRIES_INTRO,
+  INDUSTRY_ROWS,
+  LOCATIONS_INTRO,
+  LOCATION_ROWS,
+  LOCATIONS_NOTE,
+  MISTAKES_ITEMS,
+  TIPS_ITEMS,
+  COMPARISON_ROWS,
   FAQ_ITEMS,
+  CTA_TITLE,
+  CTA_PARAGRAPHS,
+  CTA_FOOTER,
+  REPORTS_INTRO,
+  REPORT_ROWS,
+  type TableRow,
 } from "../data/nablContent";
 
 const NABL_PAGE_PATH = "/services/nabl-accreditation";
 
+type DataTableColumn = {
+  key: string;
+  header: string;
+  scope?: "col" | "row";
+};
+
+function DataTable({
+  columns,
+  rows,
+  getRowKey,
+}: {
+  columns: DataTableColumn[];
+  rows: TableRow[];
+  getRowKey: (row: TableRow, index: number) => string;
+}) {
+  return (
+    <div className={styles.tableScroll}>
+      <table className={styles.dataTable}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={getRowKey(row, index)}>
+              {columns.map((col) => {
+                const value = row[col.key] ?? "";
+                if (col.scope === "row") {
+                  return (
+                    <th key={col.key} scope="row">
+                      {value}
+                    </th>
+                  );
+                }
+                return <td key={col.key}>{value}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function CallbackForm() {
   return (
     <ServiceCallbackForm
       idPrefix="nabl"
       defaultService="NABL Accreditation"
-      serviceOptions={[
-        "NABL Accreditation",
-      ]}
+      serviceOptions={["NABL Accreditation"]}
       successText="Our NABL accreditation expert will contact you within one business day."
       mobilePlaceholder="+91 XXXXX XXXXX"
       serviceSelectClassName="formInput"
     />
   );
 }
-
 
 function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -73,6 +178,34 @@ function FaqAccordion() {
     </div>
   );
 }
+
+function CtaRow({ items }: { items: { label: string; href: string }[] }) {
+  return (
+    <div className={`${styles.ctaButtons} ${styles.ctaButtonsCenter} ${styles.ctaButtonsOnLight}`}>
+      {items.map((item, index) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          className={index === 0 ? styles.ctaBtnPrimary : styles.ctaBtnSecondary}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+const PAGE_CTAS = [
+  { label: "Request a NABL Testing Proposal", href: "/contact" },
+  { label: "Speak to a Testing Expert", href: "/contact" },
+  { label: "Book Product Testing in a NABL Lab", href: "/contact" },
+];
+
+const FINAL_CTAS = [
+  { label: "Book NABL Lab Testing", href: "/contact" },
+  { label: "Request a Testing Proposal", href: "/contact" },
+  { label: "Speak to a Testing Expert", href: "/contact" },
+];
 
 export function NablPageContent() {
   const [activeId, setActiveId] = useState(NABL_TOC[0].id);
@@ -120,9 +253,7 @@ export function NablPageContent() {
                   <button
                     type="button"
                     data-toc-id={item.id}
-                    className={`${styles.tocLink} ${
-                      activeId === item.id ? styles.tocLinkActive : ""
-                    }`}
+                    className={`${styles.tocLink} ${activeId === item.id ? styles.tocLinkActive : ""}`}
                     onClick={() => scrollToSection(item.id)}
                   >
                     <span className={styles.tocNum}>{i + 1}.</span>
@@ -137,171 +268,143 @@ export function NablPageContent() {
           </nav>
 
           <article className={styles.main}>
-            <section id="introduction" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                NABL Accreditation in India — Complete Guide for Testing and Calibration Laboratories
-              </h2>
-              <div className={styles.introGrid}>
-                <div className={styles.introTextCol}>
-                  <p className={styles.sectionText}>
-                    If you operate a testing or calibration laboratory in India — whether you test products for BIS
-                    certification, conduct environmental testing, perform food safety analysis, calibrate industrial
-                    instruments, or provide any other laboratory testing service — NABL Accreditation is the credential
-                    that separates recognised, trusted laboratories from the rest.
-                  </p>
-                  <p className={styles.sectionText}>
-                    NABL — the National Accreditation Board for Testing and Calibration Laboratories — is India&apos;s apex
-                    accreditation body for testing and calibration laboratories. Operating under the Quality Council of
-                    India (QCI), NABL grants accreditation to laboratories that demonstrate technical competence and
-                    management system compliance with ISO/IEC 17025 — the international standard for laboratory competence.
-                  </p>
-                  <p className={styles.sectionText}>
-                    At Ornate Quality Services, we help laboratories across India achieve and maintain NABL
-                    Accreditation — from initial gap assessment and ISO 17025 implementation to application management
-                    and assessment preparation. In this guide, we cover everything you need to know about NABL
-                    Accreditation — what it is, who needs it, how the process works, and what it costs.
-                  </p>
-                </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{BANNER_TITLE}</h2>
+              <p className={`${styles.heroLead} ${styles.textJustify}`}>
+                <strong>{BANNER_SUBTITLE}</strong>
+              </p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{BANNER_DESCRIPTION}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHAT_YOU_GET_INTRO}</p>
+              <div className={styles.highlightsBox}>
+                <ul className={styles.bulletList}>
+                  {WHAT_YOU_GET.map((item) => (
+                    <li key={item.slice(0, 48)} className={styles.textJustify}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <CtaRow items={PAGE_CTAS} />
+            </div>
 
+            <section id="introduction" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{INTRO_TITLE}</h2>
+              <div className={styles.introFlow}>
                 <div className={styles.introImageWrap}>
                   <Image
                     src={buildingImage}
-                    alt="NABL accreditation and laboratory compliance support"
+                    alt="NABL accredited lab testing coordination for certification in India"
                     fill
                     sizes="(min-width: 960px) 320px, 100vw"
                     className={styles.introImage}
                   />
                 </div>
-
-                <blockquote className={styles.blockquote}>
-                  <span className={styles.blockquoteIcon} aria-hidden="true">
-                    &ldquo;
-                  </span>
-                  <p className={styles.blockquoteText}>
-                    Running a testing or calibration laboratory? Contact our team for a free NABL readiness assessment
-                    and find out what it takes to get accredited.
+                {INTRO_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                    {paragraph}
                   </p>
-                </blockquote>
+                ))}
               </div>
             </section>
 
-            <section id="what-is-nabl" className={styles.section}>
-              <h2 className={styles.sectionTitle}>What is NABL Accreditation?</h2>
-              <div className={styles.splitGrid}>
-                <div>
-                  <p className={styles.sectionText}>
-                    NABL — the National Accreditation Board for Testing and Calibration Laboratories — is the national
-                    accreditation body for testing and calibration laboratories in India. It is a constituent board of
-                    the Quality Council of India (QCI), operating under the Department for Promotion of Industry and
-                    Internal Trade (DPIIT), Ministry of Commerce and Industry.
-                  </p>
-                  <p className={styles.sectionText}>
-                    NABL Accreditation is the formal recognition by NABL that a laboratory has demonstrated technical
-                    competence to perform specific tests or calibrations — as defined in its scope of accreditation — in
-                    accordance with the requirements of ISO/IEC 17025:2017, the internationally recognised standard for
-                    the competence of testing and calibration laboratories.
-                  </p>
-                  <p className={styles.sectionText}>
-                    NABL is a signatory to the Mutual Recognition Arrangement (MRA) of the Asia Pacific Accreditation
-                    Cooperation (APAC) and the International Laboratory Accreditation Cooperation (ILAC). This means that
-                    NABL-accredited laboratory test reports are internationally recognised — accepted by regulatory
-                    authorities, government agencies, and international buyers in countries that are part of the ILAC MRA
-                    network.
-                  </p>
-                  <p className={styles.sectionText}>
-                    NABL accreditation covers testing laboratories across all disciplines — mechanical, chemical,
-                    biological, electrical, electronics, fluid flow, photometry, and more — as well as calibration
-                    laboratories across all measurement parameters. Each laboratory&apos;s accreditation is specific to its
-                    defined scope.
-                  </p>
-                </div>
-                <div className={styles.whatIsVisual} aria-hidden="true">
-                  <span className={styles.whatIsIcon}>LAB</span>
-                  <span className={styles.whatIsLabel}>ISO 17025 ACCREDITATION</span>
-                </div>
-              </div>
+            <section id="what-is" className={styles.section}>
+              <h2 className={styles.sectionTitle}>What is NABL Accredited Lab Testing?</h2>
+              {WHAT_IS_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
             </section>
 
-            <section id="importance" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Why NABL Accreditation Is Essential for Your Laboratory</h2>
-              <p className={styles.sectionText}>
-                NABL Accreditation transforms a laboratory from a testing facility into a recognised, trusted source of
-                technically reliable data.
-              </p>
-              <h3 className={styles.subsectionTitle}>Required for BIS, FSSAI, CDSCO, and Other Regulatory Testing</h3>
-              <p className={styles.sectionText}>
-                Many of India&apos;s most important product certification schemes require testing at NABL-accredited
-                laboratories. BIS CRS Registration requires testing at NABL-accredited labs. FSSAI food safety testing must
-                be conducted at NABL-accredited food laboratories. CDSCO requires testing at NABL-accredited or
-                internationally recognised labs. WPC requires RF testing at designated labs — typically NABL-accredited.
-                Without NABL accreditation, a laboratory cannot participate in these high-value testing markets.
-              </p>
-              <h3 className={styles.subsectionTitle}>Government and Regulatory Acceptance</h3>
-              <p className={styles.sectionText}>
-                Government agencies, regulatory authorities, and public sector organisations increasingly require test
-                reports from NABL-accredited laboratories for procurement qualification, environmental compliance, product
-                approval, and enforcement purposes. BEE, CPCB, ARAI, and dozens of other agencies specify NABL
-                accreditation as a requirement for accepted test reports.
-              </p>
-              <h3 className={styles.subsectionTitle}>International Acceptance of Test Reports</h3>
-              <p className={styles.sectionText}>
-                Through NABL&apos;s membership of the ILAC Mutual Recognition Arrangement, test reports issued by
-                NABL-accredited laboratories carry international credibility. Indian exporters who need test reports
-                accepted by overseas regulatory authorities can use NABL-accredited laboratory reports in many markets.
-              </p>
-              <h3 className={styles.subsectionTitle}>Competitive Advantage in Commercial Testing Market</h3>
-              <p className={styles.sectionText}>
-                In India&apos;s competitive commercial testing market, NABL accreditation is a significant
-                differentiator. Manufacturers, importers, and exporters who need reliable test data prefer NABL-accredited
-                laboratories because the accreditation provides independent assurance of technical competence.
-              </p>
-              <h3 className={styles.subsectionTitle}>Builds Internal Quality Culture</h3>
-              <p className={styles.sectionText}>
-                The process of achieving and maintaining NABL accreditation — implementing ISO 17025, establishing
-                measurement uncertainty practices, maintaining equipment calibration, and running a systematic internal
-                audit programme — creates a genuine quality culture within the laboratory that improves data reliability
-                and reduces errors.
-              </p>
+            <section id="why-important" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why NABL Accredited Lab Testing is Important for Your Business</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHY_INTRO}</p>
+              {WHY_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
             </section>
 
-            <section id="accreditation-types" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Types of NABL Accreditation — Which One Does Your Laboratory Need?</h2>
-              <p className={styles.sectionText}>
-                NABL offers accreditation across multiple laboratory disciplines. The following table covers the main
-                types of NABL accreditation and the typical laboratory categories within each.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Accreditation Type</th>
-                    <th scope="col">Typical Laboratory Types</th>
-                    <th scope="col">Common Test Parameters</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ACCREDITATION_TYPES_ROWS.map((row) => (
-                    <tr key={row.type}>
-                      <th scope="row">{row.type}</th>
-                      <td>{row.laboratories}</td>
-                      <td>{row.parameters}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                A laboratory can apply for NABL accreditation in multiple disciplines simultaneously — or build its scope
-                progressively over time. Our team advises on the most strategic scope of accreditation based on the
-                laboratory&apos;s current capabilities and target markets.
-              </p>
+            <section id="applications" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Certification and Regulatory Applications We Support</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{APPLICATIONS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "application", header: "Regulatory Application", scope: "row" },
+                  { key: "service", header: "Our Service" },
+                  { key: "testing", header: "Testing We Coordinate" },
+                ]}
+                rows={APPLICATION_ROWS}
+                getRowKey={(row) => row.application}
+              />
+            </section>
+
+            <section id="who-needs" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Needs NABL Accredited Lab Testing Services?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHO_NEEDS_INTRO}</p>
+            </section>
+
+            <section id="benefits" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Benefits of Our NABL Lab Testing Coordination</h2>
+              {BENEFITS_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="features" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Key Features of Our Lab Testing Coordination Service</h2>
+              <ul className={styles.bulletList}>
+                {FEATURES_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="eligibility" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Who Can Use Our NABL Lab Testing Services?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_YOU_MAY}</p>
+              <ul className={styles.bulletList}>
+                {ELIGIBILITY_ITEMS.map((item) => (
+                  <li key={item} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {ELIGIBILITY_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+            </section>
+
+            <section id="documents" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Information and Documents Required for NABL Lab Testing</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOCUMENTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "document", header: "Document / Information", scope: "row" },
+                  { key: "purpose", header: "Purpose" },
+                  { key: "mandatory", header: "Mandatory / Optional" },
+                  { key: "notes", header: "Notes" },
+                ]}
+                rows={DOCUMENTS_ROWS}
+                getRowKey={(row) => row.document}
+              />
+              <div className={styles.noteBox}>{DOCUMENTS_NOTE}</div>
             </section>
 
             <section id="process" className={styles.section}>
-              <h2 className={styles.sectionTitle}>NABL Accreditation Process — Step by Step</h2>
-              <p className={styles.sectionText}>
-                The NABL accreditation process is structured around the requirements of ISO/IEC 17025:2017. It involves
-                implementing the standard, applying to NABL, undergoing an assessment, and maintaining the accreditation
-                through ongoing surveillance.
-              </p>
+              <h2 className={styles.sectionTitle}>Step-by-Step NABL Lab Testing Process</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{PROCESS_LEAD}</p>
               <div className={styles.processFlow} role="list">
                 {PROCESS_STEPS.map((step) => (
                   <div key={step.step} className={styles.processStep} role="listitem">
@@ -315,239 +418,236 @@ export function NablPageContent() {
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title}>
                   <h3 className={styles.subsectionTitle}>{step.title}</h3>
-                  <p className={styles.sectionText}>{step.text}</p>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{step.text}</p>
                 </div>
               ))}
             </section>
 
-            <section id="requirements" className={styles.section}>
-              <h2 className={styles.sectionTitle}>NABL Accreditation Requirements for Laboratories</h2>
-              <p className={styles.sectionText}>
-                Laboratories seeking NABL accreditation must meet the following requirements under ISO/IEC 17025:2017 and
-                NABL&apos;s specific accreditation criteria.
-              </p>
-              <h3 className={styles.subsectionTitle}>Management System Requirements</h3>
-              <ul className={styles.bulletList}>
-                <li>Documented management system covering all requirements of ISO/IEC 17025:2017</li>
-                <li>Laboratory Quality Manual defining policies, objectives, and overall management framework</li>
-                <li>Document control system for all laboratory procedures and records</li>
-                <li>Internal audit programme — at least one complete internal audit before application</li>
-                <li>Management review process with documented outcomes and improvement actions</li>
-                <li>Corrective action system for addressing non-conformities and customer complaints</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>Technical Requirements</h3>
-              <ul className={styles.bulletList}>
-                <li>Defined scope of accreditation — specific tests or calibrations with applicable methods and ranges</li>
-                <li>Technically competent staff — qualifications, training records, and authorisation for all test activities</li>
-                <li>Calibrated equipment with full traceability to national / international standards</li>
-                <li>Validated test methods — including method validation records and measurement uncertainty estimates</li>
-                <li>Appropriate laboratory facilities and environmental conditions for the scope of testing</li>
-                <li>Proficiency testing participation — with satisfactory performance records</li>
-              </ul>
-              <h3 className={styles.subsectionTitle}>Infrastructure Requirements</h3>
-              <p className={styles.sectionText}>
-                The laboratory must have appropriate physical facilities — including controlled environmental conditions,
-                adequate space for testing activities, and proper storage for samples and reference materials. For
-                accreditation in specific disciplines, additional infrastructure requirements apply — for example, shielded
-                rooms for EMC testing or cleanroom facilities for microbiology.
-              </p>
-              <p className={styles.sectionText}>
-                Not sure whether your laboratory meets NABL requirements? Our team provides a free readiness assessment
-                covering all ISO 17025 requirements. Contact us to get started.
-              </p>
+            <section id="domains" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Testing Domains Covered Under Our NABL Lab Testing Services</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DOMAINS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "domain", header: "Testing Domain", scope: "row" },
+                  { key: "covers", header: "What It Covers" },
+                  { key: "who", header: "Who Typically Needs It" },
+                  { key: "page", header: "Our Hub Page" },
+                ]}
+                rows={DOMAIN_ROWS}
+                getRowKey={(row) => row.domain}
+              />
+              <div className={styles.noteBox}>{DOMAINS_NOTE}</div>
             </section>
 
-            <section id="documents" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Documents Required for NABL Accreditation Application</h2>
-              <p className={styles.sectionText}>
-                The following documents are required for the NABL accreditation application. These form the core of the
-                laboratory&apos;s quality management system documentation.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Document</th>
-                    <th scope="col">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DOCUMENTS_ROWS.map((row) => (
-                    <tr key={row.no}>
-                      <td>{row.no}</td>
-                      <th scope="row">{row.document}</th>
-                      <td>{row.details}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                Our team develops all required documentation during the implementation phase — ensuring your
-                laboratory&apos;s quality management system is complete, technically sound, and assessment-ready before
-                the NABL application is filed.
-              </p>
+            <section id="timeline" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How Long Does NABL Lab Testing Take?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_FACTORS_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {TIMELINE_FACTORS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{TIMELINE_CLOSING}</p>
             </section>
 
             <section id="cost" className={styles.section}>
-              <h2 className={styles.sectionTitle}>NABL Accreditation Cost in India</h2>
-              <p className={styles.sectionText}>
-                NABL accreditation costs include NABL application and assessment fees, proficiency testing charges,
-                equipment calibration costs, and professional consulting fees.
-              </p>
-              <h3 className={styles.subsectionTitle}>NABL Application and Assessment Fees</h3>
-              <p className={styles.sectionText}>
-                NABL charges an application fee and assessment fees based on the laboratory&apos;s scope and size. Total
-                NABL fees for the initial accreditation cycle typically range from INR 50,000 to INR 3,00,000 depending on
-                the scope complexity and number of assessment days required.
-              </p>
-              <h3 className={styles.subsectionTitle}>Equipment Calibration Costs</h3>
-              <p className={styles.sectionText}>
-                Establishing a complete equipment calibration programme is a significant cost component. For a mid-sized
-                testing laboratory, initial calibration costs can range from INR 1,00,000 to INR 5,00,000 depending on
-                the number and type of instruments.
-              </p>
-              <h3 className={styles.subsectionTitle}>Proficiency Testing Fees</h3>
-              <p className={styles.sectionText}>
-                Participation in proficiency testing programmes involves fees paid to the PT provider — typically ranging
-                from INR 5,000 to INR 30,000 per PT round per parameter. NABL requires participation in at least one PT
-                round before accreditation for most test parameters.
-              </p>
-              <h3 className={styles.subsectionTitle}>Professional Consulting Fees</h3>
-              <p className={styles.sectionText}>
-                Ornate Quality Services charges a professional fee for the complete NABL accreditation consulting service
-                — from Gap Analysis and ISO 17025 implementation to application filing, assessment preparation, and
-                post-assessment non-conformity closure support. All fees are quoted transparently based on the
-                laboratory&apos;s scope and size.
-              </p>
-              <p className={styles.sectionText}>
-                For a precise NABL accreditation cost estimate for your specific laboratory and scope — contact our team
-                for a free consultation.
-              </p>
+              <h2 className={styles.sectionTitle}>NABL Lab Testing Cost in India — What Affects It?</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_INTRO}</p>
+              <ul className={styles.bulletList}>
+                {COST_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{COST_CLOSING}</p>
             </section>
 
             <section id="validity" className={styles.section}>
-              <h2 className={styles.sectionTitle}>NABL Accreditation Validity and Surveillance Cycle</h2>
-              <p className={styles.sectionText}>
-                NABL accreditation is granted for a period of two years. The accreditation cycle consists of an initial
-                accreditation assessment followed by annual surveillance assessments, and a full reassessment at the end
-                of the two-year cycle.
-              </p>
-              <h3 className={styles.subsectionTitle}>Annual Surveillance Assessments</h3>
-              <p className={styles.sectionText}>
-                NABL conducts annual surveillance assessments during the accreditation cycle to verify that the laboratory
-                continues to meet ISO/IEC 17025 requirements and maintains technical competence across its accredited
-                scope. Surveillance assessments are typically shorter than initial assessments but cover all critical
-                elements of the management system and selected technical activities.
-              </p>
-              <h3 className={styles.subsectionTitle}>Reassessment</h3>
-              <p className={styles.sectionText}>
-                At the end of the two-year accreditation cycle, a full reassessment is conducted. Successful reassessment
-                results in renewal of accreditation for another two-year cycle. Our team manages the complete surveillance
-                and reassessment cycle — ensuring your laboratory remains in a state of continuous assessment readiness.
-              </p>
-              <h3 className={styles.subsectionTitle}>Scope Extensions</h3>
-              <p className={styles.sectionText}>
-                Laboratories can extend their scope of accreditation at any time by applying for additional test parameters
-                or calibration ranges. Scope extensions require a separate application and may involve an additional
-                on-site assessment for the new parameters. Our team manages scope extension applications alongside ongoing
-                accreditation maintenance.
-              </p>
+              <h2 className={styles.sectionTitle}>NABL Test Report Validity — What You Should Know</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_INTRO}</p>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_LEAD}</p>
+              <ul className={styles.bulletList}>
+                {VALIDITY_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.noteBox}>{VALIDITY_NOTE}</div>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{VALIDITY_CLOSING}</p>
             </section>
 
-            <section id="benefits" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Key Benefits of NABL Accreditation for Your Laboratory</h2>
+            <section id="retesting" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Retesting: When and How It Works</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{RETESTING_INTRO}</p>
+              {RETESTING_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="standards" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Applicable Rules, Standards and Regulatory Framework</h2>
+              {STANDARDS_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="challenges" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Challenges in NABL Lab Testing — And How to Avoid Them</h2>
+              {CHALLENGES_ITEMS.map((item) => (
+                <div key={item.title}>
+                  <h3 className={styles.subsectionTitle}>{item.title}</h3>
+                  <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
+                </div>
+              ))}
+            </section>
+
+            <section id="how-we-help" className={styles.section}>
+              <h2 className={styles.sectionTitle}>How Ornate Quality Services Helps with NABL Lab Testing</h2>
+              {HELP_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{HELP_DO_INTRO}</p>
               <ul className={styles.bulletList}>
-                {BENEFITS_ITEMS.map((item) => (
-                  <li key={item}>{item}</li>
+                {HELP_DO_ITEMS.map((item) => (
+                  <li key={item.title} className={styles.textJustify}>
+                    <strong>{item.title}:</strong> {item.text}
+                  </li>
                 ))}
               </ul>
             </section>
 
-            <section id="consequences" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Consequences of Operating Without NABL Accreditation</h2>
-              <p className={styles.sectionText}>
-                While operating a testing laboratory without NABL accreditation is not illegal in itself, the commercial
-                and regulatory consequences of not being accredited are significant and increasingly limiting.
-              </p>
-              <table className={styles.compareTable}>
-                <thead>
-                  <tr>
-                    <th scope="col">Situation</th>
-                    <th scope="col">Consequence Without NABL Accreditation</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {CONSEQUENCES_ROWS.map((row) => (
-                    <tr key={row.situation}>
-                      <th scope="row">{row.situation}</th>
-                      <td>{row.consequence}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className={styles.sectionText}>
-                As India&apos;s regulatory framework continues to strengthen — with BIS, FSSAI, CDSCO, and other agencies
-                increasingly mandating NABL-accredited testing — the proportion of the testing market accessible to
-                non-accredited laboratories will continue to shrink. NABL accreditation is a prerequisite for operating in
-                the most significant segments of India&apos;s testing market.
-              </p>
+            <section id="why-choose" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Why Choose Ornate Quality Services for NABL Lab Testing?</h2>
+              <DataTable
+                columns={[
+                  { key: "what", header: "What You Get", scope: "row" },
+                  { key: "means", header: "What It Means for You" },
+                ]}
+                rows={WHY_CHOOSE_ROWS}
+                getRowKey={(row) => row.what}
+              />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{WHY_CHOOSE_CLOSING}</p>
             </section>
 
-            <section id="case-study" className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                Real Example — How We Helped a Hyderabad Electronics Testing Lab Achieve NABL Accreditation
-              </h2>
-              <p className={styles.sectionText}>
-                A Hyderabad-based electronics testing laboratory approached Ornate Quality Services after failing its first
-                NABL assessment attempt. The laboratory had been operational for four years and had submitted its NABL
-                application based on a self-prepared quality management system — but the assessment had identified 14
-                non-conformities, including major non-conformities in method validation, measurement traceability, and
-                proficiency testing.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Challenge</h3>
-              <p className={styles.sectionText}>
-                The laboratory&apos;s self-prepared quality system documentation was technically incomplete — the SOPs
-                lacked method validation data, the equipment calibration programme had gaps in traceability documentation,
-                and the laboratory had not participated in proficiency testing before the assessment. NABL had placed the
-                accreditation on hold pending closure of all non-conformities within 6 months.
-              </p>
-              <h3 className={styles.subsectionTitle}>What We Did</h3>
-              <p className={styles.sectionText}>
-                Our team conducted a detailed review of all 14 non-conformity reports and developed a structured
-                corrective action plan. We rewrote the method validation documentation for all 12 test methods, established
-                a complete equipment calibration programme, enrolled the laboratory in appropriate proficiency testing
-                programmes, and revised the quality manual and SOPs. We also prepared the laboratory for a follow-up NABL
-                assessment with a pre-assessment mock audit.
-              </p>
-              <h3 className={styles.subsectionTitle}>The Result</h3>
-              <p className={styles.sectionText}>
-                All 14 non-conformities were closed within the 6-month window. The follow-up NABL assessment found the
-                laboratory fully compliant, and NABL accreditation was granted within 8 months of our engagement. The
-                laboratory now holds accreditation for all 12 test parameters in its original scope and has since added 4
-                new parameters through scope extensions managed by our team.
-              </p>
+            <section id="services-directory" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Testing Services We Coordinate Across All Disciplines</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{DIRECTORY_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "service", header: "Testing Service", scope: "row" },
+                  { key: "covers", header: "What It Covers" },
+                  { key: "who", header: "Who Needs It" },
+                ]}
+                rows={DIRECTORY_ROWS}
+                getRowKey={(row) => row.service}
+              />
+            </section>
+
+            <section id="industries" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Industries We Serve</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{INDUSTRIES_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "industry", header: "Industry", scope: "row" },
+                  { key: "needs", header: "Typical Testing Needs" },
+                  { key: "certification", header: "Relevant Certification" },
+                ]}
+                rows={INDUSTRY_ROWS}
+                getRowKey={(row) => row.industry}
+              />
+            </section>
+
+            <section id="locations" className={styles.section}>
+              <h2 className={styles.sectionTitle}>NABL Lab Testing Services Across India</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{LOCATIONS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "city", header: "City / Region", scope: "row" },
+                  { key: "serve", header: "How We Serve You" },
+                ]}
+                rows={LOCATION_ROWS}
+                getRowKey={(row) => row.city}
+              />
+              <div className={styles.noteBox}>{LOCATIONS_NOTE}</div>
+            </section>
+
+            <section id="mistakes" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Common Mistakes to Avoid in NABL Lab Testing</h2>
+              <ul className={styles.bulletList}>
+                {MISTAKES_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="expert-tips" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Expert Tips for Efficient NABL Lab Testing</h2>
+              <ul className={styles.bulletList}>
+                {TIPS_ITEMS.map((item) => (
+                  <li key={item.slice(0, 48)} className={styles.textJustify}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="comparison" className={styles.section}>
+              <h2 className={styles.sectionTitle}>NABL Accredited Lab Testing vs the Alternatives</h2>
+              <DataTable
+                columns={[
+                  { key: "aspect", header: "Aspect", scope: "row" },
+                  { key: "nabl", header: "NABL Accredited Lab Testing" },
+                  { key: "non", header: "Non-Accredited Lab Testing" },
+                  { key: "inhouse", header: "In-House / Supplier Testing" },
+                ]}
+                rows={COMPARISON_ROWS}
+                getRowKey={(row) => row.aspect}
+              />
+            </section>
+
+            <section id="test-reports" className={styles.section}>
+              <h2 className={styles.sectionTitle}>Test Reports and Certificates We Help You Obtain</h2>
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{REPORTS_INTRO}</p>
+              <DataTable
+                columns={[
+                  { key: "need", header: "What You Need", scope: "row" },
+                  { key: "do", header: "What We Do" },
+                  { key: "scheme", header: "Relevant Scheme" },
+                ]}
+                rows={REPORT_ROWS}
+                getRowKey={(row) => row.need}
+              />
             </section>
 
             <section id="faq" className={styles.section}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions — NABL Accreditation</h2>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions — NABL Lab Testing Services</h2>
               <FaqAccordion />
             </section>
 
-            <section id="get-started" className={`${styles.section} ${styles.ctaSection}`}>
-              <h2 className={styles.sectionTitle}>Get Expert Assistance for NABL Accreditation</h2>
-              <p className={styles.ctaText}>
-                Need help with gap analysis, ISO 17025 implementation, NABL application filing, assessment preparation, or
-                ongoing surveillance support? Connect with Ornate Quality Services for complete laboratory accreditation
-                support.
-              </p>
-              <div className={styles.ctaButtons}>
-                <Link href="/contact" className={styles.ctaBtnPrimary}>
-                  Apply Now →
-                </Link>
-                <a href="tel:+919266877738" className={styles.ctaBtnSecondary}>
-                  📞 Expert Consultation
-                </a>
-              </div>
+            <section id="get-started" className={styles.section}>
+              <h2 className={styles.sectionTitle}>{CTA_TITLE}</h2>
+              {CTA_PARAGRAPHS.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className={`${styles.sectionText} ${styles.textJustify}`}>
+                  {paragraph}
+                </p>
+              ))}
+              <CtaRow items={FINAL_CTAS} />
+              <p className={`${styles.sectionText} ${styles.textJustify}`}>{CTA_FOOTER}</p>
             </section>
           </article>
 

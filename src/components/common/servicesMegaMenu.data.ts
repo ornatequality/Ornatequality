@@ -55,6 +55,7 @@ export const SERVICE_ROUTES = {
   cli: "/services/container-loading-inspection",
   rohs: "/services/rohs-certification",
   audit: "/services/audit-services",
+  technical: "/services/technical-documentation",
 } as const;
 
 export const SERVICE_PAGE_ANCHORS = {
@@ -242,7 +243,7 @@ export const servicesMegaMenuColumns: MegaMenuColumn[] = [
       },
       {
         label: "TECHNICAL DOCUMENTATION & COMPLIANCE SUPPORT",
-        slug: SERVICE_PAGE_ANCHORS.testing,
+        slug: SERVICE_ROUTES.technical,
         icon: { type: "glyph", glyph: "DOC", tone: "orange" },
       },
     ],

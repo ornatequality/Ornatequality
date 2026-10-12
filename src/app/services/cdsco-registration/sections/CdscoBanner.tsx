@@ -6,8 +6,8 @@ export function CdscoBanner() {
   return (
     <ServicePageBanner
       src={cdscoBanner}
-      alt="CDSCO Certification — Drugs, Medical Devices, Cosmetics, Regulatory Approval"
-      label="CDSCO Registration banner"
+      alt="CDSCO Certification for Medical Devices in India — classification, dossier, filing and licence"
+      label="CDSCO Certification banner"
     />
   );
 }

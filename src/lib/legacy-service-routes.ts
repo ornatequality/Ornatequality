@@ -50,6 +50,8 @@ const LEGACY_SERVICE_SLUG_MAP: Record<string, string> = {
   "iec-registration": SERVICE_ROUTES.iec,
   "audit-services": SERVICE_ROUTES.audit,
   "audit-certification": SERVICE_ROUTES.audit,
+  "technical-documentation": SERVICE_ROUTES.technical,
+  "technical-documentation-compliance-support": SERVICE_ROUTES.technical,
 };
 
 const CURRENT_SERVICE_SLUGS = new Set(
