@@ -58,11 +58,19 @@ const CURRENT_SERVICE_SLUGS = new Set(
   Object.values(SERVICE_ROUTES).map((path) => path.replace("/services/", "")),
 );
 
+/** Nested product pages that must not be treated as old location URLs. */
+const SERVICE_PRODUCT_PAGES = new Set(["bis-fmcs-certification/furniture"]);
+
 export function getLegacyServiceRedirect(pathname: string): string | null {
   const match = pathname.match(/^\/services\/([^/]+)\/(.+)$/);
   if (!match) return null;
 
-  const [, serviceSlug] = match;
+  const [, serviceSlug, rest] = match;
+  const nestedKey = `${serviceSlug}/${rest.split("/")[0]}`.toLowerCase();
+  if (SERVICE_PRODUCT_PAGES.has(nestedKey)) {
+    return null;
+  }
+
   const normalizedSlug = serviceSlug.toLowerCase();
 
   if (LEGACY_SERVICE_SLUG_MAP[normalizedSlug]) {

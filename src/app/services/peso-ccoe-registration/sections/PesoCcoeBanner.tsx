@@ -6,8 +6,8 @@ export function PesoCcoeBanner() {
   return (
     <ServicePageBanner
       src={pesoBanner}
-      alt="PESO / CCOE Certification — Petroleum, Explosives, Compressed Gases, Hazardous Installations"
-      label="PESO / CCOE Registration banner"
+      alt="PESO Flame Proof Approval — ex-proof equipment certification for hazardous areas"
+      label="PESO Flame Proof Approval banner"
     />
   );
 }

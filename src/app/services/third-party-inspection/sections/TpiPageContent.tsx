@@ -690,7 +690,7 @@ export function TpiPageContent() {
                       </li>
                     ))}
                   </ul>
-                </div>
+              </div>
               ))}
             </section>
           </article>

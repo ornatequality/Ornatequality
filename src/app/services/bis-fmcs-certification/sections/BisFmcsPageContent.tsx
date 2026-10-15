@@ -126,6 +126,13 @@ function DataTable({ columns, rows, getRowKey }: DataTableProps) {
                     </th>
                   );
                 }
+                if (col.key === "dedicatedPage" && value.startsWith("/")) {
+                  return (
+                    <td key={col.key}>
+                      <Link href={value}>View dedicated page</Link>
+                    </td>
+                  );
+                }
                 return <td key={col.key}>{value}</td>;
               })}
             </tr>

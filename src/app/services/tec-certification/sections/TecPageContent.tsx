@@ -374,7 +374,7 @@ export function TecPageContent() {
                 {DOCUMENTS_ITEMS.map((item) => (
                   <li key={item} className={styles.textJustify}>
                     {item}
-                  </li>
+                </li>
                 ))}
               </ul>
               {DOCUMENTS_EXTRA.map((paragraph) => (
@@ -395,7 +395,7 @@ export function TecPageContent() {
                 {ELIGIBILITY_FACTORS.map((item) => (
                   <li key={item} className={styles.textJustify}>
                     {item}
-                  </li>
+                </li>
                 ))}
               </ul>
               <p className={`${styles.sectionText} ${styles.textJustify}`}>{ELIGIBILITY_CLOSING}</p>

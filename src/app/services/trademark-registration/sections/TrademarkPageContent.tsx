@@ -308,7 +308,7 @@ export function TrademarkPageContent() {
                 ))}
               </ul>
               <CtaRow items={HERO_CTAS} />
-            </div>
+                </div>
 
             <section id="what-this-page-covers" className={styles.section}>
               <h2 className={styles.sectionTitle}>Trademark Registration: What This Page Covers</h2>
@@ -370,7 +370,7 @@ export function TrademarkPageContent() {
                 <div key={item.title}>
                   <h3 className={styles.subsectionTitle}>{item.title}</h3>
                   <p className={`${styles.sectionText} ${styles.textJustify}`}>{item.text}</p>
-                </div>
+              </div>
               ))}
             </section>
 

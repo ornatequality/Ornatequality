@@ -207,38 +207,38 @@ export const FURNITURE_PRODUCTS: FmcsProductRow[] = [
   {
     product: "Work chairs (office / ergonomic / task chairs)",
     isNumber: "IS 17631:2022",
-    mandatory: "Yes — Furniture (Quality Control) Order, 2025 (in force from 14 Feb 2026)",
-    dedicatedPage: "Coming Soon",
+    mandatory: "Yes — Furniture (Quality Control) Order, 2025 (in force from 13 Feb 2026)",
+    dedicatedPage: "/services/bis-fmcs-certification/furniture",
   },
   {
     product: "General-purpose chairs and stools",
     isNumber: "IS 17632:2022",
     mandatory: "Yes — Furniture (Quality Control) Order, 2025",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-fmcs-certification/furniture",
   },
   {
     product: "Tables and desks",
     isNumber: "IS 17633:2022",
     mandatory: "Yes — Furniture (Quality Control) Order, 2025",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-fmcs-certification/furniture",
   },
   {
     product: "Storage units (wardrobes, cabinets, bookshelves)",
     isNumber: "IS 17634:2022",
     mandatory: "Yes — Furniture (Quality Control) Order, 2025",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-fmcs-certification/furniture",
   },
   {
     product: "Beds",
     isNumber: "IS 17635:2022",
     mandatory: "Yes — Furniture (Quality Control) Order, 2025",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-fmcs-certification/furniture",
   },
   {
     product: "Bunk beds",
     isNumber: "IS 17636:2022",
     mandatory: "Yes — Furniture (Quality Control) Order, 2025",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-fmcs-certification/furniture",
   },
 ];
 
