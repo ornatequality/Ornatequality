@@ -66,7 +66,7 @@ import {
   type TableRow,
 } from "../data/pesoCcoeContent";
 
-const PESO_CCOE_PAGE_PATH = "/services/peso-ccoe-registration";
+const PESO_CCOE_PAGE_PATH = "/services/ccoe-peso-certification";
 
 type DataTableColumn = {
   key: string;

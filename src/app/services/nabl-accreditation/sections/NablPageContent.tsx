@@ -84,7 +84,7 @@ import {
   type TableRow,
 } from "../data/nablContent";
 
-const NABL_PAGE_PATH = "/services/nabl-accreditation";
+const NABL_PAGE_PATH = "/services/nabl-lab-testing-services";
 
 type DataTableColumn = {
   key: string;

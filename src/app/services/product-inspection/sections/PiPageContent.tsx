@@ -110,7 +110,7 @@ import {
   type TableRow,
 } from "../data/piContent";
 
-const PI_PAGE_PATH = "/services/product-inspection";
+const PI_PAGE_PATH = "/services/product-inspection-quality-monitoring";
 
 type DataTableColumn = {
   key: string;

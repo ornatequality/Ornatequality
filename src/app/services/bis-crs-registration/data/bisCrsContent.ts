@@ -45,9 +45,9 @@ export const LATEST_NOTIFICATIONS = [
 ];
 
 export const OUR_SERVICES_LINKS = [
-  { label: "BIS CRS Registration", href: "/services/bis-crs-registration" },
-  { label: "BIS ISI Mark Certification", href: "/services/bis-isi-mark-certification" },
-  { label: "BIS FMCS Certification", href: "/services/bis-fmcs-certification" },
+  { label: "BIS CRS Registration", href: "/services/bis-certification/bis-crs-registration" },
+  { label: "BIS ISI Mark Certification", href: "/services/bis-certification/isi-mark-certification" },
+  { label: "BIS FMCS Certification", href: "/services/bis-certification/fmcs-certification" },
   { label: "WPC-ETA Approval", href: "/services/wpc-eta-approval" },
   { label: "BEE Registration", href: "/services/bee-certification" },
   { label: "EPR Registration", href: "/services/epr-registration" },
@@ -57,8 +57,8 @@ export const OUR_SERVICES_LINKS = [
   { label: "ISO Certification", href: "/services/iso-certification" },
   { label: "FSSAI Registration", href: "/services/fssai-registration" },
   { label: "CDSCO Registration", href: "/services/cdsco-registration" },
-  { label: "PESO / CCOE Registration", href: "/services/peso-ccoe-registration" },
-  { label: "NABL Accreditation", href: "/services/nabl-accreditation" },
+  { label: "PESO / CCOE Registration", href: "/services/ccoe-peso-certification" },
+  { label: "NABL Lab Testing Services", href: "/services/nabl-lab-testing-services" },
   { label: "Third Party Inspection", href: "/services/third-party-inspection" },
   { label: "RoHS Certification", href: "/services/rohs-certification" },
   { label: "Audit Services", href: "/services/audit-services" },

@@ -92,7 +92,7 @@ const Services = () => {
       {
         title: "BIS CRS Registration",
         description: "Complete support for BIS CRS certification for electronic products.",
-        href: "/services/bis-crs-registration",
+        href: "/services/bis-certification/bis-crs-registration",
         icon: bisCrsIcon,
         iconAlt: "BIS CRS Registration",
         iconBg: "#ece9fb",
@@ -101,7 +101,7 @@ const Services = () => {
       {
         title: "ISI Mark Certification",
         description: "Get ISI Mark for your products as per Indian Standards.",
-        href: "/services/bis-isi-mark-certification",
+        href: "/services/bis-certification/isi-mark-certification",
         icon: isiMarkIcon,
         iconAlt: "ISI Mark Certification",
         iconBg: "#fde8d8",

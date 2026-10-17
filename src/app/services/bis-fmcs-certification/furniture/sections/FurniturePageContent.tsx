@@ -99,7 +99,7 @@ export function FurniturePageContent() {
               <span>/</span>
               <Link href="/services">Services</Link>
               <span>/</span>
-              <Link href="/services/bis-fmcs-certification">FMCS Certification</Link>
+              <Link href="/services/bis-certification/isi-mark-certification">BIS ISI Mark Certification</Link>
               <span>/</span>
               <span>BIS Certification for Furniture</span>
             </nav>

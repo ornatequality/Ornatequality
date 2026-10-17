@@ -17,8 +17,10 @@ const LEGACY_SERVICE_SLUG_MAP: Record<string, string> = {
   "bis-crs": SERVICE_ROUTES.bisCrs,
   "bis-certification": SERVICE_ROUTES.bisCertification,
   "bis-isi-mark": SERVICE_ROUTES.bisIsi,
+  "bis-isi-mark-certification": SERVICE_ROUTES.bisIsi,
   "isi-mark-certification": SERVICE_ROUTES.bisIsi,
   "bis-fmcs": SERVICE_ROUTES.bisFmcs,
+  "bis-fmcs-certification": SERVICE_ROUTES.bisFmcs,
   "fmcs-certification": SERVICE_ROUTES.bisFmcs,
   "wpc-approval": SERVICE_ROUTES.wpc,
   "wpc-eta-approval": SERVICE_ROUTES.wpc,
@@ -37,10 +39,13 @@ const LEGACY_SERVICE_SLUG_MAP: Record<string, string> = {
   "cdsco-certification": SERVICE_ROUTES.cdsco,
   "peso-certification": SERVICE_ROUTES.pesoCcoe,
   "peso-ccoe-registration": SERVICE_ROUTES.pesoCcoe,
+  "ccoe-peso-certification": SERVICE_ROUTES.pesoCcoe,
   "ccoe-certification": SERVICE_ROUTES.pesoCcoe,
   "nabl-accreditation": SERVICE_ROUTES.nabl,
+  "nabl-lab-testing-services": SERVICE_ROUTES.nabl,
   "third-party-inspection": SERVICE_ROUTES.tpi,
   "product-inspection": SERVICE_ROUTES.prd,
+  "product-inspection-quality-monitoring": SERVICE_ROUTES.prd,
   "pre-production-inspection": SERVICE_ROUTES.ppi,
   "during-production-inspection": SERVICE_ROUTES.dpi,
   "factory-process-inspection": SERVICE_ROUTES.fac,
@@ -59,7 +64,13 @@ const CURRENT_SERVICE_SLUGS = new Set(
 );
 
 /** Nested product pages that must not be treated as old location URLs. */
-const SERVICE_PRODUCT_PAGES = new Set(["bis-fmcs-certification/furniture"]);
+const SERVICE_PRODUCT_PAGES = new Set([
+  "bis-fmcs-certification/furniture",
+  "bis-isi-mark-certification/furniture",
+  "bis-certification/isi-mark-certification",
+  "bis-certification/bis-crs-registration",
+  "bis-certification/fmcs-certification",
+]);
 
 export function getLegacyServiceRedirect(pathname: string): string | null {
   const match = pathname.match(/^\/services\/([^/]+)\/(.+)$/);

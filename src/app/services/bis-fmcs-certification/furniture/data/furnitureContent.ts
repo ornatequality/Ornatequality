@@ -1,4 +1,4 @@
-export const PAGE_PATH = "/services/bis-fmcs-certification/furniture";
+export const PAGE_PATH = "/services/bis-isi-mark-certification/furniture";
 
 export const HERO = {
   kicker: "Product certification",
@@ -454,8 +454,8 @@ export const HELP_CLOSING =
   "Because furniture is new territory for BIS, accurate guidance matters more than speed claims. We work from the official order, its amendments and the BIS product manuals, and we tell you clearly when a product is outside the QCO as well as when it is inside it.";
 
 export const RELATED_SERVICES = [
-  { label: "BIS-ISI Mark Certification", href: "/services/bis-isi-mark-certification" },
-  { label: "FMCS Certification", href: "/services/bis-fmcs-certification" },
+  { label: "BIS-ISI Mark Certification", href: "/services/bis-certification/isi-mark-certification" },
+  { label: "FMCS Certification", href: "/services/bis-certification/fmcs-certification" },
   { label: "BIS Certification", href: "/services/bis-certification" },
   { label: "Factory and Process Inspection", href: "/services/factory-process-inspection" },
   { label: "Pre-Production Inspection", href: "/services/pre-production-inspection" },

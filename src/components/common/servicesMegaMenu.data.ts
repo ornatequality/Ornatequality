@@ -28,10 +28,11 @@ export type MegaMenuColumn = {
 };
 
 export const SERVICE_ROUTES = {
-  bisCrs: "/services/bis-crs-registration",
+  bisCrs: "/services/bis-certification/bis-crs-registration",
   bisCertification: "/services/bis-certification",
-  bisIsi: "/services/bis-isi-mark-certification",
-  bisFmcs: "/services/bis-fmcs-certification",
+  bisIsi: "/services/bis-certification/isi-mark-certification",
+  bisFurniture: "/services/bis-isi-mark-certification/furniture",
+  bisFmcs: "/services/bis-certification/fmcs-certification",
   bee: "/services/bee-certification",
   wpc: "/services/wpc-eta-approval",
   tec: "/services/tec-certification",
@@ -44,10 +45,10 @@ export const SERVICE_ROUTES = {
   iso: "/services/iso-certification",
   fssai: "/services/fssai-registration",
   cdsco: "/services/cdsco-registration",
-  pesoCcoe: "/services/peso-ccoe-registration",
-  nabl: "/services/nabl-accreditation",
+  pesoCcoe: "/services/ccoe-peso-certification",
+  nabl: "/services/nabl-lab-testing-services",
   tpi: "/services/third-party-inspection",
-  prd: "/services/product-inspection",
+  prd: "/services/product-inspection-quality-monitoring",
   ppi: "/services/pre-production-inspection",
   dpi: "/services/during-production-inspection",
   fac: "/services/factory-process-inspection",

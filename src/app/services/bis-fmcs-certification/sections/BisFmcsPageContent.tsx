@@ -87,7 +87,7 @@ import {
   FOOTWEAR_PRODUCTS,
 } from "../data/bisFmcsProductTables";
 
-const FMCS_PAGE_PATH = "/services/bis-fmcs-certification";
+const FMCS_PAGE_PATH = "/services/bis-certification/fmcs-certification";
 
 type DataTableColumn = {
   key: string;

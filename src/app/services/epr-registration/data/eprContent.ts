@@ -864,9 +864,9 @@ export const INTERNAL_LINKS: InternalLink[] = [
   { label: "Battery Waste EPR Registration", href: "/services/epr-registration#products-covered", group: "waste-stream" },
   { label: "Tyre Waste EPR", href: "/services/epr-registration#products-covered", group: "waste-stream" },
   { label: "Used Oil EPR", href: "/services/epr-registration#products-covered", group: "waste-stream" },
-  { label: "BIS CRS Registration", href: "/services/bis-crs-registration", group: "related-service" },
-  { label: "BIS-ISI Mark Certification", href: "/services/bis-isi-mark-certification", group: "related-service" },
-  { label: "BIS Certification", href: "/services/bis-isi-mark-certification", group: "related-service" },
+  { label: "BIS CRS Registration", href: "/services/bis-certification/bis-crs-registration", group: "related-service" },
+  { label: "BIS-ISI Mark Certification", href: "/services/bis-certification/isi-mark-certification", group: "related-service" },
+  { label: "BIS Certification", href: "/services/bis-certification", group: "related-service" },
   { label: "RoHS Compliance", href: "/services/rohs-certification", group: "related-service" },
   { label: "LMPC Registration", href: "/services/lmpc-registration", group: "related-service" },
   { label: "IEC Registration", href: "/services/iec-registration", group: "related-service" },
@@ -878,7 +878,7 @@ export const INTERNAL_LINKS: InternalLink[] = [
   { label: "GeM Registration", href: "/services/gem-registration", group: "related-service" },
   { label: "Trademark Registration", href: "/services/trademark-registration", group: "related-service" },
   { label: "ISO Certification", href: "/services/iso-certification", group: "related-service" },
-  { label: "NABL Lab Testing Services", href: "/services/nabl-accreditation", group: "related-service" },
+  { label: "NABL Lab Testing Services", href: "/services/nabl-lab-testing-services", group: "related-service" },
   { label: "Third-Party Inspection", href: "/services/third-party-inspection", group: "related-service" },
   { label: "Product Inspection & Quality Monitoring", href: "/services/third-party-inspection", group: "related-service" },
 ];
@@ -899,12 +899,12 @@ export const INTERNAL_LINK_GROUPS: InternalLinkGroup[] = [
     items: [
       {
         label: "BIS CRS Registration",
-        href: "/services/bis-crs-registration",
+        href: "/services/bis-certification/bis-crs-registration",
         description: "electronics importers who also need product certification",
       },
       {
         label: "BIS-ISI Mark Certification and BIS Certification",
-        href: "/services/bis-isi-mark-certification",
+        href: "/services/bis-certification/isi-mark-certification",
         description: "domestic manufacturers of notified products",
       },
       {
@@ -959,7 +959,7 @@ export const INTERNAL_LINK_GROUPS: InternalLinkGroup[] = [
       },
       {
         label: "NABL Lab Testing Services",
-        href: "/services/nabl-accreditation",
+        href: "/services/nabl-lab-testing-services",
         description: "testing evidence supporting compliance",
       },
       {

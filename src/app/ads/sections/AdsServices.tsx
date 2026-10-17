@@ -14,13 +14,13 @@ const SERVICES = [
   {
     title: "BIS (ISI Mark) Certification",
     desc: "Mandatory quality certification for products under Indian Standards.",
-    href: "/services/bis-isi-mark-certification",
+    href: "/services/bis-certification/isi-mark-certification",
     icon: isiIcon,
   },
   {
     title: "BIS CRS Registration",
     desc: "Compulsory registration for electronic and IT products in India.",
-    href: "/services/bis-crs-registration",
+    href: "/services/bis-certification/bis-crs-registration",
     icon: bisIcon,
   },
   {

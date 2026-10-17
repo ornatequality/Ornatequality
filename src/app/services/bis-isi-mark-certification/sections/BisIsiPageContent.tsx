@@ -82,7 +82,7 @@ import {
 } from "../data/bisIsiContent";
 import { PRODUCTS_COVERED, QCO_ROWS } from "../data/bisIsiProductTables";
 
-const ISI_PAGE_PATH = "/services/bis-isi-mark-certification";
+const ISI_PAGE_PATH = "/services/bis-certification/isi-mark-certification";
 
 type DataTableColumn = {
   key: string;

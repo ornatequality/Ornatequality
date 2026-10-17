@@ -1,19 +1,5 @@
-import type { Metadata } from "next";
-import { BisIsiBanner } from "./sections/BisIsiBanner";
-import { BisIsiPageContent } from "./sections/BisIsiPageContent";
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "BIS-ISI Mark Certification for Domestic Manufacturers | Ornate Quality Services",
-  description:
-    "Government-approved ISI Mark Certification (Scheme-I) for domestic manufacturers. End-to-end documentation, factory audit preparation, and CM/L licence support by Ornate Quality Service Pvt. Ltd.",
-};
-
-export default function BisIsiMarkCertificationPage() {
-  return (
-    <>
-      <BisIsiBanner />
-      <BisIsiPageContent />
-    </>
-  );
+export default function BisIsiMarkCertificationRedirect() {
+  permanentRedirect("/services/bis-certification/isi-mark-certification");
 }
-
