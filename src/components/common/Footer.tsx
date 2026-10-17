@@ -293,7 +293,7 @@ const Footer = () => {
             </ul>
           </nav>
 
-          <nav className={styles.linksCol} aria-label="Government links">
+          <nav className={`${styles.linksCol} ${styles.govCol}`} aria-label="Government links">
             <div className={styles.colTitle}>Government Links</div>
             <ul className={styles.linkList}>
               {GOVERNMENT_LINKS.map(({ label, href }) => (
@@ -322,8 +322,10 @@ const Footer = () => {
                   <IconPin />
                 </span>
                 <div className={styles.contactValue}>
-                  {SITE_ADDRESS.streetAddress}, {SITE_ADDRESS.addressLocality},{" "}
-                  {SITE_ADDRESS.addressRegion}, {SITE_ADDRESS.postalCode}
+                  <span className={styles.contactAddress}>{SITE_ADDRESS.streetAddress}</span>
+                  <span className={styles.contactAddress}>
+                    {SITE_ADDRESS.addressLocality}, {SITE_ADDRESS.addressRegion} {SITE_ADDRESS.postalCode}
+                  </span>
                 </div>
               </div>
 

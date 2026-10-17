@@ -6,7 +6,8 @@
   --cream: #f6f7fb;
   background: var(--cream);
   color: var(--navy);
-  overflow-x: clip;
+  overflow: visible;
+  height: auto;
 }
 
 .wrap {

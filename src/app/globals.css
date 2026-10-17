@@ -77,6 +77,8 @@ html {
   text-size-adjust: 100%;
   height: auto;
   min-height: 100%;
+  overflow-x: clip;
+  overflow-y: scroll;
 }
 
 body {
@@ -85,7 +87,7 @@ body {
   font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   font-size: clamp(15px, 0.35vw + 14px, 16px);
   line-height: 1.5;
-  overflow-x: clip;
+  overflow: visible;
   min-width: 0;
   height: auto;
   min-height: 100%;
@@ -94,20 +96,28 @@ body {
 .site-body {
   min-height: 100vh;
   min-height: 100dvh;
+  overflow: visible;
+  height: auto;
 }
 
 .site-main {
-  flex: 1 0 auto;
-  min-height: 0;
+  flex: 1 1 auto;
+  min-height: auto;
   overflow: visible;
 }
 
 @media (max-width: 1024px) {
-  html,
-  body {
-    overflow-x: hidden;
-    overflow-y: auto;
+  html {
+    overflow-x: clip;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+  }
+
+  body,
+  .site-body,
+  .site-main {
+    overflow: visible;
+    height: auto;
   }
 }
 

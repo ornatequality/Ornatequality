@@ -2,6 +2,8 @@
   background: #f4f7fb;
   width: 100%;
   max-width: 100%;
+  overflow: visible;
+  height: auto;
 }
 
 /* ── Banner: full width, natural height (actual aspect ratio) ── */

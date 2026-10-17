@@ -253,6 +253,10 @@
   gap: 2px;
 }
 
+.contactAddress {
+  display: block;
+}
+
 .contactLink {
   color: inherit;
   text-decoration: none;
@@ -487,121 +491,145 @@
 /* ---------- Mobile ---------- */
 @media (max-width: 767px) {
   .footer {
-    padding-top: 28px;
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    padding-top: 24px;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
   }
 
   .container {
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
+    padding-left: max(18px, env(safe-area-inset-left));
+    padding-right: max(18px, env(safe-area-inset-right));
   }
 
   .topGrid {
-    grid-template-columns: 1fr;
-    gap: 26px;
-    padding-bottom: 22px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 22px;
+    padding-bottom: 18px;
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 18px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .brandLogo {
+    width: min(168px, 56vw);
+    margin-inline: auto;
   }
 
   .brandText,
   .brandTagline {
-    max-width: none;
+    max-width: 34ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .brandText {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+
+  .brandTagline {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .socialRow {
+    justify-content: center;
+    gap: 10px;
   }
 
   .socialBtn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
 
   .socialBtn svg {
-    width: 30px;
-    height: 30px;
-  }
-
-  .link {
-    min-height: 44px;
-    font-size: 15px;
-    padding: 8px 0;
-  }
-
-  .linkList {
-    gap: 2px;
+    width: 16px;
+    height: 16px;
   }
 
   .colTitle {
-    margin-bottom: 10px;
-  }
-
-  .contactItem {
-    grid-template-columns: 40px minmax(0, 1fr);
-    gap: 12px;
-  }
-
-  .contactIcon {
-    width: 38px;
-    height: 38px;
-  }
-
-  .contactValue {
-    font-size: 14.5px;
-  }
-
-  .ctaBanner {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-    padding: 18px 16px;
-    gap: 16px;
-  }
-
-  .ctaCopy {
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-  }
-
-  .ctaIconWrap {
-    width: 52px;
-    height: 52px;
-    margin: 0 auto;
-  }
-
-  .ctaText {
-    font-size: 15.5px;
-  }
-
-  .ctaBtn {
-    width: 100%;
-    min-height: 50px;
-    white-space: normal;
-    padding: 14px 16px;
-    font-size: 12.5px;
-  }
-
-  .bottomBar {
-    padding-top: 16px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
     padding-bottom: 6px;
   }
 
-  .bottomLink {
-    min-height: 40px;
-    display: inline-flex;
-    align-items: center;
+  .colTitle::after {
+    width: 28px;
+    height: 2px;
   }
 
-  .backToTop {
-    min-height: 44px;
+  .linkList {
+    gap: 0;
   }
 
-  .backToTopIcon {
+  .link {
+    min-height: 36px;
+    font-size: 13.5px;
+    padding: 5px 0;
+    gap: 6px;
+  }
+
+  .link:hover {
+    transform: none;
+  }
+
+  .govCol,
+  .contactCol {
+    grid-column: 1 / -1;
+  }
+
+  .govCol .linkList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .govCol .link {
+    min-height: 34px;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .govCol .linkIcon {
+    display: none;
+  }
+
+  .contactList {
+    gap: 12px;
+  }
+
+  .contactItem {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+  }
+
+  .contactIcon {
     width: 32px;
     height: 32px;
+    border-radius: 7px;
   }
-}
 
-/* ---------- Small phones ---------- */
-@media (max-width: 480px) {
-  .brandLogo {
-    width: min(200px, 72vw);
+  .contactIcon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .contactValue {
+    font-size: 13.5px;
+    line-height: 1.5;
   }
 
   .contactSep {
@@ -610,6 +638,83 @@
 
   .contactValue .contactLink {
     display: block;
+    min-height: 22px;
+  }
+
+  .ctaBanner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 14px;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .ctaCopy {
+    align-items: center;
+    text-align: left;
+    gap: 10px;
+  }
+
+  .ctaIconWrap {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ctaIconWrap svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ctaText {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    min-height: 46px;
+    white-space: normal;
+    padding: 12px 14px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .bottomBar {
+    padding-top: 14px;
+    padding-bottom: 2px;
+    gap: 8px;
+  }
+
+  .bottomLeft,
+  .bottomLink,
+  .backToTop {
+    font-size: 12px;
+  }
+
+  .bottomLink {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .backToTop {
+    min-height: 40px;
+  }
+
+  .backToTopIcon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 480px) {
+  .brandLogo {
+    width: min(156px, 58vw);
+  }
+
+  .topGrid {
+    row-gap: 20px;
   }
 
   .ctaBtn {
