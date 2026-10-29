@@ -46,17 +46,111 @@ function DirectionIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function OutlineIcon({ children, ...props }: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      {children}
+    </svg>
+  );
+}
+
+function ChatIcon() {
+  return (
+    <OutlineIcon>
+      <path d="M17 10.5a6 6 0 0 1-8.7 5.4L4.5 17l1-3.3A6 6 0 1 1 17 10.5Z" />
+      <path d="M8.5 10.5h.01M11 10.5h.01M13.5 10.5h.01" strokeWidth="2.4" />
+      <path d="M18.6 8.2A5.5 5.5 0 0 1 19 17l.6 2.6-2.8-1a5.6 5.6 0 0 1-4.4.2" />
+    </OutlineIcon>
+  );
+}
+
+function UsersIcon() {
+  return (
+    <OutlineIcon>
+      <circle cx="12" cy="8" r="2.8" />
+      <circle cx="5.5" cy="9.5" r="2.2" />
+      <circle cx="18.5" cy="9.5" r="2.2" />
+      <path d="M7 18.5c.5-2.9 2.6-4.6 5-4.6s4.5 1.7 5 4.6" />
+      <path d="M2 18c.3-2.1 1.7-3.4 3.5-3.4.6 0 1.2.1 1.7.4M22 18c-.3-2.1-1.7-3.4-3.5-3.4-.6 0-1.2.1-1.7.4" />
+    </OutlineIcon>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <OutlineIcon>
+      <path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6L12 3Z" />
+    </OutlineIcon>
+  );
+}
+
+function EnvelopeIcon() {
+  return (
+    <OutlineIcon width="32" height="32" strokeWidth="1.6">
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="m4 7 8 6 8-6" />
+    </OutlineIcon>
+  );
+}
+
 export default function ContactPage() {
   return (
     <section className={styles.section} aria-label="Contact">
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.left}>
-            <h1 className={styles.h1}>Get in touch</h1>
+            <p className={styles.eyebrow}>Contact Us</p>
+            <h1 className={styles.h1}>
+              Get in <span className={styles.h1Accent}>Touch</span>
+            </h1>
             <p className={styles.lead}>
               For business enquiries, fill out the form and our team will contact you shortly. You can
               also call our support desk during office hours.
             </p>
+
+            <ul className={styles.features}>
+              <li className={styles.feature}>
+                <span className={`${styles.featureIcon} ${styles.featureBlue}`}>
+                  <ChatIcon />
+                </span>
+                <span className={styles.featureText}>
+                  Quick
+                  <br />
+                  Response
+                </span>
+              </li>
+              <li className={styles.feature}>
+                <span className={`${styles.featureIcon} ${styles.featureGreen}`}>
+                  <UsersIcon />
+                </span>
+                <span className={styles.featureText}>
+                  Expert
+                  <br />
+                  Guidance
+                </span>
+              </li>
+              <li className={styles.feature}>
+                <span className={`${styles.featureIcon} ${styles.featureOrange}`}>
+                  <ShieldIcon />
+                </span>
+                <span className={styles.featureText}>
+                  Certification
+                  <br />
+                  Support
+                </span>
+              </li>
+            </ul>
 
             <div className={styles.block}>
               <h2 className={styles.h2}>Request a Call Back</h2>
@@ -66,49 +160,56 @@ export default function ContactPage() {
               </p>
 
               <div className={styles.infoList} role="list">
-                <div className={styles.infoRow} role="listitem">
-                  <span className={styles.infoIcon} aria-hidden="true">
-                    <PhoneIcon />
+                <div className={`${styles.infoRow} ${styles.infoRowBlue}`} role="listitem">
+                  <span className={`${styles.infoIcon} ${styles.infoIconBlue}`} aria-hidden="true">
+                    <PhoneIcon width="24" height="24" />
                   </span>
                   <div className={styles.infoText}>
                     <div className={styles.infoTitle}>Toll Free / Support</div>
                     <div className={styles.infoValue}>
-                      <a className={styles.link} href="tel:+919266877738">
+                      <a className={`${styles.link} ${styles.phoneLink}`} href="tel:+919266877738">
                         +91-9266877738
-                      </a>{" "}
-                      <span className={styles.sep} aria-hidden="true">
-                        |
-                      </span>{" "}
-                      <a className={styles.link} href="tel:+918880013897">
-                        +91-88000013897
+                      </a>
+                      <a className={`${styles.link} ${styles.phoneLink}`} href="tel:+918880013897">
+                        +91-8800013897
                       </a>
                     </div>
                   </div>
                 </div>
 
-                <div className={styles.infoRow} role="listitem">
-                  <span className={styles.infoIcon} aria-hidden="true">
-                    <ClockIcon />
+                <span className={styles.infoDivider} aria-hidden="true" />
+
+                <div className={`${styles.infoRow} ${styles.infoRowOrange}`} role="listitem">
+                  <span className={`${styles.infoIcon} ${styles.infoIconOrange}`} aria-hidden="true">
+                    <ClockIcon width="26" height="26" />
                   </span>
                   <div className={styles.infoText}>
                     <div className={styles.infoTitle}>Office Hours</div>
                     <div className={styles.infoValue}>
-                      09:30 AM – 06:00 PM (Mon – Sat)
-                      <br />
-                      Sunday - Closed
+                      <span className={styles.infoStrong}>09:30 AM – 06:00 PM</span>
+                      <span>(Mon – Sat)</span>
+                      <span>Sunday - Closed</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div className={styles.card} aria-label="Send message">
             <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>Send Message</h2>
-              <div className={styles.cardSubtitle}>I would like to discuss:</div>
+              <span className={styles.cardHeaderIcon} aria-hidden="true">
+                <EnvelopeIcon />
+              </span>
+              <div className={styles.cardHeaderText}>
+                <div className={styles.cardSubtitle}>Send Message</div>
+                <h2 className={styles.cardTitle}>I would like to discuss:</h2>
+              </div>
             </div>
 
-            <ContactForm />
+            <div className={styles.cardBody}>
+              <ContactForm />
+            </div>
           </div>
         </div>
 
@@ -129,7 +230,7 @@ export default function ContactPage() {
             >
               <DirectionIcon />
               <span>Get Directions</span>
-            </a> 
+            </a>
           </div>
 
           <div className={styles.mapGrid}>
@@ -168,7 +269,7 @@ export default function ContactPage() {
                 <br />
                 Sector 94, Noida,
                 <br />
-                Uttar Pradesh - 201304, India 
+                Uttar Pradesh - 201304, India
               </p>
 
               <div className={styles.addressDivider} aria-hidden="true" />
@@ -184,7 +285,6 @@ export default function ContactPage() {
                     <a className={styles.link} href="tel:+918880013897">
                       +91-8800013897
                     </a>
-                    
                   </span>
                 </li>
                 <li>
@@ -207,7 +307,6 @@ export default function ContactPage() {
                     Sunday - Closed
                   </span>
                 </li>
-
               </ul>
 
               <a
@@ -226,4 +325,3 @@ export default function ContactPage() {
     </section>
   );
 }
-
