@@ -248,19 +248,19 @@ export const FOOTWEAR_PRODUCTS: FmcsProductRow[] = [
     isNumber:
       "IS 1989 (Parts 1 & 2), IS 11226, IS 14544, IS 3735/3736, IS 3976, IS 15844 (Parts 1–3), IS 17012, IS 17037, IS 17043 (Parts 1 & 2) — coverage depends on the exact footwear type",
     mandatory: "Yes — Footwear made from Leather and other Materials (Quality Control) Order, 2024",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-isi-mark-certification/footwear",
   },
   {
     product: "Rubber and polymeric footwear (sandals, slippers, industrial / municipal boots)",
     isNumber:
       "IS 6721, IS 10702, IS 5557 (Parts), IS 6719, IS 12254, IS 16645, IS 16994 — coverage depends on the exact footwear type",
     mandatory: "Yes — Footwear made from all Rubber and all Polymeric Material (Quality Control) Order, 2024",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-isi-mark-certification/footwear",
   },
   {
     product: "Safety and protective (PPE) footwear",
     isNumber: "IS 15298 (Part 2) safety, (Part 3) protective, (Part 4) occupational",
     mandatory: "Yes — Personal Protective Equipment – Footwear (Quality Control) Order, as amended",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-isi-mark-certification/footwear",
   },
 ];

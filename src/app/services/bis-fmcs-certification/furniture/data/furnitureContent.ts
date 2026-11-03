@@ -455,6 +455,7 @@ export const HELP_CLOSING =
 
 export const RELATED_SERVICES = [
   { label: "BIS-ISI Mark Certification", href: "/services/bis-certification/isi-mark-certification" },
+  { label: "BIS Certification for Footwear", href: "/services/bis-isi-mark-certification/footwear" },
   { label: "FMCS Certification", href: "/services/bis-certification/fmcs-certification" },
   { label: "BIS Certification", href: "/services/bis-certification" },
   { label: "Factory and Process Inspection", href: "/services/factory-process-inspection" },

@@ -67,6 +67,8 @@ const CURRENT_SERVICE_SLUGS = new Set(
 const SERVICE_PRODUCT_PAGES = new Set([
   "bis-fmcs-certification/furniture",
   "bis-isi-mark-certification/furniture",
+  "bis-fmcs-certification/footwear",
+  "bis-isi-mark-certification/footwear",
   "bis-certification/isi-mark-certification",
   "bis-certification/bis-crs-registration",
   "bis-certification/fmcs-certification",

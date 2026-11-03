@@ -5,12 +5,12 @@ import Importance from "@/components/Home/Importance";
 
 const About = dynamic(() => import("@/components/Home/About"));
 const Services = dynamic(() => import("@/components/Home/Services"));
-
 const TrustProcess = dynamic(() => import("@/components/Home/TrustProcess"));
 const BlogSection = dynamic(() => import("@/components/Home/BlogSection"));
 const ValuedClients = dynamic(() => import("@/components/Home/ValuedClients"));
 const ClientTestimonials = dynamic(() => import("@/components/Home/ClientTestimonials"));
 const Query = dynamic(() => import("@/components/Home/Query"));
+const ReelsSection = dynamic(() => import("@/components/Home/ReelsSection"));
 const Faq = dynamic(() => import("@/components/Home/Faq"));
 import { JsonLdList } from "@/components/seo/JsonLdScripts";
 import {
@@ -74,6 +74,7 @@ export default function HomePage() {
       <ValuedClients />
       <ClientTestimonials variant="home" />
       <Query />
+      <ReelsSection />
       <Faq />
     </div>
   );

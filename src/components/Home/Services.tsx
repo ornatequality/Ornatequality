@@ -1,307 +1,326 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Image, { type StaticImageData } from "next/image";
+import React, { useId, useMemo, useState } from "react";
 import Link from "next/link";
-import { playfair } from "@/lib/fonts";
+import { SERVICE_ROUTES } from "@/components/common/servicesMegaMenu.data";
+import { manrope, playfair } from "@/lib/fonts";
 import styles from "../../styles/services.module.css";
-import bisCrsIcon from "@/assests/certi-img/BIS.webp";
-import isiMarkIcon from "@/assests/certi-img/isi.webp";
-import wpcEtaIcon from "@/assests/certi-img/wpc.webp";
-import eprRegistrationIcon from "@/assests/certi-img/epr-icon.webp";
 
 type ServiceItem = {
+  badge: string;
+  tag: string;
   title: string;
   description: string;
   href: string;
-  icon: StaticImageData;
-  iconAlt: string;
-  iconBg: string;
-  includes: string[];
 };
 
-function IconChevronLeft(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" {...props}>
-      <path
-        d="M14.5 6 8.5 12l6 6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+type ServiceGroup = {
+  id: string;
+  label: string;
+  items: ServiceItem[];
+};
 
-function IconChevronRight(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" {...props}>
-      <path
-        d="M9.5 6 15.5 12l-6 6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function IconBack(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" {...props}>
-      <path
-        d="M15 6 9 12l6 6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function IconCheck(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" {...props}>
-      <path
-        d="M3.2 8.2 6.1 11l6.7-7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-const Services = () => {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
-  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
-
-  const services = useMemo<ServiceItem[]>(
-    () => [
+const GROUPS: ServiceGroup[] = [
+  {
+    id: "certification",
+    label: "Certification",
+    items: [
       {
-        title: "BIS CRS Registration",
-        description: "Complete support for BIS CRS certification for electronic products.",
-        href: "/services/bis-certification/bis-crs-registration",
-        icon: bisCrsIcon,
-        iconAlt: "BIS CRS Registration",
-        iconBg: "#ece9fb",
-        includes: ["Electronics & IT products", "Solar photovoltaic products", "CRS portal filing"],
+        badge: "BIS",
+        tag: "BIS",
+        title: "BIS Certification",
+        description: "Guide to the ISI Mark, CRS and FMCS schemes.",
+        href: SERVICE_ROUTES.bisCertification,
       },
       {
+        badge: "ISI",
+        tag: "BIS",
         title: "ISI Mark Certification",
-        description: "Get ISI Mark for your products as per Indian Standards.",
-        href: "/services/bis-certification/isi-mark-certification",
-        icon: isiMarkIcon,
-        iconAlt: "ISI Mark Certification",
-        iconBg: "#fde8d8",
-        includes: ["Product testing support", "Factory inspection readiness", "ISI licence application"],
+        description: "Indian manufacturers of products under a BIS QCO.",
+        href: SERVICE_ROUTES.bisIsi,
       },
       {
-        title: "WPC ETA Approval",
-        description: "WPC approval for wireless & telecom products.",
-        href: "/services/wpc-eta-approval",
-        icon: wpcEtaIcon,
-        iconAlt: "WPC ETA Approval",
-        iconBg: "#f3edd4",
-        includes: ["Equipment Type Approval", "Wireless device filing", "Import clearance support"],
+        badge: "FMCS",
+        tag: "BIS",
+        title: "FMCS Certification",
+        description: "Foreign manufacturers selling ISI-mark products in India.",
+        href: SERVICE_ROUTES.bisFmcs,
       },
       {
-        title: "EPR Registration",
-        description: "EPR compliance for producers, importers & brands.",
-        href: "/services/epr-registration",
-        icon: eprRegistrationIcon,
-        iconAlt: "EPR Registration",
-        iconBg: "#e4f3ea",
-        includes: ["Plastic packaging", "E-waste", "Battery waste"],
+        badge: "ISO",
+        tag: "Certification body",
+        title: "ISO Certification",
+        description: "Businesses that need a certified management system.",
+        href: SERVICE_ROUTES.iso,
+      },
+      {
+        badge: "CE",
+        tag: "EU directives",
+        title: "CE Certification",
+        description: "Indian exporters selling into the EU market.",
+        href: SERVICE_ROUTES.ce,
+      },
+      {
+        badge: "PESO",
+        tag: "PESO",
+        title: "CCOE / PESO Certification",
+        description: "Handling of hazardous and explosive materials.",
+        href: SERVICE_ROUTES.pesoCcoe,
+      },
+      {
+        badge: "MD",
+        tag: "CDSCO",
+        title: "CDSCO Registration",
+        description: "Medical device and drug importers and makers.",
+        href: SERVICE_ROUTES.cdsco,
       },
     ],
-    [],
-  );
+  },
+  {
+    id: "registration",
+    label: "Registration",
+    items: [
+      {
+        badge: "CRS",
+        tag: "BIS",
+        title: "BIS CRS Registration",
+        description: "Electronics, IT and solar products under the CRS scheme.",
+        href: SERVICE_ROUTES.bisCrs,
+      },
+      {
+        badge: "BEE",
+        tag: "Energy label",
+        title: "BEE Registration",
+        description: "Star labelling for appliances and electrical products.",
+        href: SERVICE_ROUTES.bee,
+      },
+      {
+        badge: "EPR",
+        tag: "CPCB",
+        title: "EPR Registration",
+        description: "Producers and importers of plastic, e-waste and batteries.",
+        href: SERVICE_ROUTES.epr,
+      },
+      {
+        badge: "GeM",
+        tag: "Govt. tenders",
+        title: "GeM Registration",
+        description: "Sellers listing products on the Government e-Marketplace.",
+        href: SERVICE_ROUTES.gem,
+      },
+      {
+        badge: "TM",
+        tag: "IP India",
+        title: "Trademark Registration",
+        description: "Brands protecting their name and logo in India.",
+        href: SERVICE_ROUTES.trademark,
+      },
+      {
+        badge: "IEC",
+        tag: "DGFT",
+        title: "IEC Registration",
+        description: "Businesses starting import or export from India.",
+        href: SERVICE_ROUTES.iec,
+      },
+      {
+        badge: "LM",
+        tag: "Legal Metrology",
+        title: "LMPC Registration",
+        description: "Importers and packers of pre-packaged commodities.",
+        href: SERVICE_ROUTES.lmpc,
+      },
+    ],
+  },
+  {
+    id: "inspection",
+    label: "Inspection & Quality",
+    items: [
+      {
+        badge: "PPI",
+        tag: "Pre-production",
+        title: "Pre-Production Inspection",
+        description: "Check materials and samples before production starts.",
+        href: SERVICE_ROUTES.ppi,
+      },
+      {
+        badge: "DPI",
+        tag: "In-line",
+        title: "During Production Inspection",
+        description: "Catch defects on the line while goods are being made.",
+        href: SERVICE_ROUTES.dpi,
+      },
+      {
+        badge: "FRI",
+        tag: "Pre-shipment",
+        title: "Final Random Inspection",
+        description: "AQL sampling of finished goods before dispatch.",
+        href: SERVICE_ROUTES.fri,
+      },
+      {
+        badge: "CLI",
+        tag: "Dispatch",
+        title: "Container Loading Inspection",
+        description: "Quantity, packing and seal checks at loading.",
+        href: SERVICE_ROUTES.cli,
+      },
+      {
+        badge: "FPI",
+        tag: "Factory audit",
+        title: "Factory & Process Inspection",
+        description: "Assess factory capability and process controls.",
+        href: SERVICE_ROUTES.fac,
+      },
+      {
+        badge: "PI",
+        tag: "Quality check",
+        title: "Product Inspection",
+        description: "Function, safety and finish checks on your products.",
+        href: SERVICE_ROUTES.prd,
+      },
+      {
+        badge: "TPI",
+        tag: "Independent",
+        title: "Third-Party Inspection",
+        description: "Unbiased inspection reports for buyers and sellers.",
+        href: SERVICE_ROUTES.tpi,
+      },
+    ],
+  },
+  {
+    id: "other",
+    label: "Other Services",
+    items: [
+      {
+        badge: "FSSAI",
+        tag: "Food safety",
+        title: "FSSAI Registration",
+        description: "Food businesses that need an FSSAI licence.",
+        href: SERVICE_ROUTES.fssai,
+      },
+      {
+        badge: "WPC",
+        tag: "DoT",
+        title: "WPC ETA Approval",
+        description: "Wi-Fi, Bluetooth and RF products sold in India.",
+        href: SERVICE_ROUTES.wpc,
+      },
+      {
+        badge: "TEC",
+        tag: "MTCTE",
+        title: "TEC Certification",
+        description: "Telecom equipment under TEC regulations.",
+        href: SERVICE_ROUTES.tec,
+      },
+      {
+        badge: "RoHS",
+        tag: "Hazardous substances",
+        title: "RoHS Compliance",
+        description: "Electronics makers limiting restricted substances.",
+        href: SERVICE_ROUTES.rohs,
+      },
+      {
+        badge: "LAB",
+        tag: "NABL",
+        title: "NABL Lab Testing",
+        description: "Product testing and lab coordination for approvals.",
+        href: SERVICE_ROUTES.nabl,
+      },
+      {
+        badge: "AUD",
+        tag: "Audit",
+        title: "Audit Services",
+        description: "Compliance and supplier audits across your operations.",
+        href: SERVICE_ROUTES.audit,
+      },
+      {
+        badge: "DOC",
+        tag: "Documentation",
+        title: "Technical Documentation",
+        description: "Technical files and compliance documents, prepared for you.",
+        href: SERVICE_ROUTES.technical,
+      },
+    ],
+  },
+];
 
-  const updateNavState = useCallback(() => {
-    const track = carouselRef.current;
-    if (!track) return;
+const Services = () => {
+  const [activeId, setActiveId] = useState(GROUPS[0].id);
+  const tabsId = useId();
 
-    const cards = track.querySelectorAll<HTMLElement>("[data-service-card]");
-    if (!cards.length) return;
+  const totalServices = useMemo(() => GROUPS.reduce((sum, group) => sum + group.items.length, 0), []);
+  const activeGroup = GROUPS.find((group) => group.id === activeId) ?? GROUPS[0];
 
-    const scrollLeft = track.scrollLeft;
-    const maxScroll = track.scrollWidth - track.clientWidth - 2;
-    setCanPrev(scrollLeft > 4);
-    setCanNext(scrollLeft < maxScroll);
-
-    let nearest = 0;
-    let minDist = Infinity;
-    cards.forEach((card, i) => {
-      const dist = Math.abs(card.offsetLeft - scrollLeft);
-      if (dist < minDist) {
-        minDist = dist;
-        nearest = i;
-      }
-    });
-    setActiveIndex(nearest);
-  }, []);
-
-  useEffect(() => {
-    const track = carouselRef.current;
-    if (!track) return;
-
-    updateNavState();
-    track.addEventListener("scroll", updateNavState, { passive: true });
-    window.addEventListener("resize", updateNavState);
-
-    return () => {
-      track.removeEventListener("scroll", updateNavState);
-      window.removeEventListener("resize", updateNavState);
-    };
-  }, [updateNavState, services.length]);
-
-  const scrollToCard = useCallback((index: number) => {
-    const track = carouselRef.current;
-    if (!track) return;
-
-    const card = track.querySelectorAll<HTMLElement>("[data-service-card]")[index];
-    if (!card) return;
-
-    track.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
-    setActiveIndex(index);
-  }, []);
-
-  const scrollPrev = () => scrollToCard(Math.max(0, activeIndex - 1));
-  const scrollNext = () => scrollToCard(Math.min(services.length - 1, activeIndex + 1));
+  const onTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    const step = event.key === "ArrowRight" ? 1 : -1;
+    const nextGroup = GROUPS[(index + step + GROUPS.length) % GROUPS.length];
+    setActiveId(nextGroup.id);
+    document.getElementById(`${tabsId}-tab-${nextGroup.id}`)?.focus();
+  };
 
   return (
-    <section className={styles.services} aria-label="Our core certification services">
+    <section className={`${styles.services} ${manrope.className}`} aria-label="Our services">
       <div className={styles.container}>
         <div className={styles.headerRow}>
-          <p className={styles.sectionTagline}>Your compliance partner —</p>
-          <h2 className={`${styles.heading} ${playfair.className}`}>Our Core Certification Services</h2>
-          <div className={styles.headingUnderline} aria-hidden="true" />
-        </div>
-
-        <div className={styles.carouselWrap}>
-          <button
-            type="button"
-            className={styles.navBtn}
-            onClick={scrollPrev}
-            disabled={!canPrev}
-            aria-label="Previous service"
-          >
-            <IconChevronLeft />
-          </button>
-
-          <div
-            ref={carouselRef}
-            className={styles.carousel}
-            role="list"
-            aria-label="Certification service cards"
-          >
-            {services.map((s, index) => {
-              const isFlipped = flippedIndex === index;
-              return (
-                <article
-                  key={s.title}
-                  className={`${styles.card} ${isFlipped ? styles.cardFlipped : ""}`}
-                  role="listitem"
-                  data-service-card="true"
-                  onMouseEnter={() => setFlippedIndex(index)}
-                  onMouseLeave={() => setFlippedIndex(null)}
-                  onClick={(event) => {
-                    const target = event.target as HTMLElement;
-                    if (target.closest("a")) return;
-                    setFlippedIndex((current) => (current === index ? null : index));
-                  }}
-                >
-                  <div className={styles.flipper}>
-                    <div className={`${styles.face} ${styles.faceFront}`}>
-                      <div className={styles.frontMain}>
-                        <div className={styles.iconWrap} style={{ background: s.iconBg }}>
-                          <Image
-                            src={s.icon}
-                            alt={s.iconAlt}
-                            fill
-                            sizes="56px"
-                            className={styles.serviceIconImg}
-                          />
-                        </div>
-                        <h3 className={styles.cardTitle}>{s.title}</h3>
-                      </div>
-                      <Link
-                        className={styles.exploreLink}
-                        href={s.href}
-                        onClick={(event) => event.stopPropagation()}
-                      >
-                        Explore Services <span aria-hidden="true">→</span>
-                      </Link>
-                    </div>
-
-                    <div className={`${styles.face} ${styles.faceBack}`}>
-                      <div className={styles.backTop}>
-                        <button
-                          type="button"
-                          className={styles.backArrow}
-                          aria-label={`Close ${s.title} details`}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            setFlippedIndex(null);
-                          }}
-                        >
-                          <IconBack />
-                        </button>
-                        <div className={styles.backIcon}>
-                          <Image src={s.icon} alt="" fill sizes="28px" className={styles.backIconImg} />
-                        </div>
-                        <p className={styles.backDesc}>{s.description}</p>
-                      </div>
-                      <div className={styles.backBody}>
-                        <p className={styles.includesLabel}>Services include:</p>
-                        <ul className={styles.includesList}>
-                          {s.includes.map((item) => (
-                            <li key={item} className={styles.includesItem}>
-                              <span className={styles.check} aria-hidden="true">
-                                <IconCheck />
-                              </span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                        <Link className={styles.learnMore} href={s.href} onClick={(event) => event.stopPropagation()}>
-                          Learn More <span className={styles.learnMoreArrow} aria-hidden="true">→</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+          <div>
+            <p className={styles.eyebrow}>Our services</p>
+            <h2 className={`${styles.heading} ${playfair.className}`}>
+              {totalServices} compliance services.
+              <br />
+              One accountable team.
+            </h2>
           </div>
-
-          <button
-            type="button"
-            className={`${styles.navBtn} ${styles.navBtnNext}`}
-            onClick={scrollNext}
-            disabled={!canNext}
-            aria-label="Next service"
-          >
-            <IconChevronRight />
-          </button>
+          <Link className={styles.viewAll} href="/services">
+            View all services <span aria-hidden="true">→</span>
+          </Link>
         </div>
 
-        <div className={styles.ctaRow}>
-          <a className={styles.ctaBtn} href="/services">
-            Explore All Services
-          </a>
+        <div className={styles.tabs} role="tablist" aria-label="Service categories">
+          {GROUPS.map((group, index) => {
+            const isActive = group.id === activeGroup.id;
+            return (
+              <button
+                key={group.id}
+                id={`${tabsId}-tab-${group.id}`}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`${tabsId}-panel`}
+                tabIndex={isActive ? 0 : -1}
+                className={`${styles.tab} ${isActive ? styles.tabActive : ""}`}
+                onClick={() => setActiveId(group.id)}
+                onKeyDown={(event) => onTabKeyDown(event, index)}
+              >
+                {group.label}
+                {isActive && <span className={styles.tabCount}> · {group.items.length}</span>}
+              </button>
+            );
+          })}
+        </div>
+
+        <div
+          id={`${tabsId}-panel`}
+          className={styles.grid}
+          role="tabpanel"
+          aria-labelledby={`${tabsId}-tab-${activeGroup.id}`}
+        >
+          {activeGroup.items.map((item) => (
+            <article key={item.href} className={styles.card}>
+              <div className={styles.cardTop}>
+                <span className={styles.badge} aria-hidden="true">
+                  {item.badge}
+                </span>
+                <span className={styles.tag}>{item.tag}</span>
+              </div>
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <p className={styles.cardDesc}>{item.description}</p>
+              <Link className={styles.cardLink} href={item.href}>
+                View service <span aria-hidden="true">→</span>
+                <span className={styles.srOnly}> for {item.title}</span>
+              </Link>
+            </article>
+          ))}
         </div>
       </div>
     </section>

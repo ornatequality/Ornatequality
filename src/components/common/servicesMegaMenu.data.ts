@@ -32,6 +32,7 @@ export const SERVICE_ROUTES = {
   bisCertification: "/services/bis-certification",
   bisIsi: "/services/bis-certification/isi-mark-certification",
   bisFurniture: "/services/bis-isi-mark-certification/furniture",
+  bisFootwear: "/services/bis-isi-mark-certification/footwear",
   bisFmcs: "/services/bis-certification/fmcs-certification",
   bee: "/services/bee-certification",
   wpc: "/services/wpc-eta-approval",

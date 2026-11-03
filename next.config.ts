@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/services/bis-fmcs-certification/footwear",
+        destination: "/services/bis-isi-mark-certification/footwear",
+        permanent: true,
+      },
+      {
         source: "/services/bis-isi-mark-certification",
         destination: "/services/bis-certification/isi-mark-certification",
         permanent: true,

@@ -5,12 +5,14 @@ import { SITE_URL } from "@/lib/site";
 const CANONICAL_ORIGIN = "https://www.ornatequality.com";
 const FURNITURE_CANONICAL =
   "https://www.ornatequality.com/services/bis-isi-mark-certification/furniture";
+const FOOTWEAR_CANONICAL =
+  "https://www.ornatequality.com/services/bis-isi-mark-certification/footwear";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   const serviceEntries = Object.values(SERVICE_ROUTES)
     .filter((path, index, all) => all.indexOf(path) === index)
-    .filter((path) => path !== SERVICE_ROUTES.bisFurniture)
+    .filter((path) => path !== SERVICE_ROUTES.bisFurniture && path !== SERVICE_ROUTES.bisFootwear)
     .map((path) => ({
       url: `${CANONICAL_ORIGIN}${path}`,
       lastModified,
@@ -28,6 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serviceEntries,
     {
       url: FURNITURE_CANONICAL,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: FOOTWEAR_CANONICAL,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.8,

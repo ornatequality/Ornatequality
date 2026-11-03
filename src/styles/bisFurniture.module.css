@@ -531,6 +531,39 @@
   gap: 16px;
 }
 
+.stepsSix {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.whatIdeas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.ideaCard {
+  background: #fff;
+  border: 1px solid #e6ebf3;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+  padding: 18px 16px;
+}
+
+.ideaCard h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.ideaCard p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--gray);
+}
+
 .step {
   text-align: center;
 }
@@ -862,7 +895,9 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .steps {
+  .steps,
+  .stepsSix,
+  .whatIdeas {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -992,7 +1027,11 @@
     font-size: 11px;
   }
 
-  .steps {
+  .steps,
+  .stepsSix,
+  .whatIdeas,
+  .pageFootwear .stepsSix,
+  .pageFootwear .whatIdeas {
     grid-template-columns: 1fr;
     gap: 10px;
   }
@@ -1078,6 +1117,69 @@
   }
 }
 
+.photoEmbed {
+  min-height: 280px;
+  margin-top: 12px;
+}
+
+.sectionNote {
+  margin-top: 16px;
+}
+
+.locationChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--navy);
+}
+
+.pageFootwear {
+  overflow-x: clip;
+}
+
+.pageFootwear .section,
+.pageFootwear .guide .panel {
+  scroll-margin-top: 180px;
+}
+
+@media (max-width: 720px) {
+  .pageFootwear .section,
+  .pageFootwear .guide .panel {
+    scroll-margin-top: 120px;
+  }
+}
+
+.pageFootwear .lead,
+.pageFootwear .overviewLead,
+.pageFootwear .heroText,
+.pageFootwear .catTitle,
+.pageFootwear .locationChip {
+  overflow-wrap: break-word;
+}
+
+.pageFootwear .tableScroll {
+  max-width: 100%;
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .pageFootwear .stepsSix {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) and (min-width: 721px) {
+  .pageFootwear .stepsSix,
+  .pageFootwear .whatIdeas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 480px) {
   .wrap {
     padding: 0 14px;
@@ -1106,5 +1208,130 @@
 
   .factLabel {
     font-size: 11px;
+  }
+
+  .pageFootwear .heroStats {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .pageFootwear .heroStats > div {
+    text-align: left;
+    padding: 8px 12px;
+  }
+
+  .pageFootwear .heroStats > div + div {
+    border-left: 0;
+    border-top: 1px solid #eef1f6;
+  }
+
+  .pageFootwear .heroCaption {
+    top: 10px;
+    right: 10px;
+    max-width: 46%;
+    font-size: 11px;
+  }
+
+  .pageFootwear .isiBadge {
+    width: 110px;
+    right: 10px;
+    bottom: 12px;
+    padding: 8px;
+  }
+
+  .pageFootwear .isiLogo {
+    width: 52px;
+  }
+
+  .pageFootwear .photoEmbed {
+    min-height: 180px;
+  }
+
+  .pageFootwear .catGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .pageFootwear .heroVisual {
+    height: 240px;
+  }
+
+  .pageFootwear .table {
+    min-width: 0;
+  }
+
+  .pageFootwear .table thead {
+    display: none;
+  }
+
+  .pageFootwear .table,
+  .pageFootwear .table tbody,
+  .pageFootwear .table tr,
+  .pageFootwear .table th,
+  .pageFootwear .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .pageFootwear .table tr {
+    margin: 0 0 12px;
+    overflow: hidden;
+    border: 1px solid #e6ebf3;
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .pageFootwear .table tbody tr:nth-child(even) {
+    background: #fff;
+  }
+
+  .pageFootwear .table th,
+  .pageFootwear .table td {
+    border: 0;
+    border-bottom: 1px solid #eef1f6;
+    padding: 10px 12px;
+  }
+
+  .pageFootwear .table th[scope="row"] {
+    background: #0d3b82;
+    color: #fff;
+    font-size: 13px;
+  }
+
+  .pageFootwear .table td:last-child {
+    border-bottom: 0;
+  }
+
+  .pageFootwear .table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    color: #0d3b82;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .pageFootwear .locationChip {
+    width: 100%;
+  }
+
+  .pageFootwear .heroText,
+  .pageFootwear .overviewLead,
+  .pageFootwear .lead,
+  .pageFootwear .whatLead,
+  .pageFootwear .bulletList,
+  .pageFootwear .list,
+  .pageFootwear .faqAnswer,
+  .pageFootwear .stepText,
+  .pageFootwear .ideaCard p,
+  .pageFootwear .benefitCard p,
+  .pageFootwear .photoNote {
+    max-width: none;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
   }
 }

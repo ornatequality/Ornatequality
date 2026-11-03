@@ -119,7 +119,7 @@ export const PRODUCTS_COVERED: IsiProductRow[] = [
     isNumber: "Multiple standards by footwear type — see expanded note below",
     mandatory: "Mandatory — confirm scope by footwear type against applicable QCO/Gazette Notification",
     audience: "Manufacturer",
-    dedicatedPage: "Coming Soon",
+    dedicatedPage: "/services/bis-isi-mark-certification/footwear",
   },
   {
     product: "Stainless Steel Utensils / Cookware",
