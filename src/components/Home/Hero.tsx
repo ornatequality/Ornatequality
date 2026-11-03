@@ -150,7 +150,9 @@ const Hero = () => {
             <p className={styles.tagline}>YOUR TRUSTED COMPLIANCE PARTNER —</p>
 
             <h1 className={`${styles.title} ${playfair.className}`}>
-              Helping Businesses Achieve Product Compliance &amp; Certification Success
+              <span className={styles.titleLine}>Helping Businesses Achieve</span>
+              <span className={styles.titleLine}>Product Compliance &amp;</span>
+              <span className={styles.titleLine}>Certification Success</span>
             </h1>
 
             <p className={styles.subtitle}>

@@ -305,8 +305,14 @@ const Services = () => {
           role="tabpanel"
           aria-labelledby={`${tabsId}-tab-${activeGroup.id}`}
         >
-          {activeGroup.items.map((item) => (
-            <article key={item.href} className={styles.card}>
+          {activeGroup.items.map((item, index) => (
+            <Link
+              key={`${activeGroup.id}-${item.href}`}
+              href={item.href}
+              className={styles.card}
+              style={{ animationDelay: `${index * 55}ms` }}
+              aria-label={`View service for ${item.title}`}
+            >
               <div className={styles.cardTop}>
                 <span className={styles.badge} aria-hidden="true">
                   {item.badge}
@@ -315,11 +321,10 @@ const Services = () => {
               </div>
               <h3 className={styles.cardTitle}>{item.title}</h3>
               <p className={styles.cardDesc}>{item.description}</p>
-              <Link className={styles.cardLink} href={item.href}>
+              <span className={styles.cardLink}>
                 View service <span aria-hidden="true">→</span>
-                <span className={styles.srOnly}> for {item.title}</span>
-              </Link>
-            </article>
+              </span>
+            </Link>
           ))}
         </div>
       </div>

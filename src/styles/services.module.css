@@ -115,7 +115,30 @@ p.eyebrow {
   gap: 14px;
 }
 
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes cardShine {
+  from {
+    transform: translateX(-130%) rotate(12deg);
+  }
+  to {
+    transform: translateX(220%) rotate(12deg);
+  }
+}
+
 .card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -124,20 +147,81 @@ p.eyebrow {
   background: #ffffff;
   border: 1px solid var(--svc-line);
   box-shadow: 0 1px 2px rgba(15, 29, 58, 0.03);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  animation: cardEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -40%;
+  left: 0;
+  width: 42%;
+  height: 180%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 181, 71, 0.14) 50%,
+    transparent 100%
+  );
+  transform: translateX(-130%) rotate(12deg);
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #ffb547, #0f1d3a);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card:hover,
-.card:focus-within {
-  border-color: #cfd7e6;
-  box-shadow: 0 12px 28px rgba(15, 29, 58, 0.08);
-  transform: translateY(-2px);
+.card:focus-visible {
+  border-color: rgba(15, 29, 58, 0.18);
+  box-shadow:
+    0 16px 32px rgba(15, 29, 58, 0.1),
+    0 0 0 1px rgba(255, 181, 71, 0.18);
+  transform: translateY(-5px);
+}
+
+.card:hover::before,
+.card:focus-visible::before {
+  animation: cardShine 0.7s ease;
+}
+
+.card:hover::after,
+.card:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.card:hover .badge,
+.card:focus-visible .badge {
+  transform: translateY(-1px) scale(1.06);
+}
+
+.card:hover .cardLink,
+.card:focus-visible .cardLink {
+  gap: 9px;
+  color: #0b3d8c;
 }
 
 .cardTop {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -157,6 +241,7 @@ p.eyebrow {
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.02em;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tag {
@@ -174,6 +259,8 @@ p.eyebrow {
 
 /* Scoped under .services so global h3 / p styles on the site don't override card text */
 .services h3.cardTitle {
+  position: relative;
+  z-index: 2;
   margin: 0 0 4px;
   font-family: var(--font-body, inherit);
   font-size: 15px;
@@ -185,6 +272,8 @@ p.eyebrow {
 }
 
 .services p.cardDesc {
+  position: relative;
+  z-index: 2;
   margin: 0 0 12px;
   font-family: var(--font-body, inherit);
   font-size: 13px;
@@ -198,6 +287,8 @@ p.eyebrow {
 }
 
 .services .cardLink {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -207,12 +298,9 @@ p.eyebrow {
   font-weight: 800;
   color: var(--svc-navy);
   text-decoration: none;
-  transition: gap 160ms ease;
-}
-
-.services .cardLink:hover,
-.services .cardLink:focus-visible {
-  gap: 8px;
+  transition:
+    gap 220ms ease,
+    color 220ms ease;
 }
 
 .srOnly {
@@ -229,21 +317,29 @@ p.eyebrow {
 
 .tab:focus-visible,
 .viewAll:focus-visible,
-.cardLink:focus-visible {
+.card:focus-visible {
   outline: 2px solid rgba(15, 29, 58, 0.45);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .tab {
+  .tab,
+  .badge,
+  .cardLink {
+    animation: none;
     transition: none;
   }
 
   .card:hover,
-  .card:focus-within {
+  .card:focus-visible {
     transform: none;
+  }
+
+  .card::before,
+  .card::after {
+    display: none;
   }
 }
 

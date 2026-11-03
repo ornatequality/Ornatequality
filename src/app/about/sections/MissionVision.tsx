@@ -1,12 +1,31 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import { manrope, playfair } from "@/lib/fonts";
 import styles from "@/styles/aboutV2.module.css";
 import { IconEye, IconTarget } from "./icons";
 
 export function MissionVision() {
+  const bandRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = bandRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.22 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
-      className={`${styles.mvBand} ${manrope.className}`}
+      ref={bandRef}
+      className={`${styles.mvBand} ${visible ? styles.mvVisible : ""} ${manrope.className}`}
       lang="en"
       aria-label="Mission and vision"
     >

@@ -569,8 +569,51 @@
   align-items: stretch;
 }
 
+@keyframes mvCardInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-36px, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes mvCardInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(36px, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes mvIconPop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mvShine {
+  from {
+    transform: translateX(-140%) rotate(14deg);
+  }
+  to {
+    transform: translateX(240%) rotate(14deg);
+  }
+}
+
 .mvCard {
   position: relative;
+  isolation: isolate;
   min-width: 0;
   max-width: 100%;
   display: flex;
@@ -583,11 +626,25 @@
     0 4px 12px rgba(4, 30, 91, 0.06),
     0 14px 40px rgba(4, 30, 91, 0.1),
     0 2px 4px rgba(4, 30, 91, 0.04);
-  transition:
-    box-shadow 220ms ease,
-    transform 220ms ease,
-    border-color 220ms ease;
   overflow: hidden;
+  opacity: 0;
+  cursor: pointer;
+  transition:
+    box-shadow 280ms ease,
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms ease;
+}
+
+.mvVisible .mvCardMission {
+  animation: mvCardInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.mvVisible .mvCardVision {
+  animation: mvCardInRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+}
+
+.mvVisible .mvIcon {
+  animation: mvIconPop 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
 }
 
 .mvCard::before {
@@ -598,6 +655,27 @@
   right: 0;
   height: 4px;
   border-radius: 18px 18px 0 0;
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mvCard::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -50%;
+  left: 0;
+  width: 38%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+  transform: translateX(-140%) rotate(14deg);
+  pointer-events: none;
 }
 
 .mvCardMission::before {
@@ -610,11 +688,35 @@
 
 .mvCard:hover {
   border-color: rgba(10, 27, 43, 0.14);
+  transform: translateY(-6px);
+}
+
+.mvCard:hover::before {
+  transform: scaleX(1);
+}
+
+.mvCard:hover::after {
+  animation: mvShine 0.75s ease;
+}
+
+.mvCardMission:hover {
   box-shadow:
-    0 6px 18px rgba(4, 30, 91, 0.08),
-    0 22px 52px rgba(4, 30, 91, 0.13),
-    0 2px 6px rgba(4, 30, 91, 0.05);
-  transform: translateY(-3px);
+    0 8px 22px rgba(255, 156, 8, 0.14),
+    0 22px 52px rgba(4, 30, 91, 0.12);
+}
+
+.mvCardVision:hover {
+  box-shadow:
+    0 8px 22px rgba(4, 30, 91, 0.16),
+    0 22px 52px rgba(4, 30, 91, 0.12);
+}
+
+.mvCard:hover .mvIcon {
+  transform: scale(1.08) rotate(-6deg);
+}
+
+.mvCardVision:hover .mvIcon {
+  transform: scale(1.08) rotate(6deg);
 }
 
 .mvKicker {
@@ -641,6 +743,7 @@
   display: grid;
   place-items: center;
   color: #ffffff;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mvIconMission {
@@ -1115,6 +1218,25 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .mvCard,
+  .mvVisible .mvCardMission,
+  .mvVisible .mvCardVision,
+  .mvVisible .mvIcon,
+  .mvCard:hover::after {
+    animation: none;
+  }
+
+  .mvCard {
+    opacity: 1;
+    transform: none;
+  }
+
+  .mvCard:hover,
+  .mvCard:hover .mvIcon,
+  .mvCardVision:hover .mvIcon {
+    transform: none;
+  }
+
   .certMarqueeTrack {
     animation: none;
     transform: none;
