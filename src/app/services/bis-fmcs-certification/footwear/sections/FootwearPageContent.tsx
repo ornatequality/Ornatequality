@@ -11,7 +11,7 @@ import canvasShoes from "@/assests/services/footwear/footwear-canvas.jpg";
 import sportsShoes from "@/assests/services/footwear/footwear-sports.jpg";
 import tacticalBoots from "@/assests/services/footwear/footwear-tactical.jpg";
 import sandals from "@/assests/services/footwear/footwear-sandals.jpg";
-import hawai from "@/assests/services/footwear/footwear-hawai.jpg";
+import hawai from "@/assests/services/footwear/footwear-hawai.png";
 import whatIsImg from "@/assests/services/footwear/footwear-what-is.jpg";
 import benefitsImg from "@/assests/services/footwear/footwear-benefits.jpg";
 import isiLogo from "@/assests/certi-img/isi.webp";
@@ -242,7 +242,17 @@ export function FootwearPageContent() {
             {PRODUCT_CATEGORIES.map((cat) => (
               <a key={cat.standard} className={styles.catCard} href="#products">
                 <div className={styles.catThumb}>
-                  <Image src={CATEGORY_IMAGES[cat.image]} alt={cat.title} fill sizes="180px" className={styles.catThumbImg} />
+                  <Image
+                    src={CATEGORY_IMAGES[cat.image]}
+                    alt={cat.title}
+                    fill
+                    sizes="180px"
+                    className={
+                      cat.image === "hawai" || cat.image === "tactical" || cat.image === "sandals"
+                        ? styles.catThumbImgContain
+                        : styles.catThumbImg
+                    }
+                  />
                 </div>
                 <h3 className={styles.catTitle}>{cat.title}</h3>
                 <p className={styles.catStd}>{cat.standard}</p>
@@ -317,7 +327,13 @@ export function FootwearPageContent() {
             </p>
           ))}
           <div className={`${styles.photoCard} ${styles.photoEmbed}`}>
-            <Image src={whatIsImg} alt="ISI marked footwear" fill sizes="1100px" className={styles.photoCardImg} />
+            <Image
+              src={whatIsImg}
+              alt="Leather footwear for the Indian market"
+              fill
+              sizes="1100px"
+              className={styles.photoCardImg}
+            />
             <p className={styles.photoNote}>{WHAT_IS_IMAGE_NOTE}</p>
           </div>
         </article>

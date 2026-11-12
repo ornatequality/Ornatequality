@@ -408,6 +408,11 @@
   object-fit: cover;
 }
 
+.catThumbImgContain {
+  object-fit: contain;
+  background: #fff;
+}
+
 .catTitle {
   margin: 0 0 4px;
   font-size: 13px;
@@ -1122,6 +1127,10 @@
   margin-top: 12px;
 }
 
+.pageFootwear .photoEmbed {
+  min-height: 360px;
+}
+
 .sectionNote {
   margin-top: 16px;
 }
@@ -1244,7 +1253,7 @@
   }
 
   .pageFootwear .photoEmbed {
-    min-height: 180px;
+    min-height: 220px;
   }
 
   .pageFootwear .catGrid {
