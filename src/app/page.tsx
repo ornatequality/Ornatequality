@@ -10,7 +10,7 @@ const BlogSection = dynamic(() => import("@/components/Home/BlogSection"));
 const ValuedClients = dynamic(() => import("@/components/Home/ValuedClients"));
 const ClientTestimonials = dynamic(() => import("@/components/Home/ClientTestimonials"));
 const Query = dynamic(() => import("@/components/Home/Query"));
-const ReelsSection = dynamic(() => import("@/components/Home/ReelsSection"));
+const Industries = dynamic(() => import("@/components/Home/Industries"));
 const Faq = dynamic(() => import("@/components/Home/Faq"));
 import { JsonLdList } from "@/components/seo/JsonLdScripts";
 import {
@@ -79,7 +79,7 @@ export default async function HomePage() {
       <ValuedClients />
       <ClientTestimonials variant="home" />
       <Query />
-      <ReelsSection />
+      <Industries />
       <Faq />
     </div>
   );
