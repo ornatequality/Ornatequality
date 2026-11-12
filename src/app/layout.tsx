@@ -2,10 +2,8 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 
-import TopBar from "@/components/common/Topbar";
-import Footer from "@/components/common/Footer";
-import Header from "@/components/common/Header";
 import RouteScrollReset from "@/components/common/RouteScrollReset";
+import SiteChrome from "@/components/common/SiteChrome";
 import { JsonLdScripts } from "@/components/seo/JsonLdScripts";
 import { inter, manrope, playfair } from "@/lib/fonts";
 import {
@@ -15,9 +13,6 @@ import {
   HOME_TITLE,
 } from "@/lib/seo/home";
 import { SITE_LEGAL_NAME, SITE_NAME, SITE_URL } from "@/lib/site";
-import WhatsAppButton from "@/components/common/WhatsAppButton";
-import CookieConsent from "@/components/consent/CookieConsent";
-import ConsultationPopupGate from "@/components/popup/ConsultationPopupGate";
 import {
   GoogleTagManagerBody,
   GoogleTagManagerHead,
@@ -165,13 +160,7 @@ export default function RootLayout({
         </Script>
         <GoogleTagManagerBody />
         <RouteScrollReset />
-        <TopBar />
-        <Header />
-        <main className="site-main flex-1 w-full bg-white">{children}</main>
-        <WhatsAppButton/>
-        <ConsultationPopupGate />
-        <CookieConsent />
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

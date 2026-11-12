@@ -2,75 +2,18 @@ import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { manrope, playfair } from "@/lib/fonts";
 import styles from "../../styles/blog.module.css";
-
-import blog1 from "../../assests/image.png";
-import blog2 from "../../assests/blog-2.webp";
-import blog3 from "../../assests/blog-3.webp";
-
-type TagTone = "green" | "blue" | "gold";
-
-export type BlogCardData = {
-  slug: string;
-  href?: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  topic?: string;
-  tone?: TagTone;
-  image: string | StaticImageData;
-  readTime?: string;
-};
+import {
+  BLOG_TOPICS,
+  DEFAULT_POSTS,
+  type BlogCardData,
+  type TagTone,
+} from "@/lib/blog-defaults";
 
 type LatestBlogsProps = {
   posts?: BlogCardData[];
 };
 
-const DEFAULT_POSTS: BlogCardData[] = [
-  {
-    slug: "bis-toy-certification-mistakes",
-    title: "Top 10 Common Mistakes Manufacturers Make During BIS Toy Certification",
-    excerpt:
-      "Learn how to get BIS certification for your products and ensure compliance with Indian standards.",
-    category: "BIS certification for toys",
-    topic: "BIS",
-    image: blog1,
-    readTime: "7 min read",
-  },
-  {
-    slug: "future-of-epr",
-    title: "The Future of EPR: Why It Matters and How It Will Revolutionise Industries",
-    excerpt:
-      "Understand Extended Producer Responsibility and how it impacts compliance, sustainability, and your brand's growth.",
-    category: "EPR",
-    tone: "green",
-    image: blog2,
-    readTime: "5 min read",
-  },
-  {
-    slug: "wpc-eta-approval-frequency-bands",
-    title: "WPC ETA Approval in India: Frequency Bands and Device Compliance Guide",
-    excerpt:
-      "A practical guide to WPC ETA, from frequency selection to documentation, so you can launch wireless products in India with ease.",
-    category: "WPC-ETA",
-    tone: "blue",
-    image: blog3,
-    readTime: "6 min read",
-  },
-];
-
-const TOPICS = [
-  "BIS",
-  "ISI Mark",
-  "WPC-ETA",
-  "EPR",
-  "BEE",
-  "CRS",
-  "LMPC",
-  "Quality Inspection",
-  "Industry Updates",
-];
-
-const postHref = (post: BlogCardData) => post.href ?? "/blog";
+const postHref = (post: BlogCardData) => post.href ?? `/blog/${post.slug}`;
 
 const TONE_CLASS: Record<TagTone, string> = {
   green: styles.tagGreen,
@@ -116,6 +59,28 @@ const Arrow = () => (
   </span>
 );
 
+function BlogImage({
+  image,
+  sizes,
+  className,
+}: {
+  image: string | StaticImageData;
+  sizes: string;
+  className: string;
+}) {
+  const remote = typeof image === "string" && image.startsWith("http");
+  return (
+    <Image
+      src={image}
+      alt=""
+      fill
+      sizes={sizes}
+      className={className}
+      unoptimized={remote}
+    />
+  );
+}
+
 const LatestBlogs = ({ posts = DEFAULT_POSTS }: LatestBlogsProps) => {
   const [featured, ...rest] = posts.slice(0, 3);
 
@@ -154,7 +119,7 @@ const LatestBlogs = ({ posts = DEFAULT_POSTS }: LatestBlogsProps) => {
               All Topics
             </Link>
           </li>
-          {TOPICS.map((topic) => (
+          {BLOG_TOPICS.map((topic) => (
             <li key={topic}>
               <Link className={styles.topic} href="/blog">
                 {topic}
@@ -207,11 +172,8 @@ const LatestBlogs = ({ posts = DEFAULT_POSTS }: LatestBlogsProps) => {
               aria-hidden="true"
             >
               <span className={styles.featuredImageClip}>
-                <Image
-                  src={featured.image}
-                  alt=""
-                  fill
-                  priority={false}
+                <BlogImage
+                  image={featured.image}
                   sizes="(max-width: 900px) 100vw, 520px"
                   className={styles.image}
                 />
@@ -229,10 +191,8 @@ const LatestBlogs = ({ posts = DEFAULT_POSTS }: LatestBlogsProps) => {
                     tabIndex={-1}
                     aria-hidden="true"
                   >
-                    <Image
-                      src={post.image}
-                      alt=""
-                      fill
+                    <BlogImage
+                      image={post.image}
                       sizes="(max-width: 600px) 100vw, 300px"
                       className={styles.image}
                     />

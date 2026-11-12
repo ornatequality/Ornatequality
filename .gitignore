@@ -40,4 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# admin blog uploads
+/public/uploads/blogs/*
+!/public/uploads/blogs/.gitkeep
+
 

@@ -23,6 +23,9 @@ import {
   homeWebPageSchema,
 } from "@/lib/seo/home";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { getPublishedBlogs } from "@/lib/blogs";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: HOME_TITLE,
@@ -59,7 +62,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await getPublishedBlogs(3);
+
   return (
     <div className="home-page">
       <JsonLdList
@@ -70,7 +75,7 @@ export default function HomePage() {
       <Importance />
       <Services />
       <TrustProcess />
-      <BlogSection />
+      <BlogSection posts={posts} />
       <ValuedClients />
       <ClientTestimonials variant="home" />
       <Query />

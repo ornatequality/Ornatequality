@@ -8,6 +8,9 @@ import {
   blogWebPageSchema,
 } from "@/lib/seo/blog";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { getPublishedBlogs } from "@/lib/blogs";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: BLOG_TITLE,
@@ -31,11 +34,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getPublishedBlogs(12);
+
   return (
     <>
       <JsonLdList schemas={[blogWebPageSchema]} />
-      <BlogSection />
+      <BlogSection posts={posts} />
     </>
   );
 }
