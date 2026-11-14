@@ -149,7 +149,7 @@ export function FurniturePageContent() {
               </a>
             </div>
             <aside className={styles.facts} aria-label="Quick facts">
-              <h3 className={styles.factsHeading}>Quick Facts</h3>
+              <h3 className={styles.factsHeading}>Quick Facts </h3>
               <dl className={styles.factsList}>
                 {QUICK_FACTS.map((fact) => (
                   <div key={fact.label} className={styles.factRow}>
