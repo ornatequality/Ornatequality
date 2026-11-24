@@ -1,3 +1,4 @@
+import Script from "next/script";
 import {
   jsonLdScript,
   organizationSchema,
@@ -9,6 +10,12 @@ type JsonLdScriptsProps = {
   extra?: object[];
 };
 
+function schemaScriptId(schema: object, index: number) {
+  const type = "@type" in schema ? String(schema["@type"]) : "schema";
+  const id = "@id" in schema ? String(schema["@id"]) : String(index);
+  return `jsonld-${type}-${index}-${id}`.replace(/[^a-zA-Z0-9_-]/g, "");
+}
+
 export function JsonLdScripts({ extra = [] }: JsonLdScriptsProps) {
   const schemas = [organizationSchema, professionalServiceSchema, webSiteSchema, ...extra];
 
@@ -19,9 +26,11 @@ export function JsonLdList({ schemas }: { schemas: object[] }) {
   return (
     <>
       {schemas.map((schema, index) => (
-        <script
-          key={index}
+        <Script
+          key={schemaScriptId(schema, index)}
+          id={schemaScriptId(schema, index)}
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: jsonLdScript(schema) }}
         />
       ))}

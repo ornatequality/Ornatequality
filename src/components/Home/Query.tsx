@@ -105,7 +105,11 @@ const Query = () => {
   }
 
   return (
-    <section className={`${styles.section} ${manrope.className}`} aria-label="Request a call back">
+    <section
+      id="home-query"
+      className={`${styles.section} ${manrope.className}`}
+      aria-label="Request a call back"
+    >
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.left}>
@@ -218,8 +222,6 @@ const Query = () => {
               {status === "loading" ? "Sending…" : "Request a Call Back"}
               <span aria-hidden="true">→</span>
             </button>
-
-            <p className={styles.note}>Your details are used only to answer this enquiry.</p>
 
             {status === "success" && (
               <p className={styles.ok} role="status">

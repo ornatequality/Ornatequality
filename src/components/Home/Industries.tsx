@@ -35,49 +35,49 @@ const CATEGORIES: {
 }[] = [
   {
     title: "Electronics & IT",
-    meta: "BIS CRS · WPC-ETA · EPR",
+    meta: "BIS CRS · WPC-ETA\nEPR",
     href: SERVICE_ROUTES.bisCrs,
     image: electronicsImg,
     Icon: IconMonitor,
   },
   {
     title: "Electrical Appliances",
-    meta: "BEE · BIS",
+    meta: "BEE ·\nBIS",
     href: SERVICE_ROUTES.bee,
     image: appliancesImg,
     Icon: IconAppliance,
   },
   {
     title: "Toys",
-    meta: "ISI Mark · FMCS",
+    meta: "ISI Mark ·\nFMCS",
     href: SERVICE_ROUTES.bisIsi,
     image: toysImg,
     Icon: IconBlocks,
   },
   {
     title: "Furniture",
-    meta: "ISI Mark · FMCS",
+    meta: "ISI Mark ·\nFMCS",
     href: SERVICE_ROUTES.bisFurniture,
     image: furnitureImg,
     Icon: IconChair,
   },
   {
     title: "Footwear",
-    meta: "ISI Mark · FMCS",
+    meta: "ISI Mark ·\nFMCS",
     href: SERVICE_ROUTES.bisFootwear,
     image: footwearImg,
     Icon: IconBoot,
   },
   {
     title: "Wireless & Telecom",
-    meta: "WPC-ETA · TEC",
+    meta: "WPC-ETA ·\nTEC",
     href: SERVICE_ROUTES.wpc,
     image: routerImg,
     Icon: IconWifi,
   },
   {
     title: "Steel & Metals",
-    meta: "ISI Mark · FMCS",
+    meta: "ISI Mark ·\nFMCS",
     href: SERVICE_ROUTES.bisFmcs,
     image: steelImg,
     Icon: IconBeam,
@@ -91,7 +91,7 @@ const CATEGORIES: {
   },
   {
     title: "Food & Packaged Goods",
-    meta: "FSSAI · LMPC",
+    meta: "FSSAI ·\nLMPC",
     href: SERVICE_ROUTES.fssai,
     image: foodImg,
     Icon: IconBox,
@@ -119,9 +119,11 @@ export default function Industries() {
             <div className={styles.featureCopy}>
               <p className={styles.eyebrow}>Industries we serve</p>
               <h2 id="home-industries-heading" className={styles.featureTitle}>
-                Certification Support for Every{" "}
+                <span className={styles.titleLine}>
+                  Certification support for every
+                </span>
                 <span className={`${styles.accent} ${playfair.className}`}>
-                  Product Category
+                  product category
                 </span>
               </h2>
               <p className={styles.featureText}>

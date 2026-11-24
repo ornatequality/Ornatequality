@@ -62,8 +62,8 @@
 .featureCopy {
   position: relative;
   z-index: 3;
-  padding: 22px 22px 24px;
-  max-width: 340px;
+  padding: 16px 18px 18px;
+  max-width: 360px;
 }
 
 .eyebrow {
@@ -71,7 +71,7 @@
   align-items: center;
   gap: 8px;
   margin: 0 0 8px;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -87,37 +87,42 @@
 }
 
 .featureTitle {
-  margin: 0 0 8px;
-  font-size: clamp(22px, 2.3vw, 30px);
-  line-height: 1.15;
+  margin: 0 0 6px;
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1.25;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+}
+
+.titleLine,
+.accent {
+  display: block;
+  white-space: nowrap;
 }
 
 .accent {
-  display: block;
   font-style: italic;
   font-weight: 600;
   color: #e8c056;
 }
 
 .featureText {
-  margin: 0 0 14px;
-  font-size: 13px;
-  line-height: 1.5;
+  margin: 0 0 12px;
+  font-size: 11px;
+  line-height: 1.45;
   color: rgba(255, 255, 255, 0.82);
-  max-width: 32ch;
+  max-width: 34ch;
 }
 
 .cta {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 999px;
   background: #e8c056;
   color: #1a1406;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
@@ -137,7 +142,7 @@
 .card {
   position: relative;
   display: block;
-  min-height: 104px;
+  min-height: 86px;
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
@@ -164,10 +169,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 3px;
   width: min(58%, 180px);
-  min-height: 104px;
-  padding: 12px 10px 12px 14px;
+  min-height: 86px;
+  padding: 8px 8px 8px 12px;
   background: linear-gradient(90deg, #fff 72%, rgba(255, 255, 255, 0) 100%);
 }
 
@@ -180,22 +185,22 @@
 .icon {
   display: grid;
   place-items: center;
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #f6ead0;
   color: #c4921c;
 }
 
 .icon svg {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
 }
 
 .cardTitle {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 11px;
   font-weight: 800;
   color: #0a1f44;
   letter-spacing: -0.02em;
@@ -204,19 +209,20 @@
 
 .cardMeta {
   margin: 0;
-  padding-left: 36px;
-  font-size: 10.5px;
-  font-weight: 600;
+  padding-left: 32px;
+  font-size: 8px;
+  font-weight: 500;
   color: #8b93a5;
-  line-height: 1.35;
+  line-height: 1.25;
+  white-space: pre;
 }
 
 .arrow {
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
-  margin: 2px 0 0 36px;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0 32px;
   border-radius: 50%;
   background: #e8c056;
   color: #1a1406;
@@ -255,7 +261,7 @@
   }
 
   .feature {
-    min-height: 250px;
+    min-height: 210px;
   }
 }
 
@@ -271,16 +277,21 @@
   }
 
   .card {
-    min-height: 112px;
+    min-height: 92px;
   }
 
   .featureCopy {
-    padding: 18px 18px 20px;
+    padding: 16px 16px 18px;
     max-width: 100%;
   }
 
   .featureTitle {
-    font-size: 24px;
+    font-size: 14px;
+  }
+
+  .titleLine,
+  .accent {
+    white-space: normal;
   }
 
   .cardMeta,

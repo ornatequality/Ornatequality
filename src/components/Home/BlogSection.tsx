@@ -11,6 +11,8 @@ import {
 
 type LatestBlogsProps = {
   posts?: BlogCardData[];
+  variant?: "home" | "page";
+  excludeSlug?: string;
 };
 
 const postHref = (post: BlogCardData) => post.href ?? `/blog/${post.slug}`;
@@ -81,8 +83,15 @@ function BlogImage({
   );
 }
 
-const LatestBlogs = ({ posts = DEFAULT_POSTS }: LatestBlogsProps) => {
-  const [featured, ...rest] = posts.slice(0, 3);
+const LatestBlogs = ({
+  posts = DEFAULT_POSTS,
+  variant = "home",
+  excludeSlug,
+}: LatestBlogsProps) => {
+  const source = excludeSlug
+    ? posts.filter((post) => post.slug !== excludeSlug)
+    : posts;
+  const [featured, ...rest] = source.slice(0, 3);
 
   if (!featured) return null;
 
@@ -104,9 +113,11 @@ const LatestBlogs = ({ posts = DEFAULT_POSTS }: LatestBlogsProps) => {
             </p>
           </div>
 
-          <Link className={styles.viewAll} href="/blog">
-            View all blogs <Arrow />
-          </Link>
+          {variant === "home" ? (
+            <Link className={styles.viewAll} href="/blog">
+              View all blogs <Arrow />
+            </Link>
+          ) : null}
         </div>
 
         <ul className={styles.topics} aria-label="Blog topics">

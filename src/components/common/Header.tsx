@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import styles from "../../styles/common/header.module.css";
 import logo from "../../assests/logo.webp";
 import { ServicesMegaMenu } from "./ServicesMegaMenu";
-import { KnowledgeHubMenu } from "./KnowledgeHubMenu";
 import { KNOWLEDGE_HUB_HREF } from "./knowledgeHubMenu.data";
 
 function navItemIsActive(pathname: string, href: string): boolean {
@@ -23,13 +22,9 @@ const Header = () => {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [knowledgeHubOpen, setKnowledgeHubOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [mobileKnowledgeHubOpen, setMobileKnowledgeHubOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
-  const knowledgeHubRef = useRef<HTMLDivElement>(null);
   const servicesCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const knowledgeCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearServicesCloseTimer = () => {
     if (servicesCloseTimerRef.current) {
@@ -38,16 +33,8 @@ const Header = () => {
     }
   };
 
-  const clearKnowledgeCloseTimer = () => {
-    if (knowledgeCloseTimerRef.current) {
-      clearTimeout(knowledgeCloseTimerRef.current);
-      knowledgeCloseTimerRef.current = null;
-    }
-  };
-
   const openServicesMenu = () => {
     clearServicesCloseTimer();
-    setKnowledgeHubOpen(false);
     setServicesOpen(true);
   };
 
@@ -59,20 +46,6 @@ const Header = () => {
     }, HOVER_CLOSE_DELAY_MS);
   };
 
-  const openKnowledgeHubMenu = () => {
-    clearKnowledgeCloseTimer();
-    setServicesOpen(false);
-    setKnowledgeHubOpen(true);
-  };
-
-  const scheduleCloseKnowledgeHubMenu = () => {
-    clearKnowledgeCloseTimer();
-    knowledgeCloseTimerRef.current = setTimeout(() => {
-      setKnowledgeHubOpen(false);
-      knowledgeCloseTimerRef.current = null;
-    }, HOVER_CLOSE_DELAY_MS);
-  };
-
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -80,32 +53,28 @@ const Header = () => {
   useEffect(() => {
     if (!mounted) return;
     setServicesOpen(false);
-    setKnowledgeHubOpen(false);
     setMobileServicesOpen(false);
-    setMobileKnowledgeHubOpen(false);
     setOpen(false);
   }, [pathname, mounted]);
 
   useEffect(() => {
     return () => {
       clearServicesCloseTimer();
-      clearKnowledgeCloseTimer();
     };
   }, []);
 
   useEffect(() => {
-    if (!servicesOpen && !knowledgeHubOpen) return;
+    if (!servicesOpen) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setServicesOpen(false);
-        setKnowledgeHubOpen(false);
       }
     };
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [servicesOpen, knowledgeHubOpen]);
+  }, [servicesOpen]);
 
   const activePath = mounted ? pathname : "";
   const servicesActive = navItemIsActive(activePath, "/services");
@@ -166,32 +135,13 @@ const Header = () => {
             ) : null}
           </div>
 
-          <div
-            className={styles.navDropdown}
-            ref={knowledgeHubRef}
-            onMouseEnter={openKnowledgeHubMenu}
-            onMouseLeave={scheduleCloseKnowledgeHubMenu}
-            onFocus={openKnowledgeHubMenu}
-            onBlur={(e) => {
-              if (!knowledgeHubRef.current?.contains(e.relatedTarget as Node)) {
-                scheduleCloseKnowledgeHubMenu();
-              }
-            }}
+          <Link
+            href={KNOWLEDGE_HUB_HREF}
+            className={`${styles.navLink} ${knowledgeHubActive ? styles.navLinkActive : ""}`}
+            aria-current={knowledgeHubActive ? "page" : undefined}
           >
-            <Link
-              href={KNOWLEDGE_HUB_HREF}
-              className={`${styles.navLink} ${knowledgeHubActive ? styles.navLinkActive : ""}`}
-              aria-current={knowledgeHubActive ? "page" : undefined}
-            >
-              Knowledge Hub
-            </Link>
-
-            {knowledgeHubOpen ? (
-              <div className={styles.hubMenuWrap}>
-                <KnowledgeHubMenu onNavigate={() => setKnowledgeHubOpen(false)} />
-              </div>
-            ) : null}
-          </div>
+            Knowledge Hub
+          </Link>
 
           <Link
             href="/contact"
@@ -283,46 +233,13 @@ const Header = () => {
               ) : null}
             </div>
 
-            <div className={styles.mobileServicesBlock}>
-              <div className={styles.mobileServicesRow}>
-                <Link
-                  href={KNOWLEDGE_HUB_HREF}
-                  className={`${styles.mobileLink} ${styles.mobileServicesMain} ${knowledgeHubActive ? styles.mobileLinkActive : ""}`}
-                  onClick={() => setOpen(false)}
-                >
-                  Knowledge Hub
-                </Link>
-                <button
-                  type="button"
-                  className={styles.mobileServicesExpand}
-                  aria-expanded={mobileKnowledgeHubOpen}
-                  aria-label={mobileKnowledgeHubOpen ? "Hide knowledge hub menu" : "Show knowledge hub menu"}
-                  onClick={() => setMobileKnowledgeHubOpen((v) => !v)}
-                >
-                  <span className={`${styles.chevron} ${mobileKnowledgeHubOpen ? styles.chevronOpen : ""}`} aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="14" height="14">
-                      <path
-                        d="m6 9 6 6 6-6"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
-              </div>
-              {mobileKnowledgeHubOpen ? (
-                <KnowledgeHubMenu
-                  variant="mobile"
-                  onNavigate={() => {
-                    setMobileKnowledgeHubOpen(false);
-                    setOpen(false);
-                  }}
-                />
-              ) : null}
-            </div>
+            <Link
+              href={KNOWLEDGE_HUB_HREF}
+              className={`${styles.mobileLink} ${knowledgeHubActive ? styles.mobileLinkActive : ""}`}
+              onClick={() => setOpen(false)}
+            >
+              Knowledge Hub
+            </Link>
 
             <Link
               href="/contact"

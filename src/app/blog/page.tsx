@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import BlogSection from "@/components/Home/BlogSection";
+import KnowledgeHubGuides from "@/components/blog/KnowledgeHubGuides";
+import KnowledgeHubHero from "@/components/blog/KnowledgeHubHero";
 import { JsonLdList } from "@/components/seo/JsonLdScripts";
 import {
   BLOG_DESCRIPTION,
@@ -34,13 +35,30 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage() {
-  const posts = await getPublishedBlogs(12);
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; topic?: string }>;
+}) {
+  const { q = "", topic = "all" } = await searchParams;
+  const posts = await getPublishedBlogs(40);
+  const query = q.trim().toLowerCase();
+  const filtered = query
+    ? posts.filter((post) =>
+        [post.title, post.excerpt, post.category, post.topic]
+          .join(" ")
+          .toLowerCase()
+          .includes(query),
+      )
+    : posts;
+  const visible = filtered.length ? filtered : posts;
+  const featured = visible[0];
 
   return (
     <>
       <JsonLdList schemas={[blogWebPageSchema]} />
-      <BlogSection posts={posts} />
+      {featured ? <KnowledgeHubHero featured={featured} query={q} /> : null}
+      <KnowledgeHubGuides posts={visible} query={q} topic={topic} />
     </>
   );
 }

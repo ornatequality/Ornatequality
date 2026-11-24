@@ -1,6 +1,7 @@
 .section {
   background: #fff;
   padding: clamp(18px, 2.4vw, 32px) 0;
+  scroll-margin-top: 96px;
 }
 
 .container {
@@ -218,12 +219,6 @@
 .submit:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
-
-.note {
-  margin: 12px 0 0;
-  font-size: 12px;
-  color: #8b93a5;
 }
 
 .ok,

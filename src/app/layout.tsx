@@ -151,13 +151,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <JsonLdScripts />
         <GoogleTagManagerHead />
       </head>
       <body className="site-body min-h-screen flex flex-col" suppressHydrationWarning>
         <Script id="scroll-restoration" strategy="beforeInteractive">
           {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";if(!location.hash){window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0;}}catch(e){}})();`}
         </Script>
+        <JsonLdScripts />
         <GoogleTagManagerBody />
         <RouteScrollReset />
         <SiteChrome>{children}</SiteChrome>
