@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { RohsBanner } from "./sections/RohsBanner";
 import { RohsPageContent } from "./sections/RohsPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/rohs-certification";
+const CANONICAL = "https://ornatequality.com/services/rohs-certification";
 
 export const metadata: Metadata = {
   title: {

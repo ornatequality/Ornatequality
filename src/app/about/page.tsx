@@ -1,5 +1,5 @@
-import Script from "next/script";
 import React from "react";
+import { JsonLdList } from "@/components/seo/JsonLdScripts";
 import styles from "@/styles/aboutV2.module.css";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -16,6 +16,9 @@ export const metadata = {
   title: "About Us | BIS Certification Consultants India — Ornate Quality",
   description:
     "Ornate Quality Services — India's trusted BIS Certification Consultant since 2013. 15+ years, 5000+ certifications, 98% success rate. Expert support for WPC, TEC, BEE, EPR & LMPC.",
+  alternates: {
+    canonical: `${SITE_URL}/about`,
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -120,16 +123,7 @@ const BREADCRUMB_SCHEMA = {
 export default function AboutPage() {
   return (
     <div className={styles.page}>
-      <Script
-        id="about-faq-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
-      />
-      <Script
-        id="about-breadcrumb-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
-      />
+      <JsonLdList schemas={[FAQ_SCHEMA, BREADCRUMB_SCHEMA]} />
       <AboutHero />
       <WhoWeAre />
       <AboutStatsBar />

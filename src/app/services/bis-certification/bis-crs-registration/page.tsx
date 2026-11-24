@@ -3,7 +3,7 @@ import { BisCrsBanner } from "../../bis-crs-registration/sections/BisCrsBanner";
 import { BisCrsPageContent } from "../../bis-crs-registration/sections/BisCrsPageContent";
 
 const CANONICAL =
-  "https://www.ornatequality.com/services/bis-certification/bis-crs-registration";
+  "https://ornatequality.com/services/bis-certification/bis-crs-registration";
 
 export const metadata: Metadata = {
   title: {

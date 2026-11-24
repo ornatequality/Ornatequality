@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AuditBanner } from "./sections/AuditBanner";
 import { AuditPageContent } from "./sections/AuditPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/audit-services";
+const CANONICAL = "https://ornatequality.com/services/audit-services";
 
 export const metadata: Metadata = {
   title: {

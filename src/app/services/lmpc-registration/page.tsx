@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LmpcBanner } from "./sections/LmpcBanner";
 import { LmpcPageContent } from "./sections/LmpcPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/lmpc-registration";
+const CANONICAL = "https://ornatequality.com/services/lmpc-registration";
 
 export const metadata: Metadata = {
   title: {

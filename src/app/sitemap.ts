@@ -2,11 +2,11 @@ import { MetadataRoute } from "next";
 import { SERVICE_ROUTES } from "@/components/common/servicesMegaMenu.data";
 import { SITE_URL } from "@/lib/site";
 
-const CANONICAL_ORIGIN = "https://www.ornatequality.com";
+const CANONICAL_ORIGIN = "https://ornatequality.com";
 const FURNITURE_CANONICAL =
-  "https://www.ornatequality.com/services/bis-isi-mark-certification/furniture";
+  "https://ornatequality.com/services/bis-isi-mark-certification/furniture";
 const FOOTWEAR_CANONICAL =
-  "https://www.ornatequality.com/services/bis-isi-mark-certification/footwear";
+  "https://ornatequality.com/services/bis-isi-mark-certification/footwear";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

@@ -3,7 +3,7 @@ import { FootwearPageContent } from "../../bis-fmcs-certification/footwear/secti
 
 export const FOOTWEAR_PATH = "/services/bis-isi-mark-certification/footwear";
 export const FOOTWEAR_CANONICAL =
-  "https://www.ornatequality.com/services/bis-isi-mark-certification/footwear";
+  "https://ornatequality.com/services/bis-isi-mark-certification/footwear";
 
 export const metadata: Metadata = {
   title: {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: FOOTWEAR_CANONICAL,
     images: [
       {
-        url: "https://www.ornatequality.com/og/footwear.jpg",
+        url: "https://ornatequality.com/og/footwear.jpg",
         width: 1200,
         height: 630,
         alt: "BIS Certification for Footwear",

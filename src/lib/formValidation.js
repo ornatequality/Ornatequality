@@ -50,13 +50,16 @@ export function validateContactForm(body) {
   const city = cleanText(body?.city);
   const message = cleanText(body?.message);
   const { source, service } = extractMeta(body);
+  const isLp = source.startsWith("lp-");
 
   validateName(name, errors);
   validateEmail(email, errors);
 
   if (!phone) {
     errors.phone = "Phone number is required.";
-  } else if (!/^\d{7,15}$/.test(phone)) {
+  } else if (isLp && !MOBILE_10_REGEX.test(phone)) {
+    errors.phone = "Please enter a valid 10-digit mobile number.";
+  } else if (!isLp && !/^\d{7,15}$/.test(phone)) {
     errors.phone = "Please enter a valid phone number.";
   }
 
@@ -64,7 +67,13 @@ export function validateContactForm(body) {
     errors.city = "City is required.";
   }
 
-  validateMessage(message, errors);
+  if (isLp) {
+    if (!message) {
+      errors.message = "Product name is required.";
+    }
+  } else {
+    validateMessage(message, errors);
+  }
 
   return {
     ok: Object.keys(errors).length === 0,

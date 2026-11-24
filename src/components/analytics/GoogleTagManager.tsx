@@ -1,36 +1,48 @@
-import Script from "next/script";
+"use client";
+
+import { useEffect } from "react";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
-export function GoogleTagManagerHead() {
-  if (!GTM_ID) return null;
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+    __ornateGtmLoaded?: boolean;
+  }
+}
 
-  return (
-    <>
-      <Script id="gtm-consent-default" strategy="beforeInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('consent', 'default', {
-            analytics_storage: 'denied',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            wait_for_update: 500
-          });
-        `}
-      </Script>
-      <Script id="gtm-script" strategy="afterInteractive">
-        {`
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','${GTM_ID}');
-        `}
-      </Script>
-    </>
-  );
+export function GoogleTagManagerHead() {
+  useEffect(() => {
+    if (!GTM_ID || window.__ornateGtmLoaded) return;
+    window.__ornateGtmLoaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      // GTM reads the Arguments object, not a rest-parameter array.
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer!.push(arguments);
+    };
+    window.gtag("consent", "default", {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      wait_for_update: 500,
+    });
+
+    window.dataLayer.push({
+      "gtm.start": Date.now(),
+      event: "gtm.js",
+    });
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    document.head.appendChild(script);
+  }, []);
+
+  return null;
 }
 
 export function GoogleTagManagerBody() {
@@ -48,5 +60,3 @@ export function GoogleTagManagerBody() {
     </noscript>
   );
 }
-
-

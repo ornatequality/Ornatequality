@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CdscoBanner } from "./sections/CdscoBanner";
 import { CdscoPageContent } from "./sections/CdscoPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/cdsco-registration";
+const CANONICAL = "https://ornatequality.com/services/cdsco-registration";
 
 export const metadata: Metadata = {
   title: {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CliBanner } from "./sections/CliBanner";
 import { CliPageContent } from "./sections/CliPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/container-loading-inspection";
+const CANONICAL = "https://ornatequality.com/services/container-loading-inspection";
 
 export const metadata: Metadata = {
   title: {

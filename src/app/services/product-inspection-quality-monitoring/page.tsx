@@ -3,7 +3,7 @@ import { PiBanner } from "../product-inspection/sections/PiBanner";
 import { PiPageContent } from "../product-inspection/sections/PiPageContent";
 
 const CANONICAL =
-  "https://www.ornatequality.com/services/product-inspection-quality-monitoring";
+  "https://ornatequality.com/services/product-inspection-quality-monitoring";
 
 export const metadata: Metadata = {
   title: {

@@ -3,7 +3,7 @@ import { BisFmcsBanner } from "../../bis-fmcs-certification/sections/BisFmcsBann
 import { BisFmcsPageContent } from "../../bis-fmcs-certification/sections/BisFmcsPageContent";
 
 const CANONICAL =
-  "https://www.ornatequality.com/services/bis-certification/fmcs-certification";
+  "https://ornatequality.com/services/bis-certification/fmcs-certification";
 
 export const metadata: Metadata = {
   title: {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { EprBanner } from "./sections/EprBanner";
 import { EprPageContent } from "./sections/EprPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/epr-registration";
+const CANONICAL = "https://ornatequality.com/services/epr-registration";
 
 export const metadata: Metadata = {
   title: {

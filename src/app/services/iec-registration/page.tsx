@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { IecBanner } from "./sections/IecBanner";
 import { IecPageContent } from "./sections/IecPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/iec-registration";
+const CANONICAL = "https://ornatequality.com/services/iec-registration";
 
 export const metadata: Metadata = {
   title: {

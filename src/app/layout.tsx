@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
 
 import RouteScrollReset from "@/components/common/RouteScrollReset";
@@ -43,14 +42,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
       "max-video-preview": -1,
-    },
-  },
-
-  alternates: {
-    canonical: SITE_URL,
-    languages: {
-      "en-IN": "/",
-      "x-default": "/",
     },
   },
 
@@ -150,13 +141,8 @@ export default function RootLayout({
       className={`${inter.variable} ${manrope.variable} ${playfair.variable} antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <GoogleTagManagerHead />
-      </head>
       <body className="site-body min-h-screen flex flex-col" suppressHydrationWarning>
-        <Script id="scroll-restoration" strategy="beforeInteractive">
-          {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";if(!location.hash){window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0;}}catch(e){}})();`}
-        </Script>
+        <GoogleTagManagerHead />
         <JsonLdScripts />
         <GoogleTagManagerBody />
         <RouteScrollReset />

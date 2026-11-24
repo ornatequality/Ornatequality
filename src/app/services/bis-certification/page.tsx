@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BisCertificationBanner } from "./sections/BisCertificationBanner";
 import { BisCertificationPageContent } from "./sections/BisCertificationPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/bis-certification";
+const CANONICAL = "https://ornatequality.com/services/bis-certification";
 
 export const metadata: Metadata = {
   title: {

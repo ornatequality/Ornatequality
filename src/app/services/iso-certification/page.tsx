@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { IsoBanner } from "./sections/IsoBanner";
 import { IsoPageContent } from "./sections/IsoPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/iso-certification";
+const CANONICAL = "https://ornatequality.com/services/iso-certification";
 
 export const metadata: Metadata = {
   title: {

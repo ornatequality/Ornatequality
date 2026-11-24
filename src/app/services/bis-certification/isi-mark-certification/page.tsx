@@ -3,7 +3,7 @@ import { BisIsiBanner } from "../../bis-isi-mark-certification/sections/BisIsiBa
 import { BisIsiPageContent } from "../../bis-isi-mark-certification/sections/BisIsiPageContent";
 
 const CANONICAL =
-  "https://www.ornatequality.com/services/bis-certification/isi-mark-certification";
+  "https://ornatequality.com/services/bis-certification/isi-mark-certification";
 
 export const metadata: Metadata = {
   title: {

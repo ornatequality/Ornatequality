@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FssaiBanner } from "./sections/FssaiBanner";
 import { FssaiPageContent } from "./sections/FssaiPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/fssai-registration";
+const CANONICAL = "https://ornatequality.com/services/fssai-registration";
 
 export const metadata: Metadata = {
   title: {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DpiBanner } from "./sections/DpiBanner";
 import { DpiPageContent } from "./sections/DpiPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/during-production-inspection";
+const CANONICAL = "https://ornatequality.com/services/during-production-inspection";
 
 export const metadata: Metadata = {
   title: {

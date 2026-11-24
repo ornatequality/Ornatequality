@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FriBanner } from "./sections/FriBanner";
 import { FriPageContent } from "./sections/FriPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/final-random-inspection";
+const CANONICAL = "https://ornatequality.com/services/final-random-inspection";
 
 export const metadata: Metadata = {
   title: {

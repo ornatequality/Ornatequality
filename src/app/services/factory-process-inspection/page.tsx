@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FacBanner } from "./sections/FacBanner";
 import { FacPageContent } from "./sections/FacPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/factory-process-inspection";
+const CANONICAL = "https://ornatequality.com/services/factory-process-inspection";
 
 export const metadata: Metadata = {
   title: {

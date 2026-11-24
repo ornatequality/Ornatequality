@@ -3,7 +3,7 @@ import { FurniturePageContent } from "../../bis-fmcs-certification/furniture/sec
 
 export const FURNITURE_PATH = "/services/bis-isi-mark-certification/furniture";
 export const FURNITURE_CANONICAL =
-  "https://www.ornatequality.com/services/bis-isi-mark-certification/furniture";
+  "https://ornatequality.com/services/bis-isi-mark-certification/furniture";
 
 export const metadata: Metadata = {
   title: {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: FURNITURE_CANONICAL,
     images: [
       {
-        url: "https://www.ornatequality.com/og/furniture.jpg",
+        url: "https://ornatequality.com/og/furniture.jpg",
         width: 1200,
         height: 630,
         alt: "BIS Certification for Furniture",

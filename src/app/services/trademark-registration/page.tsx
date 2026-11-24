@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TrademarkBanner } from "./sections/TrademarkBanner";
 import { TrademarkPageContent } from "./sections/TrademarkPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/trademark-registration";
+const CANONICAL = "https://ornatequality.com/services/trademark-registration";
 
 export const metadata: Metadata = {
   title: {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PesoCcoeBanner } from "../peso-ccoe-registration/sections/PesoCcoeBanner";
 import { PesoCcoePageContent } from "../peso-ccoe-registration/sections/PesoCcoePageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/ccoe-peso-certification";
+const CANONICAL = "https://ornatequality.com/services/ccoe-peso-certification";
 
 export const metadata: Metadata = {
   title: {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CeBanner } from "./sections/CeBanner";
 import { CePageContent } from "./sections/CePageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/ce-certification";
+const CANONICAL = "https://ornatequality.com/services/ce-certification";
 
 export const metadata: Metadata = {
   title: {

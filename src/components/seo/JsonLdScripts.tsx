@@ -1,4 +1,6 @@
-import Script from "next/script";
+"use client";
+
+import { useEffect } from "react";
 import {
   jsonLdScript,
   organizationSchema,
@@ -23,17 +25,27 @@ export function JsonLdScripts({ extra = [] }: JsonLdScriptsProps) {
 }
 
 export function JsonLdList({ schemas }: { schemas: object[] }) {
-  return (
-    <>
-      {schemas.map((schema, index) => (
-        <Script
-          key={schemaScriptId(schema, index)}
-          id={schemaScriptId(schema, index)}
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: jsonLdScript(schema) }}
-        />
-      ))}
-    </>
-  );
+  const payload = JSON.stringify(schemas);
+
+  useEffect(() => {
+    const list = JSON.parse(payload) as object[];
+    const added: HTMLScriptElement[] = [];
+
+    list.forEach((schema, index) => {
+      const id = schemaScriptId(schema, index);
+      if (document.getElementById(id)) return;
+      const el = document.createElement("script");
+      el.id = id;
+      el.type = "application/ld+json";
+      el.text = jsonLdScript(schema);
+      document.head.appendChild(el);
+      added.push(el);
+    });
+
+    return () => {
+      added.forEach((el) => el.remove());
+    };
+  }, [payload]);
+
+  return null;
 }

@@ -1,5 +1,5 @@
 type LeadEventPayload = {
-  page_type: "ads_landing" | "contact";
+  page_type: "ads_landing" | "contact" | "lp_bis";
 };
 
 declare global {

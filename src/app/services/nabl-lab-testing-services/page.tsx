@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { NablBanner } from "../nabl-accreditation/sections/NablBanner";
 import { NablPageContent } from "../nabl-accreditation/sections/NablPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/nabl-lab-testing-services";
+const CANONICAL = "https://ornatequality.com/services/nabl-lab-testing-services";
 
 export const metadata: Metadata = {
   title: {

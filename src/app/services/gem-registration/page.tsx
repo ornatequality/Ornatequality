@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GemBanner } from "./sections/GemBanner";
 import { GemPageContent } from "./sections/GemPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/gem-registration";
+const CANONICAL = "https://ornatequality.com/services/gem-registration";
 
 export const metadata: Metadata = {
   title: {

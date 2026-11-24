@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BeeBanner } from "./sections/BeeBanner";
 import { BeePageContent } from "./sections/BeePageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/bee-certification";
+const CANONICAL = "https://ornatequality.com/services/bee-certification";
 
 export const metadata: Metadata = {
   title: {

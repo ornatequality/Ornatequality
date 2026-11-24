@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TpiBanner } from "./sections/TpiBanner";
 import { TpiPageContent } from "./sections/TpiPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/third-party-inspection";
+const CANONICAL = "https://ornatequality.com/services/third-party-inspection";
 
 export const metadata: Metadata = {
   title: {

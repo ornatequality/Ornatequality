@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TecBanner } from "./sections/TecBanner";
 import { TecPageContent } from "./sections/TecPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/tec-certification";
+const CANONICAL = "https://ornatequality.com/services/tec-certification";
 
 export const metadata: Metadata = {
   title: {

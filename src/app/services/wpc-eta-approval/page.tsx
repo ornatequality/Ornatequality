@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { WpcBanner } from "./sections/WpcBanner";
 import { WpcPageContent } from "./sections/WpcPageContent";
 
-const CANONICAL = "https://www.ornatequality.com/services/wpc-eta-approval";
+const CANONICAL = "https://ornatequality.com/services/wpc-eta-approval";
 
 export const metadata: Metadata = {
   title: {

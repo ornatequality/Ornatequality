@@ -1,6 +1,20 @@
+import type { Metadata } from "next";
 import React from "react";
 import ContactForm from "@/components/forms/ContactForm";
 import styles from "@/styles/contact.module.css";
+import { SITE_URL } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Talk to Ornate Quality for BIS, WPC, TEC, BEE, EPR and inspection support. Call, email or send an enquiry from Noida, India.",
+  alternates: {
+    canonical: `${SITE_URL}/contact`,
+  },
+  openGraph: {
+    url: `${SITE_URL}/contact`,
+  },
+};
 
 function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
