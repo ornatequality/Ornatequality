@@ -6,7 +6,7 @@ const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 declare global {
   interface Window {
-    dataLayer?: unknown[];
+  dataLayer?: Record<string, unknown>[];
     gtag?: (...args: unknown[]) => void;
     __ornateGtmLoaded?: boolean;
   }
@@ -19,10 +19,10 @@ export function GoogleTagManagerHead() {
 
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag() {
-      // GTM reads the Arguments object, not a rest-parameter array.
-      // eslint-disable-next-line prefer-rest-params
-      window.dataLayer!.push(arguments);
-    };
+     
+window.dataLayer!.push(
+  arguments as unknown as Record<string, unknown>
+);    };
     window.gtag("consent", "default", {
       analytics_storage: "denied",
       ad_storage: "denied",
